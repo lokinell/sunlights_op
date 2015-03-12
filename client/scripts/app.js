@@ -13,8 +13,9 @@ angular
         'ui.router',
         'ui.bootstrap',
         'angular-loading-bar',
+        'ngGrid'
     ])
-    .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
         $ocLazyLoadProvider.config({
             debug: false,
@@ -28,8 +29,9 @@ angular
                 url: '/dashboard',
                 templateUrl: '/views/dashboard/main.html',
                 resolve: {
-                    loadMyDirectives: function($ocLazyLoad) {
-                        return $ocLazyLoad.load({
+                    loadMyDirectives: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load(
+                            {
                                 name: 'sbAdminApp',
                                 files: [
                                     'scripts/directives/header/header.js',
@@ -38,38 +40,44 @@ angular
                                     'scripts/directives/sidebar/sidebar-search/sidebar-search.js'
                                 ]
                             }),
-
-                            $ocLazyLoad.load({
-                                name: 'toggle-switch',
-                                files: ["bower_components/angular-toggle-switch/angular-toggle-switch.min.js",
-                                    "bower_components/angular-toggle-switch/angular-toggle-switch.css"
-                                ]
-                            }),
-
-                            $ocLazyLoad.load({
-                                name: 'ngAnimate',
-                                files: ['bower_components/angular-animate/angular-animate.js']
-                            }),
-
-                            $ocLazyLoad.load({
+                            $ocLazyLoad.load(
+                                {
+                                    name: 'toggle-switch',
+                                    files: ["bower_components/angular-toggle-switch/angular-toggle-switch.min.js",
+                                        "bower_components/angular-toggle-switch/angular-toggle-switch.css"
+                                    ]
+                                }),
+                            $ocLazyLoad.load(
+                                {
+                                    name: 'ngAnimate',
+                                    files: ['bower_components/angular-animate/angular-animate.js']
+                                })
+                        $ocLazyLoad.load(
+                            {
                                 name: 'ngCookies',
                                 files: ['bower_components/angular-cookies/angular-cookies.js']
                             })
-
-                            $ocLazyLoad.load({
+                        $ocLazyLoad.load(
+                            {
                                 name: 'ngResource',
                                 files: ['bower_components/angular-animate/angular-animate.js']
-                            }),
-
-                            $ocLazyLoad.load({
+                            })
+                        $ocLazyLoad.load(
+                            {
                                 name: 'ngSanitize',
                                 files: ['bower_components/angular-sanitize/angular-sanitize.js']
-                            }),
-
-                            $ocLazyLoad.load({
+                            })
+                        $ocLazyLoad.load(
+                            {
                                 name: 'ngTouch',
                                 files: ['bower_components/angular-touch/angular-touch.js']
-                            });
+                            })
+                        $ocLazyLoad.load(
+                            {
+                                name: 'ngGrid',
+                                files: ["bower_components/ng-grid/ng-grid-2.0.14.min.js",
+                                    "bower_components/ng-grid/ng-grid.min.css"]
+                            })
                     }
                 }
             })
@@ -78,7 +86,7 @@ angular
                 controller: 'MainCtrl',
                 templateUrl: '/views/dashboard/home.html',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -86,7 +94,8 @@ angular
                                 'scripts/directives/timeline/timeline.js',
                                 'scripts/directives/notifications/notifications.js',
                                 'scripts/directives/chat/chat.js',
-                                'scripts/directives/dashboard/stats/stats.js'
+                                'scripts/directives/dashboard/stats/stats.js',
+                                'scripts/directives/paging/NgPageChanged.js'
                             ]
                         })
                     }
@@ -109,10 +118,10 @@ angular
                 url: '/chart',
                 controller: 'ChartCtrl',
                 resolve: {
-                    loadMyFile: function($ocLazyLoad) {
+                    loadMyFile: function ($ocLazyLoad) {
                         return $ocLazyLoad.load(
-                                'bower_components/Chart.js/Chart.min.js'
-                            ),
+                            'bower_components/Chart.js/Chart.min.js'
+                        ),
                             $ocLazyLoad.load({
                                 name: 'chart.js',
                                 files: [
@@ -154,5 +163,21 @@ angular
             .state('dashboard.grid', {
                 templateUrl: 'views/ui-elements/grid.html',
                 url: '/grid'
+            })
+            .state('dashboard.verifycode', {
+                templateUrl: 'views/verifycode.html',
+                url: '/verifycode',
+                controller: 'VerifyCodeCtrl',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/CustomerService.js',
+                                'scripts/controllers/VerifyCodeCtrl.js'
+                            ]
+                        })
+                    }
+                }
             })
     }]);
