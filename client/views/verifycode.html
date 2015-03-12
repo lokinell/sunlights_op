@@ -1,0 +1,47 @@
+<div class="row" ng-controller="VerifyCodeCtrl as vcc" ng-init="vcc.findVerifyCodes()">
+    <div class="row">
+        <h1>
+            验证码列表
+        </h1>
+
+        <hr>
+    </div>
+
+
+    <form class="form-inline" role="form">
+        {{vcc.pager}}
+        <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="vcc.findVerifyCodes()"></div>
+    </form>
+
+
+    <!-- <table class="table table-striped">
+         <thead>
+         <tr>
+             <td>电话</td>
+             <td>验证码</td>
+             <td>类型</td>
+             <td>创建时间</td>
+         </tr>
+         </thead>
+         <tbody>
+         <tr ng-repeat="code in vcc.vCodes">
+             <td>{{code.mobile}}</td>
+             <td>{{code.verifyCode}}</td>
+             <td>{{code.verifyType}}</td>
+             <td>{{code.createdDatetime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+         </tr>
+         <tr ng-hide="vcc.vCodes.length">
+             <td colspan="4">
+                 <p class="text-center">没有数据</p>
+             </td>
+         </tr>
+         <tr>
+             <td align="right"  colspan="4">
+                  <pagination total-items="vcc.pager.count"  ng-model="vcc.pager.pageNum" ng-change="vcc.findVerifyCodes()" max-size="10"></pagination>
+             </td>
+         </tr>
+
+         </tbody>
+     </table>-->
+
+</div>
