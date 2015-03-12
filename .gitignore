@@ -10,7 +10,7 @@
 
 # package control
 node_modules
-client/src/vendor
+client/bower_components
 
 # logs
 npm-debug.log
