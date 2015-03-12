@@ -1,5 +1,9 @@
+# Intellij project files
+*.iml
+*.ipr
+*.iws
+.idea/
 # general
-.idea
 .DS_Store
 *~
 .sass-cache
