@@ -12,7 +12,8 @@ angular
         'oc.lazyLoad',
         'ui.router',
         'ui.bootstrap',
-        'angular-loading-bar'
+        'angular-loading-bar',
+        'ngGrid'
     ])
     .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
@@ -70,6 +71,12 @@ angular
                             {
                                 name: 'ngTouch',
                                 files: ['bower_components/angular-touch/angular-touch.js']
+                            })
+                        $ocLazyLoad.load(
+                            {
+                                name: 'ngGrid',
+                                files: ["bower_components/ng-grid/ng-grid-2.0.14.min.js",
+                                    "bower_components/ng-grid/ng-grid.min.css"]
                             })
                     }
                 }
