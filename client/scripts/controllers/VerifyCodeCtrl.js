@@ -50,7 +50,8 @@
             return this.CustomerService.findVerifyCodes(this.pager).then((function(_this) {
                 return function(data) {
                     _this.$log.debug("Promise returned " + data.list.length + " Customers");
-                    return _this.pager = data;
+                    _this.verifyCodes = data.list;
+                    return _this.$scope.pager = data;
                 };
             })(this), (function(_this) {
                 return function(error) {
