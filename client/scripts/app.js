@@ -173,4 +173,38 @@ angular
                     }
                 }
             })
+          .state('dashboard.tasks', {
+            templateUrl: 'views/tasks/index.html',
+            url: '/tasks',
+            controller: 'TaskCtrl',
+            resolve: {
+              loadMyFiles: function($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                  name: 'sbAdminApp',
+                  files: [
+                    'scripts/directives/paging/ngPageChanged.js',
+                    'scripts/services/taskService.js',
+                    'scripts/controllers/taskCtrl.js'
+                  ]
+                })
+              }
+            }
+          })
+          .state('dashboard.fundcompanies', {
+            templateUrl: 'views/fundcompanies/index.html',
+            url: '/fundcompanies',
+            controller: 'CompanyCtrl',
+            resolve: {
+              loadMyFiles: function($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                  name: 'sbAdminApp',
+                  files: [
+                    'scripts/directives/paging/ngPageChanged.js',
+                    'scripts/services/companyService.js',
+                    'scripts/controllers/companyCtrl.js'
+                  ]
+                })
+              }
+            }
+          })
     }]);

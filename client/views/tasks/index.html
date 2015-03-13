@@ -1,0 +1,24 @@
+
+<div class="row" ng-controller="TaskCtrl as tc">
+
+    <div class="row">
+        <h1>
+            任务列表
+        </h1>
+        <hr>
+    </div>
+
+    <div class="row">
+        <div class="alert alert-danger" ng-show="!!tc.error" ng-int="tc.listTasks()">
+            <h4 class="alert-heading">操作失败</h4>
+            <span ng-bind="tc.error.message.detail"></span>
+        </div>
+        <div style="text-align:right">
+            <a class="btn btn-primary submit" ng-click="tc.createTask()">添加</a>
+        </div>
+        <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="tc.listTasks()"></div>
+
+    </div>
+
+</div>
+
