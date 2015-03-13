@@ -2,58 +2,25 @@
     var ParameterCtrl;
 
     ParameterCtrl = (function () {
-        function ParameterCtrl($log, $http, $timeout, $scope, $modal, ParameterService) {
+        function ParameterCtrl($log, $http, $timeout, $location, $scope, $rootScope, ParameterService) {
             this.$log = $log;
             this.$http = $http;
             this.$timeout = $timeout;
+            this.$location = $location;
             this.$scope = $scope;
-            this.$modal = $modal;
+            this.$rootScope = $rootScope;
             this.ParameterService = ParameterService;
             this.$log.debug("constructing ParameterCtrl");
             this.parameters = [];
-            this.parameter;
-            this.editingRow = {};
+            this.parameter = this.$rootScope.parameter || {};
+            this.$rootScope.parameter = {};
             this.pager = {
                 filter: {
                     LIKES_name: ''
                 },
                 pageSize: 0
             };
-            this.$scope.editRow = (function (_this) {
-                return function (row) {
-                    return _this.editRow(row);
-                };
-            })(this);
-            this.$scope.deleteRow = (function (_this) {
-                return function (row) {
-                    return _this.deleteRow(row);
-                };
-            })(this);
-            this.$scope.open = (function (_this) {
-                return function (isEditing) {
-                    var modalInstance;
-                    modalInstance = _this.$modal.open({
-                        templateUrl: "parameterModal.html",
-                        controller: "parameterModalInstanceCtrl",
-                        resolve: {
-                            selectedRow: function () {
-                                if (isEditing) {
-                                    return _this.parameter;
-                                } else {
-                                    return {};
-                                }
-                            }
-                        }
-                    });
-                    return modalInstance.result.then((function (data) {
-                        _this.$log.debug("result>>>>" + data);
-                        _this.findParametersBy();
-                        return _this.editingRow.entity = data;
-                    }), function () {
-                        return _this.$log.info("Modal dismissed at: " + new Date());
-                    });
-                };
-            })(this);
+
             $scope.gridOptions = {
                 data: 'pager.list',
                 enablePaging: true,
@@ -104,16 +71,34 @@
             })(this));
         };
 
-        ParameterCtrl.prototype.editRow = function (row) {
-            var value;
-            this.editingRow = row;
-            value = angular.toJson(row.entity);
-            this.$log.debug(value);
-            this.parameter = value;
-            return this.$scope.open(true);
+        ParameterCtrl.prototype.saveParameter = function() {
+            this.$log.debug("saveParameter()");
+            return this.ParameterService.saveParameter(this.parameter).then((function(_this) {
+                return function(data) {
+                    _this.$log.debug("save parameter successfully");
+                    return _this.$location.path("/dashboard/parameter");
+                };
+            })(this), (function(_this) {
+                return function(error) {
+                    _this.$log.error("Unable to save parameter: " + error);
+                    return _this.error = error;
+                };
+            })(this));
         };
 
-        ParameterCtrl.prototype.deleteRow = function (parameter) {
+        ParameterCtrl.prototype.createParameter = function () {
+            this.$log.debug("createParameter()");
+            return this.$location.path("/dashboard/parameter/save");
+        };
+
+        ParameterCtrl.prototype.updateParameter = function (parameter) {
+            this.$log.debug("updateParameter");
+            this.$rootScope.parameter = parameter;
+            return this.$location.path("/dashboard/parameter/save");
+        };
+
+
+        ParameterCtrl.prototype.deleteParameter = function (parameter) {
             this.$log.debug("deleteParameter()");
             return this.ParameterService.deleteParameter(parameter).then((function (_this) {
                 return function (data) {
@@ -133,17 +118,6 @@
     })();
 
     angular.module('sbAdminApp').controller('ParameterCtrl', ParameterCtrl);
-
-    angular.module('sbAdminApp').controller("parameterModalInstanceCtrl", function ($scope, $log, $location, $modalInstance, selectedRow, ParameterService) {
-        $scope.row = angular.fromJson(selectedRow);
-        $scope.ok = function () {
-            ParameterService.saveParameter($scope.row);
-            return $modalInstance.close($scope.row);
-        };
-        return $scope.cancel = function () {
-            return $modalInstance.dismiss("cancel");
-        };
-    });
 
 }).call(this);
 

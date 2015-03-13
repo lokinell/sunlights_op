@@ -217,4 +217,19 @@ angular
                     }
                 }
             })
+            .state('dashboard.parameterSave', {
+                templateUrl: 'views/parameter/save.html',
+                url: '/parameter/save',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/parameterService.js',
+                                'scripts/controllers/parameterCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
     }]);
