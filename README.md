@@ -50,7 +50,7 @@ This task will lint your code, optimize css js and images files, run unit tests.
 
 There are some `tasks` available in `gulpfile.js`. You can dig into the file to familiarize yourself with gulpjs.
 
-A description of every available task:
+
 
 * **gulp serve** - When this task runs, the build will take care of watching files. Every time you change a file in the `client/` folder, the build recompiles every file, and your browser will reload automagically showing you the changes.
 You just need to add new JavaScript and css files in the `client/index.html` file.
