@@ -88,7 +88,7 @@ angular
                                 'scripts/directives/notifications/notifications.js',
                                 'scripts/directives/chat/chat.js',
                                 'scripts/directives/dashboard/stats/stats.js',
-                                'scripts/directives/paging/NgPageChanged.js'
+                                'scripts/directives/paging/ngPageChanged.js'
                             ]
                         })
                     }
@@ -157,17 +157,17 @@ angular
                 templateUrl: 'views/ui-elements/grid.html',
                 url: '/grid'
             })
-            .state('dashboard.verifycode', {
-                templateUrl: 'views/verifycode.html',
-                url: '/verifycode',
+            .state('dashboard.verify-code', {
+                templateUrl: 'views/verify-code/verifyCode.html',
+                url: '/verify-code',
                 controller: 'VerifyCodeCtrl',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
-                                'scripts/services/CustomerService.js',
-                                'scripts/controllers/VerifyCodeCtrl.js'
+                                'scripts/services/customerService.js',
+                                'scripts/controllers/verifyCodeCtrl.js'
                             ]
                         })
                     }
