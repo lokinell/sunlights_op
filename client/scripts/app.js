@@ -88,7 +88,7 @@ angular
                                 'scripts/directives/notifications/notifications.js',
                                 'scripts/directives/chat/chat.js',
                                 'scripts/directives/dashboard/stats/stats.js',
-                                'scripts/directives/paging/NgPageChanged.js'
+                                'scripts/directives/paging/ngPageChanged.js'
                             ]
                         })
                     }
@@ -157,17 +157,76 @@ angular
                 templateUrl: 'views/ui-elements/grid.html',
                 url: '/grid'
             })
-            .state('dashboard.verifycode', {
-                templateUrl: 'views/verifycode.html',
-                url: '/verifycode',
-                controller: 'VerifyCodeCtrl',
+            .state('dashboard.verifyCode', {
+                templateUrl: 'views/verifyCode/verifyCode.html',
+                url: '/verifyCode',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
-                                'scripts/services/CustomerService.js',
-                                'scripts/controllers/VerifyCodeCtrl.js'
+                                'scripts/services/customerService.js',
+                                'scripts/controllers/verifyCodeCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.dict', {
+                templateUrl: 'views/dict/dict.html',
+                url: '/dict',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/dictService.js',
+                                'scripts/controllers/DictCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.dictSave', {
+                templateUrl: 'views/dict/save.html',
+                url: '/dict/save',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/dictService.js',
+                                'scripts/controllers/DictCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.parameter', {
+                templateUrl: 'views/parameter/parameter.html',
+                url: '/parameter',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/parameterService.js',
+                                'scripts/controllers/parameterCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.parameterSave', {
+                templateUrl: 'views/parameter/save.html',
+                url: '/parameter/save',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/parameterService.js',
+                                'scripts/controllers/parameterCtrl.js'
                             ]
                         })
                     }

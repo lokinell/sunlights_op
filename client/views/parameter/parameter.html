@@ -1,0 +1,28 @@
+<div class="row" ng-controller="ParameterCtrl as pc">
+
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a ui-sref="dashboard.verifyCode">系统管理</a></li>
+            <li class="active">参数表</li>
+        </ol>
+    </div>
+
+    <div class="row">
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <label class="control-label">参数名：</label>
+                <input type="text" class="form-control" ng-model="pc.pager.filter.LIKES_name" ng-enter="pc.findParametersBy()">
+            </div>
+
+            <div>
+                <p class="text-right">
+                    <a class="btn btn-primary submit" ng-click="pc.findParametersBy()">查询</a>
+                    <a class="btn btn-primary submit" ng-click="pc.createParameter()">添加</a>
+                </p>
+            </div>
+        </form>
+        <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="pc.findParametersBy()"></div>
+
+    </div>
+
+</div>
