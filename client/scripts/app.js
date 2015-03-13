@@ -13,7 +13,8 @@ angular
         'ui.router',
         'ui.bootstrap',
         'angular-loading-bar',
-        'ngGrid'
+        'ngGrid',
+        'ui.date'
     ])
     .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
@@ -297,6 +298,42 @@ angular
                                 'scripts/services/companyService.js',
                                 'scripts/services/supplierService.js',
                                 'scripts/controllers/fundCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.product', {
+                templateUrl: 'views/product/product.html',
+                url: '/product',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/productService.js',
+                                'scripts/services/commonService.js',
+                                'scripts/services/taskService.js',
+                                'scripts/services/supplierService.js',
+                                'scripts/controllers/productManageCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.productSave', {
+                templateUrl: 'views/product/save.html',
+                url: '/product/save',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/productService.js',
+                                'scripts/services/commonService.js',
+                                'scripts/services/taskService.js',
+                                'scripts/services/supplierService.js',
+                                'scripts/controllers/productManageCtrl.js'
                             ]
                         })
                     }
