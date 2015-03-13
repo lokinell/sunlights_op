@@ -160,7 +160,6 @@ angular
             .state('dashboard.verifyCode', {
                 templateUrl: 'views/verifyCode/verifyCode.html',
                 url: '/verifyCode',
-                controller: 'VerifyCodeCtrl',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -168,6 +167,36 @@ angular
                             files: [
                                 'scripts/services/customerService.js',
                                 'scripts/controllers/verifyCodeCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.dict', {
+                templateUrl: 'views/dict/dict.html',
+                url: '/dict',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/dictService.js',
+                                'scripts/controllers/DictCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.dictSave', {
+                templateUrl: 'views/dict/save.html',
+                url: '/dict/save',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/dictService.js',
+                                'scripts/controllers/DictCtrl.js'
                             ]
                         })
                     }

@@ -1,0 +1,9 @@
+<div class="actions">
+                        <span class="glyphicon glyphicon-edit" data-toggle="tooltip"
+                              ng-click="dc.updateDict(row.entity)" title="编辑"></span>
+                        <span ng-show="row.entity.status == 'Y'" class="glyphicon glyphicon-remove-circle"
+                              data-toggle="tooltip"
+                              ng-click="dc.disableDict(row.entity)" title="禁用"></span>
+                        <span ng-show="row.entity.status == 'N'" class="glyphicon glyphicon-ok-circle" data-toggle="tooltip"
+                              ng-click="dc.enableDict(row.entity)" title="启用"></span>
+</div>
