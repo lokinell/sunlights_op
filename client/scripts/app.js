@@ -202,4 +202,19 @@ angular
                     }
                 }
             })
+            .state('dashboard.parameter', {
+                templateUrl: 'views/parameter/parameter.html',
+                url: '/parameter',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/parameterService.js',
+                                'scripts/controllers/parameterCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
     }]);

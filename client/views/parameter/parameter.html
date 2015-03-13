@@ -1,0 +1,51 @@
+<div class="row" ng-controller="ParameterCtrl as pc">
+
+    <div class="row">
+        <h1>
+            参数表
+        </h1>
+        <hr>
+    </div>
+
+    <div class="row">
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <label class="control-label">参数名：</label>
+                <input type="text" class="form-control" ng-model="pc.pager.filter.LIKES_name" ng-enter="pc.findParametersBy()">
+            </div>
+
+            <div>
+                <p class="text-right">
+                    <a class="btn btn-primary submit" ng-click="pc.findParametersBy()">查询</a>
+                    <a class="btn btn-primary submit" ng-click="open(false)">添加</a>
+                </p>
+            </div>
+        </form>
+        <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="pc.findParametersBy()"></div>
+
+    </div>
+
+    <script type="text/ng-template" id="parameterModal.html">
+        <div class="modal-header">
+            <button aria-hidden="true" data-dismiss="modal" class="close" type="button" ng-click="cancel()">×</button>
+            <h4 id="parameterModal" class="modal-title">参数</h4>
+        </div>
+        <div class="modal-body">
+            <label class="control-label">参数名：</label>
+            <input class="form-control" type="text" name="name" required
+                   ng-model="row.name">
+            <label class="control-label">参数值：</label>
+            <input class="form-control" type="text" name="value" required
+                   ng-model="row.value">
+            <label class="control-label">参数描述：</label>
+            <input class="form-control" type="text" name="description" required
+                   ng-model="row.description">
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">确定</button>
+            <button class="btn btn-warning" ng-click="cancel()">取消</button>
+        </div>
+    </script>
+
+
+</div>
