@@ -1,5 +1,8 @@
 Zhanyi Finance Information OperationSystem 
 
+
+How to run the project in console:
+
 ### Getting started
 
 Install **node.js**. Then **sass**, **gulp** and **bower** if you haven't yet.
