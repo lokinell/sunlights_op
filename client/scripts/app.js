@@ -157,9 +157,9 @@ angular
                 templateUrl: 'views/ui-elements/grid.html',
                 url: '/grid'
             })
-            .state('dashboard.verify-code', {
-                templateUrl: 'views/verify-code/verifyCode.html',
-                url: '/verify-code',
+            .state('dashboard.verifyCode', {
+                templateUrl: 'views/verifyCode/verifyCode.html',
+                url: '/verifyCode',
                 controller: 'VerifyCodeCtrl',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
