@@ -1,0 +1,147 @@
+<div class="row" ng-controller="FundCtrl as fc" ng-init="fc.initSave()">
+
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a ui-sref="dashboard.product">产品管理</a></li>
+            <li><a ui-sref="dashboard.fund">基金信息</a></li>
+            <li class="active">基金详情</li>
+        </ol>
+    </div>
+
+    <div class="row">
+
+        <div class="alert alert-danger" ng-show="!!fc.error">
+            <h4 class="alert-heading">操作失败</h4>
+            <span ng-bind="fc.error.message.detail"></span>
+        </div>
+        <form role="form" ng-submit="fc.saveFund()">
+            <table>
+                <tr>
+                    <td>
+                        <label class="control-label">基金编码：</label>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="fundcode" required
+                               ng-model="fc.fund.fundcode">
+                    </td>
+
+                    <td>
+                        <label class="control-label">基金名称：</label>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="fundnameabbr" required
+                               ng-model="fc.fund.fundnameabbr">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">净值日期：</label>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="currDate"
+                               ng-model="fc.fund.currDate">
+                    </td>
+
+                    <td>
+                        <label class="control-label">基金类型：</label>
+                    </td>
+                    <td>
+                        <input class="form-control" type="number" name="fundType"
+                               ng-model="fc.fund.fundType">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">基金投资类型：</label>
+                    </td>
+                    <td>
+                        <input class="form-control" type="number" name="investmentType"
+                               ng-model="fc.fund.investmentType">
+                    </td>
+
+                    <td>
+                        <label class="control-label">单位净值：</label>
+                    </td>
+                    <td>
+                        <input class="form-control" type="number" step="0.00001" name="netvalue"
+                               ng-model="fc.fund.netvalue">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">万份收益：</label>
+                    </td>
+                    <td>
+                        <input class="form-control" type="number" step="0.00001" name="incomePerTenThousand"
+                               ng-model="fc.fund.incomePerTenThousand">
+                    </td>
+
+                    <td>
+                        <label class="control-label">七日年化：</label>
+                    </td>
+                    <td>
+                        <input class="form-control" type="number" step="0.00001" name="percentSevenDays"
+                               ng-model="fc.fund.percentSevenDays">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">申购状态：</label>
+                    </td>
+                    <td>
+                        <input class="form-control" type="number" name="purchaseState"
+                               ng-model="fc.fund.purchaseState">
+                    </td>
+
+                    <td>
+                        <label class="control-label">起购金额：</label>
+                    </td>
+                    <td>
+                        <input class="form-control" type="number" step="0.00001" name="purchaseLimitMin"
+                               ng-model="fc.fund.purchaseLimitMin">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">货币基金：</label>
+                    </td>
+                    <td>
+                        <input class="form-control" type="number" name="isMonetary"
+                               ng-model="fc.fund.isMonetary">
+                    </td>
+
+                    <td>
+                        <label class="control-label">短期理财：</label>
+                    </td>
+                    <td>
+                        <input class="form-control" type="number" name="isStf"
+                               ng-model="fc.fund.isStf">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">赎回方式：</label>
+                    </td>
+                    <td>
+                        <input class="form-control" type="number" name="rapidRedeem"
+                               ng-model="fc.fund.rapidRedeem">
+                    </td>
+
+                    <td>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="4" align="right">
+                        <a ui-sref="dashboard.fund" class="btn btn-warning">取消</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+</div>

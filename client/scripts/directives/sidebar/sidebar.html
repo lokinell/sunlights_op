@@ -99,12 +99,25 @@
                     <li>
                         <a ui-sref="dashboard.parameter">参数管理</a>
                     </li>
-                  <li>
-                    <a ui-sref="dashboard.tasks">定时任务管理</a>
-                  </li>
-                  <li>
-                    <a ui-sref="dashboard.fundcompanies">基金公司管理</a>
-                  </li>
+                    <li>
+                        <a ui-sref="dashboard.tasks">定时任务管理</a>
+                    </li>
+                    <li>
+                        <a ui-sref="dashboard.fundcompanies">基金公司管理</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li ng-class="{active:collapseVar==6}">
+                <a href="" ng-click="check(6)"><i class="fa fa-files-o fa-fw"></i> 产品管理<span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" collapse="collapseVar!=6">
+                    <li>
+                        <a ui-sref="dashboard.dict">产品信息</a>
+                    </li>
+                    <li>
+                        <a ui-sref="dashboard.fund">基金信息</a>
+                    </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

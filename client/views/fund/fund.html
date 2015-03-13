@@ -1,0 +1,42 @@
+<div class="row" ng-controller="FundCtrl as fc">
+
+    <div class="row">
+
+        <ol class="breadcrumb">
+            <li><a ui-sref="dashboard.product">产品管理</a></li>
+            <li class="active">基金信息</li>
+        </ol>
+    </div>
+
+    <div class="well well-lg">
+
+        <div class="alert alert-danger" ng-show="!!fc.error">
+            <h4 class="alert-heading">操作失败</h4>
+            <span ng-bind="fc.error.message.detail"></span>
+        </div>
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <label class="control-label">基金名称：</label>
+                <input type="text" ng-enter="fc.findFunds()" class="form-control" ng-model="fc.pager.filter.LIKES_fundname"
+                       placeholder="基金名称">
+                <label class="control-label">基金编码：</label>
+                <input type="text" ng-enter="fc.findFunds()" class="form-control" ng-model="fc.pager.filter.LIKES_fundcode"
+                       placeholder="基金编码">
+         <!--       <label class="control-label">基金类型：</label>
+                <select class="form-control" ng-model="fc.pager.filter.LIKES_fundType"
+                        ng-options="item.catPointKey as item.codeVal for item in fc.fundTypes">
+                    <option value="" selected>请选择</option>
+                </select>-->
+            </div>
+
+            <div>
+                <p class="text-right">
+                    <a class="btn btn-primary submit" ng-click="fc.findFunds()">查询</a>
+                </p>
+            </div>
+            <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="fc.findFunds()"></div>
+        </form>
+
+    </div>
+
+</div>
