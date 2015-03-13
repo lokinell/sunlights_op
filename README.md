@@ -1,5 +1,4 @@
-**Speed up your [AngularJS](http://angularjs.org) development with a complete and scalable gulpjs based build system that scaffolds the project for you. Just focus on your app, angular-kickstart will take care of the rest.**
-***
+Zhanyi Finance Information OperationSystem 
 
 ### Getting started
 
