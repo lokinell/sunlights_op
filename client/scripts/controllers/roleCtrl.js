@@ -101,6 +101,9 @@
         RoleCtrl.prototype.saveRole = function () {
             this.$log.debug("saveRole()");
             this.role.deleted = !this.role.deleted;
+            var resourceIds = [];
+            this.selectedTree(this.tree.tree[0], resourceIds);
+            this.role.resourceIds = resourceIds;
             return this.RoleService.saveRole(this.role).then((function (_this) {
                 return function (data) {
                     _this.$log.debug("save role successfully");
@@ -143,6 +146,18 @@
                     return _this.error = error;
                 };
             })(this));
+        };
+
+        RoleCtrl.prototype.selectedTree = function (tree, resourceIds) {
+            if (tree.checked) {
+                resourceIds.push(tree.id)
+            }
+            var items = tree.items;
+            var _i, _len;
+            for (_i = 0, _len = items.length; _i < _len; _i++) {
+                this.selectedTree(items[_i], resourceIds);
+            }
+            return resourceIds;
         };
 
         return RoleCtrl;

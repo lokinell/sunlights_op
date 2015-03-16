@@ -1,10 +1,11 @@
 <div class="row" ng-controller="RoleCtrl as rc" ng-init="rc.findTree()">
 
     <div class="row">
-        <h4>
-            角色
-        </h4>
-        <hr>
+        <ol class="breadcrumb">
+            <li><a ui-sref="dashboard.user">权限管理</a></li>
+            <li><a ui-sref="dashboard.role">角色管理</a></li>
+            <li class="active">角色详情</li>
+        </ol>
     </div>
 
     <div class="row">
