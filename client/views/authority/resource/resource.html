@@ -1,0 +1,36 @@
+<div class="row" ng-controller="ResourceCtrl as rc">
+
+    <div class="row">
+        <h1>
+            资源管理
+        </h1>
+        <hr>
+    </div>
+
+    <div class="well well-lg">
+
+        <div class="alert alert-danger" ng-show="!!rc.error">
+            <h4 class="alert-heading">操作失败</h4>
+            <span ng-bind="rc.error.message.detail"></span>
+        </div>
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <label class="control-label">名称：</label>
+                <input type="text" ng-enter="rc.findResources()" class="form-control" ng-model="rc.pager.filter.LIKES_name" placeholder="名称">
+                <label class="control-label">代码：</label>
+                <input type="text" ng-enter="rc.findResources()" class="form-control" ng-model="rc.pager.filter.LIKES_code" placeholder="代码">
+                <label class="control-label">相对路径：</label>
+                <input type="text" ng-enter="rc.findResources()" class="form-control" ng-model="rc.pager.filter.LIKES_uri" placeholder="相对路径">
+            </div>
+
+            <div>
+                <p class="text-right">
+                    <a class="btn btn-primary submit" ng-click="rc.findResources()">查询</a>
+                </p>
+            </div>
+        </form>
+        <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="rc.findResources()"></div>
+
+    </div>
+
+</div>

@@ -121,7 +121,7 @@
 
   })();
 
-  controllersModule.controller('SupplierCtrl', SupplierCtrl);
+    angular.module('sbAdminApp').controller('SupplierCtrl', SupplierCtrl);
 
 }).call(this);
 

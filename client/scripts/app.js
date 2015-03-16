@@ -14,7 +14,8 @@ angular
         'ui.bootstrap',
         'angular-loading-bar',
         'ngGrid',
-        'ui.date'
+        'ui.date',
+        'localytics.directives'
     ])
     .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
@@ -334,6 +335,85 @@ angular
                                 'scripts/services/taskService.js',
                                 'scripts/services/supplierService.js',
                                 'scripts/controllers/productManageCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.resource', {
+                templateUrl: 'views/authority/resource/resource.html',
+                url: '/resource',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/resourceService.js',
+                                'scripts/controllers/resourceCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.role', {
+                templateUrl: 'views/authority/role/role.html',
+                url: '/role',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/roleService.js',
+                                'scripts/services/resourceService.js',
+                                'scripts/controllers/roleCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.roleSave', {
+                templateUrl: 'views/authority/role/save.html',
+                url: '/role/save',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/roleService.js',
+                                'scripts/services/resourceService.js',
+                                'scripts/controllers/roleCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.user', {
+                templateUrl: 'views/authority/user/user.html',
+                url: '/user',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/roleService.js',
+                                'scripts/services/userService.js',
+                                'scripts/controllers/userCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.userSave', {
+                templateUrl: 'views/authority/user/save.html',
+                url: '/user/save',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/roleService.js',
+                                'scripts/services/userService.js',
+                                'scripts/controllers/userCtrl.js'
                             ]
                         })
                     }

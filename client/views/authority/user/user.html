@@ -1,0 +1,33 @@
+<div class="row" ng-controller="UserCtrl as uc">
+
+    <div class="row">
+        <h1>
+            用户管理
+        </h1>
+        <hr>
+    </div>
+
+    <div class="well well-lg">
+
+        <div class="alert alert-danger" ng-show="!!uc.error">
+            <h4 class="alert-heading">操作失败</h4>
+            <span ng-bind="uc.error.message.detail"></span>
+        </div>
+        <form class="form-inline" user="form">
+            <div class="form-group">
+                <label class="control-label">用户名：</label>
+                <input type="text" ng-enter="uc.findUsers()" class="form-control" ng-model="uc.pager.filter.LIKES_username" placeholder="用户名">
+            </div>
+
+            <div>
+                <p class="text-right">
+                    <a class="btn btn-primary submit" ng-click="uc.findUsers()">查询</a>
+                    <a class="btn btn-primary submit" ng-click="uc.createUser()">添加</a>
+                </p>
+            </div>
+        </form>
+        <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="uc.findUsers()"></div>
+
+    </div>
+
+</div>
