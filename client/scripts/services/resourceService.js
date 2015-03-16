@@ -24,7 +24,7 @@
             deferred = this.$q.defer();
             this.$http.get(baseUrl + '/resources', {
                 headers: {
-                    'params': angular.toJson(pager)
+                    'params': encodeURIComponent(angular.toJson(pager))
                 }
             }).success((function (_this) {
                 return function (data, status, headers) {
@@ -40,11 +40,15 @@
             return deferred.promise;
         };
 
-        ResourceService.prototype.findTree = function () {
+        ResourceService.prototype.findTree = function (role) {
             var deferred;
             this.$log.debug("findTree");
             deferred = this.$q.defer();
-            this.$http.get(baseUrl + "/resource/tree").success((function (_this) {
+            this.$http.get(baseUrl + '/resource/tree', {
+                headers: {
+                    'params': encodeURIComponent(angular.toJson(role))
+                }
+            }).success((function (_this) {
                 return function (data, status, headers) {
                     _this.$log.info("Successfully findTree - status " + status);
                     return deferred.resolve(data);

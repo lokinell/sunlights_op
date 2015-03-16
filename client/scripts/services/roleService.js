@@ -24,7 +24,7 @@
             deferred = this.$q.defer();
             this.$http.get(baseUrl + '/roles', {
                 headers: {
-                    'params': angular.toJson(pager)
+                    'params': encodeURIComponent(angular.toJson(pager))
                 }
             }).success((function (_this) {
                 return function (data, status, headers) {

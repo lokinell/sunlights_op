@@ -13,86 +13,89 @@
             <h4 class="alert-heading">操作失败</h4>
             <span ng-bind="rc.error.message.detail"></span>
         </div>
-        <form class="form-horizontal" role="form" ng-submit="rc.saveRole()">
+        <form class="form-horizontal col-md-12" role="form" ng-submit="rc.saveRole()">
 
-            <div class="row col-md-11 col-padding">
 
-                <name class="col-md-1 col-padding control-name">名称：</name>
+            <div class="row col-md-8 col-padding">
 
-                <div class="col-md-3 col-padding">
-                    <input class="form-control" ng-model="rc.role.name" required>
-                </div>
-                <name class="col-md-1 col-padding control-name">代码：</name>
 
-                <div class="col-md-3 col-padding">
-                    <input class="form-control" ng-model="rc.role.code" ng-disabled="!!rc.role.id" required>
-                </div>
+                    <name class="col-md-2 col-padding control-name">名称：</name>
+
+                    <div class="col-md-4 col-padding">
+                        <input class="form-control" ng-model="rc.role.name" required>
+                    </div>
+                    <name class="col-md-2 col-padding control-name">代码：</name>
+
+                    <div class="col-md-4 col-padding">
+                        <input class="form-control" ng-model="rc.role.code" ng-disabled="!!rc.role.id" required>
+                    </div>
+
+
+
+                    <name class="col-md-2 col-padding control-name">有效：</name>
+
+                    <div class="col-md-10 col-padding">
+                        <input type="checkbox" ng-model="rc.role.deleted" required>
+                    </div>
+
+                    <name class="col-md-2 col-padding control-name">描述：</name>
+
+                    <div class="col-md-10 col-padding">
+                        <textarea class="form-control" ng-model="rc.role.desc" style="height: 225px;">
+                        </textarea>
+                    </div>
+
+
             </div>
 
 
-            <div class="row col-md-11 col-padding">
-
-                <name class="col-md-1 col-padding control-name">有效：</name>
-
-                <div class="col-md-1 col-padding">
-                    <input type="checkbox" ng-model="rc.role.deleted" required>
-                </div>
-            </div>
-            <div class="row col-md-11 col-padding">
-
-                <name class="col-md-1 col-padding control-name">描述：</name>
-
-                <div class="col-md-7 col-padding">
-                    <textarea class="form-control" ng-model="rc.role.desc">
-                    </textarea>
-                </div>
-            </div>
-            <div class="row col-md-11 col-padding">
-                <div class="tree">
-                    <ul>
-                        <li ng-repeat="menu1 in rc.menus" ng-class="{closed:rc.tree.isFolded(menu1)}">
-                            <div>
-                                <input type="checkbox" ng-model="menu1.checked" ng-change="rc.tree.check(menu1, menu1.checked)"
-                                       ng-class="{intermediate: rc.tree.isSemiChecked(menu1)}"/>
+            <div class="row col-md-4 col-padding">
+                <div class="panel panel-default">
+                    <div class="panel-heading">资源</div>
+                    <div class="panel-body" style="height: 238px;overflow: auto;">
+                        <div class="tree">
+                            <ul>
+                                <li ng-repeat="menu1 in rc.menus" ng-class="{closed:rc.tree.isFolded(menu1)}">
+                                    <div>
+                                        <input type="checkbox" ng-model="menu1.checked" ng-change="rc.tree.check(menu1, menu1.checked)"
+                                               ng-class="{intermediate: rc.tree.isSemiChecked(menu1)}"/>
                                   <span ng-click="rc.tree.toggleFold(menu1)">
                                     <span class="glyphicon" ng-class="rc.tree.isFolded(menu1)?'glyphicon-plus':'glyphicon-minus'"></span>
                                     {{menu1.name}}
                                   </span>
-                            </div>
-                            <ul ng-class="{hidden: rc.tree.isFolded(menu1)}">
-                                <li ng-repeat="menu2 in menu1.items" ng-class="{closed:rc.tree.isFolded(menu2)}">
-                                    <input type="checkbox" ng-model="menu2.checked" ng-change="rc.tree.check(menu2, menu2.checked)"
-                                           ng-class="{intermediate: rc.tree.isSemiChecked(menu2)}"/>
+                                    </div>
+                                    <ul ng-class="{hidden: rc.tree.isFolded(menu1)}">
+                                        <li ng-repeat="menu2 in menu1.items" ng-class="{closed:rc.tree.isFolded(menu2)}">
+                                            <input type="checkbox" ng-model="menu2.checked" ng-change="rc.tree.check(menu2, menu2.checked)"
+                                                   ng-class="{intermediate: rc.tree.isSemiChecked(menu2)}"/>
                                     <span ng-click="rc.tree.toggleFold(menu2)">
                                       <span class="glyphicon" ng-class="rc.tree.isFolded(menu2)?'glyphicon-plus':'glyphicon-minus'"></span>
                                       {{menu2.name}}
                                     </span>
-                                    <ul ng-class="{hidden: rc.tree.isFolded(menu2)}">
-                                        <li ng-repeat="menu3 in menu2.items">
-                                            <name>
-                                                <input type="checkbox" ng-model="menu3.checked" ng-change="rc.tree.check(menu3, menu3.checked)"/>
-                                                {{menu3.name}}
-                                            </name>
+                                            <ul ng-class="{hidden: rc.tree.isFolded(menu2)}">
+                                                <li ng-repeat="menu3 in menu2.items">
+                                                    <name>
+                                                        <input type="checkbox" ng-model="menu3.checked"
+                                                               ng-change="rc.tree.check(menu3, menu3.checked)"/>
+                                                        {{menu3.name}}
+                                                    </name>
+                                                </li>
+                                            </ul>
                                         </li>
                                     </ul>
                                 </li>
                             </ul>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
-
-
             </div>
-
-
-            <div class="row col-md-11 col-padding text-right">
-                <div class="col-md-2 col-padding col-md-offset-6">
-                    <button type="submit" class="btn btn-success">确定</button>
-                    <a ui-sref="dashboard.role" class="btn btn-warning">取消</a>
-                </div>
+            <div class="row col-md-12 col-padding">
+                    <button type="submit" class="btn btn-success col-md-1 col-md-offset-10">确定</button>
+                    <a ui-sref="dashboard.role" class="btn btn-warning col-md-1">取消</a>
             </div>
 
         </form>
     </div>
+
 
 </div>
