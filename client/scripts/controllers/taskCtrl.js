@@ -173,14 +173,14 @@
     TaskCtrl.prototype.createTask = function() {
       this.$log.debug("createTask()");
       this.task = {};
-      return this.$location.path("/task/save");
+      return this.$location.path("/dashboard/tasks/save");
     };
 
     TaskCtrl.prototype.editTask = function(task) {
       this.$log.debug("editTask() " + (angular.toJson(task, true)));
       task.isEdit = true;
       this.$rootScope.task = task;
-      return this.$location.path("/task/save");
+      return this.$location.path("/dashboard/tasks/save");
     };
 
     TaskCtrl.prototype.deleteTask = function(task) {

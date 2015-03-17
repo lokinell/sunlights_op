@@ -6,12 +6,19 @@ module.exports = {
 
   //This is the list of file patterns to load into the browser during testing.
   files: [
-    baseDir + '/src/vendor/angular/angular.js',
-    baseDir + '/src/vendor/angular-mocks/angular-mocks.js',
-    baseDir + '/src/vendor/angular-ui-router/release/angular-ui-router.js',
-    baseDir + '/src/app/**/*.js',
-    baseDir + '/src/common/**/*.js',
-    'build/tmp/*.js',
+    baseDir + '/bower_components/angular/angular.js',
+    baseDir + '/bower_components/jquery/dist/jquery.min.js',
+    baseDir + "/bower_components/angular-loading-bar/build/loading-bar.min.js",
+    baseDir + '/bower_components/bootstrap/dist/js/bootstrap.min.js',
+    baseDir + '/bower_components/angular-chosen-localytics/chosen.js',
+    baseDir + '/bower_components/angular-ui-date/src/date.js',
+    baseDir + '/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+    baseDir +'/bower_components/ng-grid/ng-grid-2.0.14.min.js',
+    baseDir + '/bower_components/oclazyload/dist/ocLazyLoad.min.js',
+    baseDir + '/bower_components/angular-mocks/angular-mocks.js',
+    baseDir + '/bower_components/angular-ui-router/release/angular-ui-router.js',
+    baseDir + '/scripts/**/*.js',
+    baseDir + '/scripts/**/*.js',
     baseDir + '/test/unit/**/*.spec.js'
   ],
 

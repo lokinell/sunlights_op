@@ -251,6 +251,25 @@ angular
                     }
                 }
             })
+          .state('dashboard.tasksSave', {
+            templateUrl: 'views/tasks/save.html',
+            url: '/tasks/save',
+            controller: 'TaskCtrl',
+            resolve: {
+              loadMyFiles: function ($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                  name: 'sbAdminApp',
+                  files: [
+                    'bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js',
+                    'bower_components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css',
+                    'scripts/directives/paging/ngPageChanged.js',
+                    'scripts/services/taskService.js',
+                    'scripts/controllers/taskCtrl.js'
+                  ]
+                })
+              }
+            }
+          })
             .state('dashboard.fundcompanies', {
                 templateUrl: 'views/fundcompanies/index.html',
                 url: '/fundcompanies',
