@@ -13,12 +13,6 @@
             this.depositInterest = this.$rootScope.depositInterest || {};
             this.$rootScope.depositInterest = {};
             this.pager = {};
-            $scope.datepickerOptions = {
-                format: 'yyyy-mm-dd',
-                language: 'zh',
-                autoclose: true,
-                weekStart: 0
-            }
         }
 
         DepositInterestCtrl.prototype.findDepositInterests = function () {

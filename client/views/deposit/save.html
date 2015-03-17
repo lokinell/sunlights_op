@@ -21,7 +21,18 @@
                 <label class="col-md-1 col-padding control-label">日期：</label>
 
                 <div class="col-md-3 col-padding">
-                    <input class="form-control" type="date" ng-model="dic.depositInterest.date">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" id="dropdown1" role="button" data-toggle="dropdown" data-target="#">
+                            <div class="input-group">
+                                <input class="form-control" value="{{dic.depositInterest.date | date : 'yyyy-MM-dd HH:mm:ss'}}">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker ng-model="dic.depositInterest.date"
+                                            datetimepicker-config="{ dropdownSelector: '#dropdown1'}"></datetimepicker>
+                        </ul>
+                    </div>
                 </div>
                 <label class="col-md-1 col-padding control-label">活期：</label>
 
