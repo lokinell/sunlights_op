@@ -1,0 +1,32 @@
+<div class="row" ng-controller="BankCtrl as bc">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a ui-sref="dashboard.bank">银行管理</a></li>
+            <li class="active">银行信息</li>
+        </ol>
+    </div>
+    <div class="row">
+
+        <form class="form-inline" role="form">
+
+            <div class="form-group">
+                <label class="control-label">银行编码：</label>
+                <input type="text" ng-enter="bc.findBanks()" class="form-control" ng-model="bc.pager.filter.LIKES_bankCode"
+                       placeholder="银行编码">
+                <label class="control-label">银行名称：</label>
+                <input type="text" ng-enter="bc.findBanks()" class="form-control" ng-model="bc.pager.filter.LIKES_bankName"
+                       placeholder="银行名称">
+
+
+            </div>
+            <p class="text-right">
+                <a class="btn btn-primary submit" ng-click="bc.findBanks()">查询</a>
+                <a class="btn btn-primary submit" ng-click="bc.createBank()">添加</a>
+            </p>
+
+        </form>
+        <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="bc.findBanks()"></div>
+    </div>
+
+
+</div>

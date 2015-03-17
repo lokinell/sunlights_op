@@ -449,4 +449,34 @@ angular
                     }
                 }
             })
+            .state('dashboard.bank', {
+                templateUrl: 'views/bank/bank.html',
+                url: '/bank',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/bankService.js',
+                                'scripts/controllers/bankCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.bankSave', {
+                templateUrl: 'views/bank/save.html',
+                url: '/bank/save',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/bankService.js',
+                                'scripts/controllers/bankCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
     }]);
