@@ -17,6 +17,7 @@ module.exports = {
     baseDir + '/bower_components/oclazyload/dist/ocLazyLoad.min.js',
     baseDir + '/bower_components/angular-mocks/angular-mocks.js',
     baseDir + '/bower_components/angular-ui-router/release/angular-ui-router.js',
+    baseDir + '/bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js',
     baseDir + '/scripts/**/*.js',
     baseDir + '/scripts/**/*.js',
     baseDir + '/test/unit/**/*.spec.js'
