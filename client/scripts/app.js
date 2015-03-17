@@ -15,7 +15,8 @@ angular
         'angular-loading-bar',
         'ngGrid',
         'ui.date',
-        'localytics.directives'
+        'localytics.directives',
+        'ui.bootstrap.datetimepicker'
     ])
     .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
