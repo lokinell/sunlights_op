@@ -1,0 +1,143 @@
+<div class="row" ng-controller="DepositInterestCtrl as dic">
+
+    <div class="row">
+        <h4>
+            活期利率
+        </h4>
+        <hr>
+    </div>
+
+    <div class="row">
+
+        <div class="alert alert-danger" ng-show="!!dic.error">
+            <h4 class="alert-heading">操作失败</h4>
+            <span ng-bind="dic.error.message.detail"></span>
+        </div>
+        <form class="form-horizontal" role="form" ng-submit="dic.saveDepositInterest()">
+
+            <div class="row col-md-11 col-padding">
+
+                <label class="col-md-1 col-padding control-label">日期：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" type="date" ng-model="dic.depositInterest.date">
+                </div>
+                <label class="col-md-1 col-padding control-label">活期：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" type="number" step="0.0001" ng-model="dic.depositInterest.current" required>
+                </div>
+            </div>
+
+
+            <div class="row col-md-11 col-padding">
+                <h4>
+                    整存整取
+                </h4>
+
+                </hr>
+                <label class="col-md-1 col-padding control-label">三个月：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" type="number" step="0.0001" ng-model="dic.depositInterest.fullThreeMonths">
+                </div>
+                <label class="col-md-1 col-padding control-label">6个月：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" type="number" step="0.0001" ng-model="dic.depositInterest.fullHalfYear">
+                </div>
+            </div>
+
+            <div class="row col-md-11 col-padding">
+                <label class="col-md-1 col-padding control-label">一年：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" type="number" step="0.0001" ng-model="dic.depositInterest.fullOneYear">
+                </div>
+                <label class="col-md-1 col-padding control-label">二年：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" type="number" step="0.0001" ng-model="dic.depositInterest.fullTwoYear">
+                </div>
+            </div>
+            <div class="row col-md-11 col-padding">
+
+                <label class="col-md-1 col-padding control-label">三年：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" type="number" step="0.0001" ng-model="dic.depositInterest.fullThreeYear">
+                </div>
+                <label class="col-md-1 col-padding control-label">五年：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" type="number" step="0.0001" ng-model="dic.depositInterest.fullFiveYear">
+                </div>
+            </div>
+
+
+            <div class="row col-md-11 col-padding">
+                <h4>
+                    零存整取 整存零取 存本取息
+                </h4>
+
+                </hr>
+
+                <label class="col-md-1 col-padding control-label">一年：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" type="number" step="0.0001" ng-model="dic.depositInterest.shortageOneYear">
+                </div>
+                <label class="col-md-1 col-padding control-label">三年：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" type="number" step="0.0001" ng-model="dic.depositInterest.shortageThreeYear">
+                </div>
+            </div>
+            <div class="row col-md-11 col-padding">
+
+                <label class="col-md-1 col-padding control-label">五年：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" type="number" step="0.0001" ng-model="dic.depositInterest.shortageFiveYear">
+                </div>
+            </div>
+            <div class="row col-md-11 col-padding">
+
+                <label class="col-md-1 col-padding control-label">协定存款：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" type="number" step="0.0001" ng-model="dic.depositInterest.agreementSavings">
+                </div>
+            </div>
+
+            <div class="row col-md-11 col-padding">
+
+                <h4>
+                    通知存款
+                </h4>
+
+                </hr>
+
+                <label class="col-md-1 col-padding control-label">一天：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" type="number" step="0.0001" ng-model="dic.depositInterest.callDepositOneDay">
+                </div>
+
+                <label class="col-md-1 col-padding control-label">七天：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" type="number" step="0.0001" ng-model="dic.depositInterest.callDepositOneWeek">
+                </div>
+            </div>
+            <div class="row col-md-11 col-padding text-right">
+                <div class="col-md-2 col-padding col-md-offset-6">
+                    <button type="submit" class="btn btn-success">确定</button>
+                    <a ui-sref="dashboard.deposit" class="btn btn-warning">取消</a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>

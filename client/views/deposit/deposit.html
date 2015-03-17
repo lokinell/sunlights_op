@@ -1,0 +1,92 @@
+<div class="row" ng-controller="DepositInterestCtrl as dic" ng-init="dic.findDepositInterests()">
+
+    <div class="row">
+        <h1>
+            活期利率
+        </h1>
+        <hr>
+    </div>
+
+    <div class="row">
+
+        <div class="alert alert-danger" ng-show="!!dic.error">
+            <h4 class="alert-heading">操作失败</h4>
+            <span ng-bind="dic.error.message.detail"></span>
+        </div>
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <label class="control-label">开始时间：</label>
+                <input type="date" ng-enter="dic.findDepositInterests()" class="form-control" ng-model="dic.pager.filter.GTD_beginDate"
+                       placeholder="开始时间">
+                <label class="control-label">结束时间：</label>
+                <input type="date" ng-enter="dic.findDepositInterests()" class="form-control" ng-model="dic.pager.filter.LED_endDate"
+                       placeholder="结束时间">
+            </div>
+
+            <div>
+                <p class="text-right">
+                    <a class="btn btn-primary submit" ng-click="dic.findDepositInterests()">查询</a>
+                    <a class="btn btn-primary submit" ng-click="dic.createDepositInterest()">添加</a>
+                </p>
+            </div>
+        </form>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th style="text-align: center;vertical-align: middle;" rowspan="2">日期</th>
+                <th style="text-align: center;vertical-align: middle;" rowspan="2">活期</th>
+                <th style="text-align: center;vertical-align: middle;" colspan="6">整存整取</th>
+                <th style="text-align: center;vertical-align: middle;" colspan="3">零存整取 整存零取 存本取息</th>
+                <th style="text-align: center;vertical-align: middle;" rowspan="2">协定存款</th>
+                <th style="text-align: center;vertical-align: middle;" rowspan="2">一天通知存款</th>
+                <th style="text-align: center;vertical-align: middle;" rowspan="2">七天通知存款</th>
+                <th style="text-align: center;vertical-align: middle;" rowspan="2">操作</th>
+            </tr>
+            <tr>
+                <th style="text-align: center;vertical-align: middle;">三个月</th>
+                <th style="text-align: center;vertical-align: middle;">6个月</th>
+                <th style="text-align: center;vertical-align: middle;">一年</th>
+                <th style="text-align: center;vertical-align: middle;">二年</th>
+                <th style="text-align: center;vertical-align: middle;">三年</th>
+                <th style="text-align: center;vertical-align: middle;">五年</th>
+                <th style="text-align: center;vertical-align: middle;">一年</th>
+                <th style="text-align: center;vertical-align: middle;">三年</th>
+                <th style="text-align: center;vertical-align: middle;">五年</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="depositInterest in dic.depositInterests">
+                <td>{{ depositInterest.date | date:'yyyy-MM-dd'}}</td>
+                <td>{{ depositInterest.current }}</td>
+                <td>{{ depositInterest.fullThreeMonths }}</td>
+                <td>{{ depositInterest.fullHalfYear }}</td>
+                <td>{{ depositInterest.fullOneYear }}</td>
+                <td>{{ depositInterest.fullTwoYear }}</td>
+                <td>{{ depositInterest.fullThreeYear }}</td>
+                <td>{{ depositInterest.fullFiveYear }}</td>
+                <td>{{ depositInterest.shortageOneYear }}</td>
+                <td>{{ depositInterest.shortageThreeYear }}</td>
+                <td>{{ depositInterest.shortageFiveYear }}</td>
+                <td>{{ depositInterest.agreementSavings }}</td>
+                <td>{{ depositInterest.callDepositOneDay }}</td>
+                <td>{{ depositInterest.callDepositOneWeek }}</td>
+                <td>
+                    <div class="actions">
+                        <span class="glyphicon glyphicon-edit" data-toggle="tooltip"
+                              ng-click="dic.updateDepositInterest(depositInterest)" title="编辑"></span>
+                        <span class="glyphicon glyphicon-remove" data-toggle="tooltip"
+                              ng-click="dic.deleteDepositInterest(depositInterest)" title="删除"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr ng-hide="dic.depositInterests.length">
+                <td colspan="15">
+                    <p class="text-center">No DepositInterests Found</p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

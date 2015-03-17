@@ -419,4 +419,34 @@ angular
                     }
                 }
             })
+            .state('dashboard.deposit', {
+                templateUrl: 'views/deposit/deposit.html',
+                url: '/deposit',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/depositInterestService.js',
+                                'scripts/controllers/depositInterestCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.depositSave', {
+                templateUrl: 'views/deposit/save.html',
+                url: '/deposit/save',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/depositInterestService.js',
+                                'scripts/controllers/depositInterestCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
     }]);
