@@ -54,14 +54,34 @@
                 <label class="col-md-2 col-padding control-label">上架时间：</label>
 
                 <div class="col-md-4 col-padding">
-                    <input class="form-control" ui-date name="upBeginTime" required
-                           ng-model="pmc.manage.upBeginTimeString">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" id="upBeginTime" role="button" data-toggle="dropdown" data-target="#">
+                            <div class="input-group">
+                                <input class="form-control" value="{{pmc.manage.upBeginTime | date : 'yyyy-MM-dd'}}" required>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker ng-model="pmc.manage.upBeginTime"
+                                            datetimepicker-config="{ dropdownSelector: '#upBeginTime', minView : 'day'}"></datetimepicker>
+                        </ul>
+                    </div>
                 </div>
                 <label class="col-md-2 col-padding control-label">下架时间：</label>
 
                 <div class="col-md-4 col-padding">
-                    <input class="form-control" ui-date name="downEndTime" required
-                           ng-model="pmc.manage.downEndTimeString">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" id="downEndTime" role="button" data-toggle="dropdown" data-target="#">
+                            <div class="input-group">
+                                <input class="form-control" value="{{pmc.manage.downEndTime | date : 'yyyy-MM-dd'}}" required>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker ng-model="pmc.manage.downEndTime"
+                                            datetimepicker-config="{ dropdownSelector: '#downEndTime', minView : 'day'}"></datetimepicker>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="row col-md-10 col-padding">
