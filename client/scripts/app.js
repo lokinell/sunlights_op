@@ -529,4 +529,34 @@ angular
                     }
                 }
             })
+            .state('dashboard.question', {
+                templateUrl: 'views/question/question.html',
+                url: '/question',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/questionService.js',
+                                'scripts/controllers/questionCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.questionSave', {
+                templateUrl: 'views/question/save.html',
+                url: '/question/save',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/questionService.js',
+                                'scripts/controllers/questionCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
     }]);

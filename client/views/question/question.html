@@ -1,0 +1,33 @@
+<div class="row" ng-controller="QuestionCtrl as qc">
+
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a ui-sref="dashboard.feedback">问题反馈</a></li>
+            <li class="active">问题</li>
+        </ol>
+    </div>
+
+    <div class="row">
+        <form class="form-inline" role="form">
+            <div class="col-md-12">
+                <label class="control-label">处理标志：</label>
+                <select class="form-control" ng-model="qc.pager.filter.EQS_status">
+                    <option value="" selected>请选择</option>
+                    <option value="Y">未处理</option>
+                    <option value="N">已处理</option>
+                </select>
+                <label class="control-label">手机号：</label>
+                <input type="text" class="form-control" ng-model="qc.pager.filter.LIKES_phoneNo" ng-enter="qc.findQuestions()">
+            </div>
+            <div class="text-right">
+                <a class="btn btn-primary submit" ng-click="qc.findQuestions()">查询</a>
+                <a class="btn btn-primary submit" ng-click="qc.createQuestion()">添加</a>
+            </div>
+
+            <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="qc.findQuestions()"></div>
+
+        </form>
+    </div>
+
+
+</div>
