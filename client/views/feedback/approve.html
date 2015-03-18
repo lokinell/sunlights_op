@@ -1,0 +1,71 @@
+<div class="row" ng-controller="FeedBackCtrl as fc">
+
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a ui-sref="dashboard.feedback">意见反馈</a></li>
+            <li><a ui-sref="dashboard.feedback">反馈</a></li>
+            <li class="active">反馈审核</li>
+        </ol>
+    </div>
+
+    <div class="row">
+
+        <div class="alert alert-danger" ng-show="!!fc.error">
+            <h4 class="alert-heading">操作失败</h4>
+            <span ng-bind="fc.error.message.detail"></span>
+        </div>
+        <form class="form-horizontal" user="form" ng-submit="fc.approveFeedBack()">
+            <div class="row col-md-11 col-padding">
+                <label class="col-md-1 col-padding control-label">设备号：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" disabled="true" class="form-control" type="text" name="deviceNo"
+                           ng-model="fc.feedBack.deviceNo" required>
+                </div>
+                <label class="col-md-1 col-padding control-label">手机号：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" disabled="true" class="form-control" type="text" name="mobile"
+                           ng-model="fc.feedBack.mobile">
+                </div>
+            </div>
+            <div class="row col-md-11 col-padding">
+                <label class="col-md-1 col-padding control-label">客户编码：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" disabled="true" class="form-control" type="text" name="customerId"
+                           ng-model="fc.feedBack.customerId">
+                </div>
+                <label class="col-md-1 col-padding control-label">创建时间：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" value="{{fc.feedBack.createTime | date : 'yyyy-MM-dd HH:mm:ss'}}" disabled="true">
+                </div>
+            </div>
+            <div class="row col-md-11 col-padding">
+                <label class="col-md-1 col-padding control-label">反馈内容：</label>
+
+                <div class="col-md-7 col-padding">
+                    <textarea disabled="true" class="form-control" type="text" name="context"
+                              ng-model="fc.feedBack.context">
+                    </textarea>
+                </div>
+            </div>
+            <div class="row col-md-11 col-padding">
+                <label class="col-md-1 col-padding control-label">备注：</label>
+
+                <div class="col-md-7 col-padding">
+                    <textarea class="form-control" type="text" name="remark" ng-model="fc.feedBack.remark" required>
+                    </textarea>
+                </div>
+            </div>
+            <div class="row col-md-11 col-padding" align="right">
+                <div class="col-md-2 col-padding col-md-offset-6">
+                    <button type="submit" class="btn btn-success" ng-disabled="fc.feedBack.status == 'Y'">确定</button>
+                    <a ui-sref="dashboard.feedback" class="btn btn-warning">取消</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

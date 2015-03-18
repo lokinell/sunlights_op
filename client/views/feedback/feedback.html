@@ -1,0 +1,33 @@
+<div class="row" ng-controller="FeedBackCtrl as fc">
+
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a ui-sref="dashboard.feedback">意见反馈</a></li>
+            <li class="active">反馈</li>
+        </ol>
+    </div>
+
+    <div class="well well-lg">
+
+        <div class="alert alert-danger" ng-show="!!fc.error">
+            <h4 class="alert-heading">操作失败</h4>
+            <span ng-bind="fc.error.message.detail"></span>
+        </div>
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <label class="control-label">反馈内容</label>
+                <input type="text" ng-enter="fc.findFeedBacks()" class="form-control" ng-model="fc.pager.filter.LIKES_context" placeholder="反馈内容">
+            </div>
+            <select class="form-control" ng-model="fc.pager.filter.EQS_status" ng-options="item.key as item.value for item in fc.status">
+            </select>
+
+            <div>
+                <p class="text-right">
+                    <a class="btn btn-primary submit" ng-click="fc.findFeedBacks()">查询</a>
+                </p>
+            </div>
+        </form>
+        <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="fc.findFeedBacks()"></div>
+    </div>
+
+</div>

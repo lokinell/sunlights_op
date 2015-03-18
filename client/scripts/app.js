@@ -499,4 +499,34 @@ angular
                     }
                 }
             })
+            .state('dashboard.feedback', {
+                templateUrl: 'views/feedback/feedback.html',
+                url: '/feedback',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/feedbackService.js',
+                                'scripts/controllers/feedbackCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.feedbackApprove', {
+                templateUrl: 'views/feedback/approve.html',
+                url: '/feedback/approve',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/feedbackService.js',
+                                'scripts/controllers/feedbackCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
     }]);
