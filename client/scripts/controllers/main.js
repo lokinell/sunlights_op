@@ -17,8 +17,18 @@
             this.LoginService = LoginService;
             this.$log.debug("constructing MainCtrl");
             this.user = {};
-            this.findCurrentUser()
+            this.findCurrentUser();
+
         }
+
+       MainCtrl.prototype.check = function (x) {
+            this.$log.debug("check()");
+            if (x == this.collapseVar)
+                this.collapseVar = 0;
+            else
+                this.collapseVar = x;
+            return;
+        };
 
         MainCtrl.prototype.logout = function () {
             this.$log.debug("findCurrentUser()");

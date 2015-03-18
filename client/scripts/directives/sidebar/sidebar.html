@@ -16,152 +16,16 @@
             <li ui-sref-active="active">
                 <a ui-sref="dashboard.form"><i class="fa fa-edit fa-fw"></i> Forms</a>
             </li>
-            <li ng-class="{active: collapseVar==1}">{{dropDown}}
-                <a href="" ng-click="check(1)"><i class="fa fa-wrench fa-fw"></i> UI Elements<span
-                        class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapseVar!=1">
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.panels-wells">Panels and Wells</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.buttons">Buttons</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.notifications">Notifications</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.typography">Typography</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.icons"> Icons</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.grid">Grid</a>
+            <li ng-repeat="menu1 in mc.user.menuVo.menuVos" ng-class="{active: mc.collapseVar==menu1.id}">
+                <a href="" ng-click="mc.check(menu1.id)"><i class="fa fa-wrench fa-fw"></i>
+                    <span ng-bind="menu1.name"></span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level" collapse="mc.collapseVar!=menu1.id">
+                    <li ng-repeat="menu2 in menu1.menuVos" ui-sref-active="active">
+                        <a ui-sref="dashboard.panels-wells" ng-bind="menu2.name"></a>
                     </li>
                 </ul>
-                <!-- /.nav-second-level -->
-            </li>
-            <li ng-class="{active: collapseVar==2}">
-                <a href="" ng-click="check(2)"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span
-                        class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapseVar!=2">
-                    <li>
-                        <a href="">Second Level Item</a>
-                    </li>
-                    <li>
-                        <a href="">Second Level Item</a>
-                    </li>
-                    <li ng-init="third=!third" ng-class="{active: multiCollapseVar==3}">
-                        <a href="" ng-click="multiCheck(3)">Third Level <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level" collapse="multiCollapseVar!=3">
-                            <li>
-                                <a href="">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="">Third Level Item</a>
-                            </li>
-
-                        </ul>
-                        <!-- /.nav-third-level -->
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
-            <li ng-class="{active:collapseVar==4}">
-                <a href="" ng-click="check(4)"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span
-                        class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapseVar!=4">
-                    <li ng-class="{active: selectedMenu=='blank'}">
-                        <a ui-sref="dashboard.blank" ng-click="selectedMenu='blank'">Blank Page</a>
-                    </li>
-                    <li>
-                        <a ui-sref="login">Login Page</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
-            <li ng-class="{active:collapseVar==5}">
-                <a href="" ng-click="check(5)"><i class="fa fa-files-o fa-fw"></i> 系统管理<span
-                        class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapseVar!=5">
-                    <li>
-                        <a ui-sref="dashboard.verifyCode">验证码</a>
-                    </li>
-                    <li>
-                        <a ui-sref="dashboard.dict">字典表</a>
-                    </li>
-                    <li>
-                        <a ui-sref="dashboard.parameter">参数管理</a>
-                    </li>
-                    <li>
-                        <a ui-sref="dashboard.tasks">定时任务管理</a>
-                    </li>
-                    <li>
-                        <a ui-sref="dashboard.fundcompanies">基金公司管理</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
-            <li ng-class="{active:collapseVar==6}">
-                <a href="" ng-click="check(6)"><i class="fa fa-files-o fa-fw"></i> 产品管理<span
-                        class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapseVar!=6">
-                    <li>
-                        <a ui-sref="dashboard.product">产品信息</a>
-                    </li>
-                    <li>
-                        <a ui-sref="dashboard.fund">基金信息</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
-            <li ng-class="{active:collapseVar==7}">
-                <a href="" ng-click="check(7)"><i class="fa fa-files-o fa-fw"></i> 权限管理<span
-                        class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapseVar!=7">
-                    <li>
-                        <a ui-sref="dashboard.user">用户管理</a>
-                    </li>
-                    <li>
-                        <a ui-sref="dashboard.role">角色管理</a>
-                    </li>
-                    <li>
-                        <a ui-sref="dashboard.resource">资源管理</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
-            <li ng-class="{active:collapseVar==8}">
-                <a href="" ng-click="check(8)"><i class="fa fa-files-o fa-fw"></i> 银行管理<span
-                        class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapseVar!=8">
-                    <li>
-                        <a ui-sref="dashboard.bank">银行信息管理</a>
-                    </li>
-                    <li>
-                        <a ui-sref="dashboard.deposit">银行活期</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
-            <li ng-class="{active:collapseVar==9}">
-                <a href="" ng-click="check(9)"><i class="fa fa-files-o fa-fw"></i> 问题反馈<span
-                        class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapseVar!=9">
-                    <li>
-                        <a ui-sref="dashboard.feedback">反馈</a>
-                    </li>
-                    <li>
-                        <a ui-sref="dashboard.question">问题</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
             </li>
         </ul>
     </div>
