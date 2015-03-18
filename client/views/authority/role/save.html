@@ -18,33 +18,37 @@
 
 
             <div class="row col-md-8 col-padding">
+                <div class="row">
 
 
-                    <name class="col-md-2 col-padding control-name">名称：</name>
+                    <label class="col-md-2 col-padding control-label">名称：</label>
 
                     <div class="col-md-4 col-padding">
-                        <input class="form-control" ng-model="rc.role.name" required>
+                        <input class="form-control" ng-model="rc.role.label" required>
                     </div>
-                    <name class="col-md-2 col-padding control-name">代码：</name>
+                    <label class="col-md-2 col-padding control-label">代码：</label>
 
                     <div class="col-md-4 col-padding">
                         <input class="form-control" ng-model="rc.role.code" ng-disabled="!!rc.role.id" required>
                     </div>
+                </div>
+                <div class="row">
 
 
-
-                    <name class="col-md-2 col-padding control-name">有效：</name>
+                    <label class="col-md-2 col-padding control-label">有效：</label>
 
                     <div class="col-md-10 col-padding">
                         <input type="checkbox" ng-model="rc.role.deleted" required>
                     </div>
-
-                    <name class="col-md-2 col-padding control-name">描述：</name>
+                </div>
+                <div class="row">
+                    <label class="col-md-2 col-padding control-label">描述：</label>
 
                     <div class="col-md-10 col-padding">
                         <textarea class="form-control" ng-model="rc.role.desc" style="height: 225px;">
                         </textarea>
                     </div>
+                </div>
 
 
             </div>
@@ -53,7 +57,7 @@
             <div class="row col-md-4 col-padding">
                 <div class="panel panel-default">
                     <div class="panel-heading">资源</div>
-                    <div class="panel-body" style="height: 238px;overflow: auto;">
+                    <div class="panel-body" style="height: 243px;overflow: auto;">
                         <div class="tree">
                             <ul>
                                 <li ng-repeat="menu1 in rc.menus" ng-class="{closed:rc.tree.isFolded(menu1)}">
@@ -79,7 +83,7 @@
                                                         <input type="checkbox" ng-model="menu3.checked"
                                                                ng-change="rc.tree.check(menu3, menu3.checked)"/>
                                                         {{menu3.name}}
-                                                    </name>
+                                                    </name  >
                                                 </li>
                                             </ul>
                                         </li>
@@ -90,9 +94,12 @@
                     </div>
                 </div>
             </div>
-            <div class="row col-md-12 col-padding">
-                    <button type="submit" class="btn btn-success col-md-1 col-md-offset-10">确定</button>
-                    <a ui-sref="dashboard.role" class="btn btn-warning col-md-1">取消</a>
+            <div class="row col-md-12 col-padding" align="right">
+                <div class="row col-md-2 col-md-offset-10 col-padding">
+                    <button type="submit" class="btn btn-success">确定</button>
+                    <a ui-sref="dashboard.role" class="btn btn-warning">取消</a>
+                </div>
+
             </div>
 
         </form>
