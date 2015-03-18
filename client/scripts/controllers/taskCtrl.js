@@ -144,7 +144,7 @@
       this.pager.pageNum = this.$scope.gridOptions.pagingOptions.currentPage;
       return this.TaskService.listTasks(this.pager).then((function(_this) {
         return function(data) {
-          _this.$log.debug("Promise returned " + data.value.list.length + " Tasks");
+          _this.$log.info("Promise returned " + data.value.list.length + " Tasks");
           return _this.$scope.pager = data.value;
         };
       })(this), (function(_this) {

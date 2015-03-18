@@ -5,12 +5,12 @@
 (function() {
   'use strict';
 
-  describe('TaskCtrl', function() {
+  describe('TaskService', function() {
     var rootScope;
-    var ctrl;
+    var service;
     var scope;
     beforeEach(module('sbAdminApp'));
-    beforeEach(inject(function($rootScope, $controller) {
+    beforeEach(inject(function($rootScope, TaskService) {
        var task = {
           'jobClass': 'jobs.FundJob',
            'jobName': 'just a test',
@@ -25,22 +25,17 @@
       $rootScope.task = task;
       rootScope = $rootScope;
       scope = $rootScope.$new();
-      ctrl = $controller('TaskCtrl', {
-        $scope: scope
-      });
+      service = TaskService;
     }));
 
     it('taskCtrl不会为空', function() {
-      expect(ctrl).not.toEqual(null);
+      expect(service).not.toEqual(null);
     });
 
-    it('taskCtrl获取任务列表返回状态码为0', function() {
-      expect(ctrl.listTasks().$$state.status).toEqual(0);
 
-    });
 
     it('taskCtrl获取任务列表返回状态码为0', function() {
-      console.info(ctrl.saveTask());
+      console.info(service.saveTask());
 
     });
 

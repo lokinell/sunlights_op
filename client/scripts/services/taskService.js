@@ -153,7 +153,6 @@
       })(this));
       return deferred.promise;
     };
-
     return TaskService;
 
   })();
