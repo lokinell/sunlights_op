@@ -2,20 +2,6 @@
     <div class="sidebar-nav navbar-collapse">
         <ul class="nav in" id="side-menu">
             <sidebar-search></sidebar-search>
-            <li ui-sref-active="active">
-                <a ui-sref="dashboard.home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-            </li>
-            <li ui-sref-active="active">
-
-                <a ui-sref="dashboard.chart"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span></span></a>
-
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="dashboard.table"><i class="fa fa-table fa-fw"></i> Tables</a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="dashboard.form"><i class="fa fa-edit fa-fw"></i> Forms</a>
-            </li>
             <li ng-repeat="menu1 in mc.user.menuVo.menuVos" ng-class="{active: mc.collapseVar==menu1.id}">
                 <a href="" ng-click="mc.check(menu1.id)"><i class="fa fa-wrench fa-fw"></i>
                     <span ng-bind="menu1.name"></span>
@@ -23,7 +9,7 @@
                 </a>
                 <ul class="nav nav-second-level" collapse="mc.collapseVar!=menu1.id">
                     <li ng-repeat="menu2 in menu1.menuVos" ui-sref-active="active">
-                        <a ui-sref="dashboard.panels-wells" ng-bind="menu2.name"></a>
+                        <a ui-sref="{{ menu2.uri }}" ng-bind="menu2.name"></a>
                     </li>
                 </ul>
             </li>
