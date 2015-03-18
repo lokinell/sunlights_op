@@ -14,162 +14,145 @@
             <h4 class="alert-heading">操作失败</h4>
             <span ng-bind="pmc.error.message.detail"></span>
         </div>
-        <form role="form" ng-submit="pmc.saveProductManage()">
-            <table>
-                <tr>
-                    <td>
-                        <label class="control-label">产品名称：</label>
-                    </td>
-                    <td>
-                        <input disabled="true" class="form-control" type="text" name="productName" required
-                               ng-model="pmc.manage.productName">
-                    </td>
+        <form class="form-horizontal" user="form" ng-submit="pmc.saveProductManage()">
+            <div class="row col-md-10 col-padding">
 
-                    <td>
-                        <label class="control-label">产品编码：</label>
-                    </td>
-                    <td>
-                        <input disabled="true" class="form-control" type="text" name="productCode" required
-                               ng-model="pmc.manage.productCode">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="control-label">产品类型：</label>
-                    </td>
-                    <td>
-                        <select class="form-control" ng-model="pmc.manage.productType" required
-                                ng-options="item.catPointKey as item.codeVal for item in pmc.productTypes">
-                            <option value="" selected>请选择</option>
-                        </select>
-                    </td>
-                    <td>
-                        <label class="control-label">产品状态：</label>
-                    </td>
-                    <td>
-                        <select class="form-control" ng-model="pmc.manage.productStatus" required
-                                ng-options="item.catPointKey as item.codeVal for item in pmc.productStatuses">
-                            <option value="" selected>请选择</option>
-                        </select>
-                    </td>
-                </tr>
+                <label class="col-md-2 col-padding control-label">产品名称：</label>
 
-                <tr>
-                    <td>
-                        <label class="control-label">上架时间：</label>
-                    </td>
-                    <td>
-                        <input class="form-control" ui-date name="upBeginTime" required
-                               ng-model="pmc.manage.upBeginTimeString">
-                    </td>
+                <div class="col-md-4 col-padding">
+                    <input disabled="true" class="form-control" type="text" name="productName" required
+                           ng-model="pmc.manage.productName">
+                </div>
+                <label class="col-md-2 col-padding control-label">产品编码：</label>
 
-                    <td>
-                        <label class="control-label">下架时间：</label>
-                    </td>
-                    <td>
-                        <input class="form-control" ui-date name="downEndTime" required
-                               ng-model="pmc.manage.downEndTimeString">
-                    </td>
-                </tr>
+                <div class="col-md-4 col-padding">
+                    <input disabled="true" class="form-control" type="text" name="productCode" required
+                           ng-model="pmc.manage.productCode">
+                </div>
+            </div>
+            <div class="row col-md-10 col-padding">
 
-                <tr>
-                    <td>
-                        <label class="control-label">推荐类型：</label>
-                    </td>
-                    <td>
-                        <select class="form-control" ng-model="pmc.manage.recommendType" required ng-change="pmc.handleRecommendType()"
-                                ng-options="item.catPointKey as item.codeVal for item in pmc.recommendTypes">
-                            <option value="" selected>请选择</option>
-                        </select>
-                    </td>
-                    <td>
-                        <label class="control-label">推荐标志：</label>
-                    </td>
-                    <td>
-                        <select class="form-control" ng-model="pmc.manage.recommendFlag" required ng-disabled="'FP.RECOMMEND.TYPE.1' === pmc.manage.recommendType"
-                                ng-options="item.catPointKey as item.codeVal for item in pmc.recommendFlags">
-                            <option value="" selected>请选择</option>
-                        </select>
-                    </td>
+                <label class="col-md-2 col-padding control-label">产品类型：</label>
 
-                </tr>
+                <div class="col-md-4 col-padding">
+                    <select class="form-control" ng-model="pmc.manage.productType" required
+                            ng-options="item.catPointKey as item.codeVal for item in pmc.productTypes">
+                        <option value="" selected>请选择</option>
+                    </select>
+                </div>
+                <label class="col-md-2 col-padding control-label">产品状态：</label>
 
-                <tr>
-                    <td>
-                        <label class="control-label">已购买人数：</label>
-                    </td>
-                    <td>
-                        <input class="form-control" type="number" name="initBuyedCount" required
-                               ng-model="pmc.manage.initBuyedCount">
-                    </td>
-                    <td>
-                        <label class="control-label">月购买人数：</label>
-                    </td>
-                    <td>
-                        <input class="form-control" type="number" name="oneMonthBuyedCount" required
-                               ng-model="pmc.manage.oneMonthBuyedCount">
-                    </td>
+                <div class="col-md-4 col-padding">
+                    <select class="form-control" ng-model="pmc.manage.productStatus" required
+                            ng-options="item.catPointKey as item.codeVal for item in pmc.productStatuses">
+                        <option value="" selected>请选择</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row col-md-10 col-padding">
 
-                </tr>
-                <tr>
-                    <td>
-                        <label class="control-label">供应商：</label>
-                    </td>
-                    <td>
-                        <select class="form-control" ng-model="pmc.manage.supplierCode"
-                                ng-options="item.supplierCode as item.merchantName for item in pmc.suppliers">
-                            <option value="" selected>请选择</option>
-                        </select>
-                    </td>
-                    <td>
-                        <label class="control-label">同步：</label>
-                    </td>
-                    <td>
-                        <select class="form-control" ng-model="pmc.manage.isGrab" required
-                                ng-options="item.key as item.value for item in pmc.status">
-                            <option value="" selected>请选择</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="control-label">推荐序号：</label>
-                    </td>
-                    <td>
-                        <input class="form-control" type="number" name="url"
-                               ng-model="pmc.manage.priorityLevel">
-                    </td>
+                <label class="col-md-2 col-padding control-label">上架时间：</label>
 
-                </tr>
-                <tr>
-                    <td>
-                        <label class="control-label">服务器地址：</label>
-                    </td>
-                    <td colspan="3">
-                        <input class="form-control" type="text" name="url"
-                               ng-model="pmc.manage.url">
-                    </td>
+                <div class="col-md-4 col-padding">
+                    <input class="form-control" ui-date name="upBeginTime" required
+                           ng-model="pmc.manage.upBeginTimeString">
+                </div>
+                <label class="col-md-2 col-padding control-label">下架时间：</label>
 
-                </tr>
-                <tr>
-                    <td>
-                        <label class="control-label">产品说明：</label>
-                    </td>
-                    <td colspan="3">
-                        <textarea class="form-control" type="text" name="productDesc"
-                                  ng-model="pmc.manage.productDesc">
-                        </textarea>
-                    </td>
+                <div class="col-md-4 col-padding">
+                    <input class="form-control" ui-date name="downEndTime" required
+                           ng-model="pmc.manage.downEndTimeString">
+                </div>
+            </div>
+            <div class="row col-md-10 col-padding">
 
-                </tr>
+                <label class="col-md-2 col-padding control-label">推荐类型：</label>
 
-                <tr>
-                    <td colspan="4" align="right">
-                        <button type="submit" class="btn btn-success">确定</button>
-                        <a ui-sref="dashboard.product" class="btn btn-warning">取消</a>
-                    </td>
-                </tr>
-            </table>
+                <div class="col-md-4 col-padding">
+                    <select class="form-control" ng-model="pmc.manage.recommendType" required ng-change="pmc.handleRecommendType()"
+                            ng-options="item.catPointKey as item.codeVal for item in pmc.recommendTypes">
+                        <option value="" selected>请选择</option>
+                    </select>
+                </div>
+                <label class="col-md-2 col-padding control-label">推荐标志：</label>
+
+                <div class="col-md-4 col-padding">
+                    <select class="form-control" ng-model="pmc.manage.recommendFlag" required ng-disabled="'FP.RECOMMEND.TYPE.1' === pmc.manage.recommendType"
+                            ng-options="item.catPointKey as item.codeVal for item in pmc.recommendFlags">
+                        <option value="" selected>请选择</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row col-md-10 col-padding">
+
+                <label class="col-md-2 col-padding control-label">已购买人数：</label>
+
+                <div class="col-md-4 col-padding">
+                    <input class="form-control" type="number" name="initBuyedCount" required
+                           ng-model="pmc.manage.initBuyedCount">
+                </div>
+                <label class="col-md-2 col-padding control-label">月购买人数：</label>
+
+                <div class="col-md-4 col-padding">
+                    <input class="form-control" type="number" name="oneMonthBuyedCount" required
+                           ng-model="pmc.manage.oneMonthBuyedCount">
+                </div>
+            </div>
+            <div class="row col-md-10 col-padding">
+
+                <label class="col-md-2 col-padding control-label">供应商：</label>
+
+                <div class="col-md-4 col-padding">
+                    <select class="form-control" ng-model="pmc.manage.supplierCode"
+                            ng-options="item.supplierCode as item.merchantName for item in pmc.suppliers">
+                        <option value="" selected>请选择</option>
+                    </select>
+                </div>
+                <label class="col-md-2 col-padding control-label">同步：</label>
+
+                <div class="col-md-4 col-padding">
+                    <select class="form-control" ng-model="pmc.manage.isGrab" required
+                            ng-options="item.key as item.value for item in pmc.status">
+                        <option value="" selected>请选择</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row col-md-10 col-padding">
+
+                <label class="col-md-2 col-padding control-label">推荐序号：</label>
+
+                <div class="col-md-4 col-padding">
+                    <input class="form-control" type="number" name="url"
+                           ng-model="pmc.manage.priorityLevel">
+                </div>
+            </div>
+            <div class="row col-md-10 col-padding">
+
+                <label class="col-md-2 col-padding control-label">服务器地址：</label>
+
+                <div class="col-md-10 col-padding">
+                    <input class="form-control" type="text" name="url"
+                           ng-model="pmc.manage.url">
+                </div>
+            </div>
+            <div class="row col-md-10 col-padding">
+
+                <label class="col-md-2 col-padding control-label">产品说明：</label>
+
+                <div class="col-md-10 col-padding">
+                    <textarea class="form-control" type="text" name="productDesc"
+                              ng-model="pmc.manage.productDesc">
+                    </textarea>
+                </div>
+            </div>
+            <div class="row col-md-10 col-padding text-right">
+
+                <div class="col-md-2 col-padding col-md-offset-10">
+                    <button type="submit" class="btn btn-success">确定</button>
+                    <a ui-sref="dashboard.product" class="btn btn-warning">取消</a>
+                </div>
+
+            </div>
         </form>
     </div>
 
