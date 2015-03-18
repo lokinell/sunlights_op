@@ -17,12 +17,29 @@
             this.LoginService = LoginService;
             this.$log.debug("constructing MainCtrl");
             this.user = {};
+            this.findCurrentUser()
         }
 
         MainCtrl.prototype.logout = function () {
             this.$log.debug("findCurrentUser()");
             localStorage.removeItem("user");
             this.$location.path("/login");
+        };
+
+        MainCtrl.prototype.findCurrentUser = function () {
+            this.$log.debug("findCurrentUser()");
+            return this.LoginService.findCurrentUser().then((function (_this) {
+                return function (data) {
+                    _this.$log.debug("Promise returned user successfully");
+                    return _this.user = data.value;
+                };
+            })(this), (function (_this) {
+                return function (error) {
+                    _this.$log.error("Unable to get Suppliers: " + error);
+                    _this.error = error;
+                    return _this.$location.path("/login");
+                };
+            })(this));
         };
 
         return MainCtrl;
