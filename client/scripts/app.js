@@ -18,6 +18,23 @@ angular
         'localytics.directives',
         'ui.bootstrap.datetimepicker'
     ])
+    .run(function ($rootScope, $window, $location) {
+        $rootScope.$on("$locationChangeStart", function (event, next, current) {
+            console.info('$locationChangeStart--:');
+
+            var user = localStorage.getItem("user");
+
+            if (!user) {
+
+                $location.path('/login');
+                console.log('未登入--: ' + $rootScope.originalUrl);
+                return;
+            } else {
+                //已登录
+                console.log('已登入--: ' + $rootScope.originalUrl);
+            }
+        });
+    })
     .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
         $ocLazyLoadProvider.config({
@@ -79,7 +96,7 @@ angular
             })
             .state('dashboard.home', {
                 url: '/home',
-                controller: 'MainCtrl',
+                controller: 'MainCtrl as mc',
                 templateUrl: '/views/dashboard/home.html',
                 resolve: {
                     loadMyFiles: function ($ocLazyLoad) {
@@ -107,7 +124,18 @@ angular
             })
             .state('login', {
                 templateUrl: '/views/pages/login.html',
-                url: '/login'
+                url: '/login',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/loginService.js',
+                                'scripts/controllers/loginCtrl.js'
+                            ]
+                        })
+                    }
+                }
             })
             .state('dashboard.chart', {
                 templateUrl: 'views/chart.html',
