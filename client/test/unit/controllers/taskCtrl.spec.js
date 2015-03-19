@@ -16,7 +16,7 @@
            'jobName': 'just a test',
            'jobStartTime': '2015-03-17T16:00:00.000Z',
            'seconds': '1',
-          'hours': '0',
+           'hours': '0',
            'month': '*',
            'minutes': '*/20',
            'dayOfMonth': '4',
@@ -30,16 +30,18 @@
       });
     }));
 
-    it('taskCtrl不会为空', function() {
+    it('taskCtrl不为空', function() {
       expect(ctrl).not.toEqual(null);
     });
 
-    it('taskCtrl获取任务列表返回状态码为0', function() {
-      expect(ctrl.listTasks().$$state.status).toEqual(0);
+    it('taskCtrl获取任务列表', function() {
+      ctrl.listTasks();
+
+      //expect(ctrl.).toEqual(0);
 
     });
 
-    it('taskCtrl获取任务列表返回状态码为0', function() {
+    it('taskCtrl保存任务列表', function() {
       console.info(ctrl.saveTask());
 
     });

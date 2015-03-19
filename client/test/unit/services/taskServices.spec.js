@@ -6,37 +6,32 @@
   'use strict';
 
   describe('TaskService', function() {
-    var rootScope;
-    var service;
-    var scope;
+    var service, http;
+
+    var expectedTasks = {
+
+    };
+
     beforeEach(module('sbAdminApp'));
-    beforeEach(inject(function($rootScope, TaskService) {
-       var task = {
-          'jobClass': 'jobs.FundJob',
-           'jobName': 'just a test',
-           'jobStartTime': '2015-03-17T16:00:00.000Z',
-           'seconds': '1',
-          'hours': '0',
-           'month': '*',
-           'minutes': '*/20',
-           'dayOfMonth': '4',
-           'dayOfWeek': '三'
-       };
-      $rootScope.task = task;
-      rootScope = $rootScope;
-      scope = $rootScope.$new();
+    beforeEach(inject(function(TaskService, $httpBackend) {
       service = TaskService;
+      http = $httpBackend;
     }));
 
-    it('taskCtrl不会为空', function() {
-      expect(service).not.toEqual(null);
-    });
+    it('应该获取到任务列表', function(done) {
+      var success = function(data){
+        console.info(data);
+      };
 
+      var fail = function(error){
+        expect(error).toBeUndefined();
+      };
 
+      http.expectGET(baseUrl+"/tasks").respond(200, expectedTasks);
 
-    it('taskCtrl获取任务列表返回状态码为0', function() {
-      console.info(service.saveTask());
+      service.listTasks().then(success).catch(fail).finally(done);
 
+      http.flush();
     });
 
   });
