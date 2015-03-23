@@ -23,7 +23,7 @@
             http = $httpBackend;
         }));
 
-        it('应该获取到银行活期列表', function (done) {
+        it('应该获取到问题反馈列表', function (done) {
             var success = function (data) {
                 console.info(data);
             };
