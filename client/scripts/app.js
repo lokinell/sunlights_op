@@ -21,6 +21,9 @@ angular
     .run(function ($rootScope, $window, $location) {
         $rootScope.$on("$locationChangeStart", function (event, next, current) {
             console.info('$locationChangeStart--:');
+            if(next.indexOf("reset") > -1) {
+                return $location.path("reset");
+            }
 
             var user = localStorage.getItem("user");
 
@@ -126,6 +129,21 @@ angular
             .state('login', {
                 templateUrl: '/views/pages/login.html',
                 url: '/login',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/loginService.js',
+                                'scripts/controllers/loginCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('reset', {
+                templateUrl: '/views/pages/password.html',
+                url: '/reset',
                 resolve: {
                     loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({

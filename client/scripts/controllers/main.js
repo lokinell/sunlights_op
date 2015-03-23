@@ -22,7 +22,6 @@
         }
 
        MainCtrl.prototype.check = function (x) {
-            this.$log.debug("check()");
             if (x == this.collapseVar)
                 this.collapseVar = 0;
             else

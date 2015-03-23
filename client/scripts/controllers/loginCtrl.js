@@ -43,6 +43,30 @@
             })(this));
         };
 
+        LoginCtrl.prototype.reset = function () {
+            this.$log.debug("resetPassword()");
+            if(this.user.password !== this.user.passwordConfirm) {
+                this.error = {
+                    message : {
+                        summary : "重置密码失败",
+                        detail : "两次输入的密码不一致"
+                    }
+                };
+            } else {
+                return this.LoginService.reset(this.user).then((function (_this) {
+                    return function (data) {
+                        _this.$log.debug("Promise reset  successfully");
+                        return _this.$location.path("/login");
+                    };
+                })(this), (function (_this) {
+                    return function (error) {
+                        _this.$log.error("Unable reset: " + error);
+                        return _this.error = error;
+                    };
+                })(this));
+            }
+        };
+
         return LoginCtrl;
 
     })();

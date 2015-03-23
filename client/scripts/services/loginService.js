@@ -22,7 +22,7 @@
             var deferred;
             this.$log.debug("findCurrentUser()");
             deferred = this.$q.defer();
-            this.$http.get(baseUrl + "/login/user").success((function (_this) {
+            this.$http.get(baseUrl + "/login/currentuser").success((function (_this) {
                 return function (data, status, headers) {
                     _this.$log.info("Successfully findCurrentUser - status " + status);
                     return deferred.resolve(data);
@@ -40,7 +40,11 @@
             var deferred;
             this.$log.debug("login()");
             deferred = this.$q.defer();
-            this.$http.post(baseUrl + "/login", user).success((function (_this) {
+            this.$http.get(baseUrl + '/login/user', {
+                headers: {
+                    'params': encodeURIComponent(angular.toJson(user))
+                }
+            }).success((function (_this) {
                 return function (data, status, headers) {
                     _this.$log.info("Successfully login - status " + status);
                     return deferred.resolve(data);
@@ -48,6 +52,24 @@
             })(this)).error((function (_this) {
                 return function (data, status, headers) {
                     _this.$log.error("Failed to login - status " + status);
+                    return deferred.reject(data);
+                };
+            })(this));
+            return deferred.promise;
+        };
+
+        LoginService.prototype.reset = function (user) {
+            var deferred;
+            this.$log.debug("reset()");
+            deferred = this.$q.defer();
+            this.$http.put(baseUrl + "/password", user).success((function (_this) {
+                return function (data, status, headers) {
+                    _this.$log.info("Successfully reset - status " + status);
+                    return deferred.resolve(data);
+                };
+            })(this)).error((function (_this) {
+                return function (data, status, headers) {
+                    _this.$log.error("Failed to reset - status " + status);
                     return deferred.reject(data);
                 };
             })(this));
