@@ -34,7 +34,7 @@
 
             http.expectGET(baseUrl + "/funds").respond(200, funds);
 
-            service.findParametersBy().then(success).catch(fail).finally(done);
+            service.findFunds().then(success).catch(fail).finally(done);
 
             http.flush();
         });
@@ -50,7 +50,7 @@
 
             http.expectGET(baseUrl + "/managements").respond(200, managements);
 
-            service.findParametersBy().then(success).catch(fail).finally(done);
+            service.findProductManages().then(success).catch(fail).finally(done);
 
             http.flush();
         });
