@@ -649,4 +649,34 @@ angular
                     }
                 }
             })
+            .state('dashboard.referrer', {
+                templateUrl: 'views/referrer/referrer.html',
+                url: '/referrer',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/referrerService.js',
+                                'scripts/controllers/referrerCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.referrerDetail', {
+                templateUrl: 'views/referrer/detail.html',
+                url: '/referrer/detail',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/referrerService.js',
+                                'scripts/controllers/referrerCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
     }]);
