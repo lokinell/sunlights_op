@@ -1,0 +1,123 @@
+<div class="row" ng-controller="ExchangeResultCtrl as dc">
+
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a ui-sref="dashboard.red">活动管理</a></li>
+            <li class="active">红包取现兑换结果</li>
+        </ol>
+    </div>
+
+    <div class="row">
+        <form class="form-inline" role="form">
+            <div class="col-md-12">
+                <label class="control-label col-md-1">手机号：</label>
+                <input type="text" class="form-control col-md-2" ng-model="dc.pager.filter.LIKES_mobile" placeholder="手机号" name="LIKES_mobile">
+                <label class="control-label col-md-1">状态：</label>
+                <select class="form-control col-md-2" ng-model="dc.pager.filter.EQI_status" placeholder="状态" name="EQI_status">
+                    <option value="">全部</option>
+                    <option value="1">等待兑换</option>
+                    <option value="3">兑换中</option>
+                    <option value="4">兑换成功</option>
+                    <option value="5">兑换失败</option>
+                </select>
+                <label class="control-label col-md-1">开始时间：</label>
+
+                <div class="col-md-2">
+                    <a class="dropdown-toggle" id="GED_beginTime" role="button" data-toggle="dropdown" data-target="#">
+                        <div class="input-group">
+                            <input class="form-control" value="{{dc.pager.filter.GED_beginTime | date : 'yyyy-MM-dd HH:mm:ss'}}">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker ng-model="dc.pager.filter.GED_beginTime"
+                                        datetimepicker-config="{ dropdownSelector: '#GED_beginTime'}"></datetimepicker>
+                    </ul>
+                </div>
+                <label class="control-label col-md-1">结束时间：</label>
+
+                <div class="col-md-2">
+                    <a class="dropdown-toggle" id="LTD_endTime" role="button" data-toggle="dropdown" data-target="#">
+                        <div class="input-group">
+                            <input class="form-control" value="{{dc.pager.filter.LTD_endTime | date : 'yyyy-MM-dd HH:mm:ss'}}">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker ng-model="dc.pager.filter.LTD_endTime"
+                                        datetimepicker-config="{ dropdownSelector: '#LTD_endTime'}"></datetimepicker>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-right">
+                <a class="btn btn-primary submit" ng-click="dc.findRedPackets()">查询</a>
+                <a class="btn btn-primary submit" ng-click="open()">上传</a>
+                <a href="{{dc.exportUrl}}?EQI_status={{ dc.exportPager.filter.EQI_status }}&GED_beginTime={{ dc.exportPager.filter.GED_beginTime }}&LTD_endTime={{ dc.exportPager.filter.LTD_endTime }}&LIKES_mobile={{ c.exportPager.filter.LIKES_mobile}}">导出</a>
+            </div>
+
+            <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="dc.findRedPackets()"></div>
+        </form>
+    </div>
+
+
+</div>
+
+
+<script type="text/ng-template" id="exchangeResultModalContent.html">
+    <table>
+        <tbody>
+        <div class="modal-header">
+            <button aria-hidden="true" data-dismiss="modal" class="close" type="button" ng-click="cancel()">×</button>
+        </div>
+        <div class="modal-body">
+
+
+            <div class="alert alert-danger" ng-show="errorMessage.message.severity === 2">
+                <h4 class="alert-heading">{{ errorMessage.message.summary }}</h4>
+                <span ng-bind="errorMessage.message.detail"></span>
+            </div>
+            <div class="alert alert-info" ng-show="info.message.severity === 0">
+                <h4 class="alert-heading">{{ info.message.summary }}</h4>
+                <span ng-bind="info.message.detail"></span>
+            </div>
+            <label class="control-label">上传文件：</label>
+
+                <span class="fileinput-button from-control" ng-disabled="uploaderExcel.queue.length">
+                        <input type="file" nv-file-select uploader="uploaderExcel" ng-model="row.image">
+                </span>
+
+            <div ng-repeat="item in uploaderExcel.queue">
+                <br>
+                </a>
+                <div>名称: {{ item.file.name }}</div>
+                <div>大小: {{ item.file.size/1024/1024|number:2 }} Mb</div>
+                <div ng-show="uploaderExcel.isHTML5">
+                    进度:
+                    <progressbar class="progress-striped" value="item.progress" type="success" max="100">{{
+                        item.progress }}%
+                    </progressbar>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary start" ng-click="item.upload()"
+                            ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                        <i class="glyphicon glyphicon-upload"></i>
+                        <span>开始上传</span>
+                    </button>
+                    <button type="button" class="btn btn-warning cancel" ng-click="item.cancel()"
+                            ng-disabled="!item.isUploading">
+                        <i class="glyphicon glyphicon-ban-circle"></i>
+                        <span>取消上传</span>
+                    </button>
+                    <button type="button" class="btn btn-danger delete" ng-click="removed(item)">
+                        <i class="glyphicon glyphicon-trash"></i>
+                        <span>删除</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        </tbody>
+    </table>
+</script>
+
+
+</div>

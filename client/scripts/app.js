@@ -16,7 +16,8 @@ angular
         'ngGrid',
         'ui.date',
         'localytics.directives',
-        'ui.bootstrap.datetimepicker'
+        'ui.bootstrap.datetimepicker',
+        'angularFileUpload'
     ])
     .run(function ($rootScope, $window, $location) {
         $rootScope.$on("$locationChangeStart", function (event, next, current) {
@@ -59,7 +60,9 @@ angular
                                 'scripts/directives/header/header.js',
                                 'scripts/directives/header/header-notification/header-notification.js',
                                 'scripts/directives/sidebar/sidebar.js',
-                                'scripts/directives/sidebar/sidebar-search/sidebar-search.js'
+                                'scripts/directives/sidebar/sidebar-search/sidebar-search.js',
+                                'scripts/controllers/main.js',
+                                'scripts/services/loginService.js'
                             ]
                         })
                         $ocLazyLoad.load({
@@ -106,8 +109,6 @@ angular
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
-                                'scripts/controllers/main.js',
-                                'scripts/services/loginService.js',
                                 'scripts/directives/timeline/timeline.js',
                                 'scripts/directives/notifications/notifications.js',
                                 'scripts/directives/chat/chat.js',
@@ -601,6 +602,22 @@ angular
                             files: [
                                 'scripts/services/questionService.js',
                                 'scripts/controllers/questionCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.red', {
+                templateUrl: 'views/reward/exchange.html',
+                url: '/exchange',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/controllers/excelModalCtrl.js',
+                                'scripts/services/exchangeResultService.js',
+                                'scripts/controllers/exchangeResultCtrl.js'
                             ]
                         })
                     }
