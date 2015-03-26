@@ -19,10 +19,10 @@ angular
         'ui.bootstrap.datetimepicker',
         'angularFileUpload'
     ])
-    .run(function ($rootScope, $window, $location) {
-        $rootScope.$on("$locationChangeStart", function (event, next, current) {
+    .run(function($rootScope, $window, $location) {
+        $rootScope.$on("$locationChangeStart", function(event, next, current) {
             console.info('$locationChangeStart--:');
-            if(next.indexOf("reset") > -1) {
+            if (next.indexOf("reset") > -1) {
                 return $location.path("reset");
             }
 
@@ -39,7 +39,7 @@ angular
             }
         });
     })
-    .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
         $ocLazyLoadProvider.config({
             debug: false,
@@ -50,10 +50,10 @@ angular
 
         $stateProvider
             .state('dashboard', {
-                url: '/dashboard',
+                url: basePath + '/dashboard',
                 templateUrl: 'views/dashboard/main.html',
                 resolve: {
-                    loadMyDirectives: function ($ocLazyLoad) {
+                    loadMyDirectives: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -69,11 +69,11 @@ angular
                 }
             })
             .state('dashboard.home', {
-                url: '/home',
+                url: basePath + '/home',
                 controller: 'MainCtrl as mc',
                 templateUrl: 'views/dashboard/home.html',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -89,17 +89,17 @@ angular
             })
             .state('dashboard.form', {
                 templateUrl: 'views/form.html',
-                url: '/form'
+                url: basePath + '/form'
             })
             .state('dashboard.blank', {
                 templateUrl: 'views/pages/blank.html',
-                url: '/blank'
+                url: basePath + '/blank'
             })
             .state('login', {
                 templateUrl: 'views/pages/login.html',
-                url: '/login',
+                url: basePath + '/login',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -112,9 +112,9 @@ angular
             })
             .state('reset', {
                 templateUrl: 'views/pages/password.html',
-                url: '/reset',
+                url: basePath + '/reset',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -127,37 +127,37 @@ angular
             })
             .state('dashboard.table', {
                 templateUrl: 'views/table.html',
-                url: '/table'
+                url: basePath + '/table'
             })
             .state('dashboard.panels-wells', {
                 templateUrl: 'views/ui-elements/panels-wells.html',
-                url: '/panels-wells'
+                url: basePath + '/panels-wells'
             })
             .state('dashboard.buttons', {
                 templateUrl: 'views/ui-elements/buttons.html',
-                url: '/buttons'
+                url: basePath + '/buttons'
             })
             .state('dashboard.notifications', {
                 templateUrl: 'views/ui-elements/notifications.html',
-                url: '/notifications'
+                url: basePath + '/notifications'
             })
             .state('dashboard.typography', {
                 templateUrl: 'views/ui-elements/typography.html',
-                url: '/typography'
+                url: basePath + '/typography'
             })
             .state('dashboard.icons', {
                 templateUrl: 'views/ui-elements/icons.html',
-                url: '/icons'
+                url: basePath + '/icons'
             })
             .state('dashboard.grid', {
                 templateUrl: 'views/ui-elements/grid.html',
-                url: '/grid'
+                url: basePath + '/grid'
             })
             .state('dashboard.verifyCode', {
                 templateUrl: 'views/verifyCode/verifyCode.html',
-                url: '/verifyCode',
+                url: basePath + '/verifyCode',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -170,9 +170,9 @@ angular
             })
             .state('dashboard.dict', {
                 templateUrl: 'views/dict/dict.html',
-                url: '/dict',
+                url: basePath + '/dict',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -185,9 +185,9 @@ angular
             })
             .state('dashboard.dictSave', {
                 templateUrl: 'views/dict/save.html',
-                url: '/dict/save',
+                url: basePath + '/dict/save',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -200,9 +200,9 @@ angular
             })
             .state('dashboard.parameter', {
                 templateUrl: 'views/parameter/parameter.html',
-                url: '/parameter',
+                url: basePath + '/parameter',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -215,9 +215,9 @@ angular
             })
             .state('dashboard.parameterSave', {
                 templateUrl: 'views/parameter/save.html',
-                url: '/parameter/save',
+                url: basePath + '/parameter/save',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -230,10 +230,10 @@ angular
             })
             .state('dashboard.tasks', {
                 templateUrl: 'views/tasks/index.html',
-                url: '/tasks',
+                url: basePath + '/tasks',
                 controller: 'TaskCtrl',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -245,31 +245,31 @@ angular
                     }
                 }
             })
-          .state('dashboard.tasksSave', {
-            templateUrl: 'views/tasks/save.html',
-            url: '/tasks/save',
-            controller: 'TaskCtrl',
-            resolve: {
-              loadMyFiles: function ($ocLazyLoad) {
-                return $ocLazyLoad.load({
-                  name: 'sbAdminApp',
-                  files: [
-                    'bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js',
-                    'bower_components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css',
-                    'scripts/directives/paging/ngPageChanged.js',
-                    'scripts/services/taskService.js',
-                    'scripts/controllers/taskCtrl.js'
-                  ]
-                })
-              }
-            }
-          })
+            .state('dashboard.tasksSave', {
+                templateUrl: 'views/tasks/save.html',
+                url: basePath + '/tasks/save',
+                controller: 'TaskCtrl',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js',
+                                'bower_components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css',
+                                'scripts/directives/paging/ngPageChanged.js',
+                                'scripts/services/taskService.js',
+                                'scripts/controllers/taskCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
             .state('dashboard.fundcompanies', {
                 templateUrl: 'views/fundcompanies/index.html',
-                url: '/fundcompanies',
+                url: basePath + '/fundcompanies',
                 controller: 'CompanyCtrl',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -283,9 +283,9 @@ angular
             })
             .state('dashboard.fund', {
                 templateUrl: 'views/fund/fund.html',
-                url: '/fund',
+                url: basePath + '/fund',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -301,9 +301,9 @@ angular
             })
             .state('dashboard.fundSave', {
                 templateUrl: 'views/fund/save.html',
-                url: '/fund/save',
+                url: basePath + '/fund/save',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -319,9 +319,9 @@ angular
             })
             .state('dashboard.product', {
                 templateUrl: 'views/product/product.html',
-                url: '/product',
+                url: basePath + '/product',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -337,9 +337,9 @@ angular
             })
             .state('dashboard.productSave', {
                 templateUrl: 'views/product/save.html',
-                url: '/product/save',
+                url: basePath + '/product/save',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -355,9 +355,9 @@ angular
             })
             .state('dashboard.resource', {
                 templateUrl: 'views/authority/resource/resource.html',
-                url: '/resource',
+                url: basePath + '/resource',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -370,9 +370,9 @@ angular
             })
             .state('dashboard.role', {
                 templateUrl: 'views/authority/role/role.html',
-                url: '/role',
+                url: basePath + '/role',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -386,9 +386,9 @@ angular
             })
             .state('dashboard.roleSave', {
                 templateUrl: 'views/authority/role/save.html',
-                url: '/role/save',
+                url: basePath + '/role/save',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -402,9 +402,9 @@ angular
             })
             .state('dashboard.user', {
                 templateUrl: 'views/authority/user/user.html',
-                url: '/user',
+                url: basePath + '/user',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -418,9 +418,9 @@ angular
             })
             .state('dashboard.userSave', {
                 templateUrl: 'views/authority/user/save.html',
-                url: '/user/save',
+                url: basePath + '/user/save',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -434,9 +434,9 @@ angular
             })
             .state('dashboard.deposit', {
                 templateUrl: 'views/deposit/deposit.html',
-                url: '/deposit',
+                url: basePath + '/deposit',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -449,9 +449,9 @@ angular
             })
             .state('dashboard.depositSave', {
                 templateUrl: 'views/deposit/save.html',
-                url: '/deposit/save',
+                url: basePath + '/deposit/save',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -464,9 +464,9 @@ angular
             })
             .state('dashboard.bank', {
                 templateUrl: 'views/bank/bank.html',
-                url: '/bank',
+                url: basePath + '/bank',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -479,9 +479,9 @@ angular
             })
             .state('dashboard.bankSave', {
                 templateUrl: 'views/bank/save.html',
-                url: '/bank/save',
+                url: basePath + '/bank/save',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -494,9 +494,9 @@ angular
             })
             .state('dashboard.feedback', {
                 templateUrl: 'views/feedback/feedback.html',
-                url: '/feedback',
+                url: basePath + '/feedback',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -509,9 +509,9 @@ angular
             })
             .state('dashboard.feedbackApprove', {
                 templateUrl: 'views/feedback/approve.html',
-                url: '/feedback/approve',
+                url: basePath + '/feedback/approve',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -524,9 +524,9 @@ angular
             })
             .state('dashboard.question', {
                 templateUrl: 'views/question/question.html',
-                url: '/question',
+                url: basePath + '/question',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -539,9 +539,9 @@ angular
             })
             .state('dashboard.questionSave', {
                 templateUrl: 'views/question/save.html',
-                url: '/question/save',
+                url: basePath + '/question/save',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -552,92 +552,92 @@ angular
                     }
                 }
             })
-          .state('dashboard.sms', {
-            templateUrl: 'views/smsmessage/smsmessage.html',
-            url: '/smsmessage',
-            resolve: {
-              loadMyFiles: function ($ocLazyLoad) {
-                return $ocLazyLoad.load({
-                  name: 'sbAdminApp',
-                  files: [
-                    'scripts/jquery/exportExcel.js',
-                    'scripts/services/smsMessageService.js',
-                    'scripts/controllers/smsMessageCtrl.js'
-                  ]
-                })
-              }
-            }
-          })
-          .state('dashboard.group', {
-            templateUrl: 'views/group/group.html',
-            url: '/group',
-            resolve: {
-              loadMyFiles: function ($ocLazyLoad) {
-                return $ocLazyLoad.load({
-                  name: 'sbAdminApp',
-                  files: [
-                    'scripts/common/pageService.js',
-                    'scripts/services/groupService.js',
-                    'scripts/controllers/groupCtrl.js'
-                  ]
-                })
-              }
-            }
-          })
-          .state('dashboard.messageRule', {
-            templateUrl: 'views/messagerule/messageRule.html',
-            url: '/messageRules',
-            resolve: {
-              loadMyFiles: function ($ocLazyLoad) {
-                return $ocLazyLoad.load({
-                  name: 'sbAdminApp',
-                  files: [
-                    'scripts/common/pageService.js',
-                    'scripts/services/messageRuleService.js',
-                    'scripts/controllers/messageRuleCtrl.js'
-                  ]
-                })
-              }
-            }
-          })
-          .state('dashboard.messageConfig', {
-            templateUrl: 'views/messpushconfig/messagePushConfig.html',
-            url: '/messageConfig',
-            resolve: {
-              loadMyFiles: function ($ocLazyLoad) {
-                return $ocLazyLoad.load({
-                  name: 'sbAdminApp',
-                  files: [
-                    'scripts/common/pageService.js',
-                    'scripts/services/messagePushConfigService.js',
-                    'scripts/controllers/messagePushConfigCtrl.js'
-                  ]
-                })
+            .state('dashboard.sms', {
+                templateUrl: 'views/smsmessage/smsmessage.html',
+                url: basePath + '/smsmessage',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/jquery/exportExcel.js',
+                                'scripts/services/smsMessageService.js',
+                                'scripts/controllers/smsMessageCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.group', {
+                templateUrl: 'views/group/group.html',
+                url: basePath + '/group',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/common/pageService.js',
+                                'scripts/services/groupService.js',
+                                'scripts/controllers/groupCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.messageRule', {
+                templateUrl: 'views/messagerule/messageRule.html',
+                url: basePath + '/messageRules',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/common/pageService.js',
+                                'scripts/services/messageRuleService.js',
+                                'scripts/controllers/messageRuleCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.messageConfig', {
+                templateUrl: 'views/messpushconfig/messagePushConfig.html',
+                url: basePath + '/messageConfig',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/common/pageService.js',
+                                'scripts/services/messagePushConfigService.js',
+                                'scripts/controllers/messagePushConfigCtrl.js'
+                            ]
+                        })
 
-              }
-            }
-          })
-          .state('dashboard.messageMapping', {
-            templateUrl: 'views/messagemapping/messageMapping.html',
-            url: '/messageMapping',
-            resolve: {
-              loadMyFiles: function ($ocLazyLoad) {
-                return $ocLazyLoad.load({
-                  name: 'sbAdminApp',
-                  files: [
-                    'scripts/common/pageService.js',
-                    'scripts/services/messageMappingService.js',
-                    'scripts/controllers/messageMappingCtrl.js'
-                  ]
-                })
-              }
-            }
-          })
+                    }
+                }
+            })
+            .state('dashboard.messageMapping', {
+                templateUrl: 'views/messagemapping/messageMapping.html',
+                url: basePath + '/messageMapping',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/common/pageService.js',
+                                'scripts/services/messageMappingService.js',
+                                'scripts/controllers/messageMappingCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
             .state('dashboard.red', {
                 templateUrl: 'views/reward/exchange.html',
-                url: '/exchange',
+                url: basePath + '/exchange',
                 resolve: {
-                    loadMyFiles: function ($ocLazyLoad) {
+                    loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
