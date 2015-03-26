@@ -51,7 +51,7 @@ angular
         $stateProvider
             .state('dashboard', {
                 url: '/dashboard',
-                templateUrl: '/views/dashboard/main.html',
+                templateUrl: 'views/dashboard/main.html',
                 resolve: {
                     loadMyDirectives: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -65,45 +65,13 @@ angular
                                 'scripts/services/loginService.js'
                             ]
                         })
-                        $ocLazyLoad.load({
-                            name: 'toggle-switch',
-                            files: ["bower_components/angular-toggle-switch/angular-toggle-switch.min.js",
-                                "bower_components/angular-toggle-switch/angular-toggle-switch.css"
-                            ]
-                        })
-                        $ocLazyLoad.load({
-                            name: 'ngAnimate',
-                            files: ['bower_components/angular-animate/angular-animate.js']
-                        })
-                        $ocLazyLoad.load({
-                            name: 'ngCookies',
-                            files: ['bower_components/angular-cookies/angular-cookies.js']
-                        })
-                        $ocLazyLoad.load({
-                            name: 'ngResource',
-                            files: ['bower_components/angular-animate/angular-animate.js']
-                        })
-                        $ocLazyLoad.load({
-                            name: 'ngSanitize',
-                            files: ['bower_components/angular-sanitize/angular-sanitize.js']
-                        })
-                        $ocLazyLoad.load({
-                            name: 'ngTouch',
-                            files: ['bower_components/angular-touch/angular-touch.js']
-                        })
-                        $ocLazyLoad.load({
-                            name: 'ngGrid',
-                            files: ["bower_components/ng-grid/ng-grid-2.0.14.min.js",
-                                "bower_components/ng-grid/ng-grid.min.css"
-                            ]
-                        })
                     }
                 }
             })
             .state('dashboard.home', {
                 url: '/home',
                 controller: 'MainCtrl as mc',
-                templateUrl: '/views/dashboard/home.html',
+                templateUrl: 'views/dashboard/home.html',
                 resolve: {
                     loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -120,15 +88,15 @@ angular
                 }
             })
             .state('dashboard.form', {
-                templateUrl: '/views/form.html',
+                templateUrl: 'views/form.html',
                 url: '/form'
             })
             .state('dashboard.blank', {
-                templateUrl: '/views/pages/blank.html',
+                templateUrl: 'views/pages/blank.html',
                 url: '/blank'
             })
             .state('login', {
-                templateUrl: '/views/pages/login.html',
+                templateUrl: 'views/pages/login.html',
                 url: '/login',
                 resolve: {
                     loadMyFiles: function ($ocLazyLoad) {
@@ -143,7 +111,7 @@ angular
                 }
             })
             .state('reset', {
-                templateUrl: '/views/pages/password.html',
+                templateUrl: 'views/pages/password.html',
                 url: '/reset',
                 resolve: {
                     loadMyFiles: function ($ocLazyLoad) {
@@ -154,29 +122,6 @@ angular
                                 'scripts/controllers/loginCtrl.js'
                             ]
                         })
-                    }
-                }
-            })
-            .state('dashboard.chart', {
-                templateUrl: 'views/chart.html',
-                url: '/chart',
-                controller: 'ChartCtrl',
-                resolve: {
-                    loadMyFile: function ($ocLazyLoad) {
-                        return $ocLazyLoad.load(
-                            'bower_components/Chart.js/Chart.min.js'
-                        ),
-                            $ocLazyLoad.load({
-                                name: 'chart.js',
-                                files: [
-                                    'bower_components/angular-chart.js/dist/angular-chart.min.js',
-                                    'bower_components/angular-chart.js/dist/angular-chart.css'
-                                ]
-                            }),
-                            $ocLazyLoad.load({
-                                name: 'sbAdminApp',
-                                files: ['scripts/controllers/chartContoller.js']
-                            })
                     }
                 }
             })
