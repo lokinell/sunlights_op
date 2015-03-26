@@ -677,4 +677,64 @@ angular
               }
             }
           })
+            .state('dashboard.referrer', {
+                templateUrl: 'views/referrer/referrer.html',
+                url: '/referrer',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/referrerService.js',
+                                'scripts/controllers/referrerCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.referrerDetail', {
+                templateUrl: 'views/referrer/detail.html',
+                url: '/referrer/detail',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/referrerService.js',
+                                'scripts/controllers/referrerCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.statisticsPurchase', {
+                templateUrl: 'views/statistics/purchase.html',
+                url: '/statistics/purchase',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/purchaseStatisticsService.js',
+                                'scripts/controllers/firstPurchaseCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.statisticsUnPurchase', {
+                templateUrl: 'views/statistics/unpurchase.html',
+                url: '/statistics/unpurchase',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/purchaseStatisticsService.js',
+                                'scripts/controllers/unPurchaseCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
     }]);

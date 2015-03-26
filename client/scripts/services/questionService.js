@@ -33,7 +33,7 @@
                 };
             })(this)).error((function (_this) {
                 return function (data, status, headers) {
-                    _this.$log.error("Failed to find parameters - status " + status);
+                    _this.$log.error("Failed to find Questions - status " + status);
                     return deferred.reject(data);
                 };
             })(this));
