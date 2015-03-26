@@ -688,7 +688,22 @@ angular
                             name: 'sbAdminApp',
                             files: [
                                 'scripts/services/purchaseStatisticsService.js',
-                                'scripts/controllers/purchaseStatisticsCtrl.js'
+                                'scripts/controllers/firstPurchaseCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.statisticsUnPurchase', {
+                templateUrl: 'views/statistics/unpurchase.html',
+                url: '/statistics/unpurchase',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/purchaseStatisticsService.js',
+                                'scripts/controllers/unPurchaseCtrl.js'
                             ]
                         })
                     }

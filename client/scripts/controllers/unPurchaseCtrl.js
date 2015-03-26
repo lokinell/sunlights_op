@@ -2,18 +2,18 @@
  * Created by Yuan on 2015/3/26.
  */
 (function () {
-    var PurchaseStatisticsCtrl;
+    var UnPurchaseCtrl;
 
-    PurchaseStatisticsCtrl = (function () {
-        function PurchaseStatisticsCtrl($scope, $log, PurchaseStatisticsService) {
+    UnPurchaseCtrl = (function () {
+        function UnPurchaseCtrl($scope, $log, PurchaseStatisticsService) {
             this.$scope = $scope;
             this.$log = $log;
             this.PurchaseStatisticsService = PurchaseStatisticsService;
-            this.$log.debug("constructing PurchaseStatisticsCtrl");
+            this.$log.debug("constructing UnPurchaseCtrl");
             this.pager = {};
             this.exportPager = {};
-            this.exportUrl = baseUrl + "/statistics/purchase/excel";
-            $scope.firstPurchaseOptions = {
+            this.exportUrl = baseUrl + "/statistics/unpurchase/excel";
+            $scope.unPurchaseOptions = {
                 data: 'pager.list',
                 enablePaging: true,
                 showFooter: true,
@@ -30,8 +30,8 @@
                 },
                 columnDefs: [
                     {
-                        field: "tradeDate",
-                        displayName: "日期",
+                        field: "registrationDate",
+                        displayName: "注册日期",
                         cellFilter: 'date:"yyyy-MM-dd HH:mm"'
                     },
                     {
@@ -40,15 +40,7 @@
                     },
                     {
                         field: "name",
-                        displayName: "用户名"
-                    },
-                    {
-                        field: "tradeAmount",
-                        displayName: "首次购买金额"
-                    },
-                    {
-                        field: "bankName",
-                        displayName: "银行卡信息"
+                        displayName: "注册未购买人姓名"
                     },
                     {
                         field: "referrerMobile",
@@ -63,29 +55,29 @@
 
         }
 
-        PurchaseStatisticsCtrl.prototype.findFirstPurchases = function () {
-            this.$log.debug("findFirstPurchases()");
-            this.pager.pageSize = this.$scope.firstPurchaseOptions.pagingOptions.pageSize;
-            this.pager.pageNum = this.$scope.firstPurchaseOptions.pagingOptions.currentPage;
-            this.PurchaseStatisticsService.findFirstPurchases(this.pager).then((function (_this) {
+        UnPurchaseCtrl.prototype.findUnPurchases = function () {
+            this.$log.debug("findUnPurchases()");
+            this.pager.pageSize = this.$scope.unPurchaseOptions.pagingOptions.pageSize;
+            this.pager.pageNum = this.$scope.unPurchaseOptions.pagingOptions.currentPage;
+            this.PurchaseStatisticsService.findUnPurchases(this.pager).then((function (_this) {
                 return function (data) {
-                    _this.$log.debug("Promise returned " + data.value.list.length + " FirstPurchases");
+                    _this.$log.debug("Promise returned " + data.value.list.length + " UnPurchases");
                     return _this.$scope.pager = data.value;
                 };
             })(this), (function (_this) {
                 return function (error) {
-                    _this.$log.error("Unable to get FirstPurchases: " + error);
+                    _this.$log.error("Unable to get UnPurchases: " + error);
                     return _this.error = error;
                 };
             })(this));
             return this.exportPager = this.pager;
         };
 
-        return PurchaseStatisticsCtrl;
+        return UnPurchaseCtrl;
 
     })();
 
-    angular.module('sbAdminApp').controller('PurchaseStatisticsCtrl', PurchaseStatisticsCtrl);
+    angular.module('sbAdminApp').controller('UnPurchaseCtrl', UnPurchaseCtrl);
 
 }).call(this);
 
