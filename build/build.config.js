@@ -14,7 +14,8 @@ module.exports = {
     'client/test/e2e/**/*.js'
   ],
   index: 'client/index.html',
-  assets: 'client/styles/*',
+  assets: 'client/styles/**',
+  images: 'client/assets/images/**/*',
   banner: ['/**',
     ' * <%= pkg.name %> - <%= pkg.description %>',
     ' * @version v<%= pkg.version %>',
