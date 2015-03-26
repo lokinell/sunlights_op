@@ -128,7 +128,7 @@ gulp.task('copy', function() {
             config.base + '/scripts',
             config.base + '/views',
             '!' + config.base + '/*.html',
-            '!' + config.base + 'test/**'
+            '!' + config.base + '/test/**'
         ]).pipe(gulp.dest(config.dist))
         .pipe($.size({
             title: 'copy'
