@@ -50,7 +50,7 @@ angular
 
         $stateProvider
             .state('dashboard', {
-                url: basePath + '/dashboard',
+                url: '/dashboard',
                 templateUrl: 'views/dashboard/main.html',
                 resolve: {
                     loadMyDirectives: function($ocLazyLoad) {
@@ -69,7 +69,7 @@ angular
                 }
             })
             .state('dashboard.home', {
-                url: basePath + '/home',
+                url: '/home',
                 controller: 'MainCtrl as mc',
                 templateUrl: 'views/dashboard/home.html',
                 resolve: {
@@ -89,15 +89,15 @@ angular
             })
             .state('dashboard.form', {
                 templateUrl: 'views/form.html',
-                url: basePath + '/form'
+                url: '/form'
             })
             .state('dashboard.blank', {
                 templateUrl: 'views/pages/blank.html',
-                url: basePath + '/blank'
+                url: '/blank'
             })
             .state('login', {
                 templateUrl: 'views/pages/login.html',
-                url: basePath + '/login',
+                url: '/login',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -112,7 +112,7 @@ angular
             })
             .state('reset', {
                 templateUrl: 'views/pages/password.html',
-                url: basePath + '/reset',
+                url: '/reset',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -127,35 +127,35 @@ angular
             })
             .state('dashboard.table', {
                 templateUrl: 'views/table.html',
-                url: basePath + '/table'
+                url: '/table'
             })
             .state('dashboard.panels-wells', {
                 templateUrl: 'views/ui-elements/panels-wells.html',
-                url: basePath + '/panels-wells'
+                url: '/panels-wells'
             })
             .state('dashboard.buttons', {
                 templateUrl: 'views/ui-elements/buttons.html',
-                url: basePath + '/buttons'
+                url: '/buttons'
             })
             .state('dashboard.notifications', {
                 templateUrl: 'views/ui-elements/notifications.html',
-                url: basePath + '/notifications'
+                url: '/notifications'
             })
             .state('dashboard.typography', {
                 templateUrl: 'views/ui-elements/typography.html',
-                url: basePath + '/typography'
+                url: '/typography'
             })
             .state('dashboard.icons', {
                 templateUrl: 'views/ui-elements/icons.html',
-                url: basePath + '/icons'
+                url: '/icons'
             })
             .state('dashboard.grid', {
                 templateUrl: 'views/ui-elements/grid.html',
-                url: basePath + '/grid'
+                url: '/grid'
             })
             .state('dashboard.verifyCode', {
                 templateUrl: 'views/verifyCode/verifyCode.html',
-                url: basePath + '/verifyCode',
+                url: '/verifyCode',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -170,7 +170,7 @@ angular
             })
             .state('dashboard.dict', {
                 templateUrl: 'views/dict/dict.html',
-                url: basePath + '/dict',
+                url: '/dict',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -185,7 +185,7 @@ angular
             })
             .state('dashboard.dictSave', {
                 templateUrl: 'views/dict/save.html',
-                url: basePath + '/dict/save',
+                url: '/dict/save',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -200,7 +200,7 @@ angular
             })
             .state('dashboard.parameter', {
                 templateUrl: 'views/parameter/parameter.html',
-                url: basePath + '/parameter',
+                url: '/parameter',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -215,7 +215,7 @@ angular
             })
             .state('dashboard.parameterSave', {
                 templateUrl: 'views/parameter/save.html',
-                url: basePath + '/parameter/save',
+                url: '/parameter/save',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -230,7 +230,7 @@ angular
             })
             .state('dashboard.tasks', {
                 templateUrl: 'views/tasks/index.html',
-                url: basePath + '/tasks',
+                url: '/tasks',
                 controller: 'TaskCtrl',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
@@ -264,7 +264,7 @@ angular
           })
           .state('dashboard.fundcompanies', {
                 templateUrl: 'views/fundcompanies/index.html',
-                url: basePath + '/fundcompanies',
+                url: '/fundcompanies',
                 controller: 'CompanyCtrl',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
@@ -281,7 +281,7 @@ angular
             })
             .state('dashboard.fund', {
                 templateUrl: 'views/fund/fund.html',
-                url: basePath + '/fund',
+                url: '/fund',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -299,7 +299,7 @@ angular
             })
             .state('dashboard.fundSave', {
                 templateUrl: 'views/fund/save.html',
-                url: basePath + '/fund/save',
+                url: '/fund/save',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -317,7 +317,7 @@ angular
             })
             .state('dashboard.product', {
                 templateUrl: 'views/product/product.html',
-                url: basePath + '/product',
+                url: '/product',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -335,7 +335,7 @@ angular
             })
             .state('dashboard.productSave', {
                 templateUrl: 'views/product/save.html',
-                url: basePath + '/product/save',
+                url: '/product/save',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -353,7 +353,7 @@ angular
             })
             .state('dashboard.resource', {
                 templateUrl: 'views/authority/resource/resource.html',
-                url: basePath + '/resource',
+                url: '/resource',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -368,7 +368,7 @@ angular
             })
             .state('dashboard.role', {
                 templateUrl: 'views/authority/role/role.html',
-                url: basePath + '/role',
+                url: '/role',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -384,7 +384,7 @@ angular
             })
             .state('dashboard.roleSave', {
                 templateUrl: 'views/authority/role/save.html',
-                url: basePath + '/role/save',
+                url: '/role/save',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -400,7 +400,7 @@ angular
             })
             .state('dashboard.user', {
                 templateUrl: 'views/authority/user/user.html',
-                url: basePath + '/user',
+                url: '/user',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -416,7 +416,7 @@ angular
             })
             .state('dashboard.userSave', {
                 templateUrl: 'views/authority/user/save.html',
-                url: basePath + '/user/save',
+                url: '/user/save',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -432,7 +432,7 @@ angular
             })
             .state('dashboard.deposit', {
                 templateUrl: 'views/deposit/deposit.html',
-                url: basePath + '/deposit',
+                url: '/deposit',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -447,7 +447,7 @@ angular
             })
             .state('dashboard.depositSave', {
                 templateUrl: 'views/deposit/save.html',
-                url: basePath + '/deposit/save',
+                url: '/deposit/save',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -462,7 +462,7 @@ angular
             })
             .state('dashboard.bank', {
                 templateUrl: 'views/bank/bank.html',
-                url: basePath + '/bank',
+                url: '/bank',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -477,7 +477,7 @@ angular
             })
             .state('dashboard.bankSave', {
                 templateUrl: 'views/bank/save.html',
-                url: basePath + '/bank/save',
+                url: '/bank/save',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -492,7 +492,7 @@ angular
             })
             .state('dashboard.feedback', {
                 templateUrl: 'views/feedback/feedback.html',
-                url: basePath + '/feedback',
+                url: '/feedback',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -507,7 +507,7 @@ angular
             })
             .state('dashboard.feedbackApprove', {
                 templateUrl: 'views/feedback/approve.html',
-                url: basePath + '/feedback/approve',
+                url: '/feedback/approve',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -522,7 +522,7 @@ angular
             })
             .state('dashboard.question', {
                 templateUrl: 'views/question/question.html',
-                url: basePath + '/question',
+                url: '/question',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -537,7 +537,7 @@ angular
             })
             .state('dashboard.questionSave', {
                 templateUrl: 'views/question/save.html',
-                url: basePath + '/question/save',
+                url: '/question/save',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -552,7 +552,7 @@ angular
             })
             .state('dashboard.sms', {
                 templateUrl: 'views/smsmessage/smsmessage.html',
-                url: basePath + '/smsmessage',
+                url: '/smsmessage',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -568,7 +568,7 @@ angular
             })
             .state('dashboard.group', {
                 templateUrl: 'views/group/group.html',
-                url: basePath + '/group',
+                url: '/group',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -584,7 +584,7 @@ angular
             })
             .state('dashboard.messageRule', {
                 templateUrl: 'views/messagerule/messageRule.html',
-                url: basePath + '/messageRules',
+                url: '/messageRules',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -600,7 +600,7 @@ angular
             })
             .state('dashboard.messageConfig', {
                 templateUrl: 'views/messpushconfig/messagePushConfig.html',
-                url: basePath + '/messageConfig',
+                url: '/messageConfig',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -617,7 +617,7 @@ angular
             })
             .state('dashboard.messageMapping', {
                 templateUrl: 'views/messagemapping/messageMapping.html',
-                url: basePath + '/messageMapping',
+                url: '/messageMapping',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
@@ -633,7 +633,7 @@ angular
             })
             .state('dashboard.red', {
                 templateUrl: 'views/reward/exchange.html',
-                url: basePath + '/exchange',
+                url: '/exchange',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
