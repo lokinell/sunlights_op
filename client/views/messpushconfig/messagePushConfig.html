@@ -1,0 +1,48 @@
+
+<div class="row"  ng-controller="MessagePushConfigCtrl as dc"  >
+    <div class="row">
+        <h1 class="text-info">
+            推送计划配置
+        </h1>
+        <hr>
+    </div>
+    <div class="row ">
+        <div class="alert alert-danger" ng-show="!!dc.error">
+            <span ng-bind="dc.error.message.detail"></span>
+        </div>
+        <form class="form-inline" role="form">
+
+            <div class="well well-lg">
+                <div class="form-group well well-lg">
+                    <label class="control-label">推送平台：</label>
+                    <input type="text"  ng-init="count=0" class="form-control" ng-model="filterOptions.filterText.searchText1" placeholder="推送平台">&nbsp;&nbsp;
+                    <label class="control-label">推送类型：</label>
+                    <input type="text"  ng-init="count=0" class="form-control" ng-model="filterOptions.filterText.searchText2" placeholder="推送类型">
+
+                </div>
+                <br>
+                <br>
+                <div>
+                    <div class="form-group">
+                        <label class="control-label">推送平台：</label>
+                        <input type="radio" value="安卓" ng-model="filterOptions.filterText.searchText1"> 安卓
+                        <input type="radio" value="IOS" ng-model="filterOptions.filterText.searchText1"> IOS
+                        <input type="radio" value="" ng-model="filterOptions.filterText.searchText1"> 全部 &nbsp;&nbsp;
+
+                        <label class="control-label">推送类型：</label>
+                        <input type="radio" value="系统公告" ng-model="filterOptions.filterText.searchText2"> 系统公告
+                        <input type="radio" value="活动公告" ng-model="filterOptions.filterText.searchText2"> 活动公告
+                        <input type="radio" value="交易公告" ng-model="filterOptions.filterText.searchText2"> 交易公告
+                        <input type="radio" value="" ng-model="filterOptions.filterText.searchText2"> 全部
+                    </div>
+                </div>
+
+                <br>
+                <div class="gridStyle" ng-grid="gridOptions"></div>
+            </div>
+        </form>
+
+
+    </div>
+
+</div>

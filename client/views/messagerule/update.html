@@ -1,0 +1,201 @@
+<div class="row" ng-controller="MessagePushCtrl as dc" ng-init="dc.messpushconfigidData();dc.messpushgroupidData()" >
+
+    <div class="row">
+        <h1>
+            规则详情
+        </h1>
+        <hr>
+    </div>
+
+    <div class="row">
+
+        <div class="alert alert-danger" ng-show="!!dc.error">
+            <h4 class="alert-heading">操作失败</h4>
+            <span ng-bind="dc.error.message.detail"></span>
+        </div>
+        <form role="form" ng-submit="dc.modifyMessPush()">
+            <table>
+                <tr>
+                    <td>
+                        <label class="control-label">规则名称：</label>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="name" required
+                               ng-model="dc.dict.name" >
+                    </td>
+
+                    <td>
+                        <label class="control-label">规则编码：</label>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="code" required
+                               ng-model="dc.dict.code">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label class="control-label">规则描述：</label>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="description" required
+                               ng-model="dc.dict.description" >
+                    </td>
+
+                    <td>
+                        <label class="control-label">推送标题：</label>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="title" required
+                               ng-model="dc.dict.title">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label class="control-label">消息中心显示：</label>
+                    </td>
+                    <td>
+                        <select class="form-control" ng-model="dc.dict.msgcenterind" required>
+                            <option value="" selected>请选择</option>
+                            <option value="Y">是</option>
+                            <option value="N" selected>否</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label class="control-label">展示内容：</label>
+                    </td>
+                    <td>
+                        <textarea class="form-control" name="content" ng-model="dc.dict.content" />
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        <label class="control-label">发送短信：</label>
+                    </td>
+                    <td>
+                        <select class="form-control" ng-model="dc.dict.smsind" required>
+                            <option value="" selected>请选择</option>
+                            <option value="Y">是</option>
+                            <option value="N" selected>否</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label class="control-label">短信内容：</label>
+                    </td>
+                    <td>
+                        <textarea class="form-control" name="contentSms" ng-model="dc.dict.contentSms" ng-required="dc.dict.smsind === 'Y'" />
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        <label class="control-label">推送：</label>
+                    </td>
+                    <td>
+
+                        <select class="form-control" ng-model="dc.dict.pushind" required>
+                            <option value="" selected>请选择</option>
+                            <option value="Y">是</option>
+                            <option value="N" selected>否</option>
+                        </select>
+
+                    </td>
+
+                    <td>
+                        <label class="control-label">推送内容：</label>
+                    </td>
+                    <td>
+                        <textarea class="form-control" name="contentPush" ng-required="dc.dict.pushind === 'Y'" ng-model="dc.dict.contentPush" />
+                    </td>
+
+
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <label class="control-label">有效标志：</label>
+                    </td>
+                    <td>
+
+                        <select class="form-control" ng-model="dc.dict.status" required>
+                            <option value="" selected>请选择</option>
+                            <option value="Y">可用</option>
+                            <option value="N" selected>删除</option>
+                        </select>
+                    </td>
+
+
+
+                    <td>
+                        <label class="control-label">推送计划描述：</label>
+                    </td>
+                    <td>
+
+                        <select class="form-control" ng-model="dc.dict.messagePushConfigId" required
+                                ng-options="item.keys as item.value for item in constant.messpushconfigid" >
+                            <option value="">-- 请选择 --</option>
+                        </select>
+
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        <label class="control-label">是否30天显示：</label>
+                    </td>
+                    <td>
+                        <select class="form-control" ng-model="dc.dict.stayDayInd" required>
+                            <option value="" selected>请选择</option>
+                            <option value="Y">是</option>
+                            <option value="N">否</option>
+                        </select>
+                    </td>
+
+                    <td>
+                        <label class="control-label">群发组名：</label>
+                    </td>
+                    <td>
+                        <select class="form-control" ng-model="dc.dict.groupid"
+                                ng-options="item.keys as item.value for item in constant.groupid" >
+                            <option value="">-- 请选择 --</option>
+                        </select>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label class="control-label">创建时间：</label>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="createtime" required
+                               ng-model="dc.dict.createtime" readonly="true">
+                    </td>
+
+                    <td>
+                        <label class="control-label">上次更新时间：</label>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="updatetime" required
+                               ng-model="dc.dict.updatetime" readonly="true">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="14" align="right">
+                        <button type="submit" class="btn btn-success" >确定</button>
+                        <a href="/#/messpush" class="btn btn-warning">取消</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+</div>

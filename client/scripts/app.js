@@ -606,4 +606,85 @@ angular
                     }
                 }
             })
+          .state('dashboard.sms', {
+            templateUrl: 'views/smsmessage/smsmessage.html',
+            url: '/smsmessage',
+            resolve: {
+              loadMyFiles: function ($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                  name: 'sbAdminApp',
+                  files: [
+                    'scripts/jquery/exportExcel.js',
+                    'scripts/services/smsMessageService.js',
+                    'scripts/controllers/smsMessageCtrl.js'
+                  ]
+                })
+              }
+            }
+          })
+          .state('dashboard.group', {
+            templateUrl: 'views/group/group.html',
+            url: '/group',
+            resolve: {
+              loadMyFiles: function ($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                  name: 'sbAdminApp',
+                  files: [
+                    'scripts/common/pageService.js',
+                    'scripts/services/groupService.js',
+                    'scripts/controllers/groupCtrl.js'
+                  ]
+                })
+              }
+            }
+          })
+          .state('dashboard.messageRule', {
+            templateUrl: 'views/messagerule/messageRule.html',
+            url: '/messageRules',
+            resolve: {
+              loadMyFiles: function ($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                  name: 'sbAdminApp',
+                  files: [
+                    'scripts/common/pageService.js',
+                    'scripts/services/messageRuleService.js',
+                    'scripts/controllers/messageRuleCtrl.js'
+                  ]
+                })
+              }
+            }
+          })
+          .state('dashboard.messageConfig', {
+            templateUrl: 'views/messpushconfig/messagePushConfig.html',
+            url: '/messageConfig',
+            resolve: {
+              loadMyFiles: function ($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                  name: 'sbAdminApp',
+                  files: [
+                    'scripts/common/pageService.js',
+                    'scripts/services/messagePushConfigService.js',
+                    'scripts/controllers/messagePushConfigCtrl.js'
+                  ]
+                })
+
+              }
+            }
+          })
+          .state('dashboard.messageMapping', {
+            templateUrl: 'views/messagemapping/messageMapping.html',
+            url: '/messageMapping',
+            resolve: {
+              loadMyFiles: function ($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                  name: 'sbAdminApp',
+                  files: [
+                    'scripts/common/pageService.js',
+                    'scripts/services/messageMappingService.js',
+                    'scripts/controllers/messageMappingCtrl.js'
+                  ]
+                })
+              }
+            }
+          })
     }]);

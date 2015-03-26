@@ -1,0 +1,57 @@
+<div class="row" ng-controller="GroupCtrl as gc">
+    <div class="row">
+        <h1>
+            群组客户配置
+        </h1>
+
+        <hr>
+    </div>
+
+    <div class="row">
+        <form class="form-inline" role="form" >
+            <div class="col-md-12">
+                <label class="control-label">群组名称：</label>
+                <input type="text" class="form-control" ng-model="gc.group.name" disabled>
+                <br>  <br>
+            </div>
+        </form>
+        <div class="col-md-12">
+            <label class="control-label">
+            <input type="text" class="col-md-1 form-control" ng-model="gc.groupCustomerPager.filter.customerFilter">
+            <span>  <a class="btn btn-primary submit" ng-click="gc.findCustomers()">查询</a>
+            <a class="btn btn-primary submit" ng-click="gc.addCustomers()">添加</a></span></label>
+
+        </div>
+
+    </div>
+
+    <table class="col-md-12 table table-bordered">
+        <thead>
+        <tr>
+            <td class="col-md-2">姓名(real_name)</td>
+            <td class="col-md-2">客户号(customer_id)</td>
+            <td class="col-md-3">手机号(mobile)</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="customer in gc.customers">
+            <td class="col-md-2">{{customer.realName}}</td>
+            <td class="col-md-2">{{customer.customerId}}</td>
+            <td class="col-md-3">{{customer.mobile}}</td>
+        </tr>
+        <tr ng-hide="gc.customers.length">
+            <td colspan="12">
+                <p class="text-center">没有数据</p>
+            </td>
+        </tr>
+        <tr >
+            <td colspan="12">
+                <pagination total-items="gc.groupCustomerPager.count" items-per-page="gc.groupCustomerPager.pageSize"  ng-model="gc.groupCustomerPager.pageNum" ng-change="gc.findCustomers()" max-size="10"></pagination>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+
+
+</div>
