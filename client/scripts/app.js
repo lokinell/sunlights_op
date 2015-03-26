@@ -679,4 +679,19 @@ angular
                     }
                 }
             })
+            .state('dashboard.statisticsPurchase', {
+                templateUrl: 'views/statistics/purchase.html',
+                url: '/statistics/purchase',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/purchaseStatisticsService.js',
+                                'scripts/controllers/purchaseStatisticsCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
     }]);
