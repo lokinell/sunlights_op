@@ -53,7 +53,8 @@
             cellFilter: 'date:"yyyy-MM-dd"'
           }, {
             field: "deleted",
-            displayName: '是否有效'
+            displayName: '是否有效',
+            cellTemplate: "<div class='ngCellText' ng-class='col.colIndex()'><span>{{row.entity.deleted ? '否' : '是'}}</span></div>"
           }
         ]
       };

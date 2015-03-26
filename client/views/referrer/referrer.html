@@ -1,0 +1,61 @@
+<div class="row" ng-controller="ReferrerCtrl as rc">
+
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a ui-sref="dashboard.referrer">统计管理</a></li>
+            <li class="active">推荐人</li>
+        </ol>
+    </div>
+
+    <div class="well well-lg">
+
+        <div class="alert alert-danger" ng-show="!!rc.error">
+            <h4 class="alert-heading">操作失败</h4>
+            <span ng-bind="rc.error.message.detail"></span>
+        </div>
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <label class="control-label col-md-1">手机号：</label>
+                <input type="text" ng-enter="rc.findReferrers()" class="form-control col-md-3"
+                       ng-model="rc.pager.filter.LIKES_mobile"
+                       placeholder="手机号">
+                <label class="control-label col-md-1">开始时间：</label>
+
+                <div class="col-md-3">
+                    <a class="dropdown-toggle" id="GED_beginTime" role="button" data-toggle="dropdown" data-target="#">
+                        <div class="input-group">
+                            <input class="form-control" value="{{rc.pager.filter.GED_beginTime | date : 'yyyy-MM-dd HH:mm:ss'}}">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker ng-model="rc.pager.filter.GED_beginTime"
+                                        datetimepicker-config="{ dropdownSelector: '#GED_beginTime'}"></datetimepicker>
+                    </ul>
+                </div>
+                <label class="control-label col-md-1">结束时间：</label>
+
+                <div class="col-md-3">
+                    <a class="dropdown-toggle" id="LTD_endTime" role="button" data-toggle="dropdown" data-target="#">
+                        <div class="input-group">
+                            <input class="form-control" value="{{rc.pager.filter.LTD_endTime | date : 'yyyy-MM-dd HH:mm:ss'}}">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker ng-model="rc.pager.filter.LTD_endTime"
+                                        datetimepicker-config="{ dropdownSelector: '#LTD_endTime'}"></datetimepicker>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <p class="text-right">
+                    <a class="btn btn-primary submit" ng-click="rc.findReferrers()">查询</a>
+                    <a href="{{rc.exportUrl}}?GED_beginTime={{ rc.exportPager.filter.GED_beginTime }}&LTD_endTime={{ rc.exportPager.filter.LTD_endTime }}&LIKES_mobile={{ c.exportPager.filter.LIKES_mobile}}">导出</a>
+                </p>
+            </div>
+        </form>
+        <div class="gridStyle" ng-grid="referrerOptions" ng-page-changed="rc.findReferrers()"></div>
+    </div>
+
+</div>
