@@ -16,6 +16,8 @@
             this.referrer = this.$rootScope.referrer || {};
             this.$rootScope.referrer = {};
             this.pager = {};
+            this.exportPager = {};
+            this.exportUrl = baseUrl + "/referrer/excel";
             $scope.referrerOptions = {
                 data: 'pager.list',
                 enablePaging: true,
@@ -104,7 +106,7 @@
             this.$log.debug("findReferrers()");
             this.pager.pageSize = this.$scope.referrerOptions.pagingOptions.pageSize;
             this.pager.pageNum = this.$scope.referrerOptions.pagingOptions.currentPage;
-            return this.ReferrerService.findReferrers(this.pager).then((function (_this) {
+            this.ReferrerService.findReferrers(this.pager).then((function (_this) {
                 return function (data) {
                     _this.$log.debug("Promise returned " + data.value.list.length + " Referrers");
                     return _this.$scope.pager = data.value;
@@ -115,6 +117,7 @@
                     return _this.error = error;
                 };
             })(this));
+            return this.exportPager = this.pager;
         };
 
         ReferrerCtrl.prototype.findReferrerDetails = function () {

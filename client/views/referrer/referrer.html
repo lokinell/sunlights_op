@@ -51,6 +51,7 @@
             <div>
                 <p class="text-right">
                     <a class="btn btn-primary submit" ng-click="rc.findReferrers()">查询</a>
+                    <a href="{{rc.exportUrl}}?GED_beginTime={{ rc.exportPager.filter.GED_beginTime }}&LTD_endTime={{ rc.exportPager.filter.LTD_endTime }}&LIKES_mobile={{ c.exportPager.filter.LIKES_mobile}}">导出</a>
                 </p>
             </div>
         </form>
