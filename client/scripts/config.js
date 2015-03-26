@@ -1,3 +1,2 @@
-var apiUrl = "http://192.168.0.93/";
-var prefix = "op";
-var baseUrl = apiUrl + prefix;
+var baseUrl = "http://192.168.0.93/op";
+var basePath = "/console";
