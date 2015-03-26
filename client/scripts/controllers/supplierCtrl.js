@@ -52,7 +52,7 @@
           }, {
             field: null,
             displayName: '操作',
-            cellTemplate: '/assets/faces/product/supplier/operation.html'
+            cellTemplate: 'views/supplier/operation.html'
           }
         ]
       };
@@ -80,7 +80,7 @@
       return this.SupplierService.saveSupplier(this.supplier).then((function(_this) {
         return function(data) {
           _this.$log.debug("save supplier successfully");
-          return _this.$location.path("/product/suppliers");
+          return _this.$location.path("/dashboard/supplier");
         };
       })(this), (function(_this) {
         return function(error) {
@@ -92,14 +92,14 @@
 
     SupplierCtrl.prototype.createSupplier = function() {
       this.$log.debug("createSupplier()");
-      return this.$location.path("/product/supplier/save");
+      return this.$location.path("/dashboard/supplier/save");
     };
 
     SupplierCtrl.prototype.updateSupplier = function(row) {
       this.$log.debug("updateSupplier()");
       this.supplier = row.entity;
       this.$rootScope.supplier = this.supplier;
-      return this.$location.path("/product/supplier/save");
+      return this.$location.path("/dashboard/supplier/save");
     };
 
     SupplierCtrl.prototype.deleteSupplier = function(row) {
@@ -125,4 +125,3 @@
 
 }).call(this);
 
-//# sourceMappingURL=SupplierCtrl.js.map

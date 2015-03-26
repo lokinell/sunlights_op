@@ -65,7 +65,7 @@
       var deferred;
       this.$log.debug("saveGroup " + (angular.toJson(group, true)));
       deferred = this.$q.defer();
-      this.$http.post("/group", group).success((function(_this) {
+      this.$http.post(baseUrl+"/group", group).success((function(_this) {
         return function(data, status, headers) {
           _this.$log.info("Successfully save group - status " + status);
           return deferred.resolve(data);

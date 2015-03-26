@@ -254,8 +254,6 @@ angular
                 return $ocLazyLoad.load({
                   name: 'sbAdminApp',
                   files: [
-                    'bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js',
-                    'bower_components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css',
                     'scripts/directives/paging/ngPageChanged.js',
                     'scripts/services/taskService.js',
                     'scripts/controllers/taskCtrl.js'
@@ -649,4 +647,34 @@ angular
                     }
                 }
             })
+          .state('dashboard.supplier', {
+            templateUrl: 'views/supplier/suppliers.html',
+            url: '/supplier',
+            resolve: {
+              loadMyFiles: function ($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                  name: 'sbAdminApp',
+                  files: [
+                    'scripts/controllers/supplierCtrl.js',
+                    'scripts/services/supplierService.js'
+                  ]
+                })
+              }
+            }
+          })
+          .state('dashboard.supplierSave', {
+            templateUrl: 'views/supplier/save.html',
+            url: '/supplier/save',
+            resolve: {
+              loadMyFiles: function ($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                  name: 'sbAdminApp',
+                  files: [
+                    'scripts/controllers/supplierCtrl.js',
+                    'scripts/services/supplierService.js'
+                  ]
+                })
+              }
+            }
+          })
     }]);

@@ -201,11 +201,11 @@
   angular.module('sbAdminApp').controller('GroupCtrl', GroupCtrl);
 
   angular.module('sbAdminApp').controller("groupModalInstanceCtrl", function($scope, $log, $location, $modalInstance, selectedRow, GroupService) {
+    console.info($scope.row);
     $scope.row = angular.fromJson(selectedRow);
     $scope.ok = function() {
       GroupService.save($scope.row);
       $modalInstance.close($scope.row);
-      return window.parent.location.reload();
     };
     return $scope.cancel = function() {
       return $modalInstance.dismiss("cancel");

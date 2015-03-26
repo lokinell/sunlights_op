@@ -14,28 +14,28 @@
       this.$log.debug("constructing TaskCtrl");
       this.pager = {};
       this.task = this.$rootScope.task || {};
-      this.$rootScope.task = {};
+      this.$log.debug(this.task);
       this.jobClasses = [
         {
-          key: 'jobs.FundJob',
+          key: 'com.sunlights.op.jobs.FundJob',
           value: '基金同步'
         }, {
-          key: 'jobs.FundCodeJob',
+          key: 'com.sunlights.op.jobs.FundCodeJob',
           value: '基金代码同步'
         }, {
-          key: 'jobs.PushMessageJob',
+          key: 'com.sunlights.op.jobs.PushMessageJob',
           value: '推送信息'
         }, {
-          key: 'jobs.FundProfitHistoryJob',
+          key: 'com.sunlights.op.jobs.FundProfitHistoryJob',
           value: '基金净值同步'
         }, {
-          key: 'jobs.FundEquityMonitorJob',
+          key: 'com.sunlights.op.jobs.FundEquityMonitorJob',
           value: '基金净值监控'
         }, {
-          key: 'jobs.FundArchiveexJob',
+          key: 'com.sunlights.op.jobs.FundArchiveexJob',
           value: '基金档案同步'
         }, {
-          key: 'jobs.WeiXinTicketJob',
+          key: 'com.sunlights.op.jobs.WeiXinTicketJob',
           value: '微信公众JS临时门票'
         }
       ];
@@ -160,7 +160,7 @@
       return this.TaskService.saveTask(this.task).then((function(_this) {
         return function(data) {
           _this.$log.debug("Promise returned " + data);
-          return _this.$location.path("/tasks");
+          return _this.$location.path("/dashboard/tasks");
         };
       })(this), (function(_this) {
         return function(error) {
