@@ -551,7 +551,7 @@ angular
                 }
             })
             .state('dashboard.sms', {
-                templateUrl: 'views/smsmessage/smsmessage.html',
+                templateUrl: 'views/smsmessage/smsMessage.html',
                 url: '/smsmessage',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
