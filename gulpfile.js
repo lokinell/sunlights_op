@@ -200,6 +200,7 @@ gulp.task('serve:dist', ['build:dist'], function() {
 });
 
 gulp.task('fonts', ['clean'], function() {
-  return gulp.src(config.base +'/bower_components/bootstrap/fonts/*')
-    .pipe(gulp.dest(config.dist+'/assets/fonts/'));
+  return gulp.src([config.base +'/bower_components/bootstrap/fonts/*',
+                   config.base +'/bower_components/font-awesome/fonts/*'])
+         .pipe(gulp.dest(config.dist+'/assets/fonts/'));
 });
