@@ -1,10 +1,11 @@
 
 <div class="row"  ng-controller="MessagePushConfigCtrl as dc"  >
     <div class="row">
-        <h1 class="text-info">
-            推送计划配置
-        </h1>
-        <hr>
+
+      <ol class="breadcrumb">
+        <li><a ui-sref="dashboard.messageConfig">系统管理</a></li>
+        <li class="active">推送计划配置</li>
+      </ol>
     </div>
     <div class="row ">
         <div class="alert alert-danger" ng-show="!!dc.error">

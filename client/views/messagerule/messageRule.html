@@ -1,10 +1,11 @@
 
 <div class="row" ng-controller="MessageRuleCtrl as dc" >
     <div class="row">
-        <h1 class="text-info">
-            消息规则
-        </h1>
-        <hr>
+
+      <ol class="breadcrumb">
+        <li><a ui-sref="dashboard.messageRule">系统管理</a></li>
+        <li class="active">消息规则</li>
+      </ol>
     </div>
     <div class="row">
         <div class="alert alert-danger" ng-show="!!dc.error">
