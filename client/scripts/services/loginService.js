@@ -22,7 +22,7 @@
             var deferred;
             this.$log.debug("findCurrentUser()");
             deferred = this.$q.defer();
-            this.$http.get(baseUrl + "/login/currentuser").success((function (_this) {
+            this.$http.get(baseUrl + "/authentication/currentuser").success((function (_this) {
                 return function (data, status, headers) {
                     _this.$log.info("Successfully findCurrentUser - status " + status);
                     return deferred.resolve(data);
@@ -40,7 +40,7 @@
             var deferred;
             this.$log.debug("login()");
             deferred = this.$q.defer();
-            this.$http.get(baseUrl + '/login/user', {
+            this.$http.get(baseUrl + '/authentication/user', {
                 headers: {
                     'params': encodeURIComponent(angular.toJson(user))
                 }
