@@ -12,7 +12,7 @@ var pkg = require('./package');
 var karma = require('karma').server;
 var del = require('del');
 var _ = require('lodash');
-/* jshint camelcase:false*/
+var replace = require('gulp-replace');
 var webdriverStandalone = require('gulp-protractor').webdriver_standalone;
 var webdriverUpdate = require('gulp-protractor').webdriver_update;
 //update webdriver if necessary, this task will be used by e2e task
