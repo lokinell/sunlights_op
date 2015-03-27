@@ -15,7 +15,6 @@ var _ = require('lodash');
 /* jshint camelcase:false*/
 var webdriverStandalone = require('gulp-protractor').webdriver_standalone;
 var webdriverUpdate = require('gulp-protractor').webdriver_update;
-
 //update webdriver if necessary, this task will be used by e2e task
 gulp.task('webdriver:update', webdriverUpdate);
 
@@ -69,7 +68,7 @@ gulp.task('templates', function() {
 
 //build files for creating a dist release
 gulp.task('build:dist', ['clean'], function(cb) {
-    runSequence(['build', 'copy', 'copy:assets', 'images'], 'html', cb);
+    runSequence(['build', 'copy','fonts', 'copy:assets', 'images'], 'html', cb);
 });
 
 //build files for development
@@ -88,7 +87,7 @@ gulp.task('html', function() {
         .pipe($.sourcemaps.init())
         .pipe($.if('**/*main.js', $.ngAnnotate()))
         .pipe($.if('*.js', $.uglify({
-            mangle: false,
+            mangle: false
         })))
         .pipe($.if('*.css', $.csso()))
         .pipe($.if(['**/*main.js', '**/*main.css'], $.header(config.banner, {
@@ -198,4 +197,9 @@ gulp.task('serve:dist', ['build:dist'], function() {
         notify: false,
         server: [config.dist]
     });
+});
+
+gulp.task('fonts', ['clean'], function() {
+  return gulp.src(config.base +'/bower_components/bootstrap/fonts/*')
+    .pipe(gulp.dest(config.dist+'/assets/fonts/'));
 });
