@@ -15,6 +15,8 @@ var _ = require('lodash');
 var replace = require('gulp-replace');
 var webdriverStandalone = require('gulp-protractor').webdriver_standalone;
 var webdriverUpdate = require('gulp-protractor').webdriver_update;
+var devBaseUrl = "http://192.168.0.93/op";
+var uatBaseUrl = "https://api-2.sunlights.me/api/op";
 //update webdriver if necessary, this task will be used by e2e task
 gulp.task('webdriver:update', webdriverUpdate);
 
@@ -203,4 +205,26 @@ gulp.task('fonts', ['clean'], function() {
   return gulp.src([config.base +'/bower_components/bootstrap/fonts/*',
                    config.base +'/bower_components/font-awesome/fonts/*'])
          .pipe(gulp.dest(config.dist+'/assets/fonts/'));
+});
+
+
+gulp.task('uat-replace', function(){
+  gulp.src(config.base+'/scripts/config.js')
+    .pipe(replace(devBaseUrl, uatBaseUrl))
+    .pipe(gulp.dest(config.base+'/scripts'));
+});
+
+gulp.task('dev-replace', function(){
+  gulp.src(config.base+'/scripts/config.js')
+    .pipe(replace(uatBaseUrl, devBaseUrl))
+    .pipe(gulp.dest(config.base+'/scripts'));
+});
+
+gulp.task('uat:dist', function(){
+  runSequence('uat-replace','build:dist');
+});
+
+
+gulp.task('dev:dist', function(){
+  runSequence('dev-replace','build:dist');
 });
