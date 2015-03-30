@@ -737,4 +737,19 @@ angular
                     }
                 }
             })
+            .state('dashboard.tradeSummary', {
+                templateUrl: 'views/statistics/summary.html',
+                url: '/statistics/summary',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/purchaseStatisticsService.js',
+                                'scripts/controllers/tradeSummaryCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
     }]);
