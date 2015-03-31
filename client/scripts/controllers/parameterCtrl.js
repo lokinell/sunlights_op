@@ -113,6 +113,21 @@
             })(this));
         };
 
+        ParameterCtrl.prototype.refreshParameter = function () {
+            this.$log.debug("refreshParameter()");
+            return this.ParameterService.refreshParameter().then((function (_this) {
+                return function (data) {
+                    _this.$log.debug("successfully refresh parameter cache");
+                    return _this.findParametersBy();
+                };
+            })(this), (function (_this) {
+                return function (error) {
+                    _this.$log.error("Unable to refresh parameter cache: " + error);
+                    return _this.error = error;
+                };
+            })(this));
+        };
+
         return ParameterCtrl;
 
     })();

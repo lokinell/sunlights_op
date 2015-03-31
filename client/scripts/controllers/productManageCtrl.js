@@ -345,6 +345,21 @@
             })(this));
         };
 
+        ProductManageCtrl.prototype.refreshProduct = function () {
+            this.$log.debug("refreshProduct()");
+            return this.ProductService.refreshProduct().then((function (_this) {
+                return function (data) {
+                    _this.$log.debug("successfully refresh Product cache");
+                    return _this.findProductManages();
+                };
+            })(this), (function (_this) {
+                return function (error) {
+                    _this.$log.error("Unable to refresh Product cache: " + error);
+                    return _this.error = error;
+                };
+            })(this));
+        };
+
         return ProductManageCtrl;
 
     })();

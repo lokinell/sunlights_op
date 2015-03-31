@@ -160,6 +160,27 @@
             return deferred.promise;
         };
 
+        ProductService.prototype.refreshProduct = function () {
+            var deferred;
+            this.$log.debug("refreshProduct ");
+            deferred = this.$q.defer();
+            this.$http({
+                method: 'DELETE',
+                url: baseUrl + '/management/refresh'
+            }).success((function (_this) {
+                return function (data, status, headers) {
+                    _this.$log.info("Successfully refresh product cache - status " + status);
+                    return deferred.resolve(data);
+                };
+            })(this)).error((function (_this) {
+                return function (data, status, headers) {
+                    _this.$log.error("Failed to refresh product cache - status " + status);
+                    return deferred.reject(data);
+                };
+            })(this));
+            return deferred.promise;
+        };
+
         return ProductService;
 
     })();

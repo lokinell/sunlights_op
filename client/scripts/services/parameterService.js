@@ -80,6 +80,27 @@
             return deferred.promise;
         };
 
+        ParameterService.prototype.refreshParameter = function () {
+            var deferred;
+            this.$log.debug("refreshParameter ");
+            deferred = this.$q.defer();
+            this.$http({
+                method: 'DELETE',
+                url: baseUrl + '/parameter/refresh'
+            }).success((function (_this) {
+                return function (data, status, headers) {
+                    _this.$log.info("Successfully refresh parameter cache - status " + status);
+                    return deferred.resolve(data);
+                };
+            })(this)).error((function (_this) {
+                return function (data, status, headers) {
+                    _this.$log.error("Failed to refresh parameter cache - status " + status);
+                    return deferred.reject(data);
+                };
+            })(this));
+            return deferred.promise;
+        };
+
         return ParameterService;
 
     })();
