@@ -498,8 +498,8 @@ angular
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
-                                'scripts/services/feedbackService.js',
-                                'scripts/controllers/feedbackCtrl.js'
+                                'scripts/services/feedBackService.js',
+                                'scripts/controllers/feedBackCtrl.js'
                             ]
                         })
                     }
