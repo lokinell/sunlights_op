@@ -1,0 +1,81 @@
+<div class="row" ng-controller="ActivityReturnMsgCtrl as dc " ng-init="init()">
+    <div class="row">
+        <h1>
+            活动返回信息管理列表
+        </h1>
+        <hr>
+    </div>
+    <div class="well well-lg">
+
+        <form class="form-inline" role="form" name="myForm" novalidate>
+            <div>
+                <div class="form-group">
+                    <label class="control-label">场景：</label>
+                    <select class="form-control" ng-model="queryRule.filterText.scene"
+                            ng-options="item.key as item.value for item in constant.scenes">
+                    </select>
+                    <label class="control-label">类型：</label>
+                    <select class="form-control" ng-model="queryRule.filterText.activityType"
+                            ng-options="item.key as item.value for item in constant.activityTypes">
+                    </select>
+                    <label class="control-label">奖励类型：</label>
+                    <select class="form-control" ng-model="queryRule.filterText.rewardType"
+                            ng-options="item.key as item.value for item in constant.rewardTypes">
+                    </select>
+
+                </div>
+                <p class="text-right">
+                    <a class="btn btn-primary submit" ng-click="findReturnMsg()">查询</a>
+                    <a class="btn btn-primary submit" ng-click="open()">添加</a>
+                </p>
+            </div>
+            <div class="gridStyle" ng-grid="gridOptions"></div>
+        </form>
+    </div>
+
+    <script type="text/ng-template" id="activityReturnMsgModalContent.html">
+        <div class="modal-header">
+            <button aria-hidden="true" data-dismiss="modal" class="close" type="button" ng-click="cancel()">×</button>
+            <h4 id="activityModalLabel" class="modal-title">活动</h4>
+        </div>
+        <form role="form" ng-submit="ok()">
+            <div class="modal-body">
+
+                <label class="control-label">场景：</label>
+                <select class="form-control" ng-model="msg.scene"
+                        ng-options="item.key as item.value for item in constant.scenes">
+                </select>
+                <label class="control-label">类型：</label>
+                <select class="form-control" ng-model="msg.type"
+                        ng-options="item.key as item.value for item in constant.activityTypes">
+                </select>
+                <label class="control-label">奖励类型：</label>
+                <select class="form-control" ng-model="msg.rewardType"
+                        ng-options="item.key as item.value for item in constant.rewardTypes">
+                </select>
+
+                <label class="control-label">作用种类：</label>
+                <select class="form-control" ng-model="msg.category"
+                        ng-options="item.key as item.value for item in constant.categories">
+                </select>
+
+                <label class="control-label">错误信息：</label>
+                <select class="form-control" ng-model="msg.errorCode"
+                        ng-options="item.key as item.value for item in constant.errorMsgs">
+                </select>
+
+                <label class="control-label">模版信息：</label>
+                <input class="form-control" type="text" name="template" required
+                       ng-model="msg.template">
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">确定</button>
+                <button type="button" class="btn btn-warning" ng-click="cancel()">取消</button>
+            </div>
+        </form>
+
+    </script>
+
+
+</div>

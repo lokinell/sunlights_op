@@ -1,0 +1,158 @@
+
+<div class="row" ng-controller="ActivityShareCtrl as dc" ng-init="dc.init()" >
+    <div class="row">
+        <h1>
+            分享列表
+        </h1>
+        <hr>
+    </div>
+    <div class="row">
+        <form class="form-inline" role="form">
+            <div>
+                <p class="text-right">
+                    <a class="btn btn-primary submit" ng-click="queryShare()">查询</a>
+                    <a class="btn btn-primary submit" ng-click="addShare()">添加</a>
+                </p>
+            </div>
+            <div class="mediumGridStyle" ng-grid="gridOptionsShare"></div>
+        </form>
+    </div>
+
+    <form role="form"  ng-submit="okShare()">
+        <div class="modal-body">
+            <label class="control-label">标题：</label>
+            <input class="form-control" type="text" name="title" required
+                   ng-model="share.title">
+
+            <label class="control-label">分享类型：</label>
+            <select class="form-control" ng-model="share.shareType"
+                    ng-options="item.key as item.value for item in dc.constant.shareType" required>
+            </select>
+
+            <label class="control-label">产生短URL是否和ID有关：</label>
+            <select class="form-control" ng-model="share.relateRefId"
+                    ng-options="item.key as item.value for item in dc.constant.isRefId" required>
+            </select>
+
+            <label class="control-label">内容：</label>
+            <input class="form-control" type="text" name="content" required
+                   ng-model="share.content">
+
+
+            <label class="control-label">分享url：</label>
+            <input class="form-control" type="text" name="baseUrl" required
+                   ng-model="share.baseUrl">
+
+            <label class="control-label">图标路径路径：</label>
+            <input class="form-control" type="text" name="imageUrl" required
+                   ng-model="share.imageUrl">
+            <div>
+                <button type="submit" class="btn btn-success">确定</button>
+                <button type="button" class="btn btn-warning" ng-click="cancel()">取消</button>
+            </div>
+        </div>
+
+    </form>
+
+    <script type="text/ng-template" id="activityShareModalContent.html">
+        <div class="modal-header">
+            <button aria-hidden="true" data-dismiss="modal" class="close" type="button" ng-click="cancel()">×</button>
+            <h4 id="obtainRuleModalLabel" class="modal-title">活动分享信息维护</h4>
+        </div>
+        <div>
+            <ul class="nav nav-tabs" ng-init="vm.activeTab=1">
+                <li ng-class="{active: vm.activeTab == 1}"><a href="javascript:;" ng-click="vm.activeTab = 1">基本信息</a></li>
+                <li ng-class="{active: vm.activeTab == 2}"><a href="javascript:;" ng-click="vm.activeTab = 2">特殊信息</a></li>
+            </ul>
+            <div class="tab-content tab-bordered">
+                <div class="tab-panel" ng-show="vm.activeTab == 1">
+                    <form role="form" ng-submit="okBasicShare()">
+                        <div class="modal-body">
+                            <label class="control-label">标题：</label>
+                            <input class="form-control" type="text" name="title" required
+                                   ng-model="row.title">
+
+                            <label class="control-label">分享类型：</label>
+                            <select class="form-control" ng-model="row.shareType"
+                                    ng-options="item.key as item.value for item in constant.shareType" required>
+                            </select>
+
+                            <label class="control-label">产生短URL是否和ID有关：</label>
+                            <select class="form-control" ng-model="row.relateRefId"
+                                    ng-options="item.key as item.value for item in constant.isRefId" required>
+                            </select>
+
+                            <label class="control-label">内容：</label>
+                            <input class="form-control" type="text" name="content" required
+                                   ng-model="row.content">
+
+
+                            <label class="control-label">分享url：</label>
+                            <input class="form-control" type="text" name="baseUrl" required
+                                   ng-model="row.baseUrl">
+
+                            <label class="control-label">图标路径路径：</label>
+                            <input class="form-control" type="text" name="imageUrl" required
+                                   ng-model="row.imageUrl">
+                            <input class="form-control" type="hidden" name="parentId"
+                                   ng-model="parentId">
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">确定</button>
+                                <button type="button" class="btn btn-warning" ng-click="cancel()">取消</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="tab-panel" ng-show="vm.activeTab == 2">
+                    <p class="text-right">
+                        <a class="btn btn-primary submit" ng-click="addSpecialShare()">添加</a>
+                    </p>
+                    <div class="gridStyle-little" ng-grid="gridOptionsShare"></div>
+                    <form role="form" ng-submit="okSpecialShare()">
+                        <div class="modal-body">
+                            <label class="control-label">标题：</label>
+                            <input class="form-control" type="text" name="title" required
+                                   ng-model="share.title">
+
+                            <label class="control-label">分享类型：</label>
+                            <select class="form-control" ng-model="share.shareType"
+                                    ng-options="item.key as item.value for item in constant.shareType" required>
+                            </select>
+
+                            <label class="control-label">关联条目：</label>
+                            <select class="form-control" ng-model="share.refLong"
+                                    ng-options="item.id as item.title for item in refIds" required>
+                            </select>
+
+                            <label class="control-label">产生短URL是否和ID有关：</label>
+                            <select class="form-control" ng-model="share.relateRefId"
+                                    ng-options="item.key as item.value for item in constant.isRefId" required>
+                            </select>
+
+                            <label class="control-label">内容：</label>
+                            <input class="form-control" type="text" name="content" required
+                                   ng-model="share.content">
+
+
+                            <label class="control-label">分享url：</label>
+                            <input class="form-control" type="text" name="baseUrl" required
+                                   ng-model="share.baseUrl">
+
+                            <label class="control-label">图标路径路径：</label>
+                            <input class="form-control" type="text" name="imageUrl" required
+                                   ng-model="share.imageUrl">
+                            <input class="form-control" type="hidden" name="parentId"
+                                   ng-model="parentId">
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">确定</button>
+                                <button type="button" class="btn btn-warning" ng-click="cancel()">取消</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </script>
+
+</div>

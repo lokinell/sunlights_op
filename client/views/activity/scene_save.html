@@ -1,0 +1,89 @@
+<div class="row" ng-controller="activitySceneCtrl as asc" ng-init="asc.initSave()">
+
+    <div class="row">
+        <h1>
+            活动场景详情
+        </h1>
+        <hr>
+    </div>
+
+    <div class="row">
+
+        <div class="alert alert-danger" ng-show="!!asc.error">
+            <h4 class="alert-heading">操作失败</h4>
+            <span ng-bind="asc.error.message.detail"></span>
+        </div>
+        <form role="form" ng-submit="asc.saveScene()">
+            <table>
+                <tr>
+                    <td>
+                        <label class="control-label">场景编码：</label>
+                    </td>
+                    <td>
+                        <input ng-disabled="!!asc.scene.id" class="form-control" type="text" name="scene" required
+                               ng-model="asc.scene.scene">
+                    </td>
+
+                    <td>
+                        <label class="control-label">场景名称：</label>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="title" required
+                               ng-model="asc.scene.title">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="control-label">产品类型：</label>
+                    </td>
+                    <td>
+                        <select class="form-control" ng-model="asc.scene.prdType" ng-change="asc.handleProductChange()"
+                                ng-options="item.catPointKey as item.codeVal for item in asc.productTypes">
+                            <option value="" selected>请选择</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label class="control-label">产品编码：</label>
+                    </td>
+                    <td>
+                        <select class="form-control" ng-model="asc.scene.prdCode"
+                                ng-options="item.productCode as item.productName for item in asc.manages">
+                            <option value="" selected>请选择</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label class="control-label">活动类型：</label>
+                    </td>
+                    <td>
+                        <select class="form-control" ng-model="asc.scene.activityType" required
+                                ng-options="item.key as item.value for item in asc.activityTypes">
+                            <option value="" selected>请选择</option>
+                        </select>
+                    </td>
+
+                    <td>
+                        <label class="control-label">状态：</label>
+                    </td>
+                    <td>
+                        <select class="form-control" ng-model="asc.scene.status" required>
+                            <option value="" selected>请选择</option>
+                            <option value="N">启用</option>
+                            <option value="F" selected>禁用</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="4" align="right">
+                        <button type="submit" class="btn btn-success">确定</button>
+                        <a ui-sref="dashboard.scene" class="btn btn-warning">取消</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+</div>

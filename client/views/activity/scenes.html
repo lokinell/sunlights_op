@@ -1,0 +1,31 @@
+<div class="row" ng-controller="activitySceneCtrl as asc" ng-init="asc.findScenes()">
+
+    <div class="row">
+        <h1>活动场景</h1>
+        <hr>
+    </div>
+
+    <div class="row">
+
+        <div class="alert alert-danger" ng-show="!!asc.error">
+            <h4 class="alert-heading">操作失败</h4>
+            <span ng-bind="asc.error.message.detail"></span>
+        </div>
+        <form class="form-inline" role="form">
+
+
+            <div class="well well-lg">
+                <div class="form-group well well-lg">
+                    <label class="control-label">查询：</label>
+                    <input type="text" class="form-control" ng-model="filterOptions.filterText.searchText1" placeholder="请输入你想查询的数据">
+                    <a class="btn btn-primary submit" ng-click="asc.createScene()">添加</a>
+
+                </div>
+                <br>   <br>
+                <div class="gridStyle" ng-grid="gridOptions"></div>
+            </div>
+        </form>
+
+    </div>
+
+</div>

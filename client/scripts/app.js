@@ -647,6 +647,147 @@ angular
                     }
                 }
             })
+            .state('dashboard.scene', {
+                templateUrl: 'views/activity/scenes.html',
+                url: '/scene',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/controllers/activitySceneCtrl.js',
+                                'scripts/services/activitySceneService.js',
+                                'scripts/services/productService.js',
+                                'scripts/common/pageService.js',
+                                'scripts/services/commonService.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.scenesave', {
+                templateUrl: 'views/activity/scene_save.html',
+                url: '/activity/scene/save',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/controllers/activitySceneCtrl.js',
+                                'scripts/services/activitySceneService.js',
+                                'scripts/services/productService.js',
+                                'scripts/common/pageService.js',
+                                'scripts/services/commonService.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.rewardType', {
+                templateUrl: 'views/reward/rewardType.html',
+                url: '/rewardType',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/controllers/rewardTypeCtrl.js',
+                                'scripts/common/pageService.js',
+                                'scripts/services/exchangeRuleService.js',
+                                'scripts/services/rewardTypesService.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.share', {
+                templateUrl: 'views/activity/activityShareInfo.html',
+                url: '/share',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/controllers/activityShareCtrl.js',
+                                'scripts/controllers/activityShareModalInstanceCtrl.js',
+                                'scripts/services/activityService.js',
+                                'scripts/services/activityShareInfoService.js',
+                                'scripts/services/obtainRewardRulesService.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.list', {
+                templateUrl: 'views/activity/activityList.html',
+                url: '/activity/list',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/controllers/activityCtrl.js',
+                                'scripts/controllers/obtainRuleModalInstanceCtrl.js',
+                                'scripts/services/activityService.js',
+                                'scripts/common/pageService.js',
+                                'scripts/services/activityShareInfoService.js',
+                                'scripts/services/obtainRewardRulesService.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.exchangescene', {
+                templateUrl: 'views/reward/exchangeScene.html',
+                url: '/exchangeScene',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/controllers/exchangeSceneCtrl.js',
+                                'scripts/services/activityService.js',
+                                'scripts/common/pageService.js',
+                                'scripts/services/exchangeSceneService.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.exchangebean', {
+                templateUrl: 'views/reward/exchangebeanresult.html',
+                url: '/exchangebean',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/controllers/excelModalCtrl.js',
+                                'scripts/controllers/exchangeBeanResultCtrl.js',
+                                'scripts/services/exchangeBeanResultService.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.errorMsg', {
+                templateUrl: 'views/activity/activityReturnMsgMgr.html',
+                url: '/activityReturnMsgMgr',
+                resolve: {
+                    loadMyFiles: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/controllers/activityReturnMsgModelInstance.js',
+                                'scripts/controllers/activityReturnMsgCtrl.js',
+                                'scripts/services/activityService.js',
+                                'scripts/common/pageService.js',
+                                'scripts/services/activityReturnMsgService.js'
+                            ]
+                        })
+                    }
+                }
+            })
           .state('dashboard.supplier', {
             templateUrl: 'views/supplier/suppliers.html',
             url: '/supplier',

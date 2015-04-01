@@ -1,0 +1,153 @@
+
+<div class="row" ng-controller="ActivityCtrl as dc" ng-init="dc.init()" >
+    <div class="row">
+        <h1>
+            活动列表
+        </h1>
+        <hr>
+    </div>
+    <div class="well well-lg" id="activity-list">
+
+        <form class="form-inline" role="form">
+            <div>
+                <div class="form-group">
+                    <label class="control-label">ID：</label>
+                    <input type="text" class="form-control" ng-model="dc.condition.id" placeholder="id">
+                    <label class="control-label">标题：</label>
+                    <input type="text" class="form-control" ng-model="dc.condition.title" placeholder="标题">
+
+                </div>
+                <p class="text-right">
+                    <a class="btn btn-primary submit" ng-click="dc.findActivities()">查询</a>
+                    <a class="btn btn-primary submit" ng-click="open()">添加活动</a>
+                </p>
+            </div>
+
+            <div class="gridStyle" ng-grid="gridOptions"></div>
+        </form>
+    </div>
+
+
+
+    <script type="text/ng-template" id="activityModalContent.html">
+        <div class="modal-header">
+            <button aria-hidden="true" data-dismiss="modal" class="close" type="button" ng-click="cancel()">×</button>
+            <h4 id="activityModalLabel" class="modal-title">活动</h4>
+        </div>
+        <form role="form" ng-submit="ok()">
+            <div class="modal-body">
+                <label class="control-label">活动标题：</label>
+                <input class="form-control" type="text" name="title" required
+                       ng-model="row.title">
+                <label class="control-label">开始时间：</label>
+                <input  required ui-date  ng-model="row.beginTime" >
+                <label class="control-label">结束时间：</label>
+                <input  required ui-date  ng-model="row.endTime" >
+                <label class="control-label">活动状态：</label>
+                <select class="form-control" ng-model="row.status"
+                        ng-options="item.key as item.value for item in constant.status" required>
+                </select>
+                <label class="control-label">应用场景：</label>
+                <select class="form-control" ng-model="row.scene"
+                        ng-options="item.key as item.value for item in constant.scenes" required>
+                </select>
+                <label class="control-label">图片名称：</label>
+                <input class="form-control" type="text" name="image" required
+                       ng-model="row.image">
+                <label class="control-label">html5名称：</label>
+                <input class="form-control" type="text" name="url" required
+                       ng-model="row.url">
+                <input class="form-control" type="hidden" name="validTime"
+                       ng-model="row.ruleId">
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">确定</button>
+                <button type="button" class="btn btn-warning" ng-click="cancel()">取消</button>
+            </div>
+        </form>
+
+    </script>
+
+    <script type="text/ng-template" id="obtainRuleModalContent.html">
+        <div class="modal-header">
+            <button aria-hidden="true" data-dismiss="modal" class="close" type="button" ng-click="cancel()">×</button>
+            <h4 id="obtainRuleModalLabel" class="modal-title">活动维护</h4>
+        </div>
+        <div>
+            <ul class="nav nav-tabs" ng-init="vm.activeTab=1">
+                <li ng-class="{active: vm.activeTab == 1}"><a href="javascript:;" ng-click="vm.activeTab = 1">获取规则</a></li>
+            </ul>
+            <div class="tab-content tab-bordered">
+                <div class="tab-panel" ng-show="vm.activeTab == 1">
+                    <p class="text-right">
+                        <a class="btn btn-primary submit" ng-click="queryrule()">查询</a>
+                        <a class="btn btn-primary submit" ng-click="addrule()">添加</a>
+                    </p>
+
+                    <div class="gridStyle-little" ng-grid="gridOptions"></div>
+                    <form role="form" ng-submit="okRule()">
+                        <div class="modal-body">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <label class="control-label">奖励类型：</label>
+                                        <select class="form-control" ng-model="rule.rewardType"
+                                                ng-options="item.key as item.value for item in ruleConstant.rewardTypes" required>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <label class="control-label">规则状态：</label>
+                                        <select class="form-control" ng-model="rule.status"
+                                                ng-options="item.key as item.value for item in ruleConstant.status" required>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="control-label">应发奖励：</label>
+                                        <input class="form-control" type="text" name="limitTime" required
+                                               ng-model="rule.shouldReward">
+                                    </td>
+                                    <td>
+                                        <label class="control-label">实发奖励：</label>
+                                        <input class="form-control" type="text" name="limitTime" required
+                                               ng-model="rule.realReward">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="control-label">到账实效：</label>
+                                        <select class="form-control" ng-model="rule.effectTime"
+                                                ng-options="item.key as item.value for item in ruleConstant.effectTimes">
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <label class="control-label">有效时长：</label>
+                                        <select class="form-control" ng-model="rule.validTime"
+                                                ng-options="item.key as item.value for item in ruleConstant.validTimes">
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="control-label">是否推荐人：</label>
+                                        <select class="form-control" ng-model="rule.inviter"
+                                                ng-options="item.key as item.value for item in ruleConstant.isInviters" required>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                            <input class="form-control" type="hidden" name="activityId"
+                                   ng-model="activityId">
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">确定</button>
+                                <button type="button" class="btn btn-warning" ng-click="cancel()">取消</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </script>
+</div>
