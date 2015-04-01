@@ -3,7 +3,7 @@
         <ul class="nav in" id="side-menu">
             <sidebar-search></sidebar-search>
             <li ng-repeat="menu1 in mc.user.menuVo.menuVos" ng-class="{active: mc.collapseVar==menu1.id}">
-                <a href="" ng-click="mc.check(menu1.id)"><i class="fa fa-wrench fa-fw"></i>
+                <a href="" ng-click="mc.check(menu1.id)">
                     <span ng-bind="menu1.name"></span>
                     <span class="fa arrow"></span>
                 </a>
