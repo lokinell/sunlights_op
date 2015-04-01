@@ -752,4 +752,19 @@ angular
                     }
                 }
             })
+            .state('dashboard.customer', {
+                templateUrl: 'views/customer/customer.html',
+                url: '/customer',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/customerService.js',
+                                'scripts/controllers/customerCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
     }]);

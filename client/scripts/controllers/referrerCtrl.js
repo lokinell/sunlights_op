@@ -90,7 +90,7 @@
                         displayName: "注册姓名"
                     },
                     {
-                        field: "createTime",
+                        field: "registrationDate",
                         displayName: "注册时间",
                         cellFilter: 'date:"yyyy-MM-dd HH:mm"'
                     },
