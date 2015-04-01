@@ -1,0 +1,140 @@
+<div class="row" ng-controller="CustomerCtrl as cl">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a ui-sref="dashboard.customer">客户管理</a></li>
+            <li class="active">客户信息</li>
+        </ol>
+    </div>
+    <div class="row">
+        <form class="form-inline col-md-12" role="form">
+            <div>
+                <p class="text-right">
+                    <label class="control-label">手机号：</label>
+                    <input type="text" class="form-control" ng-model="cl.pager.filter.EQS_telephone"
+                           placeholder="手机号">
+                    <a class="btn btn-primary submit" ng-click="cl.search()">查询</a>
+                </p>
+            </div>
+            用户基本信息查询
+            <hr>
+        </form>
+    </div>
+
+    <tabset>
+        <tab heading="用户基本信息" select="cl.findCustomerByMobile()" ng-click="cl.tabIndex = 1">
+            <div class="row col-md-12">
+                <div class=" col-md-12">
+
+                </div>
+            </div>
+            <div class="row col-md-12">
+                <div class=" col-md-6">
+                    <form class="form-horizontal col-md-12" role="form">
+                        个人资料
+                        <hr>
+                        <div class="row col-md-12">
+                            <label class="control-label">姓名：</label>
+                            <span ng-bind="cl.customer.userName"></span>
+                        </div>
+                        <div class="row col-md-12">
+                            <label class="control-label">手机号：</label>
+                            <span ng-bind="cl.customer.mobilePhoneNo"></span>
+                        </div>
+                        <div class="row col-md-12">
+                            <label class="control-label">状态：</label>
+                            <span ng-bind="cl.customer.status"></span>
+                        </div>
+                        <div class="row col-md-12">
+                            <label class="control-label">身份证号：</label>
+                            <span ng-bind="cl.customer.idCardNo"></span>
+                        </div>
+                        <div class="row col-md-12">
+                            <label class="control-label">注册邮箱：</label>
+                            <span ng-bind="cl.customer.email"></span>
+                        </div>
+                    </form>
+                </div>
+                <div class=" col-md-6">
+                    <form class="form-horizontal col-md-12" role="form">
+                        个人头像
+                        <hr>
+                        登陆信息
+                        <hr>
+                        <div class="row col-md-12">
+                            <label class="control-label">上次登陆时间：</label>
+
+                            <span ng-bind="cl.customer.loginTime | date:'yyyy-MM-dd HH:mm:ss'"></span>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+            <div class="row col-md-12">
+                <div class=" col-md-6">
+                    <form class="form-horizontal col-md-12" role="form">
+
+                        开户信息
+                        <hr>
+                        <div class="row col-md-12">
+                            <label class="control-label">注册时间：</label>
+                            <span ng-bind="cl.customer.registrationDate | date:'yyyy-MM-dd '"></span>
+                        </div>
+                        <div class="row col-md-12">
+                            <label class="control-label">开户时间：</label>
+                            <span ng-bind="cl.customer.accountCreateTime | date:'yyyy-MM-dd'"></span>
+                        </div>
+                        <div class="row col-md-12">
+                            <label class="control-label">首次购买时间：</label>
+                            <span ng-bind="cl.customer.purchaserDate | date:'yyyy-MM-dd HH:mm:ss'"></span>
+                        </div>
+                        <div class="row col-md-12">
+                            <label class="control-label">银行卡数：</label>
+                            <span ng-bind="cl.customer.bankCardCount"></span>
+                        </div>
+
+                    </form>
+                </div>
+                <div class=" col-md-6">
+                    <form class="form-horizontal col-md-12" role="form">
+
+                        推荐人信息
+                        <hr>
+                        <div class="row col-md-12">
+                            <label class="control-label">推荐人：</label>
+                            <span ng-bind="cl.customer.referrer"></span>
+                        </div>
+                        <div class="row col-md-12">
+                            <label class="control-label">推荐人手机：</label>
+                            <span ng-bind="cl.customer.referrerMobile"></span>
+                        </div>
+                        <div class="row col-md-12">
+                            <label class="control-label">成功推荐人数：</label>
+                            <span ng-bind="cl.customer.bankCardCount"></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row col-md-12">
+
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        绑定银行卡信息
+                        <hr>
+                        <div class="well well-lg">
+                            <div class="gridStyle" ng-grid="bankCardOptions" ng-page-changed="cl.findBankCards()"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </tab>
+        <tab heading="成功推荐人信息" select="cl.findReferrerDetails()" ng-click="cl.tabIndex = 2">
+            <div class="well well-lg">
+                <div class="gridStyle" ng-grid="referrerDetailOptions" ng-page-changed="cl.findReferrerDetails()"></div>
+            </div>
+        </tab>
+    </tabset>
+
+
+</div>

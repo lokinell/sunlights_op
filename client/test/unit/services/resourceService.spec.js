@@ -24,7 +24,7 @@
             {"name": "参数管理", "code": "system:dict", "seqNo": "7", "parentId": 2, "type": "menu", "uri": "dashboard.parameter", "createTime": 1422422629902, "updateTime": 1422422631476, "deleted": false},
             {"name": "短信统计", "code": "message:sms", "seqNo": "1", "parentId": 3, "type": "menu", "uri": "dashboard.sms", "createTime": 1422422629902, "updateTime": 1422422631476, "deleted": false},
             {"name": "群组管理", "code": "message:group", "seqNo": "2", "parentId": 3, "type": "menu", "uri": "dashboard.group", "createTime": 1422422629902, "updateTime": 1422422631476, "deleted": false},
-            {"name": "消息规则", "code": "message:role", "seqNo": "3", "parentId": 3, "type": "menu", "uri": "dashboard.messageRole", "createTime": 1422422629902, "updateTime": 1422422631476, "deleted": false},
+            {"name": "消息规则", "code": "message:role", "seqNo": "3", "parentId": 3, "type": "menu", "uri": "dashboard.messageRule", "createTime": 1422422629902, "updateTime": 1422422631476, "deleted": false},
             {"name": "消息推送计划配置", "code": "message:config", "seqNo": "4", "parentId": 3, "type": "menu", "uri": "dashboard.messageConfig", "createTime": 1422422629902, "updateTime": 1422422631476, "deleted": false},
             {"name": "规则与活动映射管理", "code": "message:mapping", "seqNo": "5", "parentId": 3, "type": "menu", "uri": "dashboard.messageMapping", "createTime": 1422422629902, "updateTime": 1422422631476, "deleted": false},
             {"name": "产品信息", "code": "product:management", "seqNo": "1", "parentId": 4, "type": "menu", "uri": "dashboard.product", "createTime": 1422422629902, "updateTime": 1422422631476, "deleted": false},

@@ -21,12 +21,20 @@ You are now ready to go, your applcation is available at **http://127.0.0.1:3000
 When you are ready to build a production release there is a task for that:
 
     $ gulp serve:dist
+    
+ uat环境打包命令:
+    
+    $ gulp uat:dist
+    
+ dev环境打包命令:
+        
+    $ gulp dev:dist
 
 This task will lint your code, optimize css js and images files, run unit tests. After the task has successfully finished, you can find an optimized version of your project inside the  `/build/dist` folder.
 
 ### Features
 
-* 5 simple task: `gulp serve`,`gulp serve:dist`, `gulp serve:tdd`, `gulp test:unit`, `gulp test:e2e`
+* 7 simple task: `gulp serve`,`gulp serve:dist`, `gulp serve:tdd`, `gulp test:unit`, `gulp test:e2e`,`gulp dev:dist`,`gulp uat:dist`
 * JavaScript file continuous linting with `jshint`.
 * SASS continuous compiling.
 * `Unit` and `e2e` testing support. (for `e2e` testing you need to have a java runtine installed, take a look at [selenium JavaScript api ](http://selenium.googlecode.com/git/docs/api/javascript/index.html) and [protractor](https://github.com/angular/protractor) for more informations.

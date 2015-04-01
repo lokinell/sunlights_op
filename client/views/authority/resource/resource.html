@@ -1,10 +1,6 @@
 <div class="row" ng-controller="ResourceCtrl as rc">
 
     <div class="row">
-        <h1>
-            资源管理
-        </h1>
-        <hr>
         <ol class="breadcrumb">
             <li><a ui-sref="dashboard.user">权限管理</a></li>
             <li class="active">资源管理</li>
@@ -21,10 +17,6 @@
             <div class="form-group">
                 <label class="control-label">名称：</label>
                 <input type="text" ng-enter="rc.findResources()" class="form-control" ng-model="rc.pager.filter.LIKES_name" placeholder="名称">
-                <label class="control-label">代码：</label>
-                <input type="text" ng-enter="rc.findResources()" class="form-control" ng-model="rc.pager.filter.LIKES_code" placeholder="代码">
-                <label class="control-label">相对路径：</label>
-                <input type="text" ng-enter="rc.findResources()" class="form-control" ng-model="rc.pager.filter.LIKES_uri" placeholder="相对路径">
             </div>
 
             <div>
