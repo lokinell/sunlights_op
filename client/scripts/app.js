@@ -600,7 +600,7 @@ angular
             })
             .state('dashboard.messageRule', {
                 templateUrl: 'views/messagerule/messageRule.html',
-                url: '/messagerule',
+                url: '/messagerules',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
