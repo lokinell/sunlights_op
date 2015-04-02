@@ -99,11 +99,11 @@
       return this.$scope.openRule(true);
     };
 
-    MessageRuleMappingCtrl.prototype.delect = function(row) {
-      this.$log.debug("delect()");
-      return this.MessageRuleMappingService.delect(row).then((function(_this) {
+    MessageRuleMappingCtrl.prototype.delete = function(row) {
+      this.$log.debug("delete()");
+      return this.MessageRuleMappingService.delete(row).then((function(_this) {
         return function(data) {
-          _this.$log.debug("delect MessagePushMapping successfully");
+          _this.$log.debug("delete MessagePushMapping successfully");
           return window.parent.location.reload();
         };
       })(this), (function(_this) {

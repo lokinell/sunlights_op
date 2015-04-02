@@ -1,4 +1,4 @@
-<div class="row" ng-controller="MessagePushCtrl as dc" ng-init="dc.messpushconfigidData();dc.messpushgroupidData()" >
+<div class="row" ng-controller="MessageRuleCtrl as dc" ng-init="dc.configurationData();dc.groupData()" >
 
     <div class="row">
         <h1>
@@ -66,7 +66,7 @@
                         <label class="control-label">展示内容：</label>
                     </td>
                     <td>
-                        <textarea class="form-control" name="content" ng-model="dc.dict.content" />
+                        <textarea class="form-control" name="content" ng-model="dc.dict.content" ng-required="dc.dict.msgcenterind === 'Y'"/>
                     </td>
 
                 </tr>
@@ -191,7 +191,7 @@
                 <tr>
                     <td colspan="14" align="right">
                         <button type="submit" class="btn btn-success" >确定</button>
-                        <a href="/#/messpush" class="btn btn-warning">取消</a>
+                        <a ui-sref="dashboard.messageRule" class="btn btn-warning">取消</a>
                     </td>
                 </tr>
             </table>

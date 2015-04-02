@@ -90,14 +90,14 @@
       this.$log.debug("updateMessPush()");
       this.dict = dict;
       this.$rootScope.dict = this.dict;
-      return this.$location.path("/messpushconfig/update");
+      return this.$location.path("/dashboard/messageConfig/update");
     };
 
     MessagePushConfigCtrl.prototype.createMessPush = function() {
       this.$log.debug("createMessPush()");
       this.dict.status = "Y";
       this.$rootScope.dict = this.dict;
-      return this.$location.path("/messpushconfig/save");
+      return this.$location.path("/dashboard/messageConfig/save");
     };
 
     MessagePushConfigCtrl.prototype.saveMessPush = function() {
@@ -105,7 +105,7 @@
       return this.MessagePushConfigService.saveMessPush(this.dict).then((function(_this) {
         return function(data) {
           _this.$log.debug("save messpushconfig successfully");
-          return _this.$location.path("/messpushconfig");
+          return _this.$location.path("/dashboard/messageConfig");
         };
       })(this), (function(_this) {
         return function(error) {
@@ -120,7 +120,7 @@
       return this.MessagePushConfigService.modifyMessPush(this.dict).then((function(_this) {
         return function(data) {
           _this.$log.debug("modify messpushconfig successfully");
-          return _this.$location.path("/messpushconfig");
+          return _this.$location.path("/dashboard/messageConfig");
         };
       })(this), (function(_this) {
         return function(error) {

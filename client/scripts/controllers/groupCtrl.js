@@ -117,10 +117,10 @@
       }
       this.$log.debug("delete group");
       this.$log.debug(row);
-      return this.GroupService["delete"](row).then((function(_this) {
+      return this.GroupService.delete(row).then((function(_this) {
         return function(data) {
           _this.$log.debug("successfully delete group");
-          return _this.findGroups();
+          return window.parent.location.reload();
         };
       })(this), (function(_this) {
         return function(error) {
@@ -134,9 +134,9 @@
       this.$log.debug("GroupService findGroups");
       return this.GroupService.findGroups(this.pager).then((function(_this) {
         return function(data) {
-          _this.$log.debug("Promise returned " + data.value.list.length + " Groups");
-          _this.groups = data.value.list;
-          return _this.pager.count = data.value.count;
+          _this.$log.debug("Promise returned " + data.list.length + " Groups");
+          _this.groups = data.list;
+          return _this.pager.count = data.count;
         };
       })(this), (function(_this) {
         return function(error) {
@@ -152,7 +152,7 @@
       this.group = row;
       this.groupCustomerPager.filter.groupId = row.id;
       this.$rootScope.group = this.group;
-      return this.$location.path("/group/config");
+      return this.$location.path("/dashboard/group/config");
     };
 
     GroupCtrl.prototype.findCustomers = function() {
@@ -184,7 +184,7 @@
       return this.GroupService.addCustomers(this.groupCustomerPager).then((function(_this) {
         return function(data) {
           _this.$log.debug("successfully add group customers");
-          return _this.$location.path("/group");
+          return _this.$location.path("/dashboard/group");
         };
       })(this), (function(_this) {
         return function(error) {
@@ -206,6 +206,7 @@
     $scope.ok = function() {
       GroupService.save($scope.row);
       $modalInstance.close($scope.row);
+      return window.parent.location.reload();
     };
     return $scope.cancel = function() {
       return $modalInstance.dismiss("cancel");

@@ -100,8 +100,8 @@
         return function(isEditing) {
           var modalInstance;
           modalInstance = _this.$modal.open({
-            templateUrl: "messageRuleModel.html",
-            controller: "MessageRuleModalCtrl",
+            templateUrl: "messagePushModel.html",
+            controller: "MessagePushModalCtrl",
             resolve: {
               selectedRow: function() {
                 if (isEditing) {
@@ -153,14 +153,15 @@
       this.$log.debug("updateMessPush()");
       this.dict = dict;
       this.$rootScope.dict = this.dict;
-      return this.$location.path("/messpush/update");
+      return this.$location.path("/dashboard/messagerule/update");
     };
 
     MessageRuleCtrl.prototype.createMessPush = function() {
       this.$log.debug("createMessPush()");
       this.dict.status = "Y";
+      this.dict.stayDayInd = 'N';
       this.$rootScope.dict = this.dict;
-      return this.$location.path("/messpush/save");
+      return this.$location.path("/dashboard/messagerule/save");
     };
 
     MessageRuleCtrl.prototype.saveMessPush = function() {
@@ -168,7 +169,7 @@
       return this.MessageRuleService.saveMessPush(this.dict).then((function(_this) {
         return function(data) {
           _this.$log.debug("save MessPush successfully");
-          return _this.$location.path("/messpush");
+          return _this.$location.path("/dashboard/messagerule");
         };
       })(this), (function(_this) {
         return function(error) {
@@ -183,7 +184,7 @@
       return this.MessageRuleService.modifyMessPush(this.dict).then((function(_this) {
         return function(data) {
           _this.$log.debug("modify MessagePushService successfully");
-          return _this.$location.path("/messpush");
+          return _this.$location.path("/dashboard/messagerule");
         };
       })(this), (function(_this) {
         return function(error) {
@@ -193,23 +194,23 @@
       })(this));
     };
 
-    MessageRuleCtrl.prototype.messpushconfigidData = function() {
-      return this.MessageRuleService.messpushconfigidData().then((function(_this) {
+    MessageRuleCtrl.prototype.configurationData = function() {
+      return this.MessageRuleService.configurationData().then((function(_this) {
         return function(data) {
           _this.$log.debug(data);
           _this.$scope.constant.messpushconfigid = data;
-          return _this.$log.info("Successfully find messpushconfigidData:" + data);
+          return _this.$log.info("Successfully find configurationData:" + data);
         };
       })(this), (function(_this) {
         return function(error) {
-          _this.$log.error("Unable to get messpushconfigid: " + error);
+          _this.$log.error("Unable to get configurationData: " + error);
           return _this.error = error;
         };
       })(this));
     };
 
-    MessageRuleCtrl.prototype.messpushgroupidData = function() {
-      return this.MessageRuleService.messpushgroupidData().then((function(_this) {
+    MessageRuleCtrl.prototype.groupData = function() {
+      return this.MessageRuleService.groupData().then((function(_this) {
         return function(data) {
           _this.$log.debug(data);
           _this.$scope.constant.groupid = data;
@@ -248,7 +249,7 @@
 
   angular.module("sbAdminApp").controller('MessageRuleCtrl', MessageRuleCtrl);
 
-  angular.module("sbAdminApp").controller("MessageRuleModalCtrl", function($scope, $log, $location, $modalInstance, selectedRow, MessagePushService) {
+  angular.module("sbAdminApp").controller("MessagePushModalCtrl", function($scope, $log, $location, $modalInstance, selectedRow, MessageRuleService) {
     this.$log = $log;
     $scope.myVar = false;
     $scope.myVar1 = true;
@@ -257,7 +258,7 @@
     $scope.row = angular.fromJson(selectedRow);
     this.$log.debug("this is ----:" + $scope.row);
     $scope.ok = function() {
-      return MessagePushService.AddToMessPushTxn($scope.row).then((function(_this) {
+      return MessageRuleService.AddToMessPushTxn($scope.row).then((function(_this) {
         return function(data) {
           $scope.messagePushVo = data.value;
           _this.error = {
@@ -286,7 +287,7 @@
     };
     return $scope.immediatelyPush = function() {
       $scope.toggle2();
-      return MessagePushService.immediatelyPush($scope.messagePushVo).then((function(_this) {
+      return MessageRuleService.immediatelyPush($scope.messagePushVo).then((function(_this) {
         return function(data) {
           return _this.error = {
             message: {

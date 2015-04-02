@@ -39,11 +39,11 @@
       return deferred.promise;
     };
 
-    GroupService.prototype["delete"] = function(group) {
+    GroupService.prototype.delete = function(group) {
       var deferred;
       this.$log.debug("deleteGroup " + (angular.toJson(group, true)));
       deferred = this.$q.defer();
-      this.   this.$http({
+      this.$http({
         method: 'DELETE',
         url: baseUrl + '/group',
         params: group
@@ -83,11 +83,11 @@
       var deferred;
       this.$log.info("findCustomers " + (angular.toJson(pager, true)));
       deferred = this.$q.defer();
-      this.$http.get(baseUrl + '/group/customers', {
-        headers: {
-          'params': encodeURIComponent(angular.toJson(pager))
-        }
-      }).success((function(_this) {
+      this.$http.get(baseUrl + '/group/customers',{
+            headers: {
+                'params': encodeURIComponent(angular.toJson(pager))
+            }
+        }).success((function(_this) {
         return function(data, status, headers) {
           _this.$log.info("Successfully find customers - status " + status);
           return deferred.resolve(data);
@@ -105,7 +105,7 @@
       var deferred;
       this.$log.debug("addCustomers " + (angular.toJson(pager, true)));
       deferred = this.$q.defer();
-      this.$http.post("/group/customer", pager).success((function(_this) {
+      this.$http.post(baseUrl + "/group/customer", pager).success((function(_this) {
         return function(data, status, headers) {
           _this.$log.info("Successfully add group customers - status " + status);
           return deferred.resolve(data);

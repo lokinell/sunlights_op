@@ -22,7 +22,7 @@
       var deferred;
       this.$log.debug("MessagePushService()");
       deferred = this.$q.defer();
-      this.$http.post("/querymessconfig", pager).success((function(_this) {
+      this.$http.get(baseUrl + "/message/configs", pager).success((function(_this) {
         return function(data, status, headers) {
           _this.$log.info("Successfully find MessagePush - status " + status);
           return deferred.resolve(data);
@@ -40,7 +40,7 @@
       var deferred;
       this.$log.debug("saveMessPush " + (angular.toJson(MessPushVo, true)));
       deferred = this.$q.defer();
-      this.$http.post("/querymessconfig/save", MessPushVo).success((function(_this) {
+      this.$http.post(baseUrl + "/message/config", MessPushVo).success((function(_this) {
         return function(data, status, headers) {
           _this.$log.info("Successfully saveMessPush - status " + status);
           return deferred.resolve(data);
@@ -58,7 +58,7 @@
       var deferred;
       this.$log.debug("modifyMessPush " + (angular.toJson(MessPushVo, true)));
       deferred = this.$q.defer();
-      this.$http.post("/querymessconfig/update", MessPushVo).success((function(_this) {
+      this.$http.put(baseUrl + "/message/config", MessPushVo).success((function(_this) {
         return function(data, status, headers) {
           _this.$log.info("Successfully save MessPush - status " + status);
           return deferred.resolve(data);

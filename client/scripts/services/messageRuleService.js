@@ -22,7 +22,7 @@
       var deferred;
       this.$log.debug("MessageRuleService()");
       deferred = this.$q.defer();
-      this.$http.get(baseUrl + '/messagerule', {
+      this.$http.get(baseUrl + '/messagerules', {
         headers: {
           'params': encodeURIComponent(angular.toJson(pager))
         }
@@ -44,7 +44,7 @@
       var deferred;
       this.$log.debug("saveMessPush " + (angular.toJson(MessPushVo, true)));
       deferred = this.$q.defer();
-      this.$http.post("/querymesspush/save", MessPushVo).success((function(_this) {
+      this.$http.post(baseUrl + "/messagerule", MessPushVo).success((function(_this) {
         return function(data, status, headers) {
           _this.$log.info("Successfully saveMessPush - status " + status);
           return deferred.resolve(data);
@@ -62,7 +62,7 @@
       var deferred;
       this.$log.debug("modifyMessPush " + (angular.toJson(MessPushVo, true)));
       deferred = this.$q.defer();
-      this.$http.post("/querymesspush/update", MessPushVo).success((function(_this) {
+      this.$http.put(baseUrl + "/messagerule", MessPushVo).success((function(_this) {
         return function(data, status, headers) {
           _this.$log.info("Successfully save MessPush - status " + status);
           return deferred.resolve(data);
@@ -76,45 +76,47 @@
       return deferred.promise;
     };
 
-    MessageRuleService.prototype.messpushconfigidData = function() {
+    MessageRuleService.prototype.configurationData = function() {
       var deferred;
       deferred = this.$q.defer();
-      this.$http.post("/querymesspush/getmesspushid").success((function(_this) {
-        return function(data, status, headers) {
-          _this.$log.info("Successfully find messpushconfigidData - status " + status);
-          return deferred.resolve(data);
-        };
-      })(this)).error((function(_this) {
-        return function(data, status, headers) {
-          _this.$log.error("Failed to find messpushconfigidData - status " + status);
-          return deferred.reject(data);
-        };
-      })(this));
-      return deferred.promise;
+        this.$http.get(baseUrl + '/messagerule/configrations')
+            .success((function (_this) {
+            return function (data, status, headers) {
+                _this.$log.info("Successfully find configrations - status " + status);
+                return deferred.resolve(data);
+            };
+        })(this)).error((function (_this) {
+            return function (data, status, headers) {
+                _this.$log.error("Failed to find configrations - status " + status);
+                return deferred.reject(data);
+            };
+        })(this));
+        return deferred.promise;
     };
 
-    MessageRuleService.prototype.messpushgroupidData = function() {
+    MessageRuleService.prototype.groupData = function() {
       var deferred;
       deferred = this.$q.defer();
-      this.$http.post("/querymesspush/getmesspushgroup").success((function(_this) {
-        return function(data, status, headers) {
-          _this.$log.info("Successfully find messpushgroupidData - status " + status);
-          return deferred.resolve(data);
-        };
-      })(this)).error((function(_this) {
-        return function(data, status, headers) {
-          _this.$log.error("Failed to find messpushgroupidData - status " + status);
-          return deferred.reject(data);
-        };
-      })(this));
-      return deferred.promise;
+        this.$http.get(baseUrl + '/messagerule/groups')
+            .success((function (_this) {
+                return function (data, status, headers) {
+                    _this.$log.info("Successfully find groups - status " + status);
+                    return deferred.resolve(data);
+                };
+            })(this)).error((function (_this) {
+                return function (data, status, headers) {
+                    _this.$log.error("Failed to find groups - status " + status);
+                    return deferred.reject(data);
+                };
+            })(this));
+        return deferred.promise;
     };
 
     MessageRuleService.prototype.AddToMessPushTxn = function(MessPushVo) {
       var deferred;
-      this.$log.debug("AddToMessPushTxn11 " + (angular.toJson(MessPushVo, true)));
+      this.$log.debug("AddToMessPushTxn " + (angular.toJson(MessPushVo, true)));
       deferred = this.$q.defer();
-      this.$http.post("/querymesspush/insertToMessPushTxn", MessPushVo).success((function(_this) {
+      this.$http.post(baseUrl + "/messagerule/txn", MessPushVo).success((function(_this) {
         return function(data, status, headers) {
           _this.$log.info("Successfully AddToMessPushTxn - status " + status);
           return deferred.resolve(data);
@@ -132,7 +134,7 @@
       var deferred;
       this.$log.debug("immediatelyPush " + (angular.toJson(MessPushVo, true)));
       deferred = this.$q.defer();
-      this.$http.post("/querymesspush/immediately", MessPushVo).success((function(_this) {
+      this.$http.post(baseUrl + "/messagerule/immediately", MessPushVo).success((function(_this) {
         return function(data, status, headers) {
           _this.$log.info("Successfully immediatelyPush - status " + status + " - - " + data);
           return deferred.resolve(data);
