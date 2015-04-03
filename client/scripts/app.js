@@ -231,13 +231,11 @@ angular
             .state('dashboard.tasks', {
                 templateUrl: 'views/tasks/index.html',
                 url: '/tasks',
-                controller: 'TaskCtrl',
                 resolve: {
                     loadMyFiles: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
-                                'scripts/directives/paging/ngPageChanged.js',
                                 'scripts/services/taskService.js',
                                 'scripts/controllers/taskCtrl.js'
                             ]
@@ -248,13 +246,11 @@ angular
           .state('dashboard.tasksSave', {
             templateUrl: 'views/tasks/save.html',
             url: '/tasks/save',
-            controller: 'TaskCtrl',
             resolve: {
               loadMyFiles: function ($ocLazyLoad) {
                 return $ocLazyLoad.load({
                   name: 'sbAdminApp',
                   files: [
-                    'scripts/directives/paging/ngPageChanged.js',
                     'scripts/services/taskService.js',
                     'scripts/controllers/taskCtrl.js'
                   ]
