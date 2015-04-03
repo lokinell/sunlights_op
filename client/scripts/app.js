@@ -19,27 +19,8 @@ angular
         'ui.bootstrap.datetimepicker',
         'angularFileUpload'
     ])
-    .run(function($rootScope, $window, $location) {
-        $rootScope.$on("$locationChangeStart", function(event, next, current) {
-            console.info('$locationChangeStart--:');
-            if (next.indexOf("reset") > -1) {
-                return $location.path("reset");
-            }
 
-            var user = localStorage.getItem("user");
-
-            if (!user) {
-
-                $location.path('/login');
-                console.log('未登入--: ' + $rootScope.originalUrl);
-                return;
-            } else {
-                //已登录
-                console.log('已登入--: ' + $rootScope.originalUrl);
-            }
-        });
-    })
-    .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
         $ocLazyLoadProvider.config({
             debug: false,
@@ -53,7 +34,7 @@ angular
                 url: '/dashboard',
                 templateUrl: 'views/dashboard/main.html',
                 resolve: {
-                    loadMyDirectives: function($ocLazyLoad) {
+                    loadMyDirectives: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -73,7 +54,7 @@ angular
                 controller: 'MainCtrl as mc',
                 templateUrl: 'views/dashboard/home.html',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -95,11 +76,15 @@ angular
                 templateUrl: 'views/pages/blank.html',
                 url: '/blank'
             })
+            .state('dashboard.permission', {
+                templateUrl: 'views/pages/permission.html',
+                url: '/permission'
+            })
             .state('login', {
                 templateUrl: 'views/pages/login.html',
                 url: '/login',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -114,7 +99,7 @@ angular
                 templateUrl: 'views/pages/password.html',
                 url: '/reset',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -157,7 +142,7 @@ angular
                 templateUrl: 'views/verifyCode/verifyCode.html',
                 url: '/verifyCode',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -172,7 +157,7 @@ angular
                 templateUrl: 'views/dict/dict.html',
                 url: '/dict',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -187,7 +172,7 @@ angular
                 templateUrl: 'views/dict/save.html',
                 url: '/dict/save',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -202,7 +187,7 @@ angular
                 templateUrl: 'views/parameter/parameter.html',
                 url: '/parameter',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -217,7 +202,7 @@ angular
                 templateUrl: 'views/parameter/save.html',
                 url: '/parameter/save',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -232,7 +217,7 @@ angular
                 templateUrl: 'views/tasks/index.html',
                 url: '/tasks',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -243,27 +228,27 @@ angular
                     }
                 }
             })
-          .state('dashboard.tasksSave', {
-            templateUrl: 'views/tasks/save.html',
-            url: '/tasks/save',
-            resolve: {
-              loadMyFiles: function ($ocLazyLoad) {
-                return $ocLazyLoad.load({
-                  name: 'sbAdminApp',
-                  files: [
-                    'scripts/services/taskService.js',
-                    'scripts/controllers/taskCtrl.js'
-                  ]
-                })
-              }
-            }
-          })
-          .state('dashboard.fundcompanies', {
+            .state('dashboard.tasksSave', {
+                templateUrl: 'views/tasks/save.html',
+                url: '/tasks/save',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/services/taskService.js',
+                                'scripts/controllers/taskCtrl.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.fundcompanies', {
                 templateUrl: 'views/fundcompanies/index.html',
                 url: '/fundcompanies',
                 controller: 'CompanyCtrl',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -279,7 +264,7 @@ angular
                 templateUrl: 'views/fund/fund.html',
                 url: '/fund',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -297,7 +282,7 @@ angular
                 templateUrl: 'views/fund/save.html',
                 url: '/fund/save',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -315,7 +300,7 @@ angular
                 templateUrl: 'views/product/product.html',
                 url: '/product',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -333,7 +318,7 @@ angular
                 templateUrl: 'views/product/save.html',
                 url: '/product/save',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -351,7 +336,7 @@ angular
                 templateUrl: 'views/authority/resource/resource.html',
                 url: '/resource',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -366,7 +351,7 @@ angular
                 templateUrl: 'views/authority/role/role.html',
                 url: '/role',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -382,7 +367,7 @@ angular
                 templateUrl: 'views/authority/role/save.html',
                 url: '/role/save',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -398,7 +383,7 @@ angular
                 templateUrl: 'views/authority/user/user.html',
                 url: '/user',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -414,7 +399,7 @@ angular
                 templateUrl: 'views/authority/user/save.html',
                 url: '/user/save',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -430,7 +415,7 @@ angular
                 templateUrl: 'views/deposit/deposit.html',
                 url: '/deposit',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -445,7 +430,7 @@ angular
                 templateUrl: 'views/deposit/save.html',
                 url: '/deposit/save',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -460,7 +445,7 @@ angular
                 templateUrl: 'views/bank/bank.html',
                 url: '/bank',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -475,7 +460,7 @@ angular
                 templateUrl: 'views/bank/save.html',
                 url: '/bank/save',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -490,7 +475,7 @@ angular
                 templateUrl: 'views/feedback/feedback.html',
                 url: '/feedback',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -505,7 +490,7 @@ angular
                 templateUrl: 'views/feedback/approve.html',
                 url: '/feedback/approve',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -520,7 +505,7 @@ angular
                 templateUrl: 'views/question/question.html',
                 url: '/question',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -535,7 +520,7 @@ angular
                 templateUrl: 'views/question/save.html',
                 url: '/question/save',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -550,7 +535,7 @@ angular
                 templateUrl: 'views/smsmessage/smsMessage.html',
                 url: '/smsmessage',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -566,7 +551,7 @@ angular
                 templateUrl: 'views/group/group.html',
                 url: '/group',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -582,7 +567,7 @@ angular
                 templateUrl: 'views/group/groupConfig.html',
                 url: '/group/config',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -598,7 +583,7 @@ angular
                 templateUrl: 'views/messagerule/messageRule.html',
                 url: '/messagerules',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -614,7 +599,7 @@ angular
                 templateUrl: 'views/messagerule/save.html',
                 url: '/messagerule/save',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -629,7 +614,7 @@ angular
                 templateUrl: 'views/messagerule/update.html',
                 url: '/messagerule/update',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -644,7 +629,7 @@ angular
                 templateUrl: 'views/messpushconfig/messagePushConfig.html',
                 url: '/messageConfig',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -661,7 +646,7 @@ angular
                 templateUrl: 'views/messpushconfig/save.html',
                 url: '/messageConfig/save',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -678,7 +663,7 @@ angular
                 templateUrl: 'views/messpushconfig/update.html',
                 url: '/messageConfig/update',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -694,7 +679,7 @@ angular
                 templateUrl: 'views/messagemapping/messageMapping.html',
                 url: '/messageMapping',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -710,7 +695,7 @@ angular
                 templateUrl: 'views/reward/exchange.html',
                 url: '/exchange',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -726,7 +711,7 @@ angular
                 templateUrl: 'views/activity/scenes.html',
                 url: '/scene',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -744,7 +729,7 @@ angular
                 templateUrl: 'views/activity/scene_save.html',
                 url: '/activity/scene/save',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -762,7 +747,7 @@ angular
                 templateUrl: 'views/reward/rewardType.html',
                 url: '/rewardType',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -779,7 +764,7 @@ angular
                 templateUrl: 'views/activity/activityShareInfo.html',
                 url: '/share',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -797,7 +782,7 @@ angular
                 templateUrl: 'views/activity/activityList.html',
                 url: '/activity/list',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -816,7 +801,7 @@ angular
                 templateUrl: 'views/reward/exchangeScene.html',
                 url: '/exchangeScene',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -833,7 +818,7 @@ angular
                 templateUrl: 'views/reward/exchangebeanresult.html',
                 url: '/exchangebean',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -849,7 +834,7 @@ angular
                 templateUrl: 'views/activity/activityReturnMsgMgr.html',
                 url: '/activityReturnMsgMgr',
                 resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
+                    loadMyFiles: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'sbAdminApp',
                             files: [
@@ -863,36 +848,36 @@ angular
                     }
                 }
             })
-          .state('dashboard.supplier', {
-            templateUrl: 'views/supplier/suppliers.html',
-            url: '/supplier',
-            resolve: {
-              loadMyFiles: function ($ocLazyLoad) {
-                return $ocLazyLoad.load({
-                  name: 'sbAdminApp',
-                  files: [
-                    'scripts/controllers/supplierCtrl.js',
-                    'scripts/services/supplierService.js'
-                  ]
-                })
-              }
-            }
-          })
-          .state('dashboard.supplierSave', {
-            templateUrl: 'views/supplier/save.html',
-            url: '/supplier/save',
-            resolve: {
-              loadMyFiles: function ($ocLazyLoad) {
-                return $ocLazyLoad.load({
-                  name: 'sbAdminApp',
-                  files: [
-                    'scripts/controllers/supplierCtrl.js',
-                    'scripts/services/supplierService.js'
-                  ]
-                })
-              }
-            }
-          })
+            .state('dashboard.supplier', {
+                templateUrl: 'views/supplier/suppliers.html',
+                url: '/supplier',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/controllers/supplierCtrl.js',
+                                'scripts/services/supplierService.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('dashboard.supplierSave', {
+                templateUrl: 'views/supplier/save.html',
+                url: '/supplier/save',
+                resolve: {
+                    loadMyFiles: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'sbAdminApp',
+                            files: [
+                                'scripts/controllers/supplierCtrl.js',
+                                'scripts/services/supplierService.js'
+                            ]
+                        })
+                    }
+                }
+            })
             .state('dashboard.referrer', {
                 templateUrl: 'views/referrer/referrer.html',
                 url: '/referrer',
@@ -983,4 +968,44 @@ angular
                     }
                 }
             })
-    }]);
+    }])
+    .run(function ($rootScope, $window, $location) {
+        function hasPermission(permissions, state) {
+            var _i;
+            if(!permissions) return false;
+            for (_i = 0; _i <= permissions.length; ++_i) {
+                if (state.indexOf(permissions[_i]) > -1) {
+                    return true;
+                }
+            }
+            return false;
+        };
+
+        $rootScope.$on("$locationChangeStart", function (ev, to, toParams, from, fromParams) {
+            console.info('$locationChangeStart--:');
+            var url = to.split('/').join('.');
+            if (url.indexOf("reset") > -1) {
+                return $location.path("reset");
+            }
+
+            var user = localStorage.getItem("user");
+
+            if (!user) {
+
+                $location.path('/login');
+                console.log('未登入--: ' + $rootScope.originalUrl);
+                return;
+            } else {
+                //已登录
+                console.log('已登入--: ' + $rootScope.originalUrl);
+                var currentUser = angular.fromJson(user);
+                var permissions = currentUser.permissions;
+                if (hasPermission(permissions, url)) {
+                    return;
+                } else {
+                    return $location.path("/dashboard/permission");
+                }
+            }
+
+        });
+    });

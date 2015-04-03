@@ -21,7 +21,7 @@
 
         }
 
-       MainCtrl.prototype.check = function (x) {
+        MainCtrl.prototype.check = function (x) {
             if (x == this.collapseVar)
                 this.collapseVar = 0;
             else
@@ -37,18 +37,12 @@
 
         MainCtrl.prototype.findCurrentUser = function () {
             this.$log.debug("findCurrentUser()");
-            return this.LoginService.findCurrentUser().then((function (_this) {
-                return function (data) {
-                    _this.$log.debug("Promise returned user successfully");
-                    return _this.user = data.value;
-                };
-            })(this), (function (_this) {
-                return function (error) {
-                    _this.$log.error("Unable to get Suppliers: " + error);
-                    _this.error = error;
-                    return _this.$location.path("/login");
-                };
-            })(this));
+            var currentUser = localStorage.getItem("user");
+            if (!currentUser) {
+                this.$location.path('/login');
+            } else {
+                this.user = angular.fromJson(currentUser);
+            }
         };
 
         return MainCtrl;

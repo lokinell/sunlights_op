@@ -113,7 +113,8 @@ gulp.task('html', function() {
 gulp.task('copy:assets', function() {
     return gulp.src(config.assets, {
             dot: true
-        }).pipe(gulp.dest(config.dist + '/assets'))
+        })
+        .pipe(gulp.dest(config.dist + '/assets'))
         .pipe($.size({
             title: 'copy:assets'
         }));
