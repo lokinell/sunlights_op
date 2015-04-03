@@ -153,6 +153,7 @@
                 resourceIds.push(tree.id)
             }
             var items = tree.items;
+            if(!items) return;
             var _i, _len;
             for (_i = 0, _len = items.length; _i < _len; _i++) {
                 this.selectedTree(items[_i], resourceIds);
