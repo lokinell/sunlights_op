@@ -983,7 +983,7 @@ angular
 
         $rootScope.$on("$locationChangeStart", function (ev, to, toParams, from, fromParams) {
             console.info('$locationChangeStart--:');
-            var url = to.split('/').join('.');
+            var url = to;
             if (url.indexOf("reset") > -1) {
                 return $location.path("reset");
             }

@@ -9,7 +9,7 @@
                 </a>
                 <ul class="nav nav-second-level" collapse="mc.collapseVar!=menu1.id">
                     <li ng-repeat="menu2 in menu1.menuVos" ui-sref-active="active">
-                        <a ui-sref="{{ menu2.uri }}" ng-bind="menu2.name"></a>
+                        <a href="{{ menu2.uri }}" ng-bind="menu2.name"></a>
                     </li>
                 </ul>
             </li>
