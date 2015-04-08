@@ -140,11 +140,13 @@
       return this.RoleService.saveRole(this.role).then((function (_this) {
         return function (data) {
           _this.$log.debug("successfully delete role");
+          _this.toaster.pop('success', data.message.summary, data.message.detail);
           return _this.findRoles();
         };
       })(this), (function (_this) {
         return function (error) {
           _this.$log.error("Unable to delete role: " + error);
+          _this.toaster.pop('error', data.message.summary, data.message.detail);
           return _this.error = error;
         };
       })(this));
