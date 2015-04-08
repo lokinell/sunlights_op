@@ -2,7 +2,7 @@
   var RoleCtrl;
 
   RoleCtrl = (function () {
-    function RoleCtrl($scope, $rootScope, $log, $location, RoleService, ResourceService, TreeData) {
+    function RoleCtrl($scope, $rootScope, $log, $location, RoleService, ResourceService, TreeData, toaster) {
       this.$scope = $scope;
       this.$rootScope = $rootScope;
       this.$log = $log;
@@ -10,6 +10,7 @@
       this.RoleService = RoleService;
       this.ResourceService = ResourceService;
       this.TreeData = TreeData;
+      this.toaster = toaster;
       this.$log.debug("constructing RoleCtrl");
       this.roles = [];
       this.role = this.$rootScope.role || {};
