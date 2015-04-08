@@ -2,12 +2,13 @@
   var DictCtrl;
 
   DictCtrl = (function() {
-    function DictCtrl($rootScope, $scope, $log, $location, DictService) {
+    function DictCtrl($rootScope, $scope, $log, $location, DictService, toaster) {
       this.$rootScope = $rootScope;
       this.$scope = $scope;
       this.$log = $log;
       this.$location = $location;
       this.DictService = DictService;
+      this.toaster = toaster;
       this.$log.debug("constructing DictCtrl");
       this.dict = this.$rootScope.dict || {};
       this.$rootScope.dict = {};
@@ -97,11 +98,13 @@
       return this.DictService.saveDict(this.dict).then((function(_this) {
         return function(data) {
           _this.$log.debug("save Dict successfully");
+          _this.toaster.pop('success', data.message.summary, data.message.detail);
           return _this.$location.path("/dashboard/dict");
         };
       })(this), (function(_this) {
         return function(error) {
           _this.$log.error("Unable to save Dict: " + error);
+          _this.toaster.pop('error', error.message.summary, error.message.detail);
           return _this.error = error;
         };
       })(this));
@@ -125,11 +128,13 @@
       return this.DictService.deleteDict(dict).then((function(_this) {
         return function(data) {
           _this.$log.debug("successfully delete dict");
+          _this.toaster.pop('success', data.message.summary, data.message.detail);
           return _this.findDicts();
         };
       })(this), (function(_this) {
         return function(error) {
           _this.$log.error("Unable to delete dict: " + error);
+          _this.toaster.pop('error', data.message.summary, data.message.detail);
           return _this.error = error;
         };
       })(this));
