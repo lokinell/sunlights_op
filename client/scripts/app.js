@@ -729,7 +729,7 @@ angular
       })
       .state('dashboard.scenesave', {
         templateUrl: 'views/activity/scene_save.html',
-        url: '/activity/scene/save',
+        url: '/scene/save',
         resolve: {
           loadMyFiles: function ($ocLazyLoad) {
             return $ocLazyLoad.load({
