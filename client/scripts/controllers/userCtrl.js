@@ -138,7 +138,7 @@
       })(this), (function (_this) {
         return function (error) {
           _this.$log.error("Unable to save user: " + error);
-          _this.toaster.pop('error', data.message.summary, data.message.detail);
+          _this.toaster.pop('error', error.message.summary, error.message.detail);
           return _this.error = error;
         };
       })(this));
