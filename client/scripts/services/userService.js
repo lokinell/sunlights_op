@@ -40,6 +40,24 @@
             return deferred.promise;
         };
 
+        UserService.prototype.findCurrentUser = function () {
+            var deferred;
+            this.$log.debug("find Current User()");
+            deferred = this.$q.defer();
+            this.$http.get(baseUrl + '/user/current').success((function (_this) {
+                return function (data, status, headers) {
+                    _this.$log.info("Successfully find Current User - status " + status);
+                    return deferred.resolve(data);
+                };
+            })(this)).error((function (_this) {
+                return function (data, status, headers) {
+                    _this.$log.error("Failed to find Current User - status " + status);
+                    return deferred.reject(data);
+                };
+            })(this));
+            return deferred.promise;
+        };
+
         UserService.prototype.saveUser = function (user) {
             var deferred;
             this.$log.debug("saveUser " + (angular.toJson(user, true)));

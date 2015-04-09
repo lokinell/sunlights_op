@@ -130,13 +130,13 @@
 
     activitySceneCtrl.prototype.createScene = function() {
       this.$log.debug("createScene()");
-      return this.$location.path("/dashboard/activity/scene/save");
+      return this.$location.path("/dashboard/scene/save");
     };
 
     activitySceneCtrl.prototype.updateScene = function(scene) {
       this.$log.debug("updateScene()");
       this.$rootScope.scene = scene;
-      return this.$location.path("/dashboard/activity/scene/save");
+      return this.$location.path("/dashboard/scene/save");
     };
 
     activitySceneCtrl.prototype.deleteScene = function(scene) {

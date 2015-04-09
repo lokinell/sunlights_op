@@ -1,0 +1,67 @@
+<div class="row" ng-controller="UserCtrl as uc" ng-init="uc.findCurrentUser()">
+
+    <div class="row">
+        <ol class="breadcrumb">
+            <li class="active">用户详情</li>
+        </ol>
+    </div>
+
+    <div class="row">
+
+        <div class="alert alert-danger" ng-show="!!uc.error">
+            <h4 class="alert-heading">操作失败</h4>
+            <span ng-bind="uc.error.message.detail"></span>
+        </div>
+        <span>
+
+        </span>
+        <form class="form-horizontal" user="form" ng-submit="uc.SettingUser()">
+            <div class="row col-md-11 col-padding">
+
+                <label class="col-md-1 col-padding control-label">用户名：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" ng-model="uc.user.username" required>
+                </div>
+                <label class="col-md-1 col-padding control-label">手机：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" ng-model="uc.user.telephone">
+                </div>
+            </div>
+
+
+            <div class="row col-md-11 col-padding">
+
+                <label class="col-md-1 col-padding control-label">姓：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" ng-model="uc.user.lastName">
+                </div>
+                <label class="col-md-1 col-padding control-label">名：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" ng-model="uc.user.firstName">
+                </div>
+            </div>
+            <div class="row col-md-11 col-padding">
+
+                <label class="col-md-1 col-padding control-label">邮箱：</label>
+
+                <div class="col-md-3 col-padding">
+                    <input class="form-control" type="email" ng-model="uc.user.email" required>
+                </div>
+
+            </div>
+
+            <div class="row col-md-11 col-padding text-right">
+                <div class="col-md-2 col-padding col-md-offset-6">
+                    <button type="submit" class="btn btn-success">确定</button>
+                    <a ui-sref="dashboard.home" class="btn btn-warning">取消</a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>

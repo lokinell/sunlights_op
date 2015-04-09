@@ -36,7 +36,7 @@
             value: '分享活动'
           }, {
             key: '4',
-            value: '分享跑p2p产品'
+            value: '分享p2p产品'
           }
         ],
         isRefId: [
