@@ -1,33 +1,52 @@
 <div class="row" ng-controller="UserCtrl as uc">
 
-    <div class="row">
-        <ol class="breadcrumb">
-            <li><a>权限管理</a></li>
-            <li class="active">用户管理</li>
-        </ol>
+  <div class="row">
+    <ol class="breadcrumb">
+      <li><a>权限管理</a></li>
+      <li class="active">用户管理</li>
+    </ol>
+  </div>
+
+  <div class="well well-lg">
+
+    <div class="alert alert-danger" ng-show="!!uc.error">
+      <h4 class="alert-heading">操作失败</h4>
+      <span ng-bind="uc.error.message.detail"></span>
     </div>
+    <form class="form-inline" user="form">
+      <div class="form-group">
+        <label class="control-label">用户名：</label>
+        <input type="text" ng-enter="uc.findUsers()" class="form-control" ng-model="uc.pager.filter.LIKES_username"
+               placeholder="用户名">
+      </div>
 
-    <div class="well well-lg">
+      <div>
+        <p class="text-right">
+          <a class="btn btn-primary submit" ng-click="uc.findUsers()">查询</a>
+          <a class="btn btn-primary submit" ng-click="uc.createUser()">添加</a>
+          <a class="btn btn-primary submit" ng-click="uc.showDialog()">dialog</a>
+        </p>
+      </div>
+    </form>
+    <tt>{{user || json}}</tt>
+    <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="uc.findUsers()"></div>
 
-        <div class="alert alert-danger" ng-show="!!uc.error">
-            <h4 class="alert-heading">操作失败</h4>
-            <span ng-bind="uc.error.message.detail"></span>
-        </div>
-        <form class="form-inline" user="form">
-            <div class="form-group">
-                <label class="control-label">用户名：</label>
-                <input type="text" ng-enter="uc.findUsers()" class="form-control" ng-model="uc.pager.filter.LIKES_username" placeholder="用户名">
-            </div>
-
-            <div>
-                <p class="text-right">
-                    <a class="btn btn-primary submit" ng-click="uc.findUsers()">查询</a>
-                    <a class="btn btn-primary submit" ng-click="uc.createUser()">添加</a>
-                </p>
-            </div>
-        </form>
-        <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="uc.findUsers()"></div>
-
-    </div>
+  </div>
 
 </div>
+
+<script type="text/ng-template" id="firstDialogId">
+  <div class="ngdialog-message">
+    <p ng-show="ngDialogData.foo">Data passed through: <code>{{ngDialogData.foo}}</code></p>
+  </div>
+  <div ng-include="'views/authority/user/save.html'"></div>
+  <div class="ngdialog-buttons">
+    <button type="button" class="ngdialog-button ngdialog-button-secondary"
+            ng-dialog="secondDialogId"
+            ng-dialog-class="ngdialog-theme-default"
+            ng-dialog-controller="SecondModalCtrl"
+            ng-dialog-close-previous>Close and open
+    </button>
+    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="openSecond()">Open next</button>
+  </div>
+</script>

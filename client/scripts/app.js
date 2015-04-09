@@ -19,7 +19,8 @@ angular
     'ui.bootstrap.datetimepicker',
     'angularFileUpload',
     'toaster',
-    'ngAnimate'
+    'ngAnimate',
+    'ngDialog'
   ])
 
   .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
