@@ -27,7 +27,7 @@
         };
 
         LoginCtrl.prototype.login = function () {
-            this.$log.debug("findCurrentUser()");
+            this.$log.debug("login()");
             return this.LoginService.login(this.user).then((function (_this) {
                 return function (data) {
                     _this.$log.debug("Promise login  successfully");

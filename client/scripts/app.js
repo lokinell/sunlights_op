@@ -112,6 +112,21 @@ angular
           }
         }
       })
+     .state('logout', {
+        templateUrl: 'views/pages/login.html',
+        url: '/logout',
+        resolve: {
+            loadMyFiles: function ($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                    name: 'sbAdminApp',
+                    files: [
+                        'scripts/services/loginService.js',
+                        'scripts/controllers/loginCtrl.js'
+                    ]
+                })
+            }
+        }
+      })
       .state('dashboard.table', {
         templateUrl: 'views/table.html',
         url: '/table'
@@ -581,9 +596,25 @@ angular
           }
         }
       })
+      .state('dashboard.userSetting', {
+        templateUrl: 'views/authority/user/setting.html',
+        url: '/user/setting',
+        resolve: {
+            loadMyFiles: function ($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                    name: 'sbAdminApp',
+                    files: [
+                        'scripts/services/roleService.js',
+                        'scripts/services/userService.js',
+                        'scripts/controllers/userCtrl.js'
+                    ]
+                })
+            }
+        }
+       })
       .state('dashboard.messageRule', {
         templateUrl: 'views/messagerule/messageRule.html',
-        url: '/messagerules',
+        url: '/messagerule',
         resolve: {
           loadMyFiles: function ($ocLazyLoad) {
             return $ocLazyLoad.load({

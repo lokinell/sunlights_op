@@ -169,7 +169,7 @@
       return this.MessageRuleService.saveMessPush(this.dict).then((function(_this) {
         return function(data) {
           _this.$log.debug("save MessPush successfully");
-          return _this.$location.path("/dashboard/messagerules");
+          return _this.$location.path("/dashboard/messagerule");
         };
       })(this), (function(_this) {
         return function(error) {
@@ -184,7 +184,7 @@
       return this.MessageRuleService.modifyMessPush(this.dict).then((function(_this) {
         return function(data) {
           _this.$log.debug("modify MessagePushService successfully");
-          return _this.$location.path("/dashboard/messagerules");
+          return _this.$location.path("/dashboard/messagerule");
         };
       })(this), (function(_this) {
         return function(error) {
