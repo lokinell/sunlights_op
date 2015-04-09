@@ -221,11 +221,23 @@ gulp.task('dev-replace', function(){
     .pipe(gulp.dest(config.base+'/scripts'));
 });
 
+gulp.task('uat-replace-env', function(){
+    gulp.src(config.base+'/scripts/directives/header/header.html')
+        .pipe(replace("dev", "uat"))
+        .pipe(gulp.dest(config.base+'/scripts/directives/header'));
+});
+
+gulp.task('dev-replace-env', function(){
+    gulp.src(config.base+'/scripts/directives/header/header.html')
+        .pipe(replace("uat", "dev"))
+        .pipe(gulp.dest(config.base+'/scripts/directives/header'));
+});
+
 gulp.task('uat:dist', function(){
-  runSequence('uat-replace','build:dist');
+  runSequence('uat-replace','uat-replace-env','build:dist');
 });
 
 
 gulp.task('dev:dist', function(){
-  runSequence('dev-replace','build:dist');
+  runSequence('dev-replace','dev-replace-env','build:dist');
 });

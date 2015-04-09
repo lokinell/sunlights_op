@@ -2,13 +2,14 @@
     var UserCtrl;
 
     UserCtrl = (function () {
-        function UserCtrl($scope, $rootScope, $log, $location, UserService, RoleService) {
+        function UserCtrl($scope, $rootScope, $log, $location, UserService, RoleService, toaster) {
             this.$scope = $scope;
             this.$rootScope = $rootScope;
             this.$log = $log;
             this.$location = $location;
             this.UserService = UserService;
             this.RoleService = RoleService;
+            this.toaster = toaster;
             this.$log.debug("constructing UserCtrl");
             this.users = [];
             this.user = this.$rootScope.user || {};
@@ -110,6 +111,21 @@
             })(this));
         };
 
+        UserCtrl.prototype.findCurrentUser = function () {
+            this.$log.debug("find Current User()");
+            return this.UserService.findCurrentUser().then((function (_this) {
+                return function (data) {
+                    return _this.user = data.value;
+                };
+            })(this), (function (_this) {
+                return function (error) {
+                    _this.$log.error("Unable to get Users: " + error);
+                    return _this.error = error;
+                };
+            })(this));
+        };
+
+
         UserCtrl.prototype.saveUser = function () {
             this.$log.debug("saveUser()");
             this.user.deleted = !this.user.deleted;
@@ -117,6 +133,21 @@
                 return function (data) {
                     _this.$log.debug("save user successfully");
                     return _this.$location.path("/dashboard/user");
+                };
+            })(this), (function (_this) {
+                return function (error) {
+                    _this.$log.error("Unable to save user: " + error);
+                    return _this.error = error;
+                };
+            })(this));
+        };
+
+        UserCtrl.prototype.SettingUser = function () {
+            this.$log.debug("SettingUser()");
+            return this.UserService.saveUser(this.user).then((function (_this) {
+                return function (data) {
+                    _this.$log.debug("save user successfully");
+                    return _this.$location.path("/dashboard/home");
                 };
             })(this), (function (_this) {
                 return function (error) {
@@ -147,11 +178,13 @@
             return this.UserService.saveUser(this.user).then((function (_this) {
                 return function (data) {
                     _this.$log.debug("successfully delete user");
+                    _this.toaster.pop('success', data.message.summary, data.message.detail);
                     return _this.findUsers();
                 };
             })(this), (function (_this) {
                 return function (error) {
                     _this.$log.error("Unable to delete user: " + error);
+                    _this.toaster.pop('error', error.message.summary, error.message.detail);
                     return _this.error = error;
                 };
             })(this));
