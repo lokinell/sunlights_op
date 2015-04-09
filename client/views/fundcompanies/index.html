@@ -14,20 +14,17 @@
             <h4 class="alert-heading">操作失败</h4>
             <span ng-bind="cc.error.message.detail"></span>
         </div>
-        <form class="form-inline" role="form">
-            <div class="form-group">
-                <label class="control-label">名称：</label>
-                <input type="text" ng-enter="cc.findCompanies()" class="form-control" ng-model="cc.pager.filter.LIKES_companyName" placeholder="名称">
-                <label class="control-label">代码：</label>
-                <input type="text" ng-enter="cc.findCompanies()" class="form-control" ng-model="cc.pager.filter.LIKES_pinYinCode" placeholder="代码">
-            </div>
-
-            <div>
-                <p class="text-right">
-                    <a class="btn btn-primary submit" ng-click="cc.findCompanies()">查询</a>
-                </p>
-            </div>
-        </form>
+        <div class="middle-layout">
+          <form class="form-inline " role="form">
+              <div class="form-group">
+                  <label class="control-label">名称：</label>
+                  <input type="text" ng-enter="cc.findCompanies()" class="form-control" ng-model="cc.pager.filter.LIKES_companyName" placeholder="名称">
+                  <label class="control-label">代码：</label>
+                  <input type="text" ng-enter="cc.findCompanies()" class="form-control" ng-model="cc.pager.filter.LIKES_pinYinCode" placeholder="代码">
+                  <a class="btn btn-primary submit" ng-click="cc.findCompanies()">查询</a>
+              </div>
+          </form>
+        </div>
         <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="cc.findCompanies()"></div>
 
     </div>

@@ -14,74 +14,81 @@
             <h4 class="alert-heading">操作失败</h4>
             <span ng-bind="dc.error.message.detail"></span>
         </div>
-        <form class="form-horizontal" user="form" ng-submit="dc.saveDict()">
-            <div class="row col-md-11 col-padding">
-
-                <label class="col-md-1 col-padding control-label">类别：</label>
-
-                <div class="col-md-3 col-padding">
-                    <input class="form-control" type="text" name="codeCat" required
-                           ng-model="dc.dict.codeCat">
+        <div class="well well-lg container" style="width: 100%;">
+            <form class="form-horizontal" user="form" ng-submit="dc.saveDict()">
+                <div class="row col-md-11 col-padding form-row">
+                    <div class="col-md-3 form-label">
+                        <label class="control-label">类别：</label>
+                    </div>
+                    <div class="col-md-3 col-padding">
+                        <input class="form-control" type="text" name="codeCat" required
+                               ng-model="dc.dict.codeCat">
+                    </div>
+                    <div class="col-md-3 form-label">
+                        <label class="control-label">值：</label>
+                    </div>
+                    <div class="col-md-3 col-padding">
+                        <input class="form-control" type="text" name="codeKey" required
+                               ng-model="dc.dict.codeKey">
+                    </div>
                 </div>
-                <label class="col-md-1 col-padding control-label">值：</label>
-
-                <div class="col-md-3 col-padding">
-                    <input class="form-control" type="text" name="codeKey" required
-                           ng-model="dc.dict.codeKey">
+                <div class="row col-md-11 col-padding form-row">
+                    <div class="col-md-3 form-label">
+                        <label class="control-label">描述：</label>
+                    </div>
+                    <div class="col-md-9 col-padding">
+                        <input class="form-control" type="text" name="codeVal" required
+                               ng-model="dc.dict.codeVal">
+                    </div>
                 </div>
-            </div>
-            <div class="row col-md-11 col-padding">
-
-                <label class="col-md-1 col-padding control-label">描述：</label>
-
-                <div class="col-md-7 col-padding">
-                    <input class="form-control" type="text" name="codeVal" required
-                           ng-model="dc.dict.codeVal">
+                <div class="row col-md-11 col-padding form-row">
+                    <div class="col-md-3 form-label">
+                        <label class="control-label">序号：</label>
+                    </div>
+                    <div class="col-md-3 col-padding">
+                        <input class="form-control" type="number" name="seqNo" required
+                               ng-model="dc.dict.seqNo">
+                    </div>
+                    <div class="col-md-3 form-label">
+                        <label class="control-label">状态：</label>
+                    </div>
+                    <div class="col-md-3 col-padding">
+                        <select class="form-control" ng-model="dc.dict.status"
+                                ng-options="item.key as item.value for item in dc.status">
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="row col-md-11 col-padding">
+                <div class="row col-md-11 col-padding form-row">
+                    <div class="col-md-3 form-label">
+                        <label class="control-label">图片：</label>
+                    </div>
+                    <div class="col-md-9 col-padding">
+                        <input class="form-control" type="text" name="magic"
+                               ng-model="dc.dict.magic">
+                    </div>
 
-                <label class="col-md-1 col-padding control-label">序号：</label>
-
-                <div class="col-md-3 col-padding">
-                    <input class="form-control" type="number" name="seqNo" required
-                           ng-model="dc.dict.seqNo">
                 </div>
-                <label class="col-md-1 col-padding control-label">状态：</label>
+                <div class="row col-md-11 col-padding form-row">
+                    <div class="col-md-3 form-label">
+                        <label class="control-label">注释：</label>
+                    </div>
+                    <div class="col-md-9  col-padding">
+                        <textarea class="form-control" type="text" name="remarks" ng-model="dc.dict.remarks">
+                        </textarea>
+                    </div>
 
-                <div class="col-md-3 col-padding">
-                    <select class="form-control" ng-model="dc.dict.status"
-                            ng-options="item.key as item.value for item in dc.status">
-                    </select>
                 </div>
-            </div>
-            <div class="row col-md-11 col-padding">
+                <div class="row col-md-11 col-padding text-right">
+                    <div class="col-md-6 form-label">
+                        <button type="submit" class="btn btn-success">确定</button>
+                    </div>
 
-                <label class="col-md-1 col-padding control-label">图片：</label>
-
-                <div class="col-md-7 col-padding">
-                    <input class="form-control" type="text" name="magic"
-                           ng-model="dc.dict.magic">
+                    <div class="col-md-3">
+                        <a ui-sref="dashboard.dict" class="btn btn-warning">取消</a>
+                    </div>
                 </div>
-
-            </div>
-            <div class="row col-md-11 col-padding">
-
-                <label class="col-md-1 col-padding control-label">注释：</label>
-
-                <div class="col-md-7 col-padding">
-                    <textarea class="form-control" type="text" name="remarks" ng-model="dc.dict.remarks">
-                    </textarea>
-                </div>
-
-            </div>
-            <div class="row col-md-11 col-padding text-right">
-                <div class="col-md-2 col-padding col-md-offset-6">
-                    <button type="submit" class="btn btn-success">确定</button>
-                    <a ui-sref="dashboard.dict" class="btn btn-warning">取消</a>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 
 </div>

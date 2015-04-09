@@ -15,42 +15,47 @@
             <h4 class="alert-heading">操作失败</h4>
             <span ng-bind="pc.error.message.detail"></span>
         </div>
-        <form class="form-horizontal" role="form" ng-submit="pc.saveParameter()">
+        <div class="well well-lg container" style="width: 100%;">
+            <form class="form-horizontal" role="form" ng-submit="pc.saveParameter()">
 
-            <div class="row col-md-11 col-padding">
-
-                <label class="col-md-1 col-padding control-label">参数名：</label>
-
-                <div class="col-md-3 col-padding">
-                    <input class="form-control" ng-model="pc.parameter.name" required>
-                </div>
-                <label class="col-md-1 col-padding control-label">参数值：</label>
-
-                <div class="col-md-3 col-padding">
-                    <input class="form-control" type="text" ng-model="pc.parameter.value" required>
-                </div>
-            </div>
-
-
-            <div class="row col-md-11 col-padding">
-
-                <label class="col-md-1 col-padding control-label">描述：</label>
-
-                <div class="col-md-7 col-padding">
-                    <textarea class="form-control" type="text" ng-model="pc.parameter.description">
-                    </textarea>
+                <div class="row col-md-11 col-padding form-row">
+                    <div class="col-md-3 form-label">
+                        <label class="control-label">参数名：</label>
+                    </div>
+                    <div class="col-md-3 col-padding">
+                        <input class="form-control" ng-model="pc.parameter.name" required>
+                    </div>
+                    <div class="col-md-3 form-label">
+                        <label class="control-label">参数值：</label>
+                    </div>
+                    <div class="col-md-3 col-padding">
+                        <input class="form-control" type="text" ng-model="pc.parameter.value" required>
+                    </div>
                 </div>
 
-            </div>
 
-            <div class="row col-md-11 col-padding text-right">
-                <div class="col-md-2 col-padding col-md-offset-6">
-                    <button type="submit" class="btn btn-success">确定</button>
-                    <a ui-sref="dashboard.parameter" class="btn btn-warning">取消</a>
+                <div class="row col-md-11 col-padding form-row">
+                    <div class="col-md-3 form-label">
+                        <label class="control-label">描述：</label>
+                    </div>
+                    <div class="col-md-9 col-padding">
+                        <textarea class="form-control" type="text" ng-model="pc.parameter.description">
+                        </textarea>
+                    </div>
+
                 </div>
-            </div>
 
-        </form>
+                <div class="row col-md-11 col-padding text-right">
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-success">确定</button>
+                    </div>
+                    <div class="col-md-3">
+                        <a ui-sref="dashboard.parameter" class="btn btn-warning">取消</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
     </div>
 
 </div>
