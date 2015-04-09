@@ -154,7 +154,11 @@ table tr td {
 }
 
 .form-label{
-    text-align: right;
+    text-align: left;
+}
+
+.form-submit-btn{
+  text-align: right;
 }
 
 .operation-icon-layout {
