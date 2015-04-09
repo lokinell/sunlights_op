@@ -6,24 +6,19 @@
             <li class="active">参数表</li>
         </ol>
     </div>
-
-    <div class="row">
-        <form class="form-inline" role="form">
-            <div class="form-group">
-                <label class="control-label">参数名：</label>
-                <input type="text" class="form-control" ng-model="pc.pager.filter.LIKES_name" ng-enter="pc.findParametersBy()">
-            </div>
-
-            <div>
-                <p class="text-right">
+    <div class="well well-lg">
+        <div class="middle-layout">
+            <form class="form-inline" role="form">
+                <div class="form-group">
+                    <label class="control-label">参数名：</label>
+                    <input type="text" class="form-control" ng-model="pc.pager.filter.LIKES_name" ng-enter="pc.findParametersBy()">
                     <a class="btn btn-primary submit" ng-click="pc.findParametersBy()">查询</a>
                     <a class="btn btn-primary submit" ng-click="pc.createParameter()">添加</a>
                     <a class="btn btn-primary submit" ng-click="pc.refreshParameter()">刷新缓存</a>
-                </p>
-            </div>
-        </form>
+                </div>
+            </form>
+        </div>
         <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="pc.findParametersBy()"></div>
 
     </div>
-
 </div>

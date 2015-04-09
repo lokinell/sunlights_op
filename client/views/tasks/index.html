@@ -13,7 +13,7 @@
             <h4 class="alert-heading">操作失败</h4>
             <span ng-bind="tc.error.message.detail"></span>
         </div>
-        <div style="text-align:right">
+        <div class="middle-layout">
             <a class="btn btn-primary submit" ng-click="tc.createTask()">添加</a>
         </div>
         <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="tc.listTasks()"></div>

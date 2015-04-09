@@ -1,5 +1,5 @@
 (function () {
-  var ParameterCtrl;
+    var ParameterCtrl;
 
   ParameterCtrl = (function () {
     function ParameterCtrl($log, $http, $timeout, $location, $scope, $rootScope, ParameterService, toaster) {
@@ -22,38 +22,39 @@
         pageSize: 0
       };
 
-      $scope.gridOptions = {
-        data: 'pager.list',
-        enablePaging: true,
-        showFooter: true,
-        multiSelect: false,
-        totalServerItems: 'pager.count',
-        pagingOptions: {
-          pageSizes: [5, 10, 15],
-          pageSize: 5,
-          currentPage: 1
-        },
-        columnDefs: [
-          {
-            field: 'name',
-            displayName: '参数名'
-          },
-          {
-            field: 'value',
-            displayName: '参数值'
-          },
-          {
-            field: 'description',
-            displayName: '参数描述'
-          },
-          {
-            field: 'locked',
-            displayName: '操作',
-            cellTemplate: 'views/parameter/parameterTypeCell.html'
-          }
-        ]
-      };
-    }
+            $scope.gridOptions = {
+                data: 'pager.list',
+                enablePaging: true,
+                showFooter: true,
+                multiSelect: false,
+                i18n: "zh-cn",
+                totalServerItems: 'pager.count',
+                pagingOptions: {
+                    pageSizes: [5, 10, 15],
+                    pageSize: 5,
+                    currentPage: 1
+                },
+                columnDefs: [
+                    {
+                        field: 'name',
+                        displayName: '参数名'
+                    },
+                    {
+                        field: 'value',
+                        displayName: '参数值'
+                    },
+                    {
+                        field: 'description',
+                        displayName: '参数描述'
+                    },
+                    {
+                        field: 'locked',
+                        displayName: '操作',
+                        cellTemplate: 'views/parameter/parameterTypeCell.html'
+                    }
+                ]
+            };
+        }
 
     ParameterCtrl.prototype.findParametersBy = function () {
       this.$log.debug("findParametersBy()");

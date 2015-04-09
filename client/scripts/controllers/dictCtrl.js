@@ -35,6 +35,7 @@
         enablePaging: true,
         showFooter: true,
         multiSelect: false,
+        i18n: "zh-cn",
         totalServerItems: 'pager.count',
         pagingOptions: {
           pageSizes: [5, 10, 15],

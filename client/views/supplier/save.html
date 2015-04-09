@@ -13,131 +13,136 @@
             <h4 class="alert-heading">操作失败</h4>
             <span ng-bind="sc.error.message.detail"></span>
         </div>
-        <form role="form" ng-submit="sc.saveSupplier()">
-            <table>
-                <tr>
-                    <td>
+        <div class="well well-lg container" style="width: 100%;">
+            <form role="form" ng-submit="sc.saveSupplier()">
+                <div class="row col-md-12 col-padding form-row">
+                    <div class="col-md-3 form-label">
                         <label class="control-label">商家名称：</label>
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col-md-3 col-padding">
                         <input class="form-control" type="text" name="merchantName" required
                                ng-model="sc.supplier.merchantName">
-                    </td>
+                    </div>
 
-                    <td>
+                    <div class="col-md-3 form-label">
                         <label class="control-label">商家简称：</label>
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col-md-3 col-padding">
                         <input class="form-control" type="text" name="displayName" required
                                ng-model="sc.supplier.displayName">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="control-label">供应商编号：</label>
-                    </td>
-                    <td>
+                    </div>
+                </div>
+
+                <div class="row col-md-12 col-padding form-row">
+                    <div class="col-md-3 form-label">
+                       <label class="control-label">供应商编号：</label>
+                    </div>
+                    <div class="col-md-3 col-padding">
                         <input class="form-control" type="text" name="supplierCode" required
                                ng-model="sc.supplier.supplierCode">
-                    </td>
-                    <td>
+                    </div>
+
+                    <div class="col-md-3 form-label">
                         <label class="control-label">联系电话：</label>
-                    </td>
-                    <td>
+                    </div>
+
+                    <div class="col-md-3 col-padding">
                         <input class="form-control" type="text" name="contactCallno"
                                ng-model="sc.supplier.contactCallno">
-                    </td>
-                </tr>
+                    </div>
+                </div>
 
-                <tr>
-                    <td>
+                <div class="row col-md-12 col-padding form-row">
+                    <div class="col-md-3 form-label">
                         <label class="control-label">注册资本（万元）：</label>
-                    </td>
-                    <td>
+                    </div>
+
+                    <div class="col-md-3 col-padding">
                         <input class="form-control" type="number" step="0.01" name="regCapital"
                                ng-model="sc.supplier.regCapital">
-                    </td>
+                    </div>
 
-                    <td>
+                    <div class="col-md-3 form-label">
                         <label class="control-label">实收资本（万元）：</label>
-                    </td>
-                    <td>
+                    </div>
+
+                    <div class="col-md-3 col-padding">
                         <input class="form-control" type="number" step="0.01" name="paidUpCapital"
                                ng-model="sc.supplier.paidUpCapital">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                    </div>
+                </div>
+
+                <div class="row col-md-12 col-padding form-row">
+                    <div class="col-md-3 form-label">
                         <label class="control-label">注册省：</label>
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col-md-3 col-padding">
                         <input class="form-control" type="text" name="regProv"
                                ng-model="sc.supplier.regProv">
-                    </td>
+                    </div>
 
-                    <td>
+                    <div class="col-md-3 form-label">
                         <label class="control-label">注册市：</label>
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col-md-3 col-padding">
                         <input class="form-control" type="text" name="regCity"
                                ng-model="sc.supplier.regCity">
-                    </td>
-                </tr>
-                <tr>
+                    </div>
+                </div>
+
+                <div class="row col-md-12 col-padding form-row">
+                    <div class="col-md-3 form-label">
+                      <label class="control-label">企业性质：</label>
+                    </div>
+                    <div class="col-md-3 col-padding">
+                      <input class="form-control" type="text" name="corporateProperty"
+                             ng-model="sc.supplier.corporateProperty">
+                    </div>
+                </div>
 
 
-                    <td>
-                        <label class="control-label">企业性质：</label>
-                    </td>
-                    <td>
-                        <input class="form-control" type="text" name="corporateProperty"
-                               ng-model="sc.supplier.corporateProperty">
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                <div class="row col-md-12 col-padding form-row">
+                    <div class="col-md-3 form-label">
                         <label class="control-label">网站地址：</label>
-                    </td>
-                    <td colspan="3">
+                    </div>
+                    <div class="col-md-3 col-padding">
                         <input class="form-control" type="text" name="websiteAddress"
                                ng-model="sc.supplier.websiteAddress">
-                    </td>
+                    </div>
+                </div>
 
-                </tr>
-                <tr>
-                    <td>
+                <div class="row col-md-12 col-padding form-row">
+                    <div class="col-md-3 form-label">
                         <label class="control-label">商家归属详细地址：</label>
-                    </td>
-                    <td colspan="3">
+                    </div>
+                    <div class="col-md-3 col-padding">
                         <input class="form-control" type="text" name="belongAddress"
                                ng-model="sc.supplier.belongAddress">
-                    </td>
+                    </div>
+                </div>
 
-                </tr>
-                <tr>
-                    <td>
+                <div class="row col-md-12 col-padding form-row">
+                    <div class="col-md-3 form-label">
                         <label class="control-label">注册详细地址：</label>
-                    </td>
-                    <td colspan="3">
+                    </div>
+
+                    <div class="col-md-3 col-padding">
                         <input class="form-control" type="text" name="regAddress"
                                ng-model="sc.supplier.regAddress">
-                    </td>
+                    </div>
+                </div>
 
-                </tr>
-                <tr>
-                    <td colspan="4" align="right">
+                <div class="row col-md-12 col-padding form-row">
+                    <div class="col-md-6 form-submit-btn">
                         <button type="submit" class="btn btn-success">确定</button>
+                    </div>
+
+                    <div class="col-md-3">
                         <a ui-sref="dashboard.supplier" class="btn btn-warning">取消</a>
-                    </td>
-                </tr>
-            </table>
-        </form>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
 </div>

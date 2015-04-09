@@ -11,22 +11,19 @@
             <h4 class="alert-heading">操作失败</h4>
             <span ng-bind="dc.error.message.detail"></span>
         </div>
-        <form class="form-inline" role="form">
-            <div class="form-group">
-                <label class="control-label">描述：</label>
-                <input type="text" ng-enter="dc.findDicts()" class="form-control" ng-model="dc.pager.filter.LIKES_codeVal" placeholder="描述">
-            </div>
-            <select class="form-control" ng-model="dc.pager.filter.EQS_status"
-                    ng-options="item.key as item.value for item in dc.status">
-            </select>
-
-            <div>
-                <p class="text-right">
-                    <a class="btn btn-primary submit" ng-click="dc.findDicts()">查询</a>
-                    <a class="btn btn-primary submit" ng-click="dc.createDict()">添加</a>
-                </p>
-            </div>
-        </form>
+        <div class="middle-layout">
+            <form class="form-inline" role="form">
+                <div class="form-group">
+                    <label class="control-label">描述：</label>
+                    <input type="text" ng-enter="dc.findDicts()" class="form-control" ng-model="dc.pager.filter.LIKES_codeVal" placeholder="描述">
+                </div>
+                <select class="form-control" ng-model="dc.pager.filter.EQS_status"
+                        ng-options="item.key as item.value for item in dc.status">
+                </select>
+                <a class="btn btn-primary submit" ng-click="dc.findDicts()">查询</a>
+                <a class="btn btn-primary submit" ng-click="dc.createDict()">添加</a>
+            </form>
+        </div>
         <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="dc.findDicts()"></div>
     </div>
 

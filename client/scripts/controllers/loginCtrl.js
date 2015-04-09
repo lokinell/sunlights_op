@@ -33,6 +33,10 @@
                     _this.$log.debug("Promise login  successfully");
                     localStorage.setItem("user", angular.toJson(data.value));
                     _this.user = data.value;
+                    _this.$log.debug("Promise login  successfully" + angular.toJson(data.value));
+                    if (data.value.loginInd == 'Y') {
+                        return _this.$location.path("reset");
+                    }
                     return _this.$location.path("/dashboard/home");
                 };
             })(this), (function (_this) {
@@ -41,6 +45,7 @@
                     return _this.error = error;
                 };
             })(this));
+
         };
 
         LoginCtrl.prototype.reset = function () {
