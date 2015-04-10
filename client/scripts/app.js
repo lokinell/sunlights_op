@@ -21,9 +21,23 @@ angular
     'toaster',
     'ngAnimate',
     'ngDialog'
-  ])
-
-  .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
+  ]).config(['ngDialogProvider', function (ngDialogProvider) {
+    ngDialogProvider.setDefaults({
+      className: 'ngdialog-theme-default',
+      plain: false,
+      showClose: true,
+      closeByDocument: true,
+      closeByEscape: true,
+      appendTo: false,
+      preCloseCallback: function (value, method) {
+        if ('close' === value) {
+          return true;
+        } else if ('confirm' === value) {
+          return method;
+        }
+      }
+    });
+  }]).config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
     $ocLazyLoadProvider.config({
       debug: false,
@@ -113,19 +127,19 @@ angular
           }
         }
       })
-     .state('logout', {
+      .state('logout', {
         templateUrl: 'views/pages/login.html',
         url: '/logout',
         resolve: {
-            loadMyFiles: function ($ocLazyLoad) {
-                return $ocLazyLoad.load({
-                    name: 'sbAdminApp',
-                    files: [
-                        'scripts/services/loginService.js',
-                        'scripts/controllers/loginCtrl.js'
-                    ]
-                })
-            }
+          loadMyFiles: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'sbAdminApp',
+              files: [
+                'scripts/services/loginService.js',
+                'scripts/controllers/loginCtrl.js'
+              ]
+            })
+          }
         }
       })
       .state('dashboard.table', {
@@ -601,18 +615,18 @@ angular
         templateUrl: 'views/authority/user/setting.html',
         url: '/user/setting',
         resolve: {
-            loadMyFiles: function ($ocLazyLoad) {
-                return $ocLazyLoad.load({
-                    name: 'sbAdminApp',
-                    files: [
-                        'scripts/services/roleService.js',
-                        'scripts/services/userService.js',
-                        'scripts/controllers/userCtrl.js'
-                    ]
-                })
-            }
+          loadMyFiles: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'sbAdminApp',
+              files: [
+                'scripts/services/roleService.js',
+                'scripts/services/userService.js',
+                'scripts/controllers/userCtrl.js'
+              ]
+            })
+          }
         }
-       })
+      })
       .state('dashboard.messageRule', {
         templateUrl: 'views/messagerule/messageRule.html',
         url: '/messagerule',

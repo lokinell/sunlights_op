@@ -1,97 +1,102 @@
-<div class="row" ng-controller="UserCtrl as uc" ng-init="uc.initSave()">
+<div class="dialog-contents">
+  <div class="row" ng-controller="UserCtrl as uc" ng-init="uc.initSave()">
 
     <div class="row">
 
-        <div class="alert alert-danger" ng-show="!!uc.error">
-            <h4 class="alert-heading">操作失败</h4>
-            <span ng-bind="uc.error.message.detail"></span>
-        </div>
+      <div class="alert alert-danger" ng-show="!!uc.error">
+        <h4 class="alert-heading">操作失败</h4>
+        <span ng-bind="uc.error.message.detail"></span>
+      </div>
         <span>
 
         </span>
-        <form class="form-horizontal" user="form" ng-submit="uc.saveUser()">
-            <div class="row col-md-11 col-padding">
 
-                <label class="col-md-1 col-padding control-label">用户名：</label>
+      <form class="form-horizontal" user="form">
+        <div class="row col-md-11 col-padding">
 
-                <div class="col-md-3 col-padding">
-                    <input class="form-control" ng-model="uc.user.username" required>
-                </div>
-                <label class="col-md-1 col-padding control-label">密码：</label>
+          <label class="col-md-1 col-padding control-label">用户名：</label>
 
-                <div class="col-md-3 col-padding">
-                    <input class="form-control" ng-model="uc.user.password" required>
-                </div>
-            </div>
+          <div class="col-md-3 col-padding">
+            <input class="form-control" ng-model="uc.user.username" required>
+          </div>
+          <label class="col-md-1 col-padding control-label">密码：</label>
 
-
-            <div class="row col-md-11 col-padding">
-
-                <label class="col-md-1 col-padding control-label">姓：</label>
-
-                <div class="col-md-3 col-padding">
-                    <input class="form-control" ng-model="uc.user.lastName">
-                </div>
-                <label class="col-md-1 col-padding control-label">名：</label>
-
-                <div class="col-md-3 col-padding">
-                    <input class="form-control" ng-model="uc.user.firstName">
-                </div>
-            </div>
-            <div class="row col-md-11 col-padding">
-
-                <label class="col-md-1 col-padding control-label">邮箱：</label>
-
-                <div class="col-md-3 col-padding">
-                    <input class="form-control" type="email" ng-model="uc.user.email" required>
-                </div>
-                <label class="col-md-1 col-padding control-label">手机：</label>
-
-                <div class="col-md-3 col-padding">
-                    <input class="form-control" ng-model="uc.user.telephone">
-                </div>
-            </div>
+          <div class="col-md-3 col-padding">
+            <input class="form-control" ng-model="uc.user.password" required>
+          </div>
+        </div>
 
 
-            <div class="row col-md-11 col-padding">
+        <div class="row col-md-11 col-padding">
 
-                <label class="col-md-1 col-padding control-label">状态：</label>
+          <label class="col-md-1 col-padding control-label">姓：</label>
 
-                <div class="col-md-3 col-padding">
-                    <select class="form-control" ng-model="uc.user.status" required>
-                        <option value="" selected>请选择</option>
-                        <option value="Y">启用</option>
-                        <option value="N">禁用</option>
-                    </select>
-                </div>
-                <label class="col-md-1 col-padding control-label">有效：</label>
+          <div class="col-md-3 col-padding">
+            <input class="form-control" ng-model="uc.user.lastName">
+          </div>
+          <label class="col-md-1 col-padding control-label">名：</label>
 
-                <div class="col-md-3 col-padding">
-                    <input type="checkbox" ng-model="uc.user.deleted" required>
-                </div>
-            </div>
-            <div class="row col-md-11 col-padding">
+          <div class="col-md-3 col-padding">
+            <input class="form-control" ng-model="uc.user.firstName">
+          </div>
+        </div>
+        <div class="row col-md-11 col-padding">
 
-                <label class="col-md-1 col-padding control-label">角色：</label>
+          <label class="col-md-1 col-padding control-label">邮箱：</label>
 
-                <div class="col-md-3 col-padding">
-                    <select data-placeholder="请选择"
-                            ng-model="uc.user.roleIds"
-                            ng-options="role.id as role.name for role in uc.roles"
-                            chosen multiple class="form-control">
-                    </select>
-                </div>
+          <div class="col-md-3 col-padding">
+            <input class="form-control" type="email" ng-model="uc.user.email" required>
+          </div>
+          <label class="col-md-1 col-padding control-label">手机：</label>
 
-            </div>
+          <div class="col-md-3 col-padding">
+            <input class="form-control" ng-model="uc.user.telephone">
+          </div>
+        </div>
 
-            <div class="row col-md-11 col-padding text-right">
-                <div class="col-md-2 col-padding col-md-offset-6">
-                    <button type="submit" class="btn btn-success">确定</button>
-                    <a ui-sref="dashboard.user" class="btn btn-warning">取消</a>
-                </div>
-            </div>
 
-        </form>
+        <div class="row col-md-11 col-padding">
+
+          <label class="col-md-1 col-padding control-label">状态：</label>
+
+          <div class="col-md-3 col-padding">
+            <select class="form-control" ng-model="uc.user.status" required>
+              <option value="" selected>请选择</option>
+              <option value="Y">启用</option>
+              <option value="N">禁用</option>
+            </select>
+          </div>
+          <label class="col-md-1 col-padding control-label">有效：</label>
+
+          <div class="col-md-3 col-padding">
+            <input type="checkbox" ng-model="uc.user.deleted" required>
+          </div>
+        </div>
+        <div class="row col-md-11 col-padding">
+
+          <label class="col-md-1 col-padding control-label">角色：</label>
+
+          <div class="col-md-3 col-padding">
+            <select data-placeholder="请选择"
+                    ng-model="uc.user.roleIds"
+                    ng-options="role.id as role.name for role in uc.roles"
+                    chosen multiple class="form-control">
+            </select>
+          </div>
+
+        </div>
+
+        <div class="row col-md-11 col-padding text-right">
+          <div class="col-md-2 col-padding col-md-offset-6">
+            <button class="btn btn-success" ng-click="closeThisDialog('confirm',uc.saveUser())">取消</button>
+            <button class="btn btn-warning" ng-click="closeThisDialog('close')">取消</button>
+          </div>
+        </div>
+
+      </form>
     </div>
+
+  </div>
+
 
 </div>

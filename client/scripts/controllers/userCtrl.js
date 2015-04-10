@@ -16,7 +16,7 @@
       this.user = this.$scope.user || {};
       this.pager = {};
       this.roles = [];
-      this.dialog = {};
+      this.dialog = {}
       this.selectedRoleIds = [];
       this.$scope.gridOptions = {
         data: 'pager.list',

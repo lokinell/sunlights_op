@@ -36,17 +36,6 @@
 </div>
 
 <script type="text/ng-template" id="firstDialogId">
-  <div class="ngdialog-message">
-    <p ng-show="ngDialogData.foo">Data passed through: <code>{{ngDialogData.foo}}</code></p>
-  </div>
   <div ng-include="'views/authority/user/save.html'"></div>
-  <div class="ngdialog-buttons">
-    <button type="button" class="ngdialog-button ngdialog-button-secondary"
-            ng-dialog="secondDialogId"
-            ng-dialog-class="ngdialog-theme-default"
-            ng-dialog-controller="SecondModalCtrl"
-            ng-dialog-close-previous>Close and open
-    </button>
-    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="openSecond()">Open next</button>
-  </div>
+
 </script>
