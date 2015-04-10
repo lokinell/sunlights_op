@@ -57,7 +57,7 @@
           },
           {
             field: "updateTime",
-            displayName: '创建时间',
+            displayName: '更新时间',
             cellFilter: 'date:"yyyy-MM-dd HH:mm"'
           },
           {
