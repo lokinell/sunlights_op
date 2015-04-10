@@ -17,6 +17,7 @@ var webdriverStandalone = require('gulp-protractor').webdriver_standalone;
 var webdriverUpdate = require('gulp-protractor').webdriver_update;
 var devBaseUrl = "http://192.168.0.93/op";
 var uatBaseUrl = "https://api-2.sunlights.me/api/op";
+var prdBaseUrl = "https://api.sunlights.me/api/op";
 //update webdriver if necessary, this task will be used by e2e task
 gulp.task('webdriver:update', webdriverUpdate);
 
@@ -212,32 +213,41 @@ gulp.task('fonts', ['clean'], function() {
 gulp.task('uat-replace', function(){
   gulp.src(config.base+'/scripts/config.js')
     .pipe(replace(devBaseUrl, uatBaseUrl))
+    .pipe(replace(prdBaseUrl, uatBaseUrl))
     .pipe(gulp.dest(config.base+'/scripts'));
 });
 
 gulp.task('dev-replace', function(){
   gulp.src(config.base+'/scripts/config.js')
     .pipe(replace(uatBaseUrl, devBaseUrl))
+    .pipe(replace(prdBaseUrl, devBaseUrl))
     .pipe(gulp.dest(config.base+'/scripts'));
 });
 
-gulp.task('uat-replace-env', function(){
+gulp.task('prd-replace', function(){
+  gulp.src(config.base+'/scripts/config.js')
+    .pipe(replace(uatBaseUrl, prdBaseUrl))
+    .pipe(replace(devBaseUrl, prdBaseUrl))
+    .pipe(gulp.dest(config.base+'/scripts'));
+});
+
+gulp.task('uat-replace-header', function(){
     gulp.src(config.base+'/scripts/directives/header/header.html')
         .pipe(replace("dev", "uat"))
         .pipe(gulp.dest(config.base+'/scripts/directives/header'));
 });
 
-gulp.task('dev-replace-env', function(){
+gulp.task('dev-replace-header', function(){
     gulp.src(config.base+'/scripts/directives/header/header.html')
         .pipe(replace("uat", "dev"))
         .pipe(gulp.dest(config.base+'/scripts/directives/header'));
 });
 
 gulp.task('uat:dist', function(){
-  runSequence('uat-replace','uat-replace-env','build:dist');
+  runSequence('uat-replace','uat-replace-header','build:dist');
 });
 
 
 gulp.task('dev:dist', function(){
-  runSequence('dev-replace','dev-replace-env','build:dist');
+  runSequence('dev-replace','dev-replace-header','build:dist');
 });
