@@ -165,10 +165,22 @@ table tr td {
     margin-left: 10px;
 }
 
-.popup-window {
-  position:fixed;
-  top:25%; margin:auto;
-  text-align:center;
-  overflow-y: auto;
+@media all and (min-width: 320px) and (max-width: 1024px){
+  .popup-window {
+    position:fixed;
+    margin:auto;
+    text-align:center;
+    overflow-y: auto;
+  }
 }
+
+@media only screen and (min-width : 1224px) {
+    .popup-window {
+      position:fixed;
+      top:25%; margin:auto;
+      text-align:center;
+      overflow-y: auto;
+    }
+}
+
 
