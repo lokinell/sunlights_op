@@ -149,7 +149,7 @@ table tr td {
     padding-left: 30px;
 }
 
-.row .form-row{
+.form-row{
     margin-bottom: 10px;
 }
 
@@ -164,3 +164,11 @@ table tr td {
 .operation-icon-layout {
     margin-left: 10px;
 }
+
+.popup-window {
+  position:fixed;
+  top:25%; margin:auto;
+  text-align:center;
+  overflow-y: auto;
+}
+

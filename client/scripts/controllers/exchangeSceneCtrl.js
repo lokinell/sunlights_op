@@ -126,7 +126,8 @@
           modalInstance = _this.$modal.open({
             templateUrl: "modalContent.html",
             controller: "ExchangeSceneModalInstanceCtrl",
-            resolve: {
+              windowClass : "popup-window",
+              resolve: {
               selectedRow: function() {
                 if (isEditing) {
                   return _this.exchangeScene;
@@ -142,6 +143,12 @@
               }
             }
           });
+          modalInstance.opened.then (function (){
+              console.log(angular.element("modal-content").length);
+          });
+          //modalInstance.rendered.then (function (){
+          //  alert(angular.element("modal-content").length);
+          //});
           return modalInstance.result.then((function(data) {
             if (!data.id) {
               return _this.$scope.myData[_this.$scope.myData.length] = data;
