@@ -28,14 +28,7 @@ angular
       showClose: true,
       closeByDocument: true,
       closeByEscape: true,
-      appendTo: false,
-      preCloseCallback: function (value, method) {
-        if ('close' === value) {
-          return true;
-        } else if ('confirm' === value) {
-          return method;
-        }
-      }
+      appendTo: false
     });
   }]).config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
