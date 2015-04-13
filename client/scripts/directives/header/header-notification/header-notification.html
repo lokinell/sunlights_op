@@ -1,15 +1,16 @@
 <ul class="nav navbar-top-links navbar-right" ng-controller="MainCtrl as mc">
-    <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-        </a>
-        <ul class="dropdown-menu dropdown-user">
-            <li><a ui-sref="dashboard.userSetting"><i class="fa fa-user fa-fw"></i> <span ng-bind="mc.user.username"></span></a></li>
-            <li><a ui-sref="reset"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
-            <li class="divider"></li>
-            <li><a ng-click="mc.logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
-        </ul>
-    </li>
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown">
+      <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+    </a>
+    <ul class="dropdown-menu dropdown-user">
+      <li><a ui-sref="dashboard.userSetting"><i class="fa fa-user fa-fw"></i> <span
+        ng-bind="mc.user.username"></span></a></li>
+      <li><a ui-sref="reset"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
+      <li class="divider"></li>
+      <li><a ng-click="mc.logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+    </ul>
+  </li>
   <toaster-container toaster-options="{'close-button': true}"></toaster-container>
 </ul>
 

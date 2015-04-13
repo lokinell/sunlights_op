@@ -1,105 +1,68 @@
 <div class="row" ng-controller="UserCtrl as uc" ng-init="uc.initSave()">
-
-    <div class="row">
-        <ol class="breadcrumb">
-            <li><a>权限管理</a></li>
-            <li><a ui-sref="dashboard.user">用户管理</a></li>
-            <li class="active">用户详情</li>
-        </ol>
+  <div class="dialog-contents">
+    <div class="modal-header">
+      <h4 class="modal-title">用户详情</h4>
     </div>
+    <form role="form" ng-submit="closeThisDialog('confirm')">
 
-    <div class="row">
-
-        <div class="alert alert-danger" ng-show="!!uc.error">
-            <h4 class="alert-heading">操作失败</h4>
-            <span ng-bind="uc.error.message.detail"></span>
+      <div class="modal-body">
+        <div class="alert alert-danger" ng-show="!!error">
+          <h4 class="alert-heading">操作失败</h4>
+          <span ng-bind="error.message.detail"></span>
         </div>
-        <span>
 
-        </span>
-        <form class="form-horizontal" user="form" ng-submit="uc.saveUser()">
-            <div class="row col-md-11 col-padding">
+        <label class="col-padding control-label">用户名：</label>
 
-                <label class="col-md-1 col-padding control-label">用户名：</label>
+        <input class="form-control" ng-model="uc.user.username" required>
+        <label class="col-padding control-label">密码：</label>
 
-                <div class="col-md-3 col-padding">
-                    <input class="form-control" ng-model="uc.user.username" required>
-                </div>
-                <label class="col-md-1 col-padding control-label">密码：</label>
-
-                <div class="col-md-3 col-padding">
-                    <input class="form-control" ng-model="uc.user.password" required>
-                </div>
-            </div>
+        <input class="form-control" ng-model="uc.user.password" required>
 
 
-            <div class="row col-md-11 col-padding">
+        <label class="col-padding control-label">姓：</label>
 
-                <label class="col-md-1 col-padding control-label">姓：</label>
+        <input class="form-control" ng-model="uc.user.lastName">
+        <label class="col-padding control-label">名：</label>
 
-                <div class="col-md-3 col-padding">
-                    <input class="form-control" ng-model="uc.user.lastName">
-                </div>
-                <label class="col-md-1 col-padding control-label">名：</label>
+        <input class="form-control" ng-model="uc.user.firstName">
 
-                <div class="col-md-3 col-padding">
-                    <input class="form-control" ng-model="uc.user.firstName">
-                </div>
-            </div>
-            <div class="row col-md-11 col-padding">
+        <label class="col-padding control-label">邮箱：</label>
 
-                <label class="col-md-1 col-padding control-label">邮箱：</label>
+        <input class="form-control" type="email" ng-model="uc.user.email" required>
+        <label class="col-padding control-label">手机：</label>
 
-                <div class="col-md-3 col-padding">
-                    <input class="form-control" type="email" ng-model="uc.user.email" required>
-                </div>
-                <label class="col-md-1 col-padding control-label">手机：</label>
+        <input class="form-control" ng-model="uc.user.telephone">
 
-                <div class="col-md-3 col-padding">
-                    <input class="form-control" ng-model="uc.user.telephone">
-                </div>
-            </div>
+        <div class="form-group">
+          <label class="col-padding control-label">状态：</label>
+
+          <select class="form-control" ng-model="uc.user.status" required>
+            <option value="" selected>请选择</option>
+            <option value="Y">启用</option>
+            <option value="N">禁用</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="col-padding control-label">有效：</label>
+
+          <input type="checkbox" ng-model="uc.user.deleted" required>
+        </div>
 
 
-            <div class="row col-md-11 col-padding">
+        <label class="col-padding control-label">角色：</label>
 
-                <label class="col-md-1 col-padding control-label">状态：</label>
+        <select class="form-control" data-placeholder="请选择"
+                ng-model="uc.user.roleIds"
+                ng-options="role.id as role.name for role in uc.roles"
+                chosen multiple class="form-control">
+        </select>
 
-                <div class="col-md-3 col-padding">
-                    <select class="form-control" ng-model="uc.user.status" required>
-                        <option value="" selected>请选择</option>
-                        <option value="Y">启用</option>
-                        <option value="N">禁用</option>
-                    </select>
-                </div>
-                <label class="col-md-1 col-padding control-label">有效：</label>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success">确定</button>
+        <button class="btn btn-warning" ng-click="closeThisDialog('close')">取消</button>
+      </div>
+    </form>
 
-                <div class="col-md-3 col-padding">
-                    <input type="checkbox" ng-model="uc.user.deleted" required>
-                </div>
-            </div>
-            <div class="row col-md-11 col-padding">
-
-                <label class="col-md-1 col-padding control-label">角色：</label>
-
-                <div class="col-md-3 col-padding">
-                    <select data-placeholder="请选择"
-                            ng-model="uc.user.roleIds"
-                            ng-options="role.id as role.name for role in uc.roles"
-                            chosen multiple class="form-control">
-                    </select>
-                </div>
-
-            </div>
-
-            <div class="row col-md-11 col-padding text-right">
-                <div class="col-md-2 col-padding col-md-offset-6">
-                    <button type="submit" class="btn btn-success">确定</button>
-                    <a ui-sref="dashboard.user" class="btn btn-warning">取消</a>
-                </div>
-            </div>
-
-        </form>
-    </div>
-
+  </div>
 </div>

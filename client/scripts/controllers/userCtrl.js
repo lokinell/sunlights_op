@@ -2,7 +2,7 @@
   var UserCtrl;
 
   UserCtrl = (function () {
-    function UserCtrl($scope, $rootScope, $log, $location, UserService, RoleService, toaster) {
+    function UserCtrl($scope, $rootScope, $log, $location, UserService, RoleService, toaster, ngDialog) {
       this.$scope = $scope;
       this.$rootScope = $rootScope;
       this.$log = $log;
@@ -10,14 +10,15 @@
       this.UserService = UserService;
       this.RoleService = RoleService;
       this.toaster = toaster;
+      this.ngDialog = ngDialog;
       this.$log.debug("constructing UserCtrl");
       this.users = [];
-      this.user = this.$rootScope.user || {};
-      this.$rootScope.user = {};
+      this.user = this.$scope.user || {};
       this.pager = {};
       this.roles = [];
+      this.dialog = {};
       this.selectedRoleIds = [];
-      $scope.gridOptions = {
+      this.$scope.gridOptions = {
         data: 'pager.list',
         enablePaging: true,
         showFooter: true,
@@ -72,6 +73,7 @@
           }
         ]
       };
+
     }
 
     UserCtrl.prototype.initSave = function () {
@@ -128,18 +130,19 @@
 
     UserCtrl.prototype.saveUser = function () {
       this.$log.debug("saveUser()");
+      this.user = angular.copy(this.$scope.user);
       this.user.deleted = !this.user.deleted;
       return this.UserService.saveUser(this.user).then((function (_this) {
         return function (data) {
-          _this.$log.debug("save user successfully");
+          _this.findUsers();
+          _this.ngDialog.close();
           _this.toaster.pop('success', data.message.summary, data.message.detail);
-          return _this.$location.path("/dashboard/user");
+          return _this.$log.debug("save user successfully");
         };
       })(this), (function (_this) {
         return function (error) {
-          _this.$log.error("Unable to save user: " + error);
-          _this.toaster.pop('error', error.message.summary, error.message.detail);
-          return _this.error = error;
+          _this.$scope.error = error;
+          return _this.$log.error("Unable to save user: " + error);
         };
       })(this));
     };
@@ -160,17 +163,46 @@
     };
 
     UserCtrl.prototype.createUser = function () {
-      this.$log.debug("createUser()");
-      this.$rootScope.user.deleted = true;
-      return this.$location.path("/dashboard/user/save");
+      this.$scope.error = null;
+      this.$scope.user = {deleted: true};
+      this.dialog = this.ngDialog.open({
+        template: 'userSaveDialog',
+        scope: this.$scope,
+        preCloseCallback: (function (_this) {
+          return function (value) {
+            _this.$log.debug("preCloseCallback()");
+            if ('confirm' === value) {
+              _this.saveUser();
+              return false;
+            } else {
+              return true;
+            }
+          };
+        })(this)
+      });
+      return this.$log.debug("createUser()");
     };
 
     UserCtrl.prototype.updateUser = function (row) {
-      this.$log.debug("updateUser()");
-      this.user = row.entity;
-      this.$rootScope.user = this.user;
-      this.$rootScope.user.deleted = !this.user.deleted;
-      return this.$location.path("/dashboard/user/save");
+      this.$scope.user = angular.copy(row.entity);
+      this.$scope.user.deleted = !this.$scope.user.deleted;
+      this.$scope.error = null;
+      this.dialog = this.ngDialog.open({
+        template: 'userSaveDialog',
+        scope: this.$scope,
+        preCloseCallback: (function (_this) {
+          return function (value) {
+            _this.$log.debug("preCloseCallback()");
+            if ('confirm' === value) {
+              _this.saveUser();
+              return false;
+            } else {
+              return true;
+            }
+          };
+        })(this)
+      });
+      return this.$log.debug("updateUser()");
     };
 
     UserCtrl.prototype.deleteUser = function (row) {
