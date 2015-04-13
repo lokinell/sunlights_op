@@ -1,25 +1,26 @@
-
-<div class="row"  ng-controller="MessagePushConfigCtrl as dc"  >
+<div class="row"  ng-controller="MessagePushConfigCtrl as mc"  >
     <div class="row">
-
       <ol class="breadcrumb">
-        <li><a ui-sref="dashboard.messageConfig">系统管理</a></li>
+        <li><a ui-sref="dashboard.messageConfig">消息管理</a></li>
         <li class="active">推送计划配置</li>
       </ol>
     </div>
-    <div class="row ">
-        <div class="alert alert-danger" ng-show="!!dc.error">
-            <span ng-bind="dc.error.message.detail"></span>
-        </div>
-        <form class="form-inline" role="form">
 
-            <div class="well well-lg">
-                <div class="form-group well well-lg">
+    <div class="well well-lg">
+
+        <div class="alert alert-danger" ng-show="!!mc.error">
+            <span ng-bind="mc.error.message.detail"></span>
+        </div>
+
+        <div class="middle-layout">
+            <form class="form-inline" role="form">
+
+                <div class="form-group">
                     <label class="control-label">推送平台：</label>
                     <input type="text"  ng-init="count=0" class="form-control" ng-model="filterOptions.filterText.searchText1" placeholder="推送平台">&nbsp;&nbsp;
                     <label class="control-label">推送类型：</label>
                     <input type="text"  ng-init="count=0" class="form-control" ng-model="filterOptions.filterText.searchText2" placeholder="推送类型">
-                    <a class="btn btn-primary submit" ng-click="dc.createMessPush()">添加</a>
+                    <a class="btn btn-primary submit" ng-click="mc.createMessPush()">添加</a>
                 </div>
                 <br>
                 <br>
@@ -37,13 +38,86 @@
                         <input type="radio" value="" ng-model="filterOptions.filterText.searchText2"> 全部
                     </div>
                 </div>
+            </form>
+       </div>
 
-                <br>
-                <div class="gridStyle" ng-grid="gridOptions"></div>
-            </div>
-        </form>
+        <br>
+        <div class="gridStyle" ng-grid="gridOptions"></div>
+    </div>
+</div>
 
 
+<script type="text/ng-template" id="messagePushConfigModal.html">
+
+    <div class="modal-header">
+        <button aria-hidden="true" data-dismiss="modal" class="close" type="button" ng-click="cancel()">×</button>
+        <h4 id="messagePushConfigModal" class="modal-title">推送计划配置</h4>
+    </div>
+    <div class="alert alert-info" ng-show="!!error">
+        <span ng-bind="error.message.detail"></span>
+    </div>
+    <div class="modal-body">
+        <label class="control-label">配置描述：</label>
+        <input class="form-control" type="text" name="name" ng-model="pushConfig.remarks" required>
+
+        <label class="control-label">推送平台：</label>
+        <select class="form-control" ng-model="pushConfig.platform" required>
+            <option value="FP.PUSH.PLATFORM.1">ALL</option>
+            <option value="FP.PUSH.PLATFORM.2">Android</option>
+            <option value="FP.PUSH.PLATFORM.3">IOS</option>
+        </select>
+
+        <label class="control-label">推送类型：</label>
+        <select class="form-control" ng-model="pushConfig.pushType" >
+            <option value="" selected>-- 请选择 --</option>
+            <option value="FP.PUSH.TYPE.1">系统公告</option>
+            <option value="FP.PUSH.TYPE.2">活动公告</option>
+            <option value="FP.PUSH.TYPE.3">交易公告</option>
+        </select>
+
+        <label class="control-label">定时：</label>
+        <select class="form-control" ng-model="pushConfig.pushTimedInd" required>
+            <option value="Y">定时</option>
+            <option value="N">即时</option>
+        </select>
+
+        <label class="control-label">有效标志：</label>
+        <select class="form-control" ng-model="pushConfig.status" required>
+            <option value="Y">有效</option>
+            <option value="N">禁用</option>
+        </select>
+
+        <label class="control-label">计划开始时间：</label>
+        <div class="dropdown">
+            <a class="dropdown-toggle" id="beginDropdown" role="button" data-toggle="dropdown" data-target="#">
+                <div class="input-group">
+                    <input class="form-control" value="{{pushConfig.planBeginTime | date : 'yyyy-MM-dd HH:mm:ss'}}">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                </div>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker ng-model="pushConfig.planBeginTime"
+                                datetimepicker-config="{ dropdownSelector: '#beginDropdown'}"></datetimepicker>
+            </ul>
+        </div>
+
+        <label class="control-label">计划截至时间：</label>
+        <div class="dropdown">
+            <a class="dropdown-toggle" id="endDropdown" role="button" data-toggle="dropdown" data-target="#">
+                <div class="input-group">
+                    <input class="form-control" value="{{pushConfig.planEndTime | date : 'yyyy-MM-dd HH:mm:ss'}}">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                </div>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker ng-model="pushConfig.planEndTime"
+                                datetimepicker-config="{ dropdownSelector: '#endDropdown'}"></datetimepicker>
+            </ul>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()" >确定</button>
+        <button class="btn btn-primary" ng-click="cancel()" >关闭</button>
     </div>
 
-</div>
+</script>

@@ -21,6 +21,7 @@
     ExchangeBeanResultService.prototype.findExchangeBeanResults = function(condition) {
       var deferred;
       this.$log.debug("findExchangeBeanResults()");
+        this.$log.debug("findExchangeBeanResults()" + angular.toJson(condition));
       deferred = this.$q.defer();
       this.$http.get(baseUrl + "/exchangebeanresult", condition).success((function(_this) {
         return function(data, status, headers) {

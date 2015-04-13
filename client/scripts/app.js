@@ -683,39 +683,6 @@ angular
           }
         }
       })
-      .state('dashboard.messageConfigSave', {
-        templateUrl: 'views/messpushconfig/save.html',
-        url: '/messageConfig/save',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sbAdminApp',
-              files: [
-                'scripts/common/pageService.js',
-                'scripts/services/messagePushConfigService.js',
-                'scripts/controllers/messagePushConfigCtrl.js'
-              ]
-            })
-
-          }
-        }
-      })
-      .state('dashboard.messageConfigUpdate', {
-        templateUrl: 'views/messpushconfig/update.html',
-        url: '/messageConfig/update',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sbAdminApp',
-              files: [
-                'scripts/services/messagePushConfigService.js',
-                'scripts/controllers/messagePushConfigCtrl.js'
-              ]
-            })
-
-          }
-        }
-      })
       .state('dashboard.messageMapping', {
         templateUrl: 'views/messagemapping/messageMapping.html',
         url: '/messageMapping',
