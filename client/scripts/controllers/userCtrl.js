@@ -167,6 +167,7 @@
       this.$scope.user = {deleted: true};
       this.dialog = this.ngDialog.open({
         template: 'userSaveDialog',
+        className: 'ngdialog-theme-plain custom-width',
         scope: this.$scope,
         preCloseCallback: (function (_this) {
           return function (value) {
@@ -189,6 +190,7 @@
       this.$scope.error = null;
       this.dialog = this.ngDialog.open({
         template: 'userSaveDialog',
+        className: 'ngdialog-theme-plain custom-width',
         scope: this.$scope,
         preCloseCallback: (function (_this) {
           return function (value) {

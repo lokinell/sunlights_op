@@ -183,4 +183,8 @@ table tr td {
     }
 }
 
+.ngdialog.ngdialog-theme-plain.custom-width .ngdialog-content {
+  width: 700px;
+}
+
 
