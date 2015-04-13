@@ -2,7 +2,7 @@
   var RoleCtrl;
 
   RoleCtrl = (function () {
-    function RoleCtrl($scope, $rootScope, $log, $location, RoleService, ResourceService, TreeData, toaster) {
+    function RoleCtrl($scope, $rootScope, $log, $location, RoleService, ResourceService, TreeData, toaster, ngDialog) {
       this.$scope = $scope;
       this.$rootScope = $rootScope;
       this.$log = $log;
@@ -11,14 +11,15 @@
       this.ResourceService = ResourceService;
       this.TreeData = TreeData;
       this.toaster = toaster;
+      this.ngDialog = ngDialog;
       this.$log.debug("constructing RoleCtrl");
       this.roles = [];
-      this.role = this.$rootScope.role || {};
-      this.$rootScope.role = {};
+      this.role = this.$scope.role || {};
       this.pager = {};
-      this.tree = {};
+      this.tree = this.$scope.tree || {};
       this.menus = [];
-      $scope.gridOptions = {
+      this.dialog = {};
+      this.$scope.gridOptions = {
         data: 'pager.list',
         enablePaging: true,
         showFooter: true,
@@ -70,9 +71,10 @@
       this.$log.debug("findTree()");
       return this.ResourceService.findTree(this.role).then((function (_this) {
         return function (data) {
-          _this.$log.debug("Promise returned findTree");
+
           _this.menus[0] = data.value;
-          return _this.tree = new _this.TreeData([data.value]);
+          _this.tree = new _this.TreeData([data.value]);
+          return _this.$log.debug("Promise returned findTree");
         };
       })(this), (function (_this) {
         return function (error) {
@@ -99,39 +101,74 @@
       })(this));
     };
 
-    RoleCtrl.prototype.saveRole = function () {
+    RoleCtrl.prototype.saveRole = function (resourceIds) {
       this.$log.debug("saveRole()");
+      this.role = angular.copy(this.$scope.role);
       this.role.deleted = !this.role.deleted;
-      var resourceIds = [];
-      this.selectedTree(this.tree.tree[0], resourceIds);
+
       this.role.resourceIds = resourceIds;
       return this.RoleService.saveRole(this.role).then((function (_this) {
         return function (data) {
-          _this.$log.debug("save role successfully");
+          _this.findRoles();
+          _this.dialog.close();
           _this.toaster.pop('success', data.message.summary, data.message.detail);
-          return _this.$location.path("/dashboard/role");
+          return _this.$log.debug("save role successfully");
         };
       })(this), (function (_this) {
         return function (error) {
-          _this.$log.error("Unable to save role: " + error);
-          _this.toaster.pop('error', error.message.summary, error.message.detail);
-          return _this.error = error;
+          _this.$scope.error = error;
+          return _this.$log.error("Unable to save role: " + error);
         };
       })(this));
     };
 
     RoleCtrl.prototype.createRole = function () {
-      this.$log.debug("createRole()");
-      this.$rootScope.role.deleted = true;
-      return this.$location.path("/dashboard/role/save");
+      this.$scope.error = null;
+      this.$scope.role = {deleted: true};
+      this.dialog = this.ngDialog.open({
+        template: 'roleSaveDialog',
+        className: 'ngdialog-theme-plain custom-width',
+        scope: this.$scope,
+        preCloseCallback: (function (_this) {
+          return function (tree) {
+            _this.$log.debug("preCloseCallback()");
+            if (typeof(tree) === 'object') {
+              var resourceIds = [];
+              _this.selectedTree(tree.tree[0], resourceIds);
+              _this.saveRole(resourceIds);
+              return false;
+            } else {
+              return true;
+            }
+          };
+        })(this)
+      });
+      return this.$log.debug("createRole()");
     };
 
     RoleCtrl.prototype.updateRole = function (row) {
-      this.$log.debug("updateRole()");
       this.role = row.entity;
-      this.$rootScope.role = this.role;
-      this.$rootScope.role.deleted = !this.role.deleted;
-      return this.$location.path("/dashboard/role/save");
+      this.$scope.role = this.role;
+      this.$scope.role.deleted = !this.role.deleted;
+      this.dialog = this.ngDialog.open({
+        template: 'roleSaveDialog',
+        className: 'ngdialog-theme-plain custom-width',
+        scope: this.$scope,
+        preCloseCallback: (function (_this) {
+          return function (tree) {
+            _this.$log.debug("preCloseCallback()");
+            if (typeof(tree) === 'object') {
+              var resourceIds = [];
+              _this.selectedTree(tree.tree[0], resourceIds);
+              _this.saveRole(resourceIds);
+              return false;
+            } else {
+              return true;
+            }
+          };
+        })(this)
+      });
+      return this.$log.debug("updateRole()");
     };
 
     RoleCtrl.prototype.deleteRole = function (row) {

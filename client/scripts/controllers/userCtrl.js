@@ -135,7 +135,7 @@
       return this.UserService.saveUser(this.user).then((function (_this) {
         return function (data) {
           _this.findUsers();
-          _this.ngDialog.close();
+          _this.dialog.close();
           _this.toaster.pop('success', data.message.summary, data.message.detail);
           return _this.$log.debug("save user successfully");
         };
