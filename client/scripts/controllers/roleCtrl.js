@@ -147,8 +147,9 @@
     };
 
     RoleCtrl.prototype.updateRole = function (row) {
+      this.$scope.error = null;
       this.role = row.entity;
-      this.$scope.role = this.role;
+      this.$scope.role = angular.copy(this.role);
       this.$scope.role.deleted = !this.role.deleted;
       this.dialog = this.ngDialog.open({
         template: 'roleSaveDialog',
