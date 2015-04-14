@@ -13,14 +13,15 @@ var karma = require('karma').server;
 var del = require('del');
 var _ = require('lodash');
 var replace = require('gulp-replace');
+var file = require('gulp-file');
 var webdriverStandalone = require('gulp-protractor').webdriver_standalone;
 var webdriverUpdate = require('gulp-protractor').webdriver_update;
-var devBaseUrl = "http://192.168.0.93/op";
-var uatBaseUrl = "https://api-2.sunlights.me/api/op";
+var devBaseUrl = 'var baseUrl = "http://192.168.0.93/op"';
+var uatBaseUrl = 'var baseUrl =  "https://api-2.sunlights.me/api/op"';
+var prdBaseUrl = 'var baseUrl =  "https://api.sunlights.me/api/op"';
+var clean = require('gulp-clean');// run unit tests and watch files
 //update webdriver if necessary, this task will be used by e2e task
 gulp.task('webdriver:update', webdriverUpdate);
-
-// run unit tests and watch files
 gulp.task('tdd', function(cb) {
     karma.start(_.assign({}, karmaConfig, {
         singleRun: false,
@@ -215,9 +216,15 @@ gulp.task('uat-replace', function(){
     .pipe(gulp.dest(config.base+'/scripts'));
 });
 
+gulp.task('config-file-delete', function () {
+  gulp.src(config.base+'/scripts/config.js',{read: false})
+      .pipe(clean())
+});
+
+
 gulp.task('dev-replace', function(){
   gulp.src(config.base+'/scripts/config.js')
-    .pipe(replace(uatBaseUrl, devBaseUrl))
+    .pipe(replace('/**', devBaseUrl))
     .pipe(gulp.dest(config.base+'/scripts'));
 });
 
@@ -240,4 +247,19 @@ gulp.task('uat:dist', function(){
 
 gulp.task('dev:dist', function(){
   runSequence('dev-replace','dev-replace-env','build:dist');
+});
+
+
+gulp.task('create-config-uat', function() {
+    return file(config.base+'/scripts/config.js', uatBaseUrl, { src: true }).pipe(gulp.dest(""));
+});
+
+
+gulp.task('create-config-dev', function() {
+  return file(config.base+'/scripts/config.js', devBaseUrl, { src: true }).pipe(gulp.dest(""));
+});
+
+
+gulp.task('create-config-prd', function() {
+  return file(config.base+'/scripts/config.js', prdBaseUrl, { src: true }).pipe(gulp.dest(""));
 });
