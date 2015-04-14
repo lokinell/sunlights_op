@@ -2,7 +2,7 @@
   var ProductManageCtrl;
 
   ProductManageCtrl = (function () {
-    function ProductManageCtrl($scope, $rootScope, $log, $location, ProductService, CommonService, SupplierService, TaskService, toaster) {
+    function ProductManageCtrl($scope, $rootScope, $log, $location, ProductService, CommonService, SupplierService, TaskService, toaster, ngDialog) {
       this.$scope = $scope;
       this.$rootScope = $rootScope;
       this.$log = $log;
@@ -12,19 +12,20 @@
       this.SupplierService = SupplierService;
       this.TaskService = TaskService;
       this.toaster = toaster;
+      this.ngDialog = ngDialog;
       this.$log.debug("constructing ProductManageCtrl");
       this.manages = [];
       this.funds = [];
       this.codes = [];
       this.pager = {};
-      this.manage = this.$rootScope.manage || {};
-      this.$rootScope.manage = {};
+      this.manage = this.$scope.manage || {};
       this.productTypes = [];
       this.recommendTypes = [];
       this.recommendFlags = [];
       this.productStatuses = [];
       this.suppliers = [];
       this.$rootScope.canSubmit = true;
+      this.dialog = {};
       this.status = [
         {
           key: 'Y',
@@ -35,11 +36,15 @@
           value: '否'
         }
       ];
-      $scope.gridOptions = {
+      this.$scope.gridOptions = {
         data: 'pager.list',
         enablePaging: true,
         showFooter: true,
         multiSelect: false,
+        useExternalSorting: true,
+        i18n: "zh-cn",
+        enableColumnResize: true,
+        showColumnMenu: true,
         totalServerItems: 'pager.count',
         pagingOptions: {
           pageSizes: [5, 10, 15],
@@ -223,29 +228,49 @@
       if (this.$rootScope.canSubmit) {
         this.$rootScope.canSubmit = false;
         this.$log.debug("findProductManages()");
+        this.manage = angular.copy(this.$scope.manage);
         return this.ProductService.saveProductManage(this.manage).then((function (_this) {
           return function (data) {
-            _this.$log.debug("successfully save ProductManages");
+            _this.findProductManages();
+            _this.dialog.close();
             _this.toaster.pop('success', data.message.summary, data.message.detail);
-            return _this.$location.path("/dashboard/product");
+            _this.$rootScope.canSubmit = true;
+            return _this.$log.debug("successfully save ProductManages");
           };
         })(this), (function (_this) {
           return function (error) {
-            _this.$log.error("Unable to get ProductManages: " + error);
-            _this.toaster.pop('error', error.message.summary, error.message.detail);
-            return _this.error = error;
+            _this.$scope.error = error;
+            return _this.$log.error("Unable to get ProductManages: " + error);
+            ;
           };
         })(this));
       }
+
     };
 
     ProductManageCtrl.prototype.createProductManage = function () {
       this.$log.debug("createProductManage()");
+      this.$scope.error = null;
+      this.$scope.manage = null;
       if (this.code && this.code.code) {
         if (this.code.onSale === 1) {
-          this.$rootScope.manage.productCode = this.code.code;
-          this.$rootScope.manage.productName = this.code.value;
-          return this.$location.path("/dashboard/product/save");
+          this.$scope.manage = {productCode: this.code.code, productName: this.code.value}
+          return this.dialog = this.ngDialog.open({
+            template: 'productSaveDialog',
+            className: 'ngdialog-theme-plain product-width',
+            scope: this.$scope,
+            preCloseCallback: (function (_this) {
+              return function (value) {
+                _this.$log.debug("preCloseCallback()");
+                if ('confirm' === value) {
+                  _this.saveProductManage();
+                  return false;
+                } else {
+                  return true;
+                }
+              };
+            })(this)
+          });
         } else {
           return this.error = {
             message: {
@@ -262,15 +287,31 @@
       }
     };
 
-    ProductManageCtrl.prototype.updateProductManage = function (row) {
-      this.$log.debug("updateProductManage()");
-      this.$rootScope.manage = row.entity;
-      return this.$location.path("/dashboard/product/save");
+    ProductManageCtrl.prototype.updateProductManage = function (manage) {
+      this.$scope.error = null;
+      this.$scope.manage = angular.copy(manage);
+      this.dialog = this.ngDialog.open({
+        template: 'productSaveDialog',
+        className: 'ngdialog-theme-plain product-width',
+        scope: this.$scope,
+        preCloseCallback: (function (_this) {
+          return function (value) {
+            _this.$log.debug("preCloseCallback()");
+            if ('confirm' === value) {
+              _this.saveProductManage();
+              return false;
+            } else {
+              return true;
+            }
+          };
+        })(this)
+      });
+      return this.$log.debug("updateProductManage()");
     };
 
-    ProductManageCtrl.prototype.deleteProductManage = function (row) {
+    ProductManageCtrl.prototype.deleteProductManage = function (manage) {
       this.$log.debug("deleteProductManage()");
-      return this.ProductService.deleteProductManage(row.entity).then((function (_this) {
+      return this.ProductService.deleteProductManage(manage).then((function (_this) {
         return function (data) {
           _this.$log.debug("successfully delete ProductManage");
           _this.toaster.pop('success', data.message.summary, data.message.detail);
@@ -285,9 +326,9 @@
       })(this));
     };
 
-    ProductManageCtrl.prototype.grabProfitHistoryByCode = function (row) {
+    ProductManageCtrl.prototype.grabProfitHistoryByCode = function (manage) {
       this.$log.debug("grabProfitHistoryByCode()");
-      return this.ProductService.grabProfitHistoryByCode(row.entity).then((function (_this) {
+      return this.ProductService.grabProfitHistoryByCode(manage).then((function (_this) {
         return function (data) {
           _this.$log.debug("grab Profit History By Code");
           _this.toaster.pop('success', data.message.summary, data.message.detail);

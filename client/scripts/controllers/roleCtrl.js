@@ -24,6 +24,10 @@
         enablePaging: true,
         showFooter: true,
         multiSelect: false,
+        useExternalSorting: true,
+        i18n: "zh-cn",
+        enableColumnResize: true,
+        showColumnMenu: true,
         totalServerItems: 'pager.count',
         pagingOptions: {
           pageSizes: [5, 10, 15],

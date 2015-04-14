@@ -186,5 +186,8 @@ table tr td {
 .ngdialog.ngdialog-theme-plain.custom-width .ngdialog-content {
   width: 700px;
 }
+.ngdialog.ngdialog-theme-plain.product-width .ngdialog-content {
+  width: 750px;
+}
 
 
