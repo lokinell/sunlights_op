@@ -1,90 +1,116 @@
 <div class="row" ng-controller="TaskCtrl as tc">
-        <h1>编辑任务</h1>
-        <div class="alert alert-danger" ng-show="!!tc.error">
-            <h4 class="alert-heading">操作失败</h4>
-            <span ng-bind="tc.error.message.detail"></span>
+  <div class="dialog-contents">
+    <form role="form" class="form-horizontal" ng-submit="closeThisDialog('confirm')">
+      <div class="modal-header">
+        <h4 class="modal-title">任务详情</h4>
+      </div>
+      <div class="alert alert-danger" ng-show="!!error">
+        <h4 class="alert-heading">操作失败</h4>
+        <span ng-bind="error.message.detail"></span>
+      </div>
+      <div class="modal-body col-md-12">
+        <div class="row form-row">
+          <div class="col-md-2">
+            <label class="control-label">任务名称：</label>
+          </div>
+          <div class="col-md-4">
+            <input class="form-control" ng-disabled="tc.task.isEdit" type="text" name="jobName"
+                   ng-model="tc.task.jobName" required>
+          </div>
+          <div class="col-md-2">
+            <label class="control-label">执行类：</label>
+          </div>
+          <div class="col-md-4">
+            <select class="form-control" ng-model="tc.task.jobClass" required
+                    ng-options="item.key as item.value for item in tc.jobClasses">
+              <option value="" selected>请选择</option>
+            </select>
+          </div>
         </div>
-        <div class="well well-lg container" style="width: 100%;">
-          <form id="taskForm" name="taskForm" role="form" ng-submit="tc.saveTask()">
-              <legend class="col-md-10">基本信息</legend>
-
-              <div class="row form-row">
-                <div class="col-md-3 form-label"><label class="control-label">任务名称：</label></div>
-                <div class="col-md-3"><input class="form-control" ng-disabled="tc.task.isEdit" type="text" name="jobName" ng-model="tc.task.jobName" required></div>
-                <div class="col-md-3 form-label"><label class="control-label">任务执行类：</label></div>
-                <div class="col-md-3">
-                    <select class="form-control" ng-model="tc.task.jobClass" required
-                            ng-options="item.key as item.value for item in tc.jobClasses">
-                      <option value="" selected>请选择</option>
-                    </select>
+        <div class="row form-row">
+          <div class="col-md-2">
+            <label class="control-label">执行时间：</label>
+          </div>
+          <div class="col-md-4">
+            <div class="dropdown">
+              <a class="dropdown-toggle" id="jobStartTime" role="button" data-toggle="dropdown" data-target="#">
+                <div class="input-group">
+                  <input class="form-control" value="{{tc.task.jobStartTime | date : 'yyyy-MM-dd HH:mm:ss'}}" required>
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
-              </div>
-
-              <div class="row form-row">
-                  <div class="col-md-3 form-label"><label class="control-label">任务执行时间：</label></div>
-                  <div class="col-md-3"><input class="form-control" ui-date name="jobStartTime" required ng-model="tc.task.jobStartTime"></div>
-              </div>
-
-              <div class="row form-row">
-                  <div class="col-md-3 form-label"><label class="control-label">秒：</label></div>
-                  <div class="col-md-3">
-                      <select class="form-control" ng-model="tc.task.seconds" required
-                                                ng-options="item for item in tc.seconds">
-                          <option value="" selected>请选择</option>
-                      </select>
-                  </div>
-                  <div class="col-md-3 form-label"><label class="control-label">分：</label></div>
-                  <div class="col-md-3">
-                      <select class="form-control" ng-model="tc.task.minutes" required
-                              ng-options="item.key as item.value for item in tc.minutes">
-                        <option value="" selected>请选择</option>
-                      </select>
-                  </div>
-              </div>
-
-              <div class="row form-row">
-                <div class="col-md-3 form-label"><label class="control-label">时：</label></div>
-                <div class="col-md-3">
-                  <select class="form-control" ng-model="tc.task.hours" required
-                          ng-options="item for item in tc.hours">
-                    <option value="" selected>请选择</option>
-                  </select>
-                </div>
-                <div class="col-md-3 form-label"><label class="control-label">天：</label></div>
-                <div class="col-md-3">
-                  <select class="form-control" ng-model="tc.task.dayOfMonth" required
-                          ng-options="item for item in tc.dayOfMonth">
-                    <option value="" selected>请选择</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="row form-row">
-                <div class="col-md-3 form-label"><label class="control-label">月：</label></div>
-                <div class="col-md-3">
-                  <select class="form-control" ng-model="tc.task.month" required
-                          ng-options="item for item in tc.month">
-                    <option value="" selected>请选择</option>
-                  </select>
-                </div>
-                <div class="col-md-3 form-label"><label class="control-label">周：</label></div>
-                <div class="col-md-3">
-                  <select class="form-control" ng-model="tc.task.dayOfWeek" required
-                          ng-options="item for item in tc.dayOfWeek">
-                    <option value="" selected>请选择</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="row form-row">
-                <div class="col-md-6 form-submit-btn">
-                    <button type="submit" class="btn btn-success">确定</button>
-                </div>
-                <div class="col-md-6 ">
-                  <a ui-sref="dashboard.tasks" class="btn btn-warning">取消</a>
-                </div>
-              </div>
-          </form>
+              </a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker ng-model="tc.task.jobStartTime"
+                                datetimepicker-config="{ dropdownSelector: '#jobStartTime'}"></datetimepicker>
+              </ul>
+            </div>
+          </div>
         </div>
-
+        <div class="row form-row">
+          <div class="col-md-2">
+            <label class="control-label">秒：</label>
+          </div>
+          <div class="col-md-4">
+            <select class="form-control" ng-model="tc.task.seconds" required
+                    ng-options="item for item in tc.seconds">
+              <option value="" selected>请选择</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label class="control-label">分：</label>
+          </div>
+          <div class="col-md-4">
+            <select class="form-control" ng-model="tc.task.minutes" required
+                    ng-options="item.key as item.value for item in tc.minutes">
+              <option value="" selected>请选择</option>
+            </select>
+          </div>
+        </div>
+        <div class="row form-row">
+          <div class="col-md-2">
+            <label class="control-label">时：</label>
+          </div>
+          <div class="col-md-4">
+            <select class="form-control" ng-model="tc.task.hours" required
+                    ng-options="item for item in tc.hours">
+              <option value="" selected>请选择</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label class="control-label">天：</label>
+          </div>
+          <div class="col-md-4">
+            <select class="form-control" ng-model="tc.task.dayOfMonth" required
+                    ng-options="item for item in tc.dayOfMonth">
+              <option value="" selected>请选择</option>
+            </select>
+          </div>
+        </div>
+        <div class="row form-row">
+          <div class="col-md-2">
+            <label class="control-label">月：</label>
+          </div>
+          <div class="col-md-4">
+            <select class="form-control" ng-model="tc.task.month" required
+                    ng-options="item for item in tc.month">
+              <option value="" selected>请选择</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label class="control-label">周：</label>
+          </div>
+          <div class="col-md-4">
+            <select class="form-control" ng-model="tc.task.dayOfWeek" required
+                    ng-options="item for item in tc.dayOfWeek">
+              <option value="" selected>请选择</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success">确定</button>
+        <button class="btn btn-warning" ng-click="closeThisDialog('close')">取消</button>
+      </div>
+    </form>
+  </div>
 </div>
