@@ -20,7 +20,10 @@
         enablePaging: true,
         showFooter: true,
         multiSelect: false,
+        useExternalSorting: true,
         i18n: "zh-cn",
+        enableColumnResize: true,
+        showColumnMenu: true,
         totalServerItems: 'pager.count',
         pagingOptions: {
           pageSizes: [5, 10, 15],
@@ -30,7 +33,7 @@
         columnDefs: [
           {
             field: 'supplierCode',
-            displayName: '供应商编号'
+            displayName: '编号'
           }, {
             field: 'merchantName',
             displayName: '商家名称'
@@ -39,7 +42,7 @@
             displayName: '商家简称'
           }, {
             field: 'belongAddress',
-            displayName: '商家归属详细地址'
+            displayName: '归属地址'
           }, {
             field: 'contactCallno',
             displayName: '联系电话'
@@ -48,7 +51,7 @@
             displayName: '企业性质'
           }, {
             field: 'regAddress',
-            displayName: '注册详细地址'
+            displayName: '注册地址'
           }, {
             field: "createTime",
             displayName: '创建时间'
