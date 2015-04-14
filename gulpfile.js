@@ -216,7 +216,7 @@ gulp.task('uat-replace', function(){
     .pipe(gulp.dest(config.base+'/scripts'));
 });
 
-gulp.task('config-file-delete', function () {
+gulp.task('delete-config-file', function () {
   gulp.src(config.base+'/scripts/config.js',{read: false})
       .pipe(clean())
 });
@@ -241,14 +241,16 @@ gulp.task('dev-replace-env', function(){
 });
 
 gulp.task('uat:dist', function(){
-  runSequence('uat-replace','uat-replace-env','build:dist');
+  runSequence('create-config-uat','uat-replace-env','build:dist');
 });
-
 
 gulp.task('dev:dist', function(){
-  runSequence('dev-replace','dev-replace-env','build:dist');
+  runSequence('create-config-dev','dev-replace-env','build:dist');
 });
 
+gulp.task('prd:dist', function(){
+  runSequence('create-config-prd','dev-replace-env','build:dist');
+});
 
 gulp.task('create-config-uat', function() {
     return file(config.base+'/scripts/config.js', uatBaseUrl, { src: true }).pipe(gulp.dest(""));
