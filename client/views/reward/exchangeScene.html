@@ -6,72 +6,121 @@
             <li class="active">兑换场景列表</li>
         </ol>
     </div>
-    <div class="row">
-        <form class="form-inline" role="form">
-  <!--          <div>
-                <p class="text-right">
-                    <a class="btn btn-primary submit" ng-click="dc.findExchangeScenes()">查询</a>
-                    <a class="btn btn-primary submit" ng-click="open()">添加</a>
-                </p>
-            </div>-->
 
-
-            <div class="well well-lg">
-                <div class="form-group well well-lg">
+    <div class="well well-lg">
+        <div class="middle-layout">
+            <form class="form-inline " role="form">
+                <div class="form-group">
                     <label class="control-label">查询：</label>
                     <input type="text" class="form-control" ng-model="filterOptions.filterText.searchText1" placeholder="请输入你想查询的数据">
                     <a class="btn btn-primary submit" ng-click="open()">添加</a>
                 </div>
-                <br>   <br>
-                <div class="gridStyle" ng-grid="gridOptions"></div>
-            </div>
-        </form>
+            </form>
+        </div>
+        <div class="gridStyle" ng-grid="gridOptions"></div>
     </div>
 
     <script type="text/ng-template" id="modalContent.html">
         <div class="modal-header">
             <button aria-hidden="true" data-dismiss="modal" class="close" type="button" ng-click="cancel()">×</button>
-            <h4 id="myModalLabel" class="modal-title">奖励类型</h4>
+            <h4 id="myModalLabel" class="modal-title">兑换场景</h4>
         </div>
         <form role="form" ng-submit="ok()">
-        <div class="modal-body">
-                <label class="control-label">编码：</label>
-                <input class="form-control" type="text" name="code" required
-                       ng-model="row.scene">
-                <label class="control-label">名称：</label>
-                <input class="form-control" type="text" name="name" required
-                       ng-model="row.title">
-                <label class="control-label">状态：</label>
-                <select class="form-control" ng-model="row.status"
-                        ng-options="item.key as item.value for item in constant.status" required>
-                </select>
-                <label class="control-label">奖励类型：</label>
-                <select class="form-control" ng-model="row.rewardType"
-                        ng-options="item.key as item.value for item in constant.rewardTypes" required>
-                </select>
-                <label class="control-label">活动类型：</label>
-                <select class="form-control" ng-model="row.activityType"
-                        ng-options="item.key as item.value for item in constant.activityTypes" required>
-                </select>
-                <label class="control-label">兑换类型：</label>
-                <select class="form-control" ng-model="row.exchangeType"
-                        ng-options="item.key as item.value for item in constant.exchangeTypes" required>
-                </select>
-                <label class="control-label">所需数量：</label>
-                <input class="form-control" type="text" name="unit" required
-                       ng-model="row.requireAmt">
-                <label class="control-label">兑换数量：</label>
-                <input class="form-control" type="text" name="unit"
-                       ng-model="row.exchangedAmt">
-                <label class="control-label">兑换限额：</label>
-                <input class="form-control" type="text" name="unit" required
-                       ng-model="row.exchangeLimit">
-                <label class="control-label">到账期限：</label>
-                <input class="form-control" type="text" name="unit" required
-                    ng-model="row.timeLimit">
-                <label class="control-label">LOGO_URL：</label>
-                <input class="form-control" type="text" name="unit" required
+        <div class="modal-body container col-md-12">
+            <div class="row form-row">
+                <div class="col-md-3 form-label">
+                    <label class="control-label">编码：</label>
+                </div>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" name="code" required
+                           ng-model="row.scene">
+                </div>
+                <div class="col-md-3 form-label">
+                    <label class="control-label">名称：</label>
+                </div>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" name="name" required
+                           ng-model="row.title">
+                </div>
+            </div>
+            <div class="row form-row">
+                <div class="col-md-3 form-label">
+                    <label class="control-label">到账期限：</label>
+                </div>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" name="unit" required
+                           ng-model="row.timeLimit">
+                </div>
+                <div class="col-md-3 form-label">
+                    <label class="control-label">状态：</label>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-control" ng-model="row.status"
+                            ng-options="item.key as item.value for item in constant.status" required>
+                    </select>
+                </div>
+            </div>
+            <div class="row form-row">
+                <div class="col-md-3 form-label">
+                    <label class="control-label">奖励类型：</label>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-control" ng-model="row.rewardType"
+                            ng-options="item.key as item.value for item in constant.rewardTypes" required>
+                    </select>
+                </div>
+                <div class="col-md-3 form-label">
+                    <label class="control-label">活动类型：</label>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-control" ng-model="row.activityType"
+                            ng-options="item.key as item.value for item in constant.activityTypes" required>
+                    </select>
+                </div>
+            </div>
+            <div class="row form-row">
+                <div class="col-md-3 form-label">
+                    <label class="control-label">兑换类型：</label>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-control" ng-model="row.exchangeType"
+                            ng-options="item.key as item.value for item in constant.exchangeTypes" required>
+                    </select>
+                </div>
+                <div class="col-md-3 form-label">
+                    <label class="control-label">所需数量：</label>
+                </div>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" name="unit" required
+                           ng-model="row.requireAmt">
+                </div>
+            </div>
+            <div class="row form-row">
+                <div class="col-md-3 form-label">
+                    <label class="control-label">兑换数量：</label>
+                </div>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" name="unit"
+                           ng-model="row.exchangedAmt">
+                </div>
+                <div class="col-md-3 form-label">
+                    <label class="control-label">兑换限额：</label>
+                </div>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" name="unit" required
+                           ng-model="row.exchangeLimit">
+                </div>
+            </div>
+
+            <div class="row form-row">
+              <div class="col-md-3 form-label">
+                  <label class="control-label">LOGO_URL：</label>
+              </div>
+              <div class="col-md-9">
+                <input class="form-control" type="text" name="logo" required
                        ng-model="row.logo">
+              </div>
+            </div>
         </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-success">确定</button>

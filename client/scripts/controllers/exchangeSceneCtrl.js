@@ -126,7 +126,8 @@
           modalInstance = _this.$modal.open({
             templateUrl: "modalContent.html",
             controller: "ExchangeSceneModalInstanceCtrl",
-            resolve: {
+              windowClass : "popup-window",
+              resolve: {
               selectedRow: function() {
                 if (isEditing) {
                   return _this.exchangeScene;

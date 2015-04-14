@@ -1,84 +1,73 @@
-<div class="row" ng-controller="MessageRuleMappingCtrl as dc" >
+<div class="row" ng-controller="MessageRuleMappingCtrl as mc" >
     <div class="row">
-        <h1 class="text-info">
-            规则和活动映射管理
-        </h1>
-        <hr>
+        <ol class="breadcrumb">
+            <li><a>消息管理</a></li>
+            <li class="active">规则和活动映射管理</li>
+        </ol>
     </div>
-    <div class="row">
-        <div class="alert alert-danger" ng-show="!!dc.error">
-            <span ng-bind="dc.error.message.detail"></span>
-        </div>
-        <form class="form-inline" role="form">
-            <div class="well well-lg">
-                <div class="form-group well well-lg">
+    <div class="well well-lg">
+        <div class="middle-layout">
+            <form class="form-inline" role="form">
+                <div class="form-group">
                     <label class="control-label">查询：</label>
                     <input type="text" class="form-control" ng-model="filterOptions.filterText.searchText1" placeholder="请输入你想查询的数据">
                     <a class="btn btn-primary submit" ng-click="addRule()">添加</a>
                 </div>
-                 <br>
-                 <br>
-                <div class="gridStyle" ng-grid="gridOptions"></div>
-
-            </div>
-        </form>
-
-
-
-        <script type="text/ng-template" id="messagePushMappingModel.html">
-
-            <div class="modal-header">
-                <button aria-hidden="true" data-dismiss="modal" class="close" type="button" ng-click="cancel()">×</button>
-                <h4 id="parameterModal" class="modal-title">添加数据</h4>
-            </div>
-            <div class="alert alert-info" ng-show="!!error">
-                <span ng-bind="error.message.detail"></span>
-            </div>
-            <div class="modal-body">
-                <label class="control-label">调用方法名：</label>
-                <input class="form-control" type="text" name="name"
-                       ng-model="dict.methodName">
-                <label class="control-label">规则编码：</label>
-                <input class="form-control" type="text" name="value"
-                       ng-model="dict.ruleCode">
-                <label class="control-label">活动场景：</label>
-                <select class="form-control" ng-model="dict.scene" ng-change="getActivityIdByScene(dict.scene)"
-                        ng-options="item.key as item.value for item in constant.activityScene" >
-                    <option value="">-- 请选择 --</option>
-                </select>
-                <label class="control-label">活动ID：</label>
-                <select class="form-control" ng-model="dict.activityId"
-                        ng-options="item.keys as item.value for item in constant.activityId" >
-                    <option value="">-- 请选择 --</option>
-                </select>
-                <label class="control-label">推送类型：</label>
-
-                <select class="form-control" ng-model="dict.messageType" >
-                    <option value="" selected>-- 请选择 --</option>
-                    <option value="FP.PUSH.TYPE.1">系统公告</option>
-                    <option value="FP.PUSH.TYPE.2">活动公告</option>
-                    <option value="FP.PUSH.TYPE.3">交易公告</option>
-                    <option value="FP.PUSH.TYPE.4">登录提示公告</option>
-                </select>
-
-                <label class="control-label">有效标志：</label>
-                <select class="form-control" ng-model="dict.status" >
-                    <option value="Y">有效</option>
-                    <option value="N">禁用</option>
-                </select>
-
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" ng-click="ok()" >确定</button>
-                <button class="btn btn-primary" ng-click="cancel()" >关闭</button>
-            </div>
-
-        </script>
-
-
+            </form>
+        </div>
+        <div class="gridStyle" ng-grid="gridOptions"></div>
     </div>
-
-
-
-
 </div>
+
+
+<script type="text/ng-template" id="messagePushMappingModal.html">
+
+    <div class="modal-header">
+        <button aria-hidden="true" data-dismiss="modal" class="close" type="button" ng-click="cancel()">×</button>
+        <h4 id="parameterModal" class="modal-title">规则和活动映射管理</h4>
+    </div>
+    <div class="alert alert-info" ng-show="!!error">
+        <span ng-bind="error.message.detail"></span>
+    </div>
+    <form role="form" >
+        <div class="modal-body">
+            <label class="control-label">调用方法名：</label>
+            <input class="form-control" type="text" name="name" required
+                   ng-model="msgPushMapping.methodName">
+            <label class="control-label">规则编码：</label>
+            <input class="form-control" type="text" name="value" required
+                   ng-model="msgPushMapping.ruleCode">
+            <label class="control-label">活动场景：</label>
+            <select class="form-control" ng-model="msgPushMapping.scene" ng-change="getActivityIdByScene(dict.scene)"
+                    ng-options="item.key as item.value for item in constant.activityScene" required>
+                <option value="">-- 请选择 --</option>
+            </select>
+            <label class="control-label">活动ID：</label>
+            <select class="form-control" ng-model="msgPushMapping.activityId"
+                    ng-options="item.keys as item.value for item in constant.activityId" required>
+                <option value="">-- 请选择 --</option>
+            </select>
+            <label class="control-label">推送类型：</label>
+
+            <select class="form-control" ng-model="msgPushMapping.messageType" required>
+                <option value="" selected>-- 请选择 --</option>
+                <option value="FP.PUSH.TYPE.1">系统公告</option>
+                <option value="FP.PUSH.TYPE.2">活动公告</option>
+                <option value="FP.PUSH.TYPE.3">交易公告</option>
+                <option value="FP.PUSH.TYPE.4">登录提示公告</option>
+            </select>
+
+            <label class="control-label">有效标志：</label>
+            <select class="form-control" ng-model="msgPushMapping.status" required>
+                <option value="Y">有效</option>
+                <option value="N">禁用</option>
+            </select>
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()" >确定</button>
+            <button class="btn btn-primary" ng-click="cancel()" >关闭</button>
+        </div>
+    </form>
+
+</script>

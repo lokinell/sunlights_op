@@ -33,6 +33,7 @@ var PageService = function ($scope, $http ,$timeout) {
     $scope.totalServerItems = 0;
 
     $scope.setPagingData = function (data, page, pageSize) {
+        console.info(data);
         var pagedData = data.slice((page - 1) * pageSize, page * pageSize);
         $scope.myData = pagedData;
         $scope.totalServerItems = data.length;
@@ -127,6 +128,7 @@ var PageService = function ($scope, $http ,$timeout) {
         multiSelect:false,
         data: 'myData',
         enablePaging: true,
+        i18n: "zh-cn",
         showFooter: true,
         totalServerItems: 'totalServerItems',
         pagingOptions: $scope.pagingOptions,

@@ -1,140 +1,162 @@
 (function() {
-  var MessagePushConfigCtrl;
+    var MessagePushConfigCtrl;
 
-  MessagePushConfigCtrl = (function() {
-    function MessagePushConfigCtrl($modal, $rootScope, $http, $timeout, $log, $scope, $location, MessagePushConfigService) {
-      this.$modal = $modal;
-      this.$rootScope = $rootScope;
-      this.$http = $http;
-      this.$timeout = $timeout;
-      this.$log = $log;
-      this.$scope = $scope;
-      this.$location = $location;
-      this.MessagePushConfigService = MessagePushConfigService;
-      this.$log.debug("constructing MessagePushCtrl");
-      this.pager = {
-        filter: {
-          EQS_status: ''
-        },
-        index: 0,
-        pageSize: 2,
-        pageNum: 1
-      };
-      this.dicts = [];
-      this.dict = this.$rootScope.dict || {};
-      this.$rootScope.dict = {};
-      this.$scope.constant = {
-        messpushconfigid: [],
-        groupid: []
-      };
-      this.$scope.pageSizes = [5, 10, 20];
-      this.$scope.columnDefs = [
-        {
-          field: "remarks",
-          displayName: "配置描述"
-        }, {
-          field: "platformdes",
-          displayName: "推送平台"
-        }, {
-          field: "pushtypedes",
-          displayName: "推送类型"
-        }, {
-          field: "planbegintime",
-          displayName: "推送计划开始时"
-        }, {
-          field: "planendtime",
-          displayName: "推送计划截至时"
-        }, {
-          field: "pushtimed",
-          displayName: "是否定时",
-          cellTemplate: "<div class='ngCellText' ng-class='col.colIndex()'><span>{{row.entity.pushtimed== 'Y' ? '是' : '否'}}</span></div>"
-        }, {
-          field: "status",
-          displayName: "有效标志",
-          cellTemplate: "<div class='ngCellText' ng-class='col.colIndex()'><span>{{row.entity.status== 'Y' ? '是' : '否'}}</span></div>"
-        }, {
-          field: "createtime",
-          displayName: "创建时间",
-          cellFilter: "date:\"yyyy-MM-dd \""
-        }, {
-          field: "updatetime",
-          displayName: "修改时间",
-          cellFilter: "date:\"yyyy-MM-dd \""
-        }, {
-          field: "locked",
-          displayName: "操作",
-          cellTemplate: "views/messpushconfig/messagePushConfigCell.html"
+    MessagePushConfigCtrl = (function() {
+        function MessagePushConfigCtrl($modal, $rootScope, $http, $timeout, $log, $scope, $location, MessagePushConfigService) {
+            this.$modal = $modal;
+            this.$rootScope = $rootScope;
+            this.$http = $http;
+            this.$timeout = $timeout;
+            this.$log = $log;
+            this.$scope = $scope;
+            this.$location = $location;
+            this.MessagePushConfigService = MessagePushConfigService;
+            this.pager = {
+                index: 0,
+                pageSize: 2,
+                pageNum: 1
+            };
+            this.pushConfig = {};
+            this.$scope.pageSizes = [10, 20, 30];
+            this.$scope.columnDefs = [
+                {
+                    field: "remarks",
+                    displayName: "配置描述"
+                }, {
+                    field: "platformDes",
+                    displayName: "推送平台"
+                }, {
+                    field: "pushTypeDes",
+                    displayName: "推送类型"
+                }, {
+                    field: "planBeginTime",
+                    displayName: "推送计划开始时",
+                    cellFilter: "date:\"yyyy-MM-dd HH:mm\""
+                }, {
+                    field: "planEndTime",
+                    displayName: "推送计划截至时",
+                    cellFilter: "date:\"yyyy-MM-dd HH:mm\""
+                }, {
+                    field: "pushTimedInd",
+                    displayName: "是否定时",
+                    cellTemplate: "<div class='ngCellText' ng-class='col.colIndex()'><span>{{row.entity.pushTimedInd== 'Y' ? '是' : '否'}}</span></div>"
+                }, {
+                    field: "status",
+                    displayName: "有效标志",
+                    cellTemplate: "<div class='ngCellText' ng-class='col.colIndex()'><span>{{row.entity.status== 'Y' ? '是' : '否'}}</span></div>"
+                }, {
+                    field: "operate",
+                    displayName: "操作",
+                    cellTemplate: "views/messpushconfig/messagePushConfigCell.html"
+                }
+            ];
+            this.$scope.pageUrl =baseUrl+ "/message/configs";
+            new PageService(this.$scope, this.$http, this.$timeout);
+
+            this.$scope.openMsgPushConfigModal = (function(_this) {
+                return function(isEditing) {
+                    var modalInstance;
+                    modalInstance = _this.$modal.open({
+                        templateUrl: "messagePushConfigModal.html",
+                        controller: "MessagePushConfigModalCtrl",
+                        resolve: {
+                            selectedRow: function() {
+                                return _this.pushConfig;
+                            }
+                        }
+                    });
+                    return modalInstance.result.then((function(selectedItem) {
+                        return _this.$scope.selected = selectedItem;
+                    }), function() {
+                        return _this.$log.debug("Modal dismissed at: " + new Date());
+                    });
+                };
+            })(this);
         }
-      ];
-      this.$scope.pageUrl =baseUrl+ "/message/configs";
-      new PageService(this.$scope, this.$http, this.$timeout);
-    }
 
-    MessagePushConfigCtrl.prototype.findmesspushconfig = function() {
-      this.$log.debug("findmesspushconfig()");
-      return this.MessagePushConfigService.findmesspushconfig(this.pager).then((function(_this) {
-        return function(data) {
-          _this.$log.debug("Promise returned " + data.length + " MessagePush");
-          _this.pager = data;
-          return _this.dicts = data.list;
+        MessagePushConfigCtrl.prototype.findMessPushConfig = function() {
+            this.$log.debug("findMessPushConfig()");
+            return this.MessagePushConfigService.findMessPushConfig(this.pager).then((function(_this) {
+                return function(data) {
+                    _this.$log.debug("Promise returned " + data.length + " MessagePush");
+                    _this.pager = data;
+                    return _this.dicts = data.list;
+                };
+            })(this), (function(_this) {
+                return function(error) {
+                    _this.$log.error("Unable to get findMessPushConfig: " + error);
+                    return _this.error = error;
+                };
+            })(this));
         };
-      })(this), (function(_this) {
-        return function(error) {
-          _this.$log.error("Unable to get findmesspushconfig: " + error);
-          return _this.error = error;
+
+        MessagePushConfigCtrl.prototype.updateMessPush = function(pushConfig) {
+            this.$log.debug("updateMessPush()");
+            this.pushConfig = pushConfig;
+            this.pushConfig = this.pushConfig;
+            return this.$scope.openMsgPushConfigModal(true);
         };
-      })(this));
-    };
 
-    MessagePushConfigCtrl.prototype.updateMessPush = function(dict) {
-      this.$log.debug("updateMessPush()");
-      this.dict = dict;
-      this.$rootScope.dict = this.dict;
-      return this.$location.path("/dashboard/messageConfig/update");
-    };
-
-    MessagePushConfigCtrl.prototype.createMessPush = function() {
-      this.$log.debug("createMessPush()");
-      this.dict.status = "Y";
-      this.$rootScope.dict = this.dict;
-      return this.$location.path("/dashboard/messageConfig/save");
-    };
-
-    MessagePushConfigCtrl.prototype.saveMessPush = function() {
-      this.$log.debug("saveMessPush()");
-      return this.MessagePushConfigService.saveMessPush(this.dict).then((function(_this) {
-        return function(data) {
-          _this.$log.debug("save messpushconfig successfully");
-          return _this.$location.path("/dashboard/messageConfig");
+        MessagePushConfigCtrl.prototype.createMessPush = function() {
+            this.$log.debug("createMessPush()");
+            this.pushConfig.status = "Y";
+            this.pushConfig.pushTimedInd = "N";
+            this.pushConfig.platform = 'FP.PUSH.PLATFORM.1';
+            return this.$scope.openMsgPushConfigModal(false);
         };
-      })(this), (function(_this) {
-        return function(error) {
-          _this.$log.error("Unable to save MessPush: " + error);
-          return _this.error = error;
+
+        MessagePushConfigCtrl.prototype.saveMessPush = function() {
+            this.$log.debug("saveMessPush()");
+            return this.MessagePushConfigService.saveMessPush(this.pushConfig).then((function(_this) {
+                return function(data) {
+                    _this.$log.debug("save pushConfig successfully");
+                    return _this.$location.path("/dashboard/messageConfig");
+                };
+            })(this), (function(_this) {
+                return function(error) {
+                    _this.$log.error("Unable to save MessPush: " + error);
+                    return _this.error = error;
+                };
+            })(this));
         };
-      })(this));
-    };
 
-    MessagePushConfigCtrl.prototype.modifyMessPush = function() {
-      this.$log.debug("modifyMessPush()");
-      return this.MessagePushConfigService.modifyMessPush(this.dict).then((function(_this) {
-        return function(data) {
-          _this.$log.debug("modify messpushconfig successfully");
-          return _this.$location.path("/dashboard/messageConfig");
+        MessagePushConfigCtrl.prototype.modifyMessPush = function() {
+            this.$log.debug("modifyMessPush()");
+            return this.MessagePushConfigService.modifyMessPush(this.pushConfig).then((function(_this) {
+                return function(data) {
+                    _this.$log.debug("modify pushConfig successfully");
+                    return _this.$location.path("/dashboard/messageConfig");
+                };
+            })(this), (function(_this) {
+                return function(error) {
+                    _this.$log.error("Unable to modify pushConfig: " + error);
+                    return _this.error = error;
+                };
+            })(this));
         };
-      })(this), (function(_this) {
-        return function(error) {
-          _this.$log.error("Unable to modify messpush: " + error);
-          return _this.error = error;
+
+        return MessagePushConfigCtrl;
+
+    })();
+
+    angular.module("sbAdminApp").controller('MessagePushConfigCtrl', MessagePushConfigCtrl);
+
+    angular.module("sbAdminApp").controller("MessagePushConfigModalCtrl", function($scope, $log, $modalInstance, selectedRow, MessagePushConfigService) {
+        $scope.pushConfig = angular.fromJson(selectedRow);
+        var pushConfigId = $scope.pushConfig.id;
+        $scope.ok = function() {
+            if (pushConfigId == null) {
+                MessagePushConfigService.saveMessPush($scope.pushConfig);
+            }else{
+                MessagePushConfigService.modifyMessPush($scope.pushConfig);
+            }
+            $modalInstance.close($scope.pushConfig);
+            return window.parent.location.reload();
         };
-      })(this));
-    };
-
-    return MessagePushConfigCtrl;
-
-  })();
-
-  angular.module("sbAdminApp").controller('MessagePushConfigCtrl', MessagePushConfigCtrl);
+        return $scope.cancel = function() {
+            return $modalInstance.dismiss("cancel");
+        };
+    });
 
 }).call(this);
 

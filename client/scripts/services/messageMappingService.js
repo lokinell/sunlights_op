@@ -18,11 +18,11 @@
             this.$log.debug("constructing MessagePushService");
         }
 
-        MessageRuleMappingService.prototype.saveMsgPushMapping = function(dict) {
+        MessageRuleMappingService.prototype.saveMsgPushMapping = function(msgPushMapping) {
             var deferred;
-            this.$log.debug("saveMsgPushMapping " + (angular.toJson(dict, true)));
+            this.$log.debug("saveMsgPushMapping " + (angular.toJson(msgPushMapping, true)));
             deferred = this.$q.defer();
-            this.$http.post(baseUrl + "/message/mapping", dict).success((function(_this) {
+            this.$http.post(baseUrl + "/message/mapping", msgPushMapping).success((function(_this) {
                 return function(data, status, headers) {
                     _this.$log.info("Successfully saveMsgPushMapping - status " + status);
                     return deferred.resolve(data);
@@ -36,9 +36,9 @@
             return deferred.promise;
         };
 
-        MessageRuleMappingService.prototype.delete = function(dict) {
+        MessageRuleMappingService.prototype.delete = function(msgPushMapping) {
             var deferred;
-            this.$log.debug("deleteMsgPushMapping ---- " + (angular.toJson(dict, true)));
+            this.$log.debug("deleteMsgPushMapping ---- " + (angular.toJson(msgPushMapping, true)));
             deferred = this.$q.defer();
             if(!window.confirm('你确定要删除吗？')){
                 return deferred.promise;
@@ -47,7 +47,7 @@
             this.$http({
                 method: 'DELETE',
                 url: baseUrl + '/message/mapping',
-                params: dict
+                params: msgPushMapping
             }).success((function(_this) {
                 return function(data, status, headers) {
                     _this.$log.info("Successfully saveMsgPushMapping - status " + status);
@@ -79,12 +79,13 @@
 
         MessageRuleMappingService.prototype.getActivityId = function(activityId) {
             var deferred, param;
-            this.$log.debug("scene is----" + activityId);
+            this.$log.debug("activityId is----" + activityId);
             deferred = this.$q.defer();
-            param = {
-                "value": activityId
-            };
-            this.$http.get(baseUrl + "/message/mapping/activity", param).success((function(_this) {
+            this.$http.get(baseUrl + '/message/mapping/activity', {
+                headers: {
+                    'params': encodeURIComponent(activityId)
+                }
+            }).success((function(_this) {
                 return function(data, status, headers) {
                     _this.$log.info("Successfully find findRules - status " + status);
                     return deferred.resolve(data);

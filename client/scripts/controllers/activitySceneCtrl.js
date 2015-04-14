@@ -2,20 +2,19 @@
   var activitySceneCtrl;
 
   activitySceneCtrl = (function() {
-    function activitySceneCtrl($rootScope, $log, $http, $timeout, $location, ActivitySceneService, ProductService, CommonService, $scope) {
+    function activitySceneCtrl($modal,$rootScope, $log, $http, $timeout, $location, ActivitySceneService, CommonService, $scope) {
       this.$rootScope = $rootScope;
       this.$log = $log;
       this.$http = $http;
       this.$timeout = $timeout;
       this.$location = $location;
       this.ActivitySceneService = ActivitySceneService;
-      this.ProductService = ProductService;
       this.CommonService = CommonService;
       this.$scope = $scope;
+      this.$modal = $modal;
       this.$log.debug("constructing ActivitySceneCtrl");
       this.scenes = [];
-      this.scene = this.$rootScope.scene || {};
-      this.$rootScope.scene = {};
+      this.scene = {};
       this.activityTypes = [];
       this.manage = {};
       this.manages = [];
@@ -27,6 +26,36 @@
 
           }
       };
+
+      this.$scope.open = (function(_this) {
+          return function(isEditing) {
+              var modalInstance;
+              modalInstance = _this.$modal.open({
+                  templateUrl: "activityScenesModalContent.html",
+                  controller: "activityScenesModalInstanceCtrl",
+                  resolve: {
+                      selectedRow: function() {
+                          if (isEditing) {
+                              return _this.scene;
+                          } else {
+                              return {};
+                          }
+                      },
+                      activityTypes: function() {
+                          return _this.activityTypes;
+                      },
+                      productTypes: function() {
+                          return _this.productTypes;
+                      }
+                  }
+              });
+              return modalInstance.result.then((function(selectedItem) {
+                  return _this.$scope.selected = selectedItem;
+              }), function() {
+                  return _this.$log.debug("Modal dismissed at: " + new Date());
+              });
+          };
+      })(this);
       this.$scope.columnDefs = [
         {
           field: "scene",
@@ -41,12 +70,6 @@
           field: "status",
           displayName: "状态",
           cellTemplate: "<div class='ngCellText' ng-class='col.colIndex()'><span>{{row.entity.status== 'N' ? '正常' : '禁用'}}</span></div>"
-        }, {
-          field: "prdCode",
-          displayName: "产品编码"
-        }, {
-          field: "prdTypeDesc",
-          displayName: "产品类型"
         }, {
           field: "createTime",
           displayName: "创建时间",
@@ -64,23 +87,7 @@
     activitySceneCtrl.prototype.initSave = function() {
       this.$log.debug("initSave()");
       this.findActivityTypes();
-      this.findDicts();
-      return this.handleProductChange();
-    };
-
-    activitySceneCtrl.prototype.findDicts = function() {
-      this.$log.debug("findDicts()");
-      return this.CommonService.findDictsByCat("FP.PRODUCT.TYPE").then((function(_this) {
-        return function(data) {
-          _this.$log.debug("Promise returned " + data.length + " ProductTypes");
-          return _this.productTypes = data;
-        };
-      })(this), (function(_this) {
-        return function(error) {
-          _this.$log.error("Unable to get ProductTypes: " + error);
-          return _this.error = error;
-        };
-      })(this));
+      this.findScenes();
     };
 
     activitySceneCtrl.prototype.findActivityTypes = function() {
@@ -113,30 +120,10 @@
       })(this));
     };
 
-    activitySceneCtrl.prototype.saveScene = function() {
-      this.$log.debug("saveScene()");
-      return this.ActivitySceneService.saveScene(this.scene).then((function(_this) {
-        return function(data) {
-          _this.$log.debug("save scene successfully");
-          return _this.$location.path("/dashboard/scene");
-        };
-      })(this), (function(_this) {
-        return function(error) {
-          _this.$log.error("Unable to save scene: " + error);
-          return _this.error = error;
-        };
-      })(this));
-    };
-
-    activitySceneCtrl.prototype.createScene = function() {
-      this.$log.debug("createScene()");
-      return this.$location.path("/dashboard/scene/save");
-    };
 
     activitySceneCtrl.prototype.updateScene = function(scene) {
-      this.$log.debug("updateScene()");
-      this.$rootScope.scene = scene;
-      return this.$location.path("/dashboard/scene/save");
+      this.scene = scene;
+      return this.$scope.open(true);
     };
 
     activitySceneCtrl.prototype.deleteScene = function(scene) {
@@ -154,34 +141,30 @@
       })(this));
     };
 
-    activitySceneCtrl.prototype.handleProductChange = function() {
-      this.$log.debug("handleSelectProduct()");
-      if (this.scene.prdType) {
-        return this.ProductService.findProductManages({
-          filter: {
-            EQS_product_type: this.scene.prdType
-          }
-        }).then((function(_this) {
-          return function(data) {
-            _this.$log.debug("Promise returned " + data.value.length + " ProductManages");
-            return _this.manages = data.value;
-          };
-        })(this), (function(_this) {
-          return function(error) {
-            _this.$log.error("Unable to get ProductManages: " + error);
-            return _this.error = error;
-          };
-        })(this));
-      } else {
-        return this.manages = [];
-      }
-    };
-
     return activitySceneCtrl;
 
   })();
 
   angular.module('sbAdminApp').controller('activitySceneCtrl', activitySceneCtrl);
+
+  angular.module('sbAdminApp').controller("activityScenesModalInstanceCtrl", function($modal, $scope, $log, $location, $modalInstance, selectedRow, ActivitySceneService,activityTypes) {
+      $log.debug("constructing activityScenesModalInstanceCtrl");
+      $scope.row = angular.fromJson(selectedRow);
+      $scope.activityTypes = activityTypes
+      $scope.ok = function() {
+          if($scope.row.id) {
+              ActivitySceneService.updateScene($scope.row)
+          } else {
+              ActivitySceneService.saveScene($scope.row)
+          }
+
+          $modalInstance.close($scope.row);
+          return window.parent.location.reload();
+      };
+      $scope.cancel = function() {
+          return $modalInstance.dismiss("cancel");
+      };
+  });
 
 }).call(this);
 

@@ -6,30 +6,18 @@
             <li class="active">奖励类型列表</li>
         </ol>
     </div>
-    <div class="row">
 
-        <form class="form-inline" role="form">
-<!--            <div>
-                <p class="text-right">
-                    <a class="btn btn-primary submit" ng-click="dc.findRewardTypes()">查询</a>
-                    <a class="btn btn-primary submit" ng-click="open()">添加类型</a>
-                </p>
-            </div>
-
-            <div class="gridStyle" ng-grid="gridOptions"></div>-->
-
-            <div class="well well-lg">
-                <div class="form-group well well-lg">
+    <div class="well well-lg">
+        <div class="middle-layout">
+            <form class="form-inline " role="form">
+                <div class="form-group">
                     <label class="control-label">查询：</label>
                     <input type="text" class="form-control" ng-model="filterOptions.filterText.searchText1" placeholder="请输入你想查询的数据">
                     <a class="btn btn-primary submit" ng-click="open()">添加类型</a>
                 </div>
-                <br>   <br>
-                <div class="gridStyle" ng-grid="gridOptions"></div>
-            </div>
-
-        </form>
-
+            </form>
+        </div>
+        <div class="gridStyle" ng-grid="gridOptions"></div>
     </div>
 
     <script type="text/ng-template" id="modalContent.html">
@@ -37,24 +25,47 @@
             <button aria-hidden="true" data-dismiss="modal" class="close" type="button" ng-click="cancel()">×</button>
             <h4 id="myModalLabel" class="modal-title">奖励类型</h4>
         </div>
-        <div class="modal-body">
-                <label class="control-label">编码：</label>
-                <input class="form-control" type="text" name="code" required
-                       ng-model="row.code">
-                <label class="control-label">名称：</label>
-                <input class="form-control" type="text" name="name" required
-                       ng-model="row.name">
-                <label class="control-label">单位：</label>
-                <input class="form-control" type="text" name="unit" required
-                       ng-model="row.unit">
-                <label class="control-label">规则H5：</label>
-                <input class="form-control" type="text" name="ruleUrl" required
-                       ng-model="row.ruleUrl">
+        <div class="modal-body container col-md-12">
+            <div class="row form-row">
+                <div class="col-md-2 form-label">
+                    <label class="control-label">编码：</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="code" required
+                           ng-model="row.code">
+                </div>
+                <div class="col-md-2 form-label">
+                    <label class="control-label">名称：</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="name" required
+                           ng-model="row.name">
+                </div>
+            </div>
+
+            <div class="row form-row">
+                <div class="col-md-2 form-label">
+                    <label class="control-label">单位：</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="unit" required
+                           ng-model="row.unit">
+                </div>
+                <div class="col-md-2 form-label">
+                    <label class="control-label">规则H5：</label>
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" name="ruleUrl" required
+                           ng-model="row.ruleUrl">
+                </div>
+            </div>
+
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">确定</button>
-            <button class="btn btn-warning" ng-click="cancel()">取消</button>
+            <button type="submit" class="btn btn-success" ng-click="ok()">确定</button>
+            <button type="button" class="btn btn-warning" ng-click="cancel()">取消</button>
         </div>
+
     </script>
 
     <script type="text/ng-template" id="ruleModalContent.html">
@@ -62,20 +73,31 @@
             <button aria-hidden="true" data-dismiss="modal" class="close" type="button" ng-click="cancel()">×</button>
             <h4 id="myRuleModalLabel" class="modal-title">兑换规则</h4>
         </div>
-        <div class="modal-body">
-            <label class="control-label">兑换率：</label>
-            <input class="form-control" type="text" name="rate" required
-                   ng-model="row.rate">
-            <label class="control-label">兑换期限：</label>
-            <input class="form-control" type="text" name="limitTime" required
-                   ng-model="row.limitTime">
+        <div class="modal-body container col-md-14">
+            <div class="row form-row">
+                <div class="col-md-2 form-label">
+                    <label class="control-label">兑换率：</label>
+                </div>
+                <div class="col-md-2">
+                    <input class="form-control" type="text" name="rate" required
+                           ng-model="row.rate">
+                </div>
+                <div class="col-md-2 form-label">
+                    <label class="control-label">兑换期限：</label>
+                </div>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" name="limitTime" required
+                           ng-model="row.limitTime">
+                </div>
+            </div>
             <input class="form-control" type="hidden" name="code"
                    ng-model="code">
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">确定</button>
-            <button class="btn btn-warning" ng-click="cancel()">取消</button>
+            <button type="submit" class="btn btn-success" ng-click="ok()">确定</button>
+            <button type="button" class="btn btn-warning" ng-click="cancel()">取消</button>
         </div>
+
     </script>
 
 

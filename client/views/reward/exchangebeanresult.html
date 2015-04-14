@@ -6,9 +6,11 @@
             <li class="active">金豆兑换话费处理</li>
         </ol>
     </div>
+
+
     <div class="well well-lg">
-        <form class="form-inline" role="form">
-            <div>
+        <div class="middle-layout">
+            <form class="form-inline " role="form">
                 <div class="form-group">
                     <label class="control-label">手机号：</label>
                     <input type="text" class="form-control" ng-model="dc.pager.filter.LIKES_registerMobile" placeholder="注册手机号" name="LIKES_registerMobile">
@@ -25,17 +27,13 @@
                     <input  type="text" class="form-control" ui-date  ng-model="dc.pager.filter.GED_beginTime" placeholder="开始时间" name="GED_beginTime">
                     <label class="control-label">结束时间：</label>
                     <input  type="text" class="form-control" ui-date  ng-model="dc.pager.filter.LTD_endTime" placeholder="结束时间" name="LTD_endTime">
-
-                </div>
-                <p class="text-right">
                     <a class="btn btn-primary submit"  ng-click="dc.findExchangeBeanResults()">查询</a>
                     <a class="btn btn-primary submit"   ng-click="open()">上传excel</a>
                     <a href="{{dc.exportUrl}}?EQI_status={{ dc.pager.filter.EQI_status }}&GED_beginTime={{ dc.pager.filter.GED_beginTime }}&LTD_endTime={{ dc.pager.filter.LTD_endTime }}&LIKES_mobile={{ c.pager.filter.LIKES_mobile}}">导出</a>
-                </p>
-            </div>
-
-            <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="dc.findExchangeBeanResults()"></div>
-        </form>
+                </div>
+            </form>
+        </div>
+        <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="dc.findExchangeBeanResults()"></div>
     </div>
 
     <script type="text/ng-template" id="exchangeBeanResultModalContent.html">

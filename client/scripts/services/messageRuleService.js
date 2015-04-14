@@ -18,7 +18,7 @@
       this.$log.debug("constructing MessagePushService");
     }
 
-    MessageRuleService.prototype.findmesspush = function(pager) {
+    MessageRuleService.prototype.findMessagePush = function(pager) {
       var deferred;
       this.$log.debug("MessageRuleService()");
       deferred = this.$q.defer();

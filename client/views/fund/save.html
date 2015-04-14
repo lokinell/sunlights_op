@@ -1,127 +1,123 @@
 <div class="row" ng-controller="FundCtrl as fc" ng-init="fc.initSave()">
-
-    <div class="row">
-        <ol class="breadcrumb">
-            <li><a>产品管理</a></li>
-            <li><a ui-sref="dashboard.fund">基金信息</a></li>
-            <li class="active">基金详情</li>
-        </ol>
+  <div class="dialog-contents">
+    <div class="modal-header">
+      <h4 class="modal-title">基金详情</h4>
     </div>
-
-    <div class="row">
-
-        <div class="alert alert-danger" ng-show="!!fc.error">
-            <h4 class="alert-heading">操作失败</h4>
-            <span ng-bind="fc.error.message.detail"></span>
+    <form role="form" class="form-horizontal">
+      <div class="alert alert-danger" ng-show="!!error">
+        <h4 class="alert-heading">操作失败</h4>
+        <span ng-bind="error.message.detail"></span>
+      </div>
+      <div class="modal-body col-md-12">
+        <div class="row form-row">
+          <div class="col-md-2">
+            <label class="control-label">基金编码：</label>
+          </div>
+          <div class="col-md-4">
+            <input class="form-control" ng-model="fc.fund.fundcode" name="fundcode" required>
+          </div>
+          <div class="col-md-2">
+            <label class="control-label">基金名称：</label>
+          </div>
+          <div class="col-md-4">
+            <input class="form-control" ng-model="fc.fund.fundnameabbr" name="fundnameabbr" required>
+          </div>
         </div>
-        <form class="form-horizontal" user="form" ng-submit="fc.saveFund()">
-            <div class="row col-md-10 col-padding">
+        <div class="row form-row">
+          <div class="col-md-2">
+            <label class="control-label">净值日期：</label>
+          </div>
+          <div class="col-md-4">
+            <input class="form-control" type="text" name="currDate"
+                   ng-model="fc.fund.currDate">
+          </div>
+          <div class="col-md-2">
+            <label class="control-label">基金类型：</label>
+          </div>
+          <div class="col-md-4">
+            <input class="form-control" type="number" name="fundType"
+                   ng-model="fc.fund.fundType">
+          </div>
+        </div>
+        <div class="row form-row">
+          <div class="col-md-2">
+            <label class="control-label">投资类型：</label>
+          </div>
+          <div class="col-md-4">
+            <input class="form-control" type="number" name="investmentType"
+                   ng-model="fc.fund.investmentType">
+          </div>
+          <div class="col-md-2">
+            <label class="control-label">单位净值：</label>
+          </div>
+          <div class="col-md-4">
+            <input class="form-control" type="number" step="0.00001" name="netvalue"
+                   ng-model="fc.fund.netvalue">
+          </div>
+        </div>
+        <div class="row form-row">
+          <div class="col-md-2">
+            <label class="control-label">万份收益：</label>
+          </div>
+          <div class="col-md-4">
+            <input class="form-control" type="number" step="0.00001" name="incomePerTenThousand"
+                   ng-model="fc.fund.incomePerTenThousand">
+          </div>
+          <div class="col-md-2">
+            <label class="control-label">七日年化：</label>
+          </div>
+          <div class="col-md-4">
+            <input class="form-control" type="number" step="0.00001" name="percentSevenDays"
+                   ng-model="fc.fund.percentSevenDays">
+          </div>
+        </div>
+        <div class="row form-row">
+          <div class="col-md-2">
+            <label class="control-label">申购状态：</label>
+          </div>
+          <div class="col-md-4">
+            <input class="form-control" type="number" name="purchaseState"
+                   ng-model="fc.fund.purchaseState">
+          </div>
+          <div class="col-md-2">
+            <label class="control-label">起购金额：</label>
+          </div>
+          <div class="col-md-4">
+            <input class="form-control" type="number" step="0.00001" name="purchaseLimitMin"
+                   ng-model="fc.fund.purchaseLimitMin">
+          </div>
+        </div>
+        <div class="row form-row">
+          <div class="col-md-2">
+            <label class="control-label">货币基金：</label>
+          </div>
+          <div class="col-md-4">
+            <input class="form-control" type="number" name="isMonetary"
+                   ng-model="fc.fund.isMonetary">
+          </div>
+          <div class="col-md-2">
+            <label class="control-label">短期理财：</label>
+          </div>
+          <div class="col-md-4">
+            <input class="form-control" type="number" name="isStf"
+                   ng-model="fc.fund.isStf">
+          </div>
+        </div>
+        <div class="row form-row">
+          <div class="col-md-2">
+            <label class="control-label">赎回方式：</label>
+          </div>
+          <div class="col-md-4">
+            <input class="form-control" type="number" name="rapidRedeem"
+                   ng-model="fc.fund.rapidRedeem">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-warning" ng-click="closeThisDialog('close')">取消</button>
+      </div>
+    </form>
+  </div>
 
-                <label class="col-md-2 col-padding control-label">基金编码：</label>
-
-                <div class="col-md-4 col-padding">
-                    <input class="form-control" type="text" name="fundcode" required
-                           ng-model="fc.fund.fundcode">
-                </div>
-                <label class="col-md-2 col-padding control-label">基金名称：</label>
-
-                <div class="col-md-4 col-padding">
-                    <input class="form-control" type="text" name="fundnameabbr" required
-                           ng-model="fc.fund.fundnameabbr">
-                </div>
-            </div>
-            <div class="row col-md-10 col-padding">
-
-                <label class="col-md-2 col-padding control-label">净值日期：</label>
-
-                <div class="col-md-4 col-padding">
-                    <input class="form-control" type="text" name="currDate"
-                           ng-model="fc.fund.currDate">
-                </div>
-                <label class="col-md-2 col-padding control-label">基金类型：</label>
-
-                <div class="col-md-4 col-padding">
-                    <input class="form-control" type="number" name="fundType"
-                           ng-model="fc.fund.fundType">
-                </div>
-            </div>
-            <div class="row col-md-10 col-padding">
-
-                <label class="col-md-2 col-padding control-label">基金投资类型：</label>
-
-                <div class="col-md-4 col-padding">
-                    <input class="form-control" type="number" name="investmentType"
-                           ng-model="fc.fund.investmentType">
-                </div>
-                <label class="col-md-2 col-padding control-label">单位净值：</label>
-
-                <div class="col-md-4 col-padding">
-                    <input class="form-control" type="number" step="0.00001" name="netvalue"
-                           ng-model="fc.fund.netvalue">
-                </div>
-            </div>
-            <div class="row col-md-10 col-padding">
-
-                <label class="col-md-2 col-padding control-label">万份收益：</label>
-
-                <div class="col-md-4 col-padding">
-                    <input class="form-control" type="number" step="0.00001" name="incomePerTenThousand"
-                           ng-model="fc.fund.incomePerTenThousand">
-                </div>
-                <label class="col-md-2 col-padding control-label">七日年化：</label>
-
-                <div class="col-md-4 col-padding">
-                    <input class="form-control" type="number" step="0.00001" name="percentSevenDays"
-                           ng-model="fc.fund.percentSevenDays">
-                </div>
-            </div>
-            <div class="row col-md-10 col-padding">
-
-                <label class="col-md-2 col-padding control-label">申购状态：</label>
-
-                <div class="col-md-4 col-padding">
-                    <input class="form-control" type="number" name="purchaseState"
-                           ng-model="fc.fund.purchaseState">
-                </div>
-                <label class="col-md-2 col-padding control-label">起购金额：</label>
-
-                <div class="col-md-4 col-padding">
-                    <input class="form-control" type="number" step="0.00001" name="purchaseLimitMin"
-                           ng-model="fc.fund.purchaseLimitMin">
-                </div>
-            </div>
-            <div class="row col-md-10 col-padding">
-
-                <label class="col-md-2 col-padding control-label">货币基金：</label>
-
-                <div class="col-md-4 col-padding">
-                    <input class="form-control" type="number" name="isMonetary"
-                           ng-model="fc.fund.isMonetary">
-                </div>
-                <label class="col-md-2 col-padding control-label">短期理财：</label>
-
-                <div class="col-md-4 col-padding">
-                    <input class="form-control" type="number" name="isStf"
-                           ng-model="fc.fund.isStf">
-                </div>
-            </div>
-            <div class="row col-md-10 col-padding">
-
-                <label class="col-md-2 col-padding control-label">赎回方式：</label>
-
-                <div class="col-md-4 col-padding">
-                    <input class="form-control" type="number" name="rapidRedeem"
-                           ng-model="fc.fund.rapidRedeem">
-                </div>
-            </div>
-            <div class="row col-md-10 col-padding text-right">
-                <div class="col-md-3 col-padding col-md-offset-9">
-                    <button type="submit" class="btn btn-success">确定</button>
-                    <a ui-sref="dashboard.fund" class="btn btn-warning">取消</a>
-                </div>
-            </div>
-
-        </form>
-    </div>
 
 </div>

@@ -19,10 +19,18 @@ angular
     'ui.bootstrap.datetimepicker',
     'angularFileUpload',
     'toaster',
-    'ngAnimate'
-  ])
-
-  .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
+    'ngAnimate',
+    'ngDialog'
+  ]).config(['ngDialogProvider', function (ngDialogProvider) {
+    ngDialogProvider.setDefaults({
+      className: 'ngdialog-theme-default',
+      plain: false,
+      showClose: true,
+      closeByDocument: true,
+      closeByEscape: true,
+      appendTo: false
+    });
+  }]).config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
     $ocLazyLoadProvider.config({
       debug: false,
@@ -112,19 +120,19 @@ angular
           }
         }
       })
-     .state('logout', {
+      .state('logout', {
         templateUrl: 'views/pages/login.html',
         url: '/logout',
         resolve: {
-            loadMyFiles: function ($ocLazyLoad) {
-                return $ocLazyLoad.load({
-                    name: 'sbAdminApp',
-                    files: [
-                        'scripts/services/loginService.js',
-                        'scripts/controllers/loginCtrl.js'
-                    ]
-                })
-            }
+          loadMyFiles: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'sbAdminApp',
+              files: [
+                'scripts/services/loginService.js',
+                'scripts/controllers/loginCtrl.js'
+              ]
+            })
+          }
         }
       })
       .state('dashboard.table', {
@@ -185,21 +193,6 @@ angular
           }
         }
       })
-      .state('dashboard.dictSave', {
-        templateUrl: 'views/dict/save.html',
-        url: '/dict/save',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sbAdminApp',
-              files: [
-                'scripts/services/dictService.js',
-                'scripts/controllers/dictCtrl.js'
-              ]
-            })
-          }
-        }
-      })
       .state('dashboard.parameter', {
         templateUrl: 'views/parameter/parameter.html',
         url: '/parameter',
@@ -215,39 +208,9 @@ angular
           }
         }
       })
-      .state('dashboard.parameterSave', {
-        templateUrl: 'views/parameter/save.html',
-        url: '/parameter/save',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sbAdminApp',
-              files: [
-                'scripts/services/parameterService.js',
-                'scripts/controllers/parameterCtrl.js'
-              ]
-            })
-          }
-        }
-      })
       .state('dashboard.tasks', {
         templateUrl: 'views/tasks/index.html',
         url: '/tasks',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sbAdminApp',
-              files: [
-                'scripts/services/taskService.js',
-                'scripts/controllers/taskCtrl.js'
-              ]
-            })
-          }
-        }
-      })
-      .state('dashboard.tasksSave', {
-        templateUrl: 'views/tasks/save.html',
-        url: '/tasks/save',
         resolve: {
           loadMyFiles: function ($ocLazyLoad) {
             return $ocLazyLoad.load({
@@ -295,45 +258,9 @@ angular
           }
         }
       })
-      .state('dashboard.fundSave', {
-        templateUrl: 'views/fund/save.html',
-        url: '/fund/save',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sbAdminApp',
-              files: [
-                'scripts/services/productService.js',
-                'scripts/services/commonService.js',
-                'scripts/services/companyService.js',
-                'scripts/services/supplierService.js',
-                'scripts/controllers/fundCtrl.js'
-              ]
-            })
-          }
-        }
-      })
       .state('dashboard.product', {
         templateUrl: 'views/product/product.html',
         url: '/product',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sbAdminApp',
-              files: [
-                'scripts/services/productService.js',
-                'scripts/services/commonService.js',
-                'scripts/services/taskService.js',
-                'scripts/services/supplierService.js',
-                'scripts/controllers/productManageCtrl.js'
-              ]
-            })
-          }
-        }
-      })
-      .state('dashboard.productSave', {
-        templateUrl: 'views/product/save.html',
-        url: '/product/save',
         resolve: {
           loadMyFiles: function ($ocLazyLoad) {
             return $ocLazyLoad.load({
@@ -380,41 +307,9 @@ angular
           }
         }
       })
-      .state('dashboard.roleSave', {
-        templateUrl: 'views/authority/role/save.html',
-        url: '/role/save',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sbAdminApp',
-              files: [
-                'scripts/services/roleService.js',
-                'scripts/services/resourceService.js',
-                'scripts/controllers/roleCtrl.js'
-              ]
-            })
-          }
-        }
-      })
       .state('dashboard.user', {
         templateUrl: 'views/authority/user/user.html',
         url: '/user',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sbAdminApp',
-              files: [
-                'scripts/services/roleService.js',
-                'scripts/services/userService.js',
-                'scripts/controllers/userCtrl.js'
-              ]
-            })
-          }
-        }
-      })
-      .state('dashboard.userSave', {
-        templateUrl: 'views/authority/user/save.html',
-        url: '/user/save',
         resolve: {
           loadMyFiles: function ($ocLazyLoad) {
             return $ocLazyLoad.load({
@@ -488,66 +383,7 @@ angular
           }
         }
       })
-      .state('dashboard.feedback', {
-        templateUrl: 'views/feedback/feedback.html',
-        url: '/feedback',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sbAdminApp',
-              files: [
-                'scripts/services/feedBackService.js',
-                'scripts/controllers/feedBackCtrl.js'
-              ]
-            })
-          }
-        }
-      })
-      .state('dashboard.feedbackApprove', {
-        templateUrl: 'views/feedback/approve.html',
-        url: '/feedback/approve',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sbAdminApp',
-              files: [
-                'scripts/services/feedbackService.js',
-                'scripts/controllers/feedbackCtrl.js'
-              ]
-            })
-          }
-        }
-      })
-      .state('dashboard.question', {
-        templateUrl: 'views/question/question.html',
-        url: '/question',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sbAdminApp',
-              files: [
-                'scripts/services/questionService.js',
-                'scripts/controllers/questionCtrl.js'
-              ]
-            })
-          }
-        }
-      })
-      .state('dashboard.questionSave', {
-        templateUrl: 'views/question/save.html',
-        url: '/question/save',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sbAdminApp',
-              files: [
-                'scripts/services/questionService.js',
-                'scripts/controllers/questionCtrl.js'
-              ]
-            })
-          }
-        }
-      })
+
       .state('dashboard.sms', {
         templateUrl: 'views/smsmessage/smsMessage.html',
         url: '/smsmessage',
@@ -600,18 +436,18 @@ angular
         templateUrl: 'views/authority/user/setting.html',
         url: '/user/setting',
         resolve: {
-            loadMyFiles: function ($ocLazyLoad) {
-                return $ocLazyLoad.load({
-                    name: 'sbAdminApp',
-                    files: [
-                        'scripts/services/roleService.js',
-                        'scripts/services/userService.js',
-                        'scripts/controllers/userCtrl.js'
-                    ]
-                })
-            }
+          loadMyFiles: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'sbAdminApp',
+              files: [
+                'scripts/services/roleService.js',
+                'scripts/services/userService.js',
+                'scripts/controllers/userCtrl.js'
+              ]
+            })
+          }
         }
-       })
+      })
       .state('dashboard.messageRule', {
         templateUrl: 'views/messagerule/messageRule.html',
         url: '/messagerule',
@@ -667,39 +503,6 @@ angular
               name: 'sbAdminApp',
               files: [
                 'scripts/common/pageService.js',
-                'scripts/services/messagePushConfigService.js',
-                'scripts/controllers/messagePushConfigCtrl.js'
-              ]
-            })
-
-          }
-        }
-      })
-      .state('dashboard.messageConfigSave', {
-        templateUrl: 'views/messpushconfig/save.html',
-        url: '/messageConfig/save',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sbAdminApp',
-              files: [
-                'scripts/common/pageService.js',
-                'scripts/services/messagePushConfigService.js',
-                'scripts/controllers/messagePushConfigCtrl.js'
-              ]
-            })
-
-          }
-        }
-      })
-      .state('dashboard.messageConfigUpdate', {
-        templateUrl: 'views/messpushconfig/update.html',
-        url: '/messageConfig/update',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sbAdminApp',
-              files: [
                 'scripts/services/messagePushConfigService.js',
                 'scripts/controllers/messagePushConfigCtrl.js'
               ]
@@ -884,21 +687,6 @@ angular
       .state('dashboard.supplier', {
         templateUrl: 'views/supplier/suppliers.html',
         url: '/supplier',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sbAdminApp',
-              files: [
-                'scripts/controllers/supplierCtrl.js',
-                'scripts/services/supplierService.js'
-              ]
-            })
-          }
-        }
-      })
-      .state('dashboard.supplierSave', {
-        templateUrl: 'views/supplier/save.html',
-        url: '/supplier/save',
         resolve: {
           loadMyFiles: function ($ocLazyLoad) {
             return $ocLazyLoad.load({

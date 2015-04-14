@@ -117,7 +117,7 @@ background-color: #eee;
 .mediumGridStyle {
     border: 1px solid rgb(212,212,212);
     width: 100%;
-    height: 200px
+    height: 300px
 }
 
 .gridStyle-little {
@@ -149,12 +149,12 @@ table tr td {
     padding-left: 30px;
 }
 
-.row .form-row{
+.form-row{
     margin-bottom: 10px;
 }
 
 .form-label{
-    text-align: left;
+    text-align: right;
 }
 
 .form-submit-btn{
@@ -164,3 +164,30 @@ table tr td {
 .operation-icon-layout {
     margin-left: 10px;
 }
+
+@media all and (min-width: 320px) and (max-width: 1024px){
+  .popup-window {
+    position:fixed;
+    margin:auto;
+    text-align:center;
+    overflow-y: auto;
+  }
+}
+
+@media only screen and (min-width : 1224px) {
+    .popup-window {
+      position:fixed;
+      top:25%; margin:auto;
+      text-align:center;
+      overflow-y: auto;
+    }
+}
+
+.ngdialog.ngdialog-theme-plain.custom-width .ngdialog-content {
+  width: 700px;
+}
+.ngdialog.ngdialog-theme-plain.product-width .ngdialog-content {
+  width: 750px;
+}
+
+

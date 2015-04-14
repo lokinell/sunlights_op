@@ -1,65 +1,57 @@
-
 <div class="row" ng-controller="MessageRuleCtrl as dc" >
     <div class="row">
 
       <ol class="breadcrumb">
-        <li><a ui-sref="dashboard.messageRule">系统管理</a></li>
+        <li><a ui-sref="dashboard.messageRule">消息管理</a></li>
         <li class="active">消息规则</li>
       </ol>
     </div>
-    <div class="row">
+    <div class="well well-lg">
         <div class="alert alert-danger" ng-show="!!dc.error">
             <span ng-bind="dc.error.message.detail"></span>
         </div>
-        <form class="form-inline" role="form">
-            <div class="well well-lg">
-                <div class="form-group well well-lg">
+        <div class="middle-layout">
+            <form class="form-inline" role="form">
+                <div class="form-group">
                     <label class="control-label">查询：</label>
                     <input type="text" class="form-control" ng-model="filterOptions.filterText.searchText1" placeholder="请输入你想查询的数据">
                     <a class="btn btn-primary submit" ng-click="dc.createMessPush()">添加</a>
                 </div>
-                 <br>
-                 <br>
+                <br>
+                <br>
                 <div class="gridStyle" ng-grid="gridOptions"></div>
-
-            </div>
-        </form>
-
-
-        <script type="text/ng-template" id="messagePushModel.html">
-
-            <div class="modal-header">
-                <button aria-hidden="true" data-dismiss="modal" class="close" type="button" ng-click="cancel()">×</button>
-                <h4 id="parameterModal" class="modal-title">添加到待推送消息</h4>
-            </div>
-            <div class="alert alert-info" ng-show="!!error">
-                <span ng-bind="error.message.detail"></span>
-            </div>
-            <div class="modal-body">
-                <label class="control-label">规则名称：</label>
-                <input class="form-control" type="text" name="name"  readonly
-                       ng-model="row.name">
-                <label class="control-label">群发组名：</label>
-                <input class="form-control" type="text" name="value"  readonly
-                       ng-model="row.groupname">
-                <label class="control-label">推送标题：</label>
-                <input class="form-control" type="text" name="name"  readonly
-                       ng-model="row.title">
-                <label class="control-label">推送内容：</label>
-                <textarea class="form-control" style="height:expression((this.scrollHeight>150)?'150px':(this.scrollHeight+5)+'px');overflow:auto;"  name="value"  readonly
-                       ng-model="row.content"></textarea>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" ng-click="ok()" ng-hide="myVar">添加到待推送消息</button>
-                <button class="btn btn-info" ng-click="immediatelyPush()" ng-hide="myVar1">立即推送</button>
-                <button class="btn btn-primary" ng-click="cancel()" ng-hide="myVar2">关闭</button>
-            </div>
-        </script>
-
+            </form>
+        </div>
 
     </div>
-
-
-
-
 </div>
+
+<script type="text/ng-template" id="messagePushModel.html">
+
+    <div class="modal-header">
+        <button aria-hidden="true" data-dismiss="modal" class="close" type="button" ng-click="cancel()">×</button>
+        <h4 id="parameterModal" class="modal-title">添加到待推送消息</h4>
+    </div>
+    <div class="alert alert-info" ng-show="!!error">
+        <span ng-bind="error.message.detail"></span>
+    </div>
+    <div class="modal-body">
+        <label class="control-label">规则名称：</label>
+        <input class="form-control" type="text" name="name"  readonly
+               ng-model="row.name">
+        <label class="control-label">群发组名：</label>
+        <input class="form-control" type="text" name="value"  readonly
+               ng-model="row.groupname">
+        <label class="control-label">推送标题：</label>
+        <input class="form-control" type="text" name="name"  readonly
+               ng-model="row.title">
+        <label class="control-label">推送内容：</label>
+        <textarea class="form-control" style="height:expression((this.scrollHeight>150)?'150px':(this.scrollHeight+5)+'px');overflow:auto;"  name="value"  readonly
+                  ng-model="row.content"></textarea>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()" ng-hide="addPushHideFlag">添加到待推送消息</button>
+        <button class="btn btn-info" ng-click="immediatelyPush()" ng-hide="pushHideFlag">立即推送</button>
+        <button class="btn btn-primary" ng-click="cancel()" ng-hide="closeHideFlag">关闭</button>
+    </div>
+</script>

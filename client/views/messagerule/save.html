@@ -1,10 +1,11 @@
 <div class="row" ng-controller="MessageRuleCtrl as dc " ng-init="dc.configurationData();dc.groupData()">
 
     <div class="row">
-        <h1>
-            添加规则
-        </h1>
-        <hr>
+        <ol class="breadcrumb">
+            <li><a>消息管理</a></li>
+            <li><a ui-sref="dashboard.messageRule">消息规则</a></li>
+            <li class="active">消息规则详情</li>
+        </ol>
     </div>
 
     <div class="row">
@@ -13,175 +14,157 @@
             <h4 class="alert-heading">操作失败</h4>
             <span ng-bind="dc.error.message.detail"></span>
         </div>
-        <form role="form" ng-submit="dc.saveMessPush()">
-            <table>
-                <tr>
-                    <td>
+        <div class="well well-lg " style="width: 100%;">
+            <form class="form-horizontal" role="form" ng-submit="dc.saveMessPush()">
+                <div class="row col-md-11 col-padding form-row">
+                    <div class="col-md-2 form-label">
                         <label class="control-label">规则名称：</label>
-                    </td>
-                    <td>
-                        <input class="form-control" type="text" name="name" required
-                               ng-model="dc.dict.name" >
-                    </td>
-
-                    <td>
-                        <label class="control-label">规则编码：</label>
-                    </td>
-                    <td>
-                        <input class="form-control" type="text" name="code" required
-                               ng-model="dc.dict.code">
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
+                    </div>
+                    <div class="col-md-2 col-padding">
+                        <input class="form-control" type="text" name="name" required ng-model="dc.messageRule.name" >
+                    </div>
+                    <div class="col-md-2 form-label">
                         <label class="control-label">规则描述：</label>
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col-md-5 col-padding">
                         <input class="form-control" type="text" name="description" required
-                               ng-model="dc.dict.description" >
-                    </td>
+                               ng-model="dc.messageRule.description" >
+                    </div>
+                </div>
 
-                    <td>
+                <div class="row col-md-11 col-padding form-row">
+
+                    <div class="col-md-2 form-label">
+                        <label class="control-label">规则编码：</label>
+                    </div>
+                    <div class="col-md-2 col-padding">
+                        <input class="form-control" type="text" name="code" required
+                               ng-model="dc.messageRule.code">
+                    </div>
+                    <div class="col-md-2 form-label">
                         <label class="control-label">推送标题：</label>
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col-md-5 col-padding">
                         <input class="form-control" type="text" name="title" required
-                               ng-model="dc.dict.title">
-                    </td>
-                </tr>
+                               ng-model="dc.messageRule.title">
+                    </div>
+                </div>
 
-                <tr>
-                    <td>
+                <div class="row col-md-11 col-padding form-row">
+                    <div class="col-md-2 form-label">
                         <label class="control-label">消息中心显示：</label>
-                    </td>
-                    <td>
-                        <select class="form-control" ng-model="dc.dict.msgcenterind" required>
+                    </div>
+                    <div class="col-md-2 col-padding">
+                        <select class="form-control" ng-model="dc.messageRule.msgCenterInd" required>
                             <option value="" selected>请选择</option>
                             <option value="Y">是</option>
                             <option value="N" selected>否</option>
                         </select>
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col-md-2 form-label">
                         <label class="control-label">展示内容：</label>
-                    </td>
-                    <td>
-                        <textarea class="form-control" name="content" ng-required="dc.dict.msgcenterind === 'Y'"
-                                  ng-model="dc.dict.content" />
-                    </td>
+                    </div>
+                    <div class="col-md-5 col-padding">
+                        <textarea class="form-control" name="content" ng-required="dc.messageRule.msgCenterInd === 'Y'"
+                                  ng-model="dc.messageRule.content" />
+                    </div>
+                </div>
 
-                </tr>
-
-                <tr>
-                    <td>
+                <div class="row col-md-11 col-padding form-row">
+                    <div class="col-md-2 form-label">
                         <label class="control-label">发送短信：</label>
-                    </td>
-                    <td>
-                        <select class="form-control" ng-model="dc.dict.smsind" required>
+                    </div>
+                    <div class="col-md-2 col-padding">
+                        <select class="form-control" ng-model="dc.messageRule.smsInd" required>
                             <option value="" selected>请选择</option>
                             <option value="Y">是</option>
                             <option value="N" selected>否</option>
                         </select>
-                    </td>
-                    <td>
+                    </div>
+                    <div class="col-md-2 form-label">
                         <label class="control-label">短信内容：</label>
-                    </td>
-                    <td>
-                        <textarea class="form-control" name="contentSms" ng-required="dc.dict.smsind === 'Y'"
-                                  ng-model="dc.dict.contentSms" />
-                    </td>
+                    </div>
+                    <div class="col-md-5 col-padding">
+                        <textarea class="form-control" name="contentSms" ng-required="dc.messageRule.smsInd === 'Y'"
+                                  ng-model="dc.messageRule.contentSms" />
+                    </div>
+                </div>
 
-                </tr>
-
-                <tr>
-                    <td>
+                <div class="row col-md-11 col-padding form-row">
+                    <div class="col-md-2 form-label">
                         <label class="control-label">推送：</label>
-                    </td>
-                    <td>
-
-                        <select class="form-control" ng-model="dc.dict.pushind" required>
+                    </div>
+                    <div class="col-md-2 col-padding">
+                        <select class="form-control" ng-model="dc.messageRule.pushInd" required>
                             <option value="" selected>请选择</option>
                             <option value="Y">是</option>
                             <option value="N" selected>否</option>
                         </select>
-
-                    </td>
-
-                    <td>
+                    </div>
+                    <div class="col-md-2 form-label">
                         <label class="control-label">推送内容：</label>
-                    </td>
-                    <td>
-                        <textarea class="form-control" name="contentPush" ng-required="dc.dict.pushind === 'Y'"
-                                  ng-model="dc.dict.contentPush" maxlength="70" />
-                    </td>
+                    </div>
+                    <div class="col-md-5 col-padding">
+                        <textarea class="form-control" name="contentPush" ng-required="dc.messageRule.pushInd === 'Y'"
+                                  ng-model="dc.messageRule.contentPush" maxlength="70" />
+                    </div>
+                </div>
 
-
-                </tr>
-
-
-                <tr>
-                    <td>
+                <div class="row col-md-11 col-padding form-row">
+                    <div class="col-md-2 form-label">
                         <label class="control-label">有效标志：</label>
-                    </td>
-                    <td>
-
-                        <select class="form-control" ng-model="dc.dict.status" required>
+                    </div>
+                    <div class="col-md-2 col-padding">
+                        <select class="form-control" ng-model="dc.messageRule.status" required>
                             <option value="" selected>请选择</option>
                             <option value="Y">可用</option>
                             <option value="N" selected>删除</option>
                         </select>
-                    </td>
-
-
-
-                    <td>
+                    </div>
+                    <div class="col-md-2 form-label">
                         <label class="control-label">推送计划描述：</label>
-                    </td>
-                    <td>
-
-                        <select class="form-control" ng-model="dc.dict.messagePushConfigId" required
-                                ng-options="item.keys as item.value for item in constant.messpushconfigid" >
+                    </div>
+                    <div class="col-md-5 col-padding">
+                        <select class="form-control" ng-model="dc.messageRule.messagePushConfigId" required
+                                ng-options="item.keys as item.value for item in constant.messPushConfigId" >
                             <option value="">-- 请选择 --</option>
                         </select>
+                    </div>
+                </div>
 
-                    </td>
-
-                </tr>
-
-                <tr>
-                    <td>
+                <div class="row col-md-11 col-padding form-row">
+                    <div class="col-md-2 form-label">
                         <label class="control-label">是否30天显示：</label>
-                    </td>
-                    <td>
-                        <select class="form-control" ng-model="dc.dict.stayDayInd" required>
+                    </div>
+                    <div class="col-md-2 col-padding">
+                        <select class="form-control" ng-model="dc.messageRule.stayDayInd" required>
                             <option value="" selected>请选择</option>
                             <option value="Y">是</option>
                             <option value="N">否</option>
                         </select>
-                    </td>
-
-                    <td>
+                    </div>
+                    <div class="col-md-2 form-label">
                         <label class="control-label">群发组名：</label>
-                    </td>
-                    <td>
-                        <select class="form-control" ng-model="dc.dict.groupid"
-                                ng-options="item.keys as item.value for item in constant.groupid" >
+                    </div>
+                    <div class="col-md-5 col-padding">
+                        <select class="form-control" ng-model="dc.messageRule.groupId"
+                                ng-options="item.keys as item.value for item in constant.groupId" >
                             <option value="">-- 请选择 --</option>
                         </select>
-                    </td>
-                    <td>
+                    </div>
+                </div>
 
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="14" align="right">
-                        <button type="submit" class="btn btn-success" >确定</button>
+                </br></br>
+                <div class="row">
+                    <div class="col-md-4 form-submit-btn">
+                        <button type="submit" class="btn btn-success">确定</button>
+                    </div>
+                    <div class="col-md-3">
                         <a ui-sref="dashboard.messageRule" class="btn btn-warning">取消</a>
-                    </td>
-                </tr>
-            </table>
-        </form>
+                    </div>
+                </div>
+             </form>
+        </div>
     </div>
 
 </div>
