@@ -5,10 +5,11 @@
             <li class="active">活动错误信息管理</li>
         </ol>
     </div>
-    <div class="well well-lg">
 
-        <form class="form-inline" role="form" name="myForm" novalidate>
-            <div>
+
+    <div class="well well-lg">
+        <div class="middle-layout">
+            <form class="form-inline " role="form">
                 <div class="form-group">
                     <label class="control-label">场景：</label>
                     <select class="form-control" ng-model="queryRule.filterText.scene"
@@ -22,15 +23,12 @@
                     <select class="form-control" ng-model="queryRule.filterText.rewardType"
                             ng-options="item.key as item.value for item in constant.rewardTypes">
                     </select>
-
-                </div>
-                <p class="text-right">
                     <a class="btn btn-primary submit" ng-click="findReturnMsg()">查询</a>
                     <a class="btn btn-primary submit" ng-click="open()">添加</a>
-                </p>
-            </div>
-            <div class="gridStyle" ng-grid="gridOptions"></div>
-        </form>
+                </div>
+            </form>
+        </div>
+        <div class="gridStyle" ng-grid="gridOptions"></div>
     </div>
 
     <script type="text/ng-template" id="activityReturnMsgModalContent.html">
@@ -39,36 +37,67 @@
             <h4 id="activityModalLabel" class="modal-title">活动</h4>
         </div>
         <form role="form" ng-submit="ok()">
-            <div class="modal-body">
+            <div class="modal-body container col-md-12">
+                <div class="row form-row">
+                    <div class="col-md-3 form-label">
+                        <label class="control-label">场景：</label>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-control" ng-model="msg.scene"
+                                ng-options="item.key as item.value for item in constant.scenes">
+                        </select>
+                    </div>
+                    <div class="col-md-3 form-label">
+                        <label class="control-label">类型：</label>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-control" ng-model="msg.type"
+                                ng-options="item.key as item.value for item in constant.activityTypes">
+                        </select>
+                    </div>
+                </div>
 
-                <label class="control-label">场景：</label>
-                <select class="form-control" ng-model="msg.scene"
-                        ng-options="item.key as item.value for item in constant.scenes">
-                </select>
-                <label class="control-label">类型：</label>
-                <select class="form-control" ng-model="msg.type"
-                        ng-options="item.key as item.value for item in constant.activityTypes">
-                </select>
-                <label class="control-label">奖励类型：</label>
-                <select class="form-control" ng-model="msg.rewardType"
-                        ng-options="item.key as item.value for item in constant.rewardTypes">
-                </select>
+                <div class="row form-row">
+                    <div class="col-md-3 form-label">
+                        <label class="control-label">奖励类型：</label>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-control" ng-model="msg.rewardType"
+                                ng-options="item.key as item.value for item in constant.rewardTypes">
+                        </select>
+                    </div>
+                    <div class="col-md-3 form-label">
+                        <label class="control-label">作用种类：</label>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-control" ng-model="msg.category"
+                                ng-options="item.key as item.value for item in constant.categories">
+                        </select>
+                    </div>
+                </div>
 
-                <label class="control-label">作用种类：</label>
-                <select class="form-control" ng-model="msg.category"
-                        ng-options="item.key as item.value for item in constant.categories">
-                </select>
+                <div class="row form-row">
+                    <div class="col-md-3 form-label">
+                        <label class="control-label">错误信息：</label>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-control" ng-model="msg.errorCode"
+                                ng-options="item.key as item.value for item in constant.errorMsgs">
+                        </select>
+                    </div>
+                </div>
 
-                <label class="control-label">错误信息：</label>
-                <select class="form-control" ng-model="msg.errorCode"
-                        ng-options="item.key as item.value for item in constant.errorMsgs">
-                </select>
-
-                <label class="control-label">模版信息：</label>
-                <input class="form-control" type="text" name="template" required
-                       ng-model="msg.template">
-
+                <div class="row form-row">
+                    <div class="col-md-3 form-label">
+                        <label class="control-label">模版信息：</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" name="template" required
+                               ng-model="msg.template">
+                    </div>
+                </div>
             </div>
+
             <div class="modal-footer">
                 <button type="submit" class="btn btn-success">确定</button>
                 <button type="button" class="btn btn-warning" ng-click="cancel()">取消</button>

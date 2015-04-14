@@ -2,9 +2,10 @@
   var ActivityShareCtrl;
 
   ActivityShareCtrl = (function() {
-    function ActivityShareCtrl($modal, $log, $scope, $location, FileUploader, ActivityService, ObtainRewardRulesService, ActivityShareInfoService) {
+    function ActivityShareCtrl($modal, $log, $scope, $location, FileUploader, ActivityService, ObtainRewardRulesService, ActivityShareInfoService, toaster) {
       this.$modal = $modal;
       this.$log = $log;
+      this.toaster = toaster;
       this.$scope = $scope;
       this.$location = $location;
       this.FileUploader = FileUploader;
@@ -78,6 +79,7 @@
               constant: function() {
                 return _this.constant;
               }
+
             }
           });
           return modalInstance.result.then((function(selectedItem) {
@@ -109,6 +111,7 @@
               $scope.share = {};
             }
             $scope.share.shareTypeStr = data.shareTypeStr;
+            _this.toaster.pop("sucess", "保存成功", "保存成功");
             return $scope.share.isRefIdStr = data.isRefIdStr;
           }, function(error) {
             return $log.error("Unable to get rules: " + error);

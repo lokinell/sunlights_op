@@ -128,6 +128,7 @@ var PageService = function ($scope, $http ,$timeout) {
         multiSelect:false,
         data: 'myData',
         enablePaging: true,
+        i18n: "zh-cn",
         showFooter: true,
         totalServerItems: 'totalServerItems',
         pagingOptions: $scope.pagingOptions,

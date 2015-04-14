@@ -2,13 +2,14 @@
   var RewardTypeCtrl;
 
   RewardTypeCtrl = (function() {
-    function RewardTypeCtrl($http, $timeout, $scope, $modal, $log, $location, FileUploader, RewardTypesService, ExchangeRuleService) {
+    function RewardTypeCtrl($http, $timeout, $scope, $modal, $log, $location, FileUploader, RewardTypesService, ExchangeRuleService,toaster) {
       this.$http = $http;
       this.$timeout = $timeout;
       this.$scope = $scope;
       this.$modal = $modal;
       this.$log = $log;
       this.$location = $location;
+      this.toaster = toaster;
       this.FileUploader = FileUploader;
       this.RewardTypesService = RewardTypesService;
       this.ExchangeRuleService = ExchangeRuleService;

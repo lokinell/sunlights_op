@@ -1,4 +1,4 @@
-<div class="row" ng-controller="activitySceneCtrl as asc" ng-init="asc.findScenes()">
+<div class="row" ng-controller="activitySceneCtrl as asc" ng-init="asc.initSave()">
 
     <div class="row">
         <ol class="breadcrumb">
@@ -7,27 +7,76 @@
         </ol>
     </div>
 
-    <div class="row">
-
+    <div class="well well-lg">
         <div class="alert alert-danger" ng-show="!!asc.error">
             <h4 class="alert-heading">操作失败</h4>
             <span ng-bind="asc.error.message.detail"></span>
         </div>
-        <form class="form-inline" role="form">
-
-
-            <div class="well well-lg">
-                <div class="form-group well well-lg">
+        <div class="middle-layout">
+            <form class="form-inline " role="form">
+                <div class="form-group">
                     <label class="control-label">查询：</label>
                     <input type="text" class="form-control" ng-model="filterOptions.filterText.searchText1" placeholder="请输入你想查询的数据">
-                    <a class="btn btn-primary submit" ng-click="asc.createScene()">添加</a>
-
+                    <a class="btn btn-primary submit" ng-click="open()">添加</a>
                 </div>
-                <br>   <br>
-                <div class="gridStyle" ng-grid="gridOptions"></div>
-            </div>
-        </form>
+            </form>
+        </div>
+        <div class="gridStyle" ng-grid="gridOptions"></div>
 
     </div>
+
+    <script type="text/ng-template" id="activityScenesModalContent.html">
+        <div class="modal-header">
+            <button aria-hidden="true" data-dismiss="modal" class="close" type="button" ng-click="cancel()">×</button>
+            <h4 id="myModalLabel" class="modal-title">活动场景</h4>
+        </div>
+            <form role="form" ng-submit="ok()">
+                <div class="modal-body container col-md-12">
+                    <div class="row form-row">
+                        <div class="col-md-3 form-label">
+                            <label class="control-label">编码：</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control" type="text" name="code" required
+                                   ng-model="row.scene">
+                        </div>
+                        <div class="col-md-3 form-label">
+                            <label class="control-label">名称：</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input class="form-control" type="text" name="name" required
+                                   ng-model="row.title">
+                        </div>
+                    </div>
+                    <div class="row form-row">
+                        <div class="col-md-3 form-label">
+                            <label class="control-label">状态：</label>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control" ng-model="row.status" required>
+                                <option value="" selected>请选择</option>
+                                <option value="N">启用</option>
+                                <option value="F" selected>禁用</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 form-label">
+                            <label class="control-label">活动类型：</label>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control" ng-model="row.activityType"
+                                    ng-options="item.key as item.value for item in activityTypes" required>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">确定</button>
+                    <button type="button" class="btn btn-warning" ng-click="cancel()">取消</button>
+                </div>
+            </form>
+        </div>
+
+    </script>
 
 </div>
