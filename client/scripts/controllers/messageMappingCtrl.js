@@ -94,7 +94,6 @@
             var value;
             this.editingRow = row;
             value = angular.toJson(row.entity);
-            this.$log.debug(value);
             this.messagePushMapping = row;
             this.getActivityScene();
             this.getActivityIdByScene();
@@ -119,7 +118,6 @@
         MessageRuleMappingCtrl.prototype.getActivityScene = function() {
             return this.MessageRuleMappingService.getActivityScene().then((function(_this) {
                 return function(data) {
-                    _this.$log.debug(data);
                     _this.$rootScope.constant.activityScene = data;
                     return _this.$log.info("Successfully find messPushConfigData:" + data);
                 };
@@ -134,7 +132,6 @@
         MessageRuleMappingCtrl.prototype.getActivityIdByScene = function() {
             return this.MessageRuleMappingService.getActivityId('').then((function(_this) {
                 return function(data) {
-                    _this.$log.debug(data);
                     return _this.$rootScope.constant.activityId = data;
                 };
             })(this), (function(_this) {
@@ -158,7 +155,6 @@
         $scope.getActivityIdByScene =  function() {
             return MessageRuleMappingService.getActivityId(selectedRow.scene).then((function(_this) {
                 return function(data) {
-                    $log.debug(data);
                     return $rootScope.constant.activityId = data;
                 };
             })(this), (function(_this) {
