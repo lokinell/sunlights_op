@@ -54,7 +54,8 @@
             displayName: '注册地址'
           }, {
             field: "createTime",
-            displayName: '创建时间'
+            displayName: '创建时间' ,
+            cellFilter: 'date:"yyyy-MM-dd HH:mm"'
           }, {
             field: null,
             displayName: '操作',
