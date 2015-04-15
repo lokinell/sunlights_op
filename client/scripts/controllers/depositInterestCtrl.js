@@ -2,18 +2,20 @@
   var DepositInterestCtrl;
 
   DepositInterestCtrl = (function () {
-    function DepositInterestCtrl($rootScope, $scope, $log, $location, DepositInterestService, toaster) {
+    function DepositInterestCtrl($rootScope, $scope, $log, $location, toaster, ngDialog, DepositInterestService) {
       this.$rootScope = $rootScope;
       this.$scope = $scope;
       this.$log = $log;
       this.$location = $location;
+      this.toaster = toaster;
+      this.ngDialog = ngDialog;
       this.DepositInterestService = DepositInterestService;
       this.toaster = toaster;
       this.$log.debug("constructing DepositInterestCtrl");
       this.depositInterests = [];
-      this.depositInterest = this.$rootScope.depositInterest || {};
-      this.$rootScope.depositInterest = {};
+      this.depositInterest = this.$scope.depositInterest || {};
       this.pager = {};
+      this.dialog = {};
     }
 
     DepositInterestCtrl.prototype.findDepositInterests = function () {
@@ -33,31 +35,67 @@
 
     DepositInterestCtrl.prototype.saveDepositInterest = function () {
       this.$log.debug("saveDepositInterest()");
+      this.depositInterest = angular.copy(this.$scope.depositInterest);
       return this.DepositInterestService.saveDepositInterest(this.depositInterest).then((function (_this) {
         return function (data) {
-          _this.$log.debug("save depositInterest successfully");
+          _this.findDepositInterests();
+          _this.dialog.close();
           _this.toaster.pop('success', data.message.summary, data.message.detail);
-          return _this.$location.path("/dashboard/deposit");
+          return _this.$log.debug("save depositInterest successfully");
+
         };
       })(this), (function (_this) {
         return function (error) {
-          _this.$log.error("Unable to save depositInterest: " + error);
-          _this.toaster.pop('error', error.message.summary, error.message.detail);
-          return _this.error = error;
+          _this.$scope.error = error;
+          return _this.$log.error("Unable to save depositInterest: " + error);
+
         };
       })(this));
     };
 
     DepositInterestCtrl.prototype.createDepositInterest = function () {
-      this.$log.debug("createDepositInterest()");
-      return this.$location.path("/dashboard/deposit/save");
+      this.$scope.error = null;
+      this.$scope.depositInterest = {};
+      this.dialog = this.ngDialog.open({
+        template: 'depositSaveDialog',
+        className: 'ngdialog-theme-plain custom-width',
+        scope: this.$scope,
+        preCloseCallback: (function (_this) {
+          return function (value) {
+            _this.$log.debug("preCloseCallback()");
+            if ('confirm' === value) {
+              _this.saveDepositInterest();
+              return false;
+            } else {
+              return true;
+            }
+          };
+        })(this)
+      });
+      return this.$log.debug("createDepositInterest()");
+
     };
 
     DepositInterestCtrl.prototype.updateDepositInterest = function (depositInterest) {
-      this.$log.debug("updateDepositInterest()");
-      this.depositInterest = depositInterest;
-      this.$rootScope.depositInterest = this.depositInterest;
-      return this.$location.path("/dashboard/deposit/save");
+      this.$scope.error = null;
+      this.$scope.depositInterest = angular.copy(depositInterest);
+      this.dialog = this.ngDialog.open({
+        template: 'depositSaveDialog',
+        className: 'ngdialog-theme-plain custom-width',
+        scope: this.$scope,
+        preCloseCallback: (function (_this) {
+          return function (value) {
+            _this.$log.debug("preCloseCallback()");
+            if ('confirm' === value) {
+              _this.saveDepositInterest();
+              return false;
+            } else {
+              return true;
+            }
+          };
+        })(this)
+      });
+      return this.$log.debug("updateDepositInterest()");
     };
 
     DepositInterestCtrl.prototype.deleteDepositInterest = function (depositInterest) {
