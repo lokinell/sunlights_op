@@ -18,7 +18,7 @@
       this.$rootScope.customer = {};
       this.tabIndex = 1;
       this.pager = {filter: {EQS_telephone: ''}};
-      $scope.bankCardOptions = {
+      this.$scope.bankCardOptions = {
         data: 'bankCardPager.list',
         enablePaging: true,
         showFooter: true,
@@ -44,7 +44,7 @@
           }
         ]
       };
-      $scope.referrerDetailOptions = {
+      this.$scope.referrerDetailOptions = {
         data: 'referrerDetailPager.list',
         enablePaging: true,
         showFooter: true,

@@ -2,7 +2,7 @@
   <div class="dialog-contents">
     <form role="form" class="form-horizontal" ng-submit="closeThisDialog('confirm')">
       <div class="modal-header">
-        <h4 class="modal-title">供应商详情</h4>
+        <h4 class="modal-title">字典表详情</h4>
       </div>
       <div class="alert alert-danger" ng-show="!!error">
         <h4 class="alert-heading">操作失败</h4>
@@ -74,7 +74,7 @@
       </div>
       <div class="modal-footer">
         <button class="btn btn-success">确定</button>
-        <button class="btn btn-warning" ng-click="closeThisDialog('close')">取消</button>
+        <a class="btn btn-warning" ng-click="closeThisDialog('close')">取消</a>
       </div>
     </form>
   </div>
