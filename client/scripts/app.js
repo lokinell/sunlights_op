@@ -368,22 +368,6 @@ angular
           }
         }
       })
-      .state('dashboard.bankSave', {
-        templateUrl: 'views/bank/save.html',
-        url: '/bank/save',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sbAdminApp',
-              files: [
-                'scripts/services/bankService.js',
-                'scripts/controllers/bankCtrl.js'
-              ]
-            })
-          }
-        }
-      })
-
       .state('dashboard.sms', {
         templateUrl: 'views/smsmessage/smsMessage.html',
         url: '/smsmessage',

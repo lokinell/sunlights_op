@@ -5,23 +5,29 @@
   var BankCtrl;
 
   BankCtrl = (function () {
-    function BankCtrl($scope, $rootScope, $log, $location, BankService, toaster) {
+    function BankCtrl($scope, $rootScope, $log, $location, toaster, ngDialog, BankService) {
       this.$scope = $scope;
       this.$rootScope = $rootScope;
       this.$log = $log;
       this.$location = $location;
+      this.toaster = toaster;
+      this.ngDialog = ngDialog;
       this.BankService = BankService;
       this.toaster = toaster;
       this.$log.debug("constructing BankCtrl");
       this.banks = [];
-      this.bank = this.$rootScope.bank || {};
-      this.$rootScope.bank = {};
+      this.bank = this.$scope.bank || {};
       this.pager = {};
-      $scope.gridOptions = {
+      this.dialog = {};
+      this.$scope.gridOptions = {
         data: 'pager.list',
         enablePaging: true,
         showFooter: true,
         multiSelect: false,
+        useExternalSorting: true,
+        i18n: "zh-cn",
+        enableColumnResize: true,
+        showColumnMenu: true,
         totalServerItems: 'pager.count',
         pagingOptions: {
           pageSizes: [5, 10, 15],
@@ -83,30 +89,67 @@
 
     BankCtrl.prototype.saveBank = function () {
       this.$log.debug("saveBank()");
+      this.bank = angular.copy(this.$scope.bank)
       return this.BankService.saveBank(this.bank).then((function (_this) {
         return function (data) {
-          _this.$log.debug("save bank successfully");
+          _this.findBanks();
+          _this.dialog.close();
           _this.toaster.pop('success', data.message.summary, data.message.detail);
-          return _this.$location.path("/dashboard/bank");
+          return _this.$log.debug("save bank successfully");
+
         };
       })(this), (function (_this) {
         return function (error) {
-          _this.$log.error("Unable to save bank: " + error);
-          _this.toaster.pop('error', error.message.summary, error.message.detail);
-          return _this.error = error;
+          _this.$scope.error = error;
+          return _this.$log.error("Unable to save bank: " + error);
         };
       })(this));
     };
 
     BankCtrl.prototype.createBank = function () {
-      this.$log.debug("createBank()");
-      return this.$location.path("/dashboard/bank/save");
+      this.$scope.error = null;
+      this.$scope.bank = {};
+      this.dialog = this.ngDialog.open({
+        template: 'bankSaveDialog',
+        className: 'ngdialog-theme-plain custom-width',
+        scope: this.$scope,
+        preCloseCallback: (function (_this) {
+          return function (value) {
+            _this.$log.debug("preCloseCallback()");
+            if ('confirm' === value) {
+              _this.saveBank();
+              return false;
+            } else {
+              return true;
+            }
+          };
+        })(this)
+      });
+      return this.$log.debug("createBank()");
+
     };
 
     BankCtrl.prototype.updateBank = function (bank) {
-      this.$log.debug("updateBank()");
-      this.$rootScope.bank = bank;
-      return this.$location.path("/dashboard/bank/save");
+      this.$scope.error = null;
+      this.$scope.bank = angular.copy(bank);
+      this.dialog = this.ngDialog.open({
+        template: 'bankSaveDialog',
+        className: 'ngdialog-theme-plain custom-width',
+        scope: this.$scope,
+        preCloseCallback: (function (_this) {
+          return function (value) {
+            _this.$log.debug("preCloseCallback()");
+            if ('confirm' === value) {
+              _this.saveBank();
+              return false;
+            } else {
+              return true;
+            }
+          };
+        })(this)
+      });
+      return this.$log.debug("updateBank()");
+
     };
 
     BankCtrl.prototype.deleteBank = function (bank) {
