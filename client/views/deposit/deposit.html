@@ -7,7 +7,7 @@
         </ol>
     </div>
 
-    <div class="row">
+    <div class="well well-lg">
 
         <div class="alert alert-danger" ng-show="!!dic.error">
             <h4 class="alert-heading">操作失败</h4>
@@ -90,3 +90,6 @@
     </div>
 
 </div>
+<script type="text/ng-template" id="depositSaveDialog">
+  <div ng-include="'views/deposit/save.html'"></div>
+</script>
