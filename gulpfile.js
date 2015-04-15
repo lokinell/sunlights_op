@@ -183,7 +183,7 @@ gulp.task('serve:tdd', function(cb) {
 });
 
 //run the server after having built generated files, and watch for changes
-gulp.task('serve', ['build'], function() {
+gulp.task('watchFile', ['build'], function() {
     browserSync({
         notify: false,
         logPrefix: pkg.name,
@@ -193,6 +193,12 @@ gulp.task('serve', ['build'], function() {
     gulp.watch(config.html, reload);
     gulp.watch(config.tpl, ['templates', reload]);
     gulp.watch(config.assets, reload);
+});
+
+
+
+gulp.task('serve', function(cb) {
+  runSequence('create-config-dev','watchFile');
 });
 
 //run the app packed in the dist folder
@@ -215,12 +221,6 @@ gulp.task('uat-replace', function(){
     .pipe(replace(devBaseUrl, uatBaseUrl))
     .pipe(gulp.dest(config.base+'/scripts'));
 });
-
-gulp.task('delete-config-file', function () {
-  gulp.src(config.base+'/scripts/config.js',{read: false})
-      .pipe(clean())
-});
-
 
 gulp.task('dev-replace', function(){
   gulp.src(config.base+'/scripts/config.js')
