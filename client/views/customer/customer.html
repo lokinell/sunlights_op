@@ -8,14 +8,21 @@
   <div class="row">
     <form class="form-inline col-md-12" name="form" role="form" ng-submit="cl.search()">
 
-      <div>
-        <p class="text-right">
-          <label class="control-label">手机号：</label>
-          <input type="text" class="form-control" ng-model="cl.pager.filter.EQS_telephone"
-                 placeholder="手机号">
-          <button class="btn btn-primary submit">查询</button>
-
-        </p>
+      <div class=" text-right">
+        <div class="alert alert-danger" ng-show="!form.$valid">
+          <span class="error" ng-show="form.mobile.$error.minlength">只能为11位手机号码</span>
+          <span class="error" ng-show="form.mobile.$error.maxlength">只能为11位手机号码</span>
+        </div>
+      </div>
+      <div class=" text-right">
+        <div class="input-group">
+          <input type="number" name="mobile" class="form-control" ng-model="cl.pager.filter.EQS_telephone"
+                 placeholder="手机号" ng-maxlength="11" ng-minlength="11">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit" ng-disabled="!form.$valid"><span class="glyphicon glyphicon-search"
+                                                                aria-hidden="true"></span></button>
+          </span>
+        </div>
       </div>
       用户基本信息查询
       <hr>

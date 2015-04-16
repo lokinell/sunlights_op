@@ -1,32 +1,34 @@
 <div class="row" ng-controller="ResourceCtrl as rc">
 
-    <div class="row">
-        <ol class="breadcrumb">
-            <li><a>权限管理</a></li>
-            <li class="active">资源管理</li>
-        </ol>
+  <div class="row">
+    <ol class="breadcrumb">
+      <li><a>权限管理</a></li>
+      <li class="active">资源管理</li>
+    </ol>
+  </div>
+
+  <div class="well well-lg">
+
+    <div class="alert alert-danger" ng-show="!!rc.error">
+      <h4 class="alert-heading">操作失败</h4>
+      <span ng-bind="rc.error.message.detail"></span>
     </div>
-
-    <div class="well well-lg">
-
-        <div class="alert alert-danger" ng-show="!!rc.error">
-            <h4 class="alert-heading">操作失败</h4>
-            <span ng-bind="rc.error.message.detail"></span>
+    <form class="form-inline" role="form">
+      <div class="form-group">
+        <div class="input-group">
+          <input type="text" ng-enter="rc.findResources()" class="form-control" ng-model="rc.pager.filter.LIKES_name"
+                 placeholder="名称">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-click="rc.findResources()"><span
+              class="glyphicon glyphicon-search"
+              aria-hidden="true"></span></button>
+          </span>
         </div>
-        <form class="form-inline" role="form">
-            <div class="form-group">
-                <label class="control-label">名称：</label>
-                <input type="text" ng-enter="rc.findResources()" class="form-control" ng-model="rc.pager.filter.LIKES_name" placeholder="名称">
-            </div>
+      </div>
+    </form>
+    <br>
+    <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="rc.findResources()"></div>
 
-            <div>
-                <p class="text-right">
-                    <a class="btn btn-primary submit" ng-click="rc.findResources()">查询</a>
-                </p>
-            </div>
-        </form>
-        <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="rc.findResources()"></div>
-
-    </div>
+  </div>
 
 </div>
