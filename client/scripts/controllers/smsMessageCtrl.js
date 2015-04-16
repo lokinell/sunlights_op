@@ -9,6 +9,7 @@
       this.SmsMessageService = SmsMessageService;
       this.$log.debug("constructing SmsMessageCtrl");
       this.allCount = 0;
+      this.exportUrl = baseUrl + "/smsmessage/excel";
       this.pager = {
         filter: {
           EQS_sendStatus: '',
@@ -70,8 +71,6 @@
       this.$log.debug("findSmsMessageVos()");
       return this.SmsMessageService.findSmsMessageVos(this.pager).then((function(_this) {
         return function(data) {
-          _this.$log.debug("Promise returned " + data.value.list.length + " SmsMessages");
-          _this.$log.debug("Promise returned " + data.value.allCount + " SmsMessages");
           _this.$scope.myData = data.value.list;
           return _this.allCount = data.value.allCount;
         };
