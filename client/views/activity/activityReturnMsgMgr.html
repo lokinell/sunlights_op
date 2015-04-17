@@ -12,15 +12,15 @@
             <form class="form-inline " role="form">
                 <div class="form-group">
                     <label class="control-label">场景：</label>
-                    <select class="form-control" ng-model="queryRule.filterText.scene"
+                    <select class="form-control" ng-model="pager.filter.EQS_scene"
                             ng-options="item.key as item.value for item in constant.scenes">
                     </select>
                     <label class="control-label">类型：</label>
-                    <select class="form-control" ng-model="queryRule.filterText.activityType"
+                    <select class="form-control" ng-model="pager.filter.EQS_type"
                             ng-options="item.key as item.value for item in constant.activityTypes">
                     </select>
                     <label class="control-label">奖励类型：</label>
-                    <select class="form-control" ng-model="queryRule.filterText.rewardType"
+                    <select class="form-control" ng-model="pager.filter.EQS_rewardType"
                             ng-options="item.key as item.value for item in constant.rewardTypes">
                     </select>
                     <a class="btn btn-primary submit" ng-click="findReturnMsg()">查询</a>
@@ -28,7 +28,7 @@
                 </div>
             </form>
         </div>
-        <div class="gridStyle" ng-grid="gridOptions"></div>
+        <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="findReturnMsg()"></div>
     </div>
 
     <script type="text/ng-template" id="activityReturnMsgModalContent.html">

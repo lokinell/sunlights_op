@@ -18,12 +18,16 @@
       this.$log.debug("constructing ExchangeBeanResultService");
     }
 
-    ExchangeBeanResultService.prototype.findExchangeBeanResults = function(condition) {
+    ExchangeBeanResultService.prototype.findExchangeBeanResults = function(pager) {
       var deferred;
       this.$log.debug("findExchangeBeanResults()");
-        this.$log.debug("findExchangeBeanResults()" + angular.toJson(condition));
+        this.$log.debug("findExchangeBeanResults()" + angular.toJson(pager));
       deferred = this.$q.defer();
-      this.$http.get(baseUrl + "/exchangebeanresult", condition).success((function(_this) {
+      this.$http.get(baseUrl + "/exchangebeanresult", {
+          headers: {
+              'params': encodeURIComponent(angular.toJson(pager))
+          }
+      }).success((function(_this) {
         return function(data, status, headers) {
           _this.$log.info("Successfully find exchangeBeanresult - status " + status);
           return deferred.resolve(data);

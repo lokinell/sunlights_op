@@ -22,7 +22,11 @@
       var deferred;
       this.$log.debug("findRewardTypes()");
       deferred = this.$q.defer();
-      this.$http.get(baseUrl +     "/rewardTypes", pager).success((function(_this) {
+      this.$http.get(baseUrl + "/rewardTypes", {
+          headers: {
+              'params': encodeURIComponent(angular.toJson(pager))
+          }
+      }).success((function(_this) {
         return function(data, status, headers) {
           _this.$log.info("Successfully find RewardTypes - status " + status);
           return deferred.resolve(data);

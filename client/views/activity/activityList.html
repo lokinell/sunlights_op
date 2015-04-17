@@ -13,15 +13,15 @@
             <form class="form-inline " role="form">
                 <div class="form-group">
                     <label class="control-label">ID：</label>
-                    <input type="text" class="form-control" ng-model="dc.condition.id" placeholder="id">
+                    <input type="text" class="form-control" ng-model="dc.pager.filter.EQL_id" placeholder="id">
                     <label class="control-label">标题：</label>
-                    <input type="text" class="form-control" ng-model="dc.condition.title" placeholder="标题">
+                    <input type="text" class="form-control" ng-model="dc.pager.filter.LIKES_title" placeholder="标题">
                     <a class="btn btn-primary submit" ng-click="dc.findActivities()">查询</a>
                     <a class="btn btn-primary submit" ng-click="open()">添加活动</a>
                 </div>
             </form>
         </div>
-        <div class="gridStyle" ng-grid="gridOptions"></div>
+        <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="dc.findActivities()"></div>
     </div>
 
 

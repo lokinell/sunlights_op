@@ -2,11 +2,12 @@
   var ActivityCtrl;
 
   ActivityCtrl = (function() {
-    function ActivityCtrl($modal, $log, $scope, $location, FileUploader, ActivityService, ObtainRewardRulesService, ActivityShareInfoService) {
+    function ActivityCtrl($modal, $log, $scope, $location,toaster, FileUploader, ActivityService, ObtainRewardRulesService, ActivityShareInfoService) {
       this.$modal = $modal;
       this.$log = $log;
       this.$scope = $scope;
       this.$location = $location;
+      this.toaster = toaster;
       this.FileUploader = FileUploader;
       this.ActivityService = ActivityService;
       this.ObtainRewardRulesService = ObtainRewardRulesService;
@@ -18,9 +19,7 @@
       this.$scope.myData = [];
       this.activityId;
       this.pager = {
-        filter: {
-          EQS_status: ''
-        }
+
       };
       this.constant = {
         activityStyle: [
@@ -159,14 +158,13 @@
           }
         ],
         multiSelect: false,
-        data: 'myData',
+        data: 'pager.list',
         enablePaging: true,
         showFooter: true,
-        totalServerItems: 'totalServerItems',
+        totalServerItems: 'pager.count',
         pagingOptions: {
-          pageSizes: [30, 60, 90],
-          pageSize: 30,
-          totalServerItems: 0,
+          pageSizes: [5, 10, 20],
+          pageSize: 10,
           currentPage: 1
         },
         useExternalSorting: true,
@@ -261,16 +259,18 @@
 
     ActivityCtrl.prototype.init = function() {
       this.setupScope();
-      this.findActivities();
       return this.prepareData();
     };
 
     ActivityCtrl.prototype.findActivities = function() {
       this.$log.debug("findActivities()");
-      return this.ActivityService.findActivities(this.condition).then((function(_this) {
+      this.pager.pageSize = this.$scope.gridOptions.pagingOptions.pageSize;
+      this.pager.pageNum = this.$scope.gridOptions.pagingOptions.currentPage;
+
+      return this.ActivityService.findActivities(this.pager).then((function(_this) {
         return function(data) {
           _this.$log.debug("Promise returned " + data.length + " activities");
-          return _this.$scope.myData = data;
+          return _this.$scope.pager = data.value;
         };
       })(this), (function(_this) {
         return function(error) {
@@ -295,11 +295,13 @@
       return this.ActivityService.deleteActivity(row.entity).then((function(_this) {
         return function(data) {
           _this.$log.debug("Successfully delete Activity");
+          _this.toaster.pop('success', "删除成功", "删除成功");
           return _this.findActivities();
         };
       })(this), (function(_this) {
         return function(error) {
           _this.$log.error("Unable to delete Activity: " + error);
+          _this.toaster.pop('success', "删除失败", "删除失败");
           return _this.error = error;
         };
       })(this));

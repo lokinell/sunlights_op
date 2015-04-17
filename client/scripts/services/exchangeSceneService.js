@@ -18,11 +18,15 @@
       this.$log.debug("constructing ExchangeRuleService");
     }
 
-    ExchangeSceneService.prototype.findExchangeScenes = function() {
+    ExchangeSceneService.prototype.findExchangeScenes = function(pager) {
       var deferred;
       this.$log.debug("findExchangeScenes()");
       deferred = this.$q.defer();
-      this.$http.get(baseUrl + "/exchangescene").success((function(_this) {
+      this.$http.get(baseUrl + "/exchangescene", {
+          headers: {
+              'params': encodeURIComponent(angular.toJson(pager))
+          }
+      }).success((function(_this) {
         return function(data, status, headers) {
           _this.$log.info("Successfully find exchangescene - status " + status);
           return deferred.resolve(data);

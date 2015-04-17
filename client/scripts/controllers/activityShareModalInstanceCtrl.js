@@ -46,6 +46,7 @@
       this.$scope.okBasicShare = function() {
         return ActivityShareInfoService.saveShare($scope.row).then((function(_this) {
           return function(data) {
+            modalInstance.close(data);
             return $log.debug("Promise returned " + data + " share");
           };
         })(this), (function(_this) {

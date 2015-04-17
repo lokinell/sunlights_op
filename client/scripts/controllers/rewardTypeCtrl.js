@@ -2,12 +2,13 @@
   var RewardTypeCtrl;
 
   RewardTypeCtrl = (function() {
-    function RewardTypeCtrl($http, $timeout, $scope, $modal, $log, $location, FileUploader, RewardTypesService, ExchangeRuleService,toaster) {
+    function RewardTypeCtrl($http, $timeout, $scope, $modal, toaster,$log, $location, FileUploader, RewardTypesService, ExchangeRuleService,toaster) {
       this.$http = $http;
       this.$timeout = $timeout;
       this.$scope = $scope;
       this.$modal = $modal;
       this.$log = $log;
+      this.toaster = toaster;
       this.$location = $location;
       this.toaster = toaster;
       this.FileUploader = FileUploader;
@@ -19,43 +20,56 @@
       this.editingRow = {};
       this.code;
       this.pager = {
-        filter: {
-          EQS_status: ''
-        }
+
       };
       this.uploaderRuleH5 = new FileUploader({
         url: '/activities/uploadFile',
         alias: 'ruleH5'
       });
-      this.$scope.pageSizes = [5, 10, 20];
-      this.$scope.columnDefs = [
-        {
-          field: "code",
-          displayName: "编码"
-        }, {
-          field: "name",
-          displayName: "名称"
-        }, {
-          field: "unit",
-          displayName: "单位"
-        }, {
-          field: "rate",
-          displayName: "兑换率"
-        }, {
-          field: "limitTime",
-          displayName: "兑换期限"
-        }, {
-          field: "locked",
-          displayName: "操作",
-          cellTemplate: "views/cell/rewardTypeCell.html"
-        }, {
-          field: "locked",
-          displayName: "兑换规则",
-          cellTemplate: "views/cell/exchangeRewardRule.html"
-        }
-      ];
-      this.$scope.pageUrl = baseUrl + "/rewardTypes";
-      new PageService(this.$scope, this.$http, this.$timeout);
+
+      this.$scope.gridOptions = {
+          data: 'pager.list',
+          enablePaging: true,
+          showFooter: true,
+          multiSelect: false,
+          useExternalSorting: true,
+          i18n: "zh-cn",
+          enableColumnResize: true,
+          showColumnMenu: true,
+          totalServerItems: 'pager.count',
+          pagingOptions: {
+              pageSizes: [2, 10, 15],
+              pageSize: 10,
+              currentPage: 1
+          },
+          columnDefs: [
+              {
+                  field: "code",
+                  displayName: "编码"
+              }, {
+                  field: "name",
+                  displayName: "名称"
+              }, {
+                  field: "unit",
+                  displayName: "单位"
+              }, {
+                  field: "rate",
+                  displayName: "兑换率"
+              }, {
+                  field: "limitTime",
+                  displayName: "兑换期限"
+              }, {
+                  field: "locked",
+                  displayName: "操作",
+                  cellTemplate: "views/cell/rewardTypeCell.html"
+              }, {
+                  field: "locked",
+                  displayName: "兑换规则",
+                  cellTemplate: "views/cell/exchangeRewardRule.html"
+              }
+          ]
+      };
+
       this.$scope.editRow = (function(_this) {
         return function(row) {
           return _this.editRow(row);
@@ -137,16 +151,15 @@
       })(this);
     }
 
-    RewardTypeCtrl.prototype.init = function() {
-      return this.findRewardTypes();
-    };
-
     RewardTypeCtrl.prototype.findRewardTypes = function() {
       this.$log.debug("findRewardTypes()");
+      this.pager.pageSize = this.$scope.gridOptions.pagingOptions.pageSize;
+      this.pager.pageNum = this.$scope.gridOptions.pagingOptions.currentPage;
+
       return this.RewardTypesService.findRewardTypes(this.pager).then((function(_this) {
         return function(data) {
           _this.$log.debug("Promise returned " + data.length + " RewardTypes");
-          return _this.$scope.myData = data.list;
+          return _this.$scope.pager = data.value;
         };
       })(this), (function(_this) {
         return function(error) {
@@ -168,11 +181,13 @@
       return this.RewardTypesService.deleteType(row.entity).then((function(_this) {
         return function(data) {
           _this.$log.debug("Successfully delete rewardType");
+          _this.toaster.pop('success', "删除成功", "删除成功");
           return _this.findRewardTypes();
         };
       })(this), (function(_this) {
         return function(error) {
           _this.$log.error("Unable to delete rewardType: " + error);
+          _this.toaster.pop('success', "删除失败", "删除失败");
           return _this.error = error;
         };
       })(this));
@@ -198,11 +213,13 @@
       return this.ExchangeRuleService.deleteRule(row.entity).then((function(_this) {
         return function(data) {
           _this.$log.debug("Successfully delete rewardType");
+          _this.toaster.pop('success', "删除成功", "删除成功");
           return _this.findRewardTypes();
         };
       })(this), (function(_this) {
         return function(error) {
           _this.$log.error("Unable to delete rewardType: " + error);
+          _this.toaster.pop('success', "删除失败", "删除失败");
           return _this.error = error;
         };
       })(this));
