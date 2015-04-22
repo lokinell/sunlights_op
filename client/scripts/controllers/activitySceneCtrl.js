@@ -2,12 +2,13 @@
   var activitySceneCtrl;
 
   activitySceneCtrl = (function() {
-    function activitySceneCtrl($modal,$rootScope, $log, $http, $timeout, $location, ActivitySceneService, CommonService, $scope) {
+    function activitySceneCtrl($modal,$rootScope, $log, $http, $timeout, toaster, $location, ActivitySceneService, CommonService, $scope) {
       this.$rootScope = $rootScope;
       this.$log = $log;
       this.$http = $http;
       this.$timeout = $timeout;
       this.$location = $location;
+      this.toaster = toaster;
       this.ActivitySceneService = ActivitySceneService;
       this.CommonService = CommonService;
       this.$scope = $scope;
@@ -19,12 +20,47 @@
       this.manage = {};
       this.manages = [];
       this.productTypes = [];
-      this.$scope.pageSizes = [5, 10, 20];
+      this.pager = {};
 
-      this.pager = {
-          filter: {
-
-          }
+      this.$scope.gridOptions = {
+          data: 'pager.list',
+          enablePaging: true,
+          showFooter: true,
+          multiSelect: false,
+          useExternalSorting: true,
+          i18n: "zh-cn",
+          enableColumnResize: true,
+          showColumnMenu: true,
+          totalServerItems: 'pager.count',
+          pagingOptions: {
+              pageSizes: [5, 10, 15],
+              pageSize: 10,
+              currentPage: 1
+          },
+          columnDefs: [
+              {
+                  field: "scene",
+                  displayName: "场景编码"
+              }, {
+                  field: "title",
+                  displayName: "场景名称"
+              }, {
+                  field: "activityTypeDesc",
+                  displayName: "活动类型"
+              }, {
+                  field: "status",
+                  displayName: "状态",
+                  cellTemplate: "<div class='ngCellText' ng-class='col.colIndex()'><span>{{row.entity.status== 'N' ? '正常' : '禁用'}}</span></div>"
+              }, {
+                  field: "createTime",
+                  displayName: "创建时间",
+                  cellFilter: "date:\"yyyy-MM-dd \""
+              }, {
+                  field: "locked",
+                  displayName: "操作",
+                  cellTemplate: "views/cell/scenesCell.html"
+              }
+          ]
       };
 
       this.$scope.open = (function(_this) {
@@ -56,38 +92,11 @@
               });
           };
       })(this);
-      this.$scope.columnDefs = [
-        {
-          field: "scene",
-          displayName: "场景编码"
-        }, {
-          field: "title",
-          displayName: "场景名称"
-        }, {
-          field: "activityTypeDesc",
-          displayName: "活动类型"
-        }, {
-          field: "status",
-          displayName: "状态",
-          cellTemplate: "<div class='ngCellText' ng-class='col.colIndex()'><span>{{row.entity.status== 'N' ? '正常' : '禁用'}}</span></div>"
-        }, {
-          field: "createTime",
-          displayName: "创建时间",
-          cellFilter: "date:\"yyyy-MM-dd \""
-        }, {
-          field: "locked",
-          displayName: "操作",
-          cellTemplate: "views/cell/scenesCell.html"
-        }
-      ];
-      this.$scope.pageUrl = baseUrl + "/activity/scene";
-      new PageService(this.$scope, this.$http, this.$timeout);
     }
 
     activitySceneCtrl.prototype.initSave = function() {
       this.$log.debug("initSave()");
       this.findActivityTypes();
-      this.findScenes();
     };
 
     activitySceneCtrl.prototype.findActivityTypes = function() {
@@ -107,10 +116,12 @@
 
     activitySceneCtrl.prototype.findScenes = function() {
       this.$log.debug("findScenes()");
+      this.pager.pageSize = this.$scope.gridOptions.pagingOptions.pageSize;
+      this.pager.pageNum = this.$scope.gridOptions.pagingOptions.currentPage;
       return this.ActivitySceneService.findScenes(this.pager).then((function(_this) {
         return function(data) {
           _this.$log.debug("Promise returned " + data.value + " Scenes");
-          return _this.$scope.myData = data.value;
+          return _this.$scope.pager = data.value;
         };
       })(this), (function(_this) {
         return function(error) {
@@ -131,11 +142,13 @@
       return this.ActivitySceneService.deleteScene(scene).then((function(_this) {
         return function(data) {
           _this.$log.debug("successfully delete scene");
+          _this.toaster.pop('success', "删除成功", "删除成功");
           return _this.findScenes();
         };
       })(this), (function(_this) {
         return function(error) {
           _this.$log.error("Unable to delete scene: " + error);
+          _this.toaster.pop('success', "删除失败", "删除失败");
           return _this.error = error;
         };
       })(this));

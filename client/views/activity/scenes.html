@@ -15,13 +15,11 @@
         <div class="middle-layout">
             <form class="form-inline " role="form">
                 <div class="form-group">
-                    <label class="control-label">查询：</label>
-                    <input type="text" class="form-control" ng-model="filterOptions.filterText.searchText1" placeholder="请输入你想查询的数据">
                     <a class="btn btn-primary submit" ng-click="open()">添加</a>
                 </div>
             </form>
         </div>
-        <div class="gridStyle" ng-grid="gridOptions"></div>
+        <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="asc.findScenes()"></div>
 
     </div>
 

@@ -28,7 +28,7 @@
         columnDefs: [
           {
             field: 'abbrName',
-            displayName: '简称'
+            displayName: '名称'
           }, {
             field: 'pinYinCode',
             displayName: '拼音代码'

@@ -12,18 +12,19 @@
 
     <form class="form-inline" user="form">
       <div class="form-group">
-        <label class="control-label">用户名：</label>
-        <input type="text" ng-enter="uc.findUsers()" class="form-control" ng-model="uc.pager.filter.LIKES_username"
-               placeholder="用户名">
+        <div class="input-group">
+          <input type="text" class="form-control" ng-enter="uc.findUsers()" ng-model="uc.pager.filter.LIKES_username"
+                 placeholder="用户名">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-click="uc.findUsers()"><span class="glyphicon glyphicon-search"
+                                                                aria-hidden="true"></span></button>
+          </span>
+        </div>
+        <a class="btn btn-primary submit" ng-click="uc.createUser()">添加</a>
       </div>
 
-      <div>
-        <p class="text-right">
-          <a class="btn btn-primary submit" ng-click="uc.findUsers()">查询</a>
-          <a class="btn btn-primary submit" ng-click="uc.createUser()">添加</a>
-        </p>
-      </div>
     </form>
+    <br>
     <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="uc.findUsers()"></div>
 
   </div>

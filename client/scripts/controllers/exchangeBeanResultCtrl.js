@@ -99,18 +99,17 @@
           }
         ],
         multiSelect: false,
-        data: 'myData',
+        data: 'pager.list',
         useExternalSorting: true,
         i18n: "zh-cn",
         enableColumnResize: true,
         showColumnMenu: true,
         enablePaging: true,
         showFooter: true,
-        totalServerItems: 'totalServerItems',
+        totalServerItems: 'pager.count',
         pagingOptions: {
-          pageSizes: [30, 60, 90],
-          pageSize: 30,
-          totalServerItems: 0,
+          pageSizes: [5, 15, 25],
+          pageSize: 10,
           currentPage: 1
         }
       };
@@ -118,15 +117,16 @@
 
     ExchangeBeanResultCtrl.prototype.init = function() {
       this.setupScope();
-      return this.findExchangeBeanResults();
     };
 
     ExchangeBeanResultCtrl.prototype.findExchangeBeanResults = function() {
       this.$log.debug("findExchangeBeanResults()");
+      this.pager.pageSize = this.$scope.gridOptions.pagingOptions.pageSize;
+      this.pager.pageNum = this.$scope.gridOptions.pagingOptions.currentPage;
       return this.ExchangeBeanResultService.findExchangeBeanResults(this.pager).then((function(_this) {
         return function(data) {
           _this.$log.debug("Promise returned " + data.length + " Scenes");
-          return _this.$scope.myData = data;
+          return _this.$scope.pager = data.value;
         };
       })(this), (function(_this) {
         return function(error) {

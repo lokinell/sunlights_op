@@ -2,13 +2,14 @@
   var ActivityShareCtrl;
 
   ActivityShareCtrl = (function() {
-    function ActivityShareCtrl($modal, $log, $scope, $location, FileUploader, ActivityService, ObtainRewardRulesService, ActivityShareInfoService, toaster) {
+    function ActivityShareCtrl($modal, $log, $scope, $location, toaster, FileUploader, ActivityService, ObtainRewardRulesService, ActivityShareInfoService, toaster) {
       this.$modal = $modal;
       this.$log = $log;
       this.toaster = toaster;
       this.$scope = $scope;
       this.$location = $location;
       this.FileUploader = FileUploader;
+      this.toaster = toaster;
       this.ActivityService = ActivityService;
       this.ObtainRewardRulesService = ObtainRewardRulesService;
       this.ActivityShareInfoService = ActivityShareInfoService;
@@ -83,6 +84,7 @@
             }
           });
           return modalInstance.result.then((function(selectedItem) {
+            _this.queryShare();
             return _this.$scope.selected = selectedItem;
           }), function() {
             return _this.$log.debug("Modal dismissed at: " + new Date());
@@ -93,8 +95,10 @@
         return function(row) {
           return ActivityShareInfoService.deleteShare(row.entity).then(function(data) {
             $log.debug("Promise returned " + data.length + " shares");
+            _this.toaster.pop('success', "删除成功", "删除成功");
             return _this.queryShare();
           }, function(error) {
+            _this.toaster.pop('success', "删除失败", "删除失败");
             return $log.error("Unable to get activities: " + error);
           });
         };
@@ -103,6 +107,8 @@
         return function() {
           return ActivityShareInfoService.saveShare($scope.share).then(function(data) {
             $log.debug("Promise returned " + data + " rules");
+            $scope.share.isRefIdStr = data.isRefIdStr
+            $scope.share.shareTypeStr = data.shareTypeStr;
             if (data.updateTime) {
               $scope.shareDatas[$scope.row] = $scope.share;
             } else {
@@ -110,9 +116,9 @@
               $scope.shareDatas[$scope.shareDatas.length] = $scope.share;
               $scope.share = {};
             }
-            $scope.share.shareTypeStr = data.shareTypeStr;
+
             _this.toaster.pop("sucess", "保存成功", "保存成功");
-            return $scope.share.isRefIdStr = data.isRefIdStr;
+            return;
           }, function(error) {
             return $log.error("Unable to get rules: " + error);
           });

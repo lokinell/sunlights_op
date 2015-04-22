@@ -7,34 +7,57 @@
     </ol>
     </div>
 
-    <div class="row">
-        <form class="form-inline" name="form" id="smsMessageForm" role="form" target="_blank" method="post">
-            <div class="col-md-12">
-                <div>
-                    <label class="control-label">发送状态：</label>
-                    <select class="form-control" ng-model="ctrl.pager.filter.EQS_sendStatus" name="EQS_sendStatus">
+
+    <div class="well well-lg">
+        <div class="middle-layout">
+            <form class="form-inline " role="form">
+                <div class="form-group">
+                    <label class="control-label">状态：</label>
+                    <select class="form-control " ng-model="ctrl.pager.filter.EQS_sendStatus" name="EQS_sendStatus">
                         <option value="">全部</option>
                         <option value="Y">成功</option>
                         <option value="N">失败</option>
                     </select>
-                </div>
-                <div>
-                    <label class="control-label">发送日期：</label>
-                    <input ui-date ng-model="ctrl.pager.filter.GED_beginTime" name="GED_beginTime">
-                    <label class="control-label">至：</label>
-                    <input ui-date ng-model="ctrl.pager.filter.LTD_endTime" name="LTD_endTime">
+
+                    <label class="control-label col-md-1">起始：</label>
+                    <div class="col-md-3">
+                        <a class="dropdown-toggle" id="beginDropdown" role="button" data-toggle="dropdown" data-target="#">
+                            <div class="input-group">
+                                <input class="form-control" value="{{ctrl.pager.filter.GED_beginTime | date : 'yyyy-MM-dd'}}">
+                                <span class="input-group-addon" ng-click="ctrl.pager.filter.GED_beginTime=''"><i class="glyphicon glyphicon-remove"></i></span>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker ng-model="ctrl.pager.filter.GED_beginTime"
+                            datetimepicker-config="{ dropdownSelector: '#beginDropdown'}"></datetimepicker>
+                        </ul>
+                    </div>
+
+                    <label class="control-label col-md-1">截至：</label>
+                    <div class="col-md-3">
+                        <a class="dropdown-toggle" id="endDropdown" role="button" data-toggle="dropdown" data-target="#">
+                            <div class="input-group">
+                                <input class="form-control" value="{{ctrl.pager.filter.LTD_endTime | date : 'yyyy-MM-dd'}}">
+                                <span class="input-group-addon" ng-click="ctrl.pager.filter.LTD_endTime=''"><i class="glyphicon glyphicon-remove"></i></span>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker ng-model="ctrl.pager.filter.LTD_endTime"
+                            datetimepicker-config="{ dropdownSelector: '#endDropdown'}"></datetimepicker>
+                        </ul>
+                    </div>
+
+
                     <a class="btn btn-primary submit" ng-click="ctrl.findSmsMessageVos()">查询</a>
-                    <button class="btn btn-primary submit" onclick="exportExcel();">导出excel</button>
+                    <a href="{{ctrl.exportUrl}}?EQS_sendStatus={{ ctrl.pager.filter.EQS_sendStatus }}&GED_beginTime={{ ctrl.pager.filter.GED_beginTime }}&LTD_endTime={{ ctrl.pager.filter.LTD_endTime }}">导出</a>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
+        <div class="gridStyle" ng-grid="gridOptions"></div>
+        <div class="text-right">
+            <label class="control-label">总条数累计：{{ctrl.allCount}}</label>
+        </div>
     </div>
-
-
-    <div class="gridStyle" ng-grid="gridOptions"></div>
-
-    <div class="text-right">
-        <label class="control-label">总条数累计：{{ctrl.allCount}}</label>
-    </div>
-
 </div>

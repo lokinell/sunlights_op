@@ -18,7 +18,7 @@
       this.$rootScope.customer = {};
       this.tabIndex = 1;
       this.pager = {filter: {EQS_telephone: ''}};
-      $scope.bankCardOptions = {
+      this.$scope.bankCardOptions = {
         data: 'bankCardPager.list',
         enablePaging: true,
         showFooter: true,
@@ -44,7 +44,7 @@
           }
         ]
       };
-      $scope.referrerDetailOptions = {
+      this.$scope.referrerDetailOptions = {
         data: 'referrerDetailPager.list',
         enablePaging: true,
         showFooter: true,
@@ -124,6 +124,11 @@
       if ("" !== this.pager.filter.EQS_telephone) {
         this.CustomerService.findCustomerByMobile(this.pager.filter.EQS_telephone).then((function (_this) {
           return function (data) {
+            if(!data.value){
+              _this.toaster.pop('warning', '查询失败', '没有该手机号');
+            } else {
+              _this.toaster.pop('success', '查询成功', '');
+            }
             return _this.customer = data.value;
           };
         })(this), (function (_this) {

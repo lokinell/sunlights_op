@@ -68,7 +68,7 @@
         </select>
 
         <label class="control-label">推送类型：</label>
-        <select class="form-control" ng-model="pushConfig.pushType" >
+        <select class="form-control" ng-model="pushConfig.pushType" required>
             <option value="" selected>-- 请选择 --</option>
             <option value="FP.PUSH.TYPE.1">系统公告</option>
             <option value="FP.PUSH.TYPE.2">活动公告</option>
@@ -92,6 +92,7 @@
             <a class="dropdown-toggle" id="beginDropdown" role="button" data-toggle="dropdown" data-target="#">
                 <div class="input-group">
                     <input class="form-control" value="{{pushConfig.planBeginTime | date : 'yyyy-MM-dd HH:mm:ss'}}">
+                    <span class="input-group-addon" ng-click="pushConfig.planBeginTime=''"><i class="glyphicon glyphicon-remove"></i></span>
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
             </a>
@@ -106,6 +107,7 @@
             <a class="dropdown-toggle" id="endDropdown" role="button" data-toggle="dropdown" data-target="#">
                 <div class="input-group">
                     <input class="form-control" value="{{pushConfig.planEndTime | date : 'yyyy-MM-dd HH:mm:ss'}}">
+                    <span class="input-group-addon" ng-click="pushConfig.planEndTime=''"><i class="glyphicon glyphicon-remove"></i></span>
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
             </a>

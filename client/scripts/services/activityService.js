@@ -22,7 +22,11 @@
       var deferred;
       this.$log.debug("findActivities()");
       deferred = this.$q.defer();
-      this.$http.get(baseUrl + "/activities", pager).success((function(_this) {
+      this.$http.get(baseUrl + "/activities", {
+          headers: {
+              'params': encodeURIComponent(angular.toJson(pager))
+          }
+      }).success((function(_this) {
         return function(data, status, headers) {
           _this.$log.info("Successfully find Activities - status " + status);
           return deferred.resolve(data);

@@ -1,4 +1,4 @@
-var ActivityReturnMsgCtrl = function ($modal, $scope, $location, ActivityReturnMsgService,ActivityService, $rootScope, FileUploader,$http,$timeout) {
+var ActivityReturnMsgCtrl = function ($modal, $scope, $location,toaster, ActivityReturnMsgService,ActivityService, $rootScope, FileUploader,$http,$timeout) {
 
     // 每页条数 及条数可选项(默认为[10,20,30])
     //$scope.pageSizes = [3, 4, 5];
@@ -6,7 +6,6 @@ var ActivityReturnMsgCtrl = function ($modal, $scope, $location, ActivityReturnM
     //$scope.isNotInit = true;
 
     $scope.pager = {};
-
 
 
     $scope.constant = {
@@ -44,21 +43,33 @@ var ActivityReturnMsgCtrl = function ($modal, $scope, $location, ActivityReturnM
         ]
     };
 
-    $scope.columnDefs = [
-        {field: 'sceneStr', displayName: '场景'},
-        {field: 'activityTypeStr', displayName: '类型'},
-        {field: 'rewardTypeStr', displayName: '奖励类型'},
-        {field: 'categoryStr', displayName: '种类'},
-        {field: 'errorMessage', displayName: '错误信息'},
-        {field: 'template', displayName: '模版信息'},
-        {field:'locked', displayName:'操作',cellTemplate:'views/cell/rewardTypeCell.html'}
-    ];
-    $scope.pageUrl=baseUrl + "/activityReturnMsg";
-
-    new PageService($scope,$http,$timeout);
+    $scope.gridOptions = {
+        data: 'pager.list',
+        enablePaging: true,
+        showFooter: true,
+        multiSelect: false,
+        useExternalSorting: true,
+        i18n: "zh-cn",
+        enableColumnResize: true,
+        showColumnMenu: true,
+        totalServerItems: 'pager.count',
+        pagingOptions: {
+            pageSizes: [5, 10, 15],
+            pageSize: 10,
+            currentPage: 1
+        },
+        columnDefs: [
+            {field: 'sceneStr', displayName: '场景'},
+            {field: 'activityTypeStr', displayName: '类型'},
+            {field: 'rewardTypeStr', displayName: '奖励类型'},
+            {field: 'categoryStr', displayName: '种类'},
+            {field: 'errorMessage', displayName: '错误信息'},
+            {field: 'template', displayName: '模版信息'},
+            {field:'locked', displayName:'操作',cellTemplate:'views/cell/rewardTypeCell.html'}
+        ]
+    };
 
     $scope.alertFlag = false;
-    $scope.error = "请输入对账日期";
 
     $scope.editRow = function (row) {
         var modalInstance = $modal.open({
@@ -81,10 +92,12 @@ var ActivityReturnMsgCtrl = function ($modal, $scope, $location, ActivityReturnM
         return ActivityReturnMsgService.delete(row.entity).then((function (data) {
             console.debug("Promise returned " + data.length + " banks");
             //$scope.myData = data;
+            toaster.pop('success', "删除成功", "删除成功");
             $scope.findReturnMsg();
 
         }), function (error) {
             console.error("Unable to get activities: " + error.data);
+            toaster.pop('success', "删除失败", "删除失败");
             $scope.error = error.data;
         });
     };
@@ -94,9 +107,11 @@ var ActivityReturnMsgCtrl = function ($modal, $scope, $location, ActivityReturnM
     };
 
     $scope.findReturnMsg = function() {
+        $scope.pager.pageSize = $scope.gridOptions.pagingOptions.pageSize;
+        $scope.pager.pageNum = $scope.gridOptions.pagingOptions.currentPage;
         return ActivityReturnMsgService.findResult($scope.pager).then((function (data) {
-            console.debug("Promise returned " + data.list.length + " ReturnMsgs");
-            $scope.myData = data.list;
+
+            $scope.pager = data.value;
 
         }), function (error) {
             console.error("Unable to get activities: " + error.data);

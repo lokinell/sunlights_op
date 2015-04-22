@@ -6,86 +6,33 @@
       </ol>
     </div>
 
-    <div class="row">
-        <form class="form-inline" role="form" >
-<!-- 这是老版本的查询
-         <div class="col-md-12">
-                <label class="control-label">群组名称：</label>
-                <input type="text" class="form-control" ng-model="gc.pager.filter.LIKES_name" ng-enter="gc.findGroups()">
-                <label class="control-label">状态</label>
-                <select class="form-control" ng-model="gc.pager.filter.EQS_status" ng-options="item.key as item.value for item in gc.status">
-                </select>
-            </div>
-            <div class="text-right">
-                <a class="btn btn-primary submit" ng-click="gc.findGroups()">查询</a>
-                <a class="btn btn-primary submit" ng-click="open(false)">添加</a>
-            </div>-->
-
-
-
-            <div class="well well-lg">
-                <div class="form-group well well-lg">
-                    <label class="control-label">查询：</label>
-                    <input type="text" class="form-control" ng-model="filterOptions.filterText.searchText1" placeholder="请输入你想查询的数据">
-                    <a class="btn btn-primary submit" ng-click="open(false)">添加</a>
-                </div>
-
-                <br>
-                <br>
-                <div>
-                    <div class="form-group">
-                        <label class="control-label">状态：</label>
-                        <input type="radio" value="Y" ng-model="filterOptions.filterText.searchText1"> 有效
-                        <input type="radio" value="" ng-model="filterOptions.filterText.searchText1"> 全部
+    <div class="well well-lg">
+        <div class="middle-layout">
+            <form class="form-inline" role="form" >
+                <div class="well well-lg">
+                    <div class="form-group well well-lg">
+                        <label class="control-label">查询：</label>
+                        <input type="text" class="form-control" ng-model="filterOptions.filterText.searchText1" placeholder="请输入你想查询的数据">
+                        <a class="btn btn-primary submit" ng-click="open(false)">添加</a>
                     </div>
+
+                    <br>
+                    <br>
+                    <div>
+                        <div class="form-group">
+                            <label class="control-label">状态：</label>
+                            <input type="radio" value="Y" ng-model="filterOptions.filterText.searchText1"> 有效
+                            <input type="radio" value="" ng-model="filterOptions.filterText.searchText1"> 全部
+                        </div>
+                    </div>
+
+                    <div class="gridStyle" ng-grid="gridOptions"></div>
                 </div>
 
-                <div class="gridStyle" ng-grid="gridOptions"></div>
-            </div>
 
-
-        </form>
+            </form>
+        </div>
     </div>
-
-<!--    <table class="col-md-12 table table-bordered">
-        <thead>
-        <tr>
-            <td class="col-md-2">名称</td>
-            <td class="col-md-2">编码</td>
-            <td class="col-md-3">描述</td>
-            <td class="col-md-1">级别</td>
-            <td class="col-md-1">已有成员数</td>
-            <td class="col-md-1">状态</td>
-            <td class="col-md-2">编辑</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="group in gc.groups">
-            <td class="col-md-2">{{group.name}}</td>
-            <td class="col-md-2">{{group.code}}</td>
-            <td class="col-md-3">{{group.description}}</td>
-            <td class="col-md-1">{{group.level}}</td>
-            <td class="col-md-1">{{group.customerNum}}</td>
-            <td class="col-md-1">{{group.status == 'Y' ? '有效' : '失效'}}</td>
-            <td class="col-md-2">
-                <div class="actions">
-                    <span class="glyphicon glyphicon-edit" data-toggle="tooltip" ng-click="gc.editRow(group)" title="更新">更新</span>
-                    <span class="glyphicon glyphicon-cog" data-toggle="tooltip" ng-click="gc.config(group)" title="人员配置">配置</span>
-                    <span class="glyphicon glyphicon-trash" data-toggle="tooltip" title="删除" ng-click="gc.deleteRow(group)">删除</span>
-                </div>
-            </td>
-        </tr>
-        <tr ng-hide="gc.groups.length">
-            <td colspan="12">
-                <p class="text-center">没有数据</p>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <div align="right">
-        <pagination total-items="gc.pager.count" items-per-page="gc.pager.pageSize"  ng-model="gc.pager.pageNum" ng-change="gc.findGroups()" max-size="10"></pagination>
-    </div>-->
-
 
     <script type="text/ng-template" id="groupModal.html">
         <div class="modal-header">

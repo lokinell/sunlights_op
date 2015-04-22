@@ -99,9 +99,11 @@
 
         MessagePushConfigCtrl.prototype.createMessPush = function() {
             this.$log.debug("createMessPush()");
-            this.pushConfig.status = "Y";
-            this.pushConfig.pushTimedInd = "N";
-            this.pushConfig.platform = 'FP.PUSH.PLATFORM.1';
+            this.pushConfig = {
+                'status': 'Y',
+                'pushTimedInd' : 'N' ,
+                'platform': 'FP.PUSH.PLATFORM.1'
+            };
             return this.$scope.openMsgPushConfigModal(false);
         };
 

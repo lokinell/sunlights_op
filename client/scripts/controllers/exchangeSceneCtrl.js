@@ -2,17 +2,19 @@
   var ExchangeSceneCtrl;
 
   ExchangeSceneCtrl = (function() {
-    function ExchangeSceneCtrl($scope, $modal, $http, $timeout, $log, $location, ExchangeSceneService, ActivityService) {
+    function ExchangeSceneCtrl($scope, $modal, $http, $timeout,toaster, $log, $location, ExchangeSceneService, ActivityService) {
       this.$scope = $scope;
       this.$modal = $modal;
       this.$http = $http;
       this.$timeout = $timeout;
       this.$log = $log;
+      this.toaster = toaster;
       this.$location = $location;
       this.ExchangeSceneService = ExchangeSceneService;
       this.ActivityService = ActivityService;
       this.$log.debug("constructing rewardType");
       this.exchangeScene;
+      this.pager = {};
       this.editingRow = {};
       this.$scope.editRow = (function(_this) {
         return function(row) {
@@ -72,47 +74,62 @@
         ],
         rewardTypes: []
       };
-      this.$scope.pageSizes = [5, 10, 20];
-      this.$scope.columnDefs = [
-        {
-          field: "scene",
-          displayName: "编码"
-        }, {
-          field: "title",
-          displayName: "名称"
-        }, {
-          field: "status",
-          displayName: "状态",
-          cellTemplate: 'views/cell/statuscell.html'
-        }, {
-          field: "rewardTypeStr",
-          displayName: "奖励类型"
-        }, {
-          field: "activityTypeStr",
-          displayName: "活动类型"
-        }, {
-          field: "exchangeTypeStr",
-          displayName: "兑换类型"
-        }, {
-          field: "requireAmt",
-          displayName: "所需数量"
-        }, {
-          field: "exchangedAmt",
-          displayName: "兑换数量"
-        }, {
-          field: "exchangeLimit",
-          displayName: "兑换限额"
-        }, {
-          field: "timeLimit",
-          displayName: "到账期限"
-        }, {
-          field: "locked",
-          displayName: "操作",
-          cellTemplate: "views/cell/rewardTypeCell.html"
-        }
-      ];
-      this.$scope.pageUrl = baseUrl + "/exchangescene";
-      new PageService(this.$scope, this.$http, this.$timeout);
+
+      this.$scope.gridOptions = {
+          data: 'pager.list',
+          enablePaging: true,
+          showFooter: true,
+          multiSelect: false,
+          useExternalSorting: true,
+          i18n: "zh-cn",
+          enableColumnResize: true,
+          showColumnMenu: true,
+          totalServerItems: 'pager.count',
+          pagingOptions: {
+              pageSizes: [5, 10, 15],
+              pageSize: 10,
+              currentPage: 1
+          },
+          columnDefs: [
+              {
+                  field: "scene",
+                  displayName: "编码"
+              }, {
+                  field: "title",
+                  displayName: "名称"
+              }, {
+                  field: "status",
+                  displayName: "状态",
+                  cellTemplate: 'views/cell/statuscell.html'
+              }, {
+                  field: "rewardTypeStr",
+                  displayName: "奖励类型"
+              }, {
+                  field: "activityTypeStr",
+                  displayName: "活动类型"
+              }, {
+                  field: "exchangeTypeStr",
+                  displayName: "兑换类型"
+              }, {
+                  field: "requireAmt",
+                  displayName: "所需数量"
+              }, {
+                  field: "exchangedAmt",
+                  displayName: "兑换数量"
+              }, {
+                  field: "exchangeLimit",
+                  displayName: "兑换限额"
+              }, {
+                  field: "timeLimit",
+                  displayName: "到账期限"
+              }, {
+                  field: "locked",
+                  displayName: "操作",
+                  cellTemplate: "views/cell/rewardTypeCell.html"
+              }
+          ]
+      };
+
       this.$scope.isNomal = (function(_this) {
         return function(row) {
           return row.getProperty("status") === "N";
@@ -145,7 +162,7 @@
           });
           return modalInstance.result.then((function(data) {
             if (!data.id) {
-              return _this.$scope.myData[_this.$scope.myData.length] = data;
+              return _this.$scope.pager.list[_this.$scope.pager.list.length] = data;
             } else {
               return _this.editingRow.entity = data;
             }
@@ -157,16 +174,17 @@
     }
 
     ExchangeSceneCtrl.prototype.init = function() {
-      this.findExchangeScenes();
       return this.prepareData();
     };
 
     ExchangeSceneCtrl.prototype.findExchangeScenes = function() {
       this.$log.debug("findExchangeScenes()");
-      return this.ExchangeSceneService.findExchangeScenes().then((function(_this) {
+      this.pager.pageSize = this.$scope.gridOptions.pagingOptions.pageSize;
+      this.pager.pageNum = this.$scope.gridOptions.pagingOptions.currentPage;
+      return this.ExchangeSceneService.findExchangeScenes(this.pager).then((function(_this) {
         return function(data) {
           _this.$log.debug("Promise returned " + data + " Scenes");
-          return _this.$scope.myData = data.list;
+          return _this.$scope.pager = data.value;
         };
       })(this), (function(_this) {
         return function(error) {
@@ -202,11 +220,13 @@
       return this.ExchangeSceneService.deleteScene(row.entity).then((function(_this) {
         return function(data) {
           _this.$log.debug("Successfully delete exchangeScene");
+          _this.toaster.pop('success', "删除成功", "删除成功");
           return _this.findExchangeScenes();
         };
       })(this), (function(_this) {
         return function(error) {
           _this.$log.error("Unable to delete exchangeScene: " + error);
+          _this.toaster.pop('success', "删除失败", "删除失败");
           return _this.error = error;
         };
       })(this));

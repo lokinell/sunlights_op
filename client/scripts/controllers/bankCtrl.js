@@ -41,7 +41,7 @@
           },
           {
             field: "bankCode",
-            displayName: "银行代码"
+            displayName: "银行编码"
           },
           {
             field: "enName",

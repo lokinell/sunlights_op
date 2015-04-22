@@ -1,45 +1,45 @@
 <div class="row" ng-controller="ProductManageCtrl as pmc" ng-init="pmc.init()">
 
-    <div class="row">
-        <ol class="breadcrumb">
-            <li><a>产品管理</a></li>
-            <li class="active">产品信息</li>
-        </ol>
-    </div>
+  <div class="row">
+    <ol class="breadcrumb">
+      <li><a>产品管理</a></li>
+      <li class="active">产品信息</li>
+    </ol>
+  </div>
 
-    <div class="well well-lg">
+  <div class="well well-lg">
 
-        <div class="alert alert-danger" ng-show="!!pmc.error">
-            <h4 class="alert-heading">操作失败</h4>
-            <span ng-bind="pmc.error.message.detail"></span>
-        </div>
-        <form class="form-inline" role="form">
-            <div class="form-group">
-                <label class="control-label">产品名称：</label>
-                <input type="text" ng-enter="pmc.createProductManage()" class="form-control"
-                       ng-model="pmc.pager.filter.LIKES_product_name"
-                       placeholder="产品名称">
-                <label class="control-label">产品编码：</label>
-                <input type="text" ng-enter="pmc.createProductManage()" class="form-control"
-                       ng-model="pmc.pager.filter.LIKES_product_code"
-                       placeholder="产品编码">
-            </div>
-            <div>
-                <p class="text-right">
-                    <input class="form-control" type="text" placeholder="产品编码"
-                           typeahead="code as code.code for code in pmc.codes | filter:{code:$viewValue} | limitTo:10"
-                           ng-model="pmc.code">
-                    <a class="btn btn-primary submit" ng-click="pmc.createProductManage()">添加</a>
-                    <a class="btn btn-primary submit" ng-click="pmc.findProductManages()">查询</a>
-                    <a class="btn btn-primary submit" ng-click="pmc.grabFundCode()">基金代码同步</a>
-                    <a class="btn btn-primary submit" ng-click="pmc.grabFund()">基金同步</a>
-                    <a class="btn btn-primary submit" ng-click="pmc.grabAllProfitHistory()">收益同步</a>
-                    <a class="btn btn-primary submit" ng-click="pmc.refreshProduct()">刷新缓存</a>
-                </p>
-            </div>
-        </form>
-        <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="pmc.findProductManages()"></div>
+    <div class="alert alert-danger" ng-show="!!pmc.error">
+      <h4 class="alert-heading">操作失败</h4>
+      <span ng-bind="pmc.error.message.detail"></span>
     </div>
+    <form class="form-inline" role="form">
+      <div class="form-group">
+        <label class="control-label">产品名称：</label>
+        <input type="text" ng-enter="pmc.createProductManage()" class="form-control"
+               ng-model="pmc.pager.filter.LIKES_product_name"
+               placeholder="产品名称">
+        <label class="control-label">产品编码：</label>
+        <input type="text" ng-enter="pmc.createProductManage()" class="form-control"
+               ng-model="pmc.pager.filter.LIKES_product_code"
+               placeholder="产品编码">
+      </div>
+      <div>
+        <p class="text-right">
+          <input class="form-control" type="text" placeholder="产品编码"
+                 typeahead="code as code.code for code in pmc.codes | startsWith:'code':$viewValue | limitTo:10"
+                 ng-model="pmc.code">
+          <a class="btn btn-primary submit" ng-click="pmc.createProductManage()">添加</a>
+          <a class="btn btn-primary submit" ng-click="pmc.findProductManages()">查询</a>
+          <a class="btn btn-primary submit" ng-click="pmc.grabFundCode()">基金代码同步</a>
+          <a class="btn btn-primary submit" ng-click="pmc.grabFund()">基金同步</a>
+          <a class="btn btn-primary submit" ng-click="pmc.grabAllProfitHistory()">收益同步</a>
+          <a class="btn btn-primary submit" ng-click="pmc.refreshProduct()">刷新缓存</a>
+        </p>
+      </div>
+    </form>
+    <div class="gridStyle" ng-grid="gridOptions" ng-page-changed="pmc.findProductManages()"></div>
+  </div>
 
 </div>
 <script type="text/ng-template" id="productSaveDialog">

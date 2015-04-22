@@ -16,7 +16,7 @@ var replace = require('gulp-replace');
 var file = require('gulp-file');
 var webdriverStandalone = require('gulp-protractor').webdriver_standalone;
 var webdriverUpdate = require('gulp-protractor').webdriver_update;
-var devBaseUrl = 'var baseUrl = "http://192.168.0.93/op"';
+var devBaseUrl = 'var baseUrl = "http://localhost:9001/op"';
 var uatBaseUrl = 'var baseUrl =  "https://api-2.sunlights.me/api/op"';
 var prdBaseUrl = 'var baseUrl =  "https://api.sunlights.me/api/op"';
 var clean = require('gulp-clean');// run unit tests and watch files
