@@ -145,9 +145,12 @@
             displayName: '活动状态',
             cellTemplate: 'views/cell/statuscell.html'
           }, {
-            field: 'clickTime',
-            displayName: '点击次数'
-          }, {
+            field: 'url',
+            displayName: 'h5名称'
+          },{
+             field: 'image',
+             displayName: '图片名称'
+          },{
             field: 'locked',
             displayName: '操作',
             cellTemplate: 'views/cell/rewardTypeCell.html'
@@ -283,7 +286,6 @@
     ActivityCtrl.prototype.editRow = function(row) {
       var value;
       value = angular.toJson(row.entity);
-      value = this.$scope.myData[row.rowIndex];
       this.$log.debug(value);
       this.activity = value;
       return this.$scope.open(true);
