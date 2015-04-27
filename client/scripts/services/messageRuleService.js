@@ -114,7 +114,6 @@
 
     MessageRuleService.prototype.AddToMessPushTxn = function(MessPushVo) {
       var deferred;
-      this.$log.debug("AddToMessPushTxn " + (angular.toJson(MessPushVo, true)));
       deferred = this.$q.defer();
       this.$http.post(baseUrl + "/messagerule/txn", MessPushVo).success((function(_this) {
         return function(data, status, headers) {

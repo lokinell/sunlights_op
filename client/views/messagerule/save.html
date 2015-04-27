@@ -134,14 +134,10 @@
 
                 <div class="row col-md-11 col-padding form-row">
                     <div class="col-md-2 form-label">
-                        <label class="control-label">是否30天显示：</label>
+                        <label class="control-label">消息持续作用天数：</label>
                     </div>
                     <div class="col-md-2 col-padding">
-                        <select class="form-control" ng-model="dc.messageRule.stayDayInd" required>
-                            <option value="" selected>请选择</option>
-                            <option value="Y">是</option>
-                            <option value="N">否</option>
-                        </select>
+                        <input class="form-control" type="number" step="1" ng-model="dc.messageRule.stayDays" required>
                     </div>
                     <div class="col-md-2 form-label">
                         <label class="control-label">群发组名：</label>

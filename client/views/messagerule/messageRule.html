@@ -47,7 +47,7 @@
                ng-model="row.title">
         <label class="control-label">推送内容：</label>
         <textarea class="form-control" style="height:expression((this.scrollHeight>150)?'150px':(this.scrollHeight+5)+'px');overflow:auto;"  name="value"  readonly
-                  ng-model="row.content"></textarea>
+                  ng-model="row.contentPush"></textarea>
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary" ng-click="ok()" ng-hide="addPushHideFlag">添加到待推送消息</button>
