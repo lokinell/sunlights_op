@@ -254,7 +254,7 @@
       this.$scope.manage = null;
       if (this.code && this.code.code) {
         if (this.code.onSale === 1) {
-          this.$scope.manage = {productCode: this.code.code, productName: this.code.value}
+          this.$scope.manage = {productCode: this.code.code, productName: this.code.value, isGrab: 'Y'}
           return this.dialog = this.ngDialog.open({
             template: 'productSaveDialog',
             className: 'ngdialog-theme-plain product-width',
