@@ -10,7 +10,6 @@ var ActivityReturnMsgCtrl = function ($modal, $scope, $location,toaster, Activit
 
     $scope.constant = {
         activityTypes : [
-            {key: '', value: '请选择'},
             {key: 'ATT001', value: '注册类'},
             {key: 'ATT002', value: '首次购买类'},
             {key: 'ATT003', value: '购买类'},
@@ -22,7 +21,6 @@ var ActivityReturnMsgCtrl = function ($modal, $scope, $location,toaster, Activit
 
         ],
         scenes : [
-            {key: '', value: '请选择'},
             {key: 'ASC001', value: '签到赚金豆'},
             {key: 'ASC002', value: '邀请好友场景'},
             {key: 'ASC004', value: '注册送金豆'},
@@ -36,7 +34,6 @@ var ActivityReturnMsgCtrl = function ($modal, $scope, $location,toaster, Activit
         ],
 
         categories : [
-            {key: '', value: '请选择'},
             {key: '1', value: '展示'},
             {key: '2', value: '发消息'},
             {key: '3', value: '奖励交易'}
