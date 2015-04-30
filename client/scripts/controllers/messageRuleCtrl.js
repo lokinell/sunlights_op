@@ -70,9 +70,8 @@
                     field: "groupName",
                     displayName: "群发组名"
                 }, {
-                    field: "stayDayInd",
-                    displayName: "30天显示",
-                    cellTemplate: "<div class='ngCellText' ng-class='col.colIndex()'><span>{{row.entity.stayDayInd== 'Y' ? '是' : '否'}}</span></div>"
+                    field: "stayDays",
+                    displayName: "作用天数"
                 }, {
                     field: "status",
                     displayName: "有效",
@@ -113,6 +112,7 @@
 
         MessageRuleCtrl.prototype.editRow = function(row) {
             this.editMessageRule = row;
+            this.$log.debug("edit row " + angular.toJson(row));
             return this.$scope.open(true);
         };
 
@@ -143,7 +143,7 @@
         MessageRuleCtrl.prototype.createMessPush = function() {
             this.$log.debug("createMessPush()");
             this.messageRule.status = "Y";
-            this.messageRule.stayDayInd = 'N';
+            this.messageRule.stayDays = 1;
             this.$rootScope.messageRule = this.messageRule;
             return this.$location.path("/dashboard/messagerule/save");
         };
